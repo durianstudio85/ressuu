@@ -1,0 +1,316 @@
+@font-face {
+    font-family: 'Signika';
+    src: url('../font/Signika-Regular.ttf');
+}
+
+
+
+.mycontainer {
+	margin-right: 15%;
+	margin-left: 15%;
+	padding-left: 15px;
+	padding-right: 150px;	
+}
+
+
+.contentarea {
+
+	
+	min-height: 100%;
+  	height: auto;
+  	/* Negative indent footer by its height */
+  	margin: 0 auto -60px;
+  	/* Pad bottom by footer height */
+  	padding: 0 0 40px;
+}
+
+.ressuuhome {
+
+	/*background-color:#01ba8e;
+
+	height: 100vh;*/
+  background-image: url("../images/background.png");
+  background-repeat: no-repeat; 
+  background-size:100% 400%;
+ 
+}
+
+.ressuuhome h1 {
+
+	font-family: 'Signika', sans-serif;
+	font-weight: 700;
+	font-size: 82px;
+	color: #ffffff;
+	text-align: center;
+
+
+}
+
+.ressuuhome h6 {
+
+	font-family: 'Signika', sans-serif;
+	font-weight: 700;
+	font-size: 30px;
+	color: #ffffff;
+	text-align: center;
+
+
+}
+
+
+.ressuuhome span {
+
+	font-family: 'Signika', sans-serif;
+	font-weight: 700;
+	font-size: 82px;
+	color: #323a45;
+	text-align: center;
+
+
+}
+
+/*
+.signup {
+
+	background: #000fff;
+    background: -moz-linear-gradient(top, #01ba8e  0%, #01ba8e  50%, #ffffff 50%, #ffffff 100%); 
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#01ba8e ), color-stop(50%,#01ba8e ), color-stop(50%,#ffffff), color-stop(100%,#ffffff)); 
+    background: -webkit-linear-gradient(top, #01ba8e  0%,#01ba8e  50%,#ffffff 50%,#ffffff 100%); 
+    background: -o-linear-gradient(top, #01ba8e  0%,#01ba8e  50%,#ffffff 50%,#ffffff 100%); 
+    background: -ms-linear-gradient(top, #01ba8e  0%,#01ba8e  50%,#ffffff 50%,#ffffff 100%); 
+    background: linear-gradient(top, #01ba8e  0%,#01ba8e  50%,#ffffff 50%,#ffffff 100%);
+
+	height: 100vh;
+}
+
+.signup section{
+	width: 351px;
+	height:100%;
+	background: #ffffff;
+}
+.signup input{
+	width: 277px;
+	height: 50px;
+	font-size: 18px;
+	border-width:0px 0px 1px 0px;
+	border-radius: 0px;
+	padding-left: 20px;
+}
+.signup h4{
+	color: #acacac;
+	font-family: Myriad Pro;
+}
+.signup img{
+	padding:10px 0px;
+}
+.singup p a{
+	text-decoration: none !important;
+	text-transform: none !important;
+	color:#acacac !important;
+}
+.signuplogo{
+	margin-top:50px;
+}
+.signin{
+   width: 281px;
+   height: 51px;
+   color:#ffffff;
+   font-size: 18px;
+   border-radius:5px;
+   border: none;
+   color:#000000;
+   background:#ebebeb;
+   margin: 25px 0px 30px 0px;
+}
+
+*/
+.contentarea button {
+
+	font-family: 'Signika', sans-serif;
+	font-weight: 700;
+	font-size: 36px;
+	color: #ffffff;
+	text-align: center;
+
+
+}
+
+.ressuufooter a {
+
+	font-family: 'Signika', sans-serif;
+	font-size: 18px;
+	color: #ffffff;
+	text-align: center;
+	padding: 7px 30px 7px 30px!important;
+	margin: 10px 10px 0px 0px;
+
+
+}
+.ressuufooter {
+	
+      background-color: #16a087;
+    width: 100%;
+    float: left;
+    height:66px; 
+    position:fixed ;
+    bottom:0;
+
+
+
+
+}
+
+.ressuufooter p {
+	
+   	color:#ffffff;
+   	font-size: 16px;
+   	font-family: 'Signika', sans-serif;
+	font-weight: 700;
+	margin-top:20px;
+
+}
+.btnwrap button{
+	float:right;
+	margin: 10px 10px 0px 0px;
+	
+}
+.btn2:hover {
+	background-color: #00ABEF!important;	
+}
+.btn1:hover {
+	background-color: #036E9A!important;	
+}
+
+.btn-danger {
+
+	background-color: #1e786f!important;
+	border: none!important;
+	padding: 0px 20px 0px 20px!important;
+}
+
+.btn1 {
+
+	font-family: 'Signika', sans-serif!important;
+	font-weight: 700!important;
+	background-color: #1e786f!important;
+	border: none!important;
+	
+}
+
+.btn2 {
+
+	font-family: 'Signika', sans-serif!important;
+	font-weight: 700!important;
+	background-color: #1e786f!important;
+	border: none!important;
+	
+}
+
+.padtop30 {
+
+	padding-top: 30px;
+
+}
+
+.padtop70 {
+
+	padding-top: 70px;
+
+}
+.phoneimg{
+	margin-top: 10px;
+	
+}
+
+
+
+
+
+
+
+
+@media (max-width: 767px) {
+
+
+	.contentarea img {
+
+		
+		display: block;
+   		margin: 0 auto;
+
+
+	}
+
+
+	.ressuuhome h1 {
+
+		
+		font-size: 45px;
+		color: #ffffff;
+		
+	}
+
+	.padtop70 {
+
+		padding-top:20px;
+
+	}
+
+	.ressuuhome span {
+
+		
+		font-size: 45px;
+		color: #323a45;
+		
+
+	}
+
+	.ressuuhome h6 {
+
+		
+		font-size: 20px;
+		color: #ffffff;
+		
+
+	}
+
+	.contentarea button {
+
+		
+		font-family: 'Signika', sans-serif;
+		font-weight: 700;
+		font-size: 26px;
+		color: #ffffff;
+		text-align: center;
+		margin-bottom: 20px;
+
+
+	}
+
+	
+
+	.btn1 {
+
+		background-color: #1e786f!important;
+		border: none!important;
+		padding: 0px 20px 0px 20px!important;
+		margin-right:7px;
+		margin-left:20px!important;
+	}
+
+	.btn2 {
+
+		background-color: #1e786f!important;
+		border: none!important;
+		padding: 0px 20px 0px 20px!important;
+		margin-top: 10px;
+
+	}
+
+	.ressuufooter p {
+	
+	   	text-align:center!important;
+
+	}
+
+}
