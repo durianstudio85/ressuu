@@ -10,7 +10,7 @@
   "require":{  
     "php":">=5.5.9",
     "laravel/framework":"5.2.*",
-    "laravelcollective/html":"5.*",
+    "laravelcollective/html": "^5.2.0",
     "hybridauth/hybridauth":"dev-master",
     "laravel/socialite":"^2.0",
     "guzzlehttp/guzzle":"^6.2"
