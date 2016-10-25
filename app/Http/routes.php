@@ -71,8 +71,9 @@ Route::get('/resume/deleteSkill/{id}', 'HomeController@deleteSkill');
 
 
 
-Route::get('/fbauth/{auth?}', 'HomeController@getFacebooklogin');
-
+// Route::get('/fbauth/{auth?}', 'HomeController@getFacebooklogin');
+// Route::get('/redirect', 'SocialAuthController@redirect');
+// Route::get('/callback', 'SocialAuthController@callback');
 
 
 
@@ -80,8 +81,7 @@ Route::get('/fbauth/{auth?}', 'HomeController@getFacebooklogin');
 
 
 /* fb integration */
-Route::get('/redirect', 'SocialAuthController@redirect');
-Route::get('/callback', 'SocialAuthController@callback');
+
 
 
 Route::get('auth/facebook', 'Auth\AuthController@redirectToProvider');

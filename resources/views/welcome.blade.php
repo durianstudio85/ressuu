@@ -48,9 +48,8 @@ ressuuhome
             </div>
             <div class="col-md-6 btn-group btnwrap">
                 <center>
-                    <a class="btn btn-success btn1">Sign In with Twitter</a>
-                
-                    <a href="auth/facebook" class="btn btn-success btn2">Sign In with Facebook</a>
+                    <a class="btn btn-success btn1"><i class="fa fa-twitter"></i>&nbsp;Sign In with Twitter</a>
+                    <a href="auth/facebook" class="btn btn-success btn2"><i class="fa fa-facebook"></i>&nbsp;Sign In with Facebook</a>
                 </center>
             </div>
         </div>
