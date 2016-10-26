@@ -18,7 +18,7 @@
     <link rel="stylesheet" type="text/css" href="css/font-awesome.css">
     <link rel="stylesheet" type="text/css" href="css/star-rating.css">
     <link rel="stylesheet" type="text/css" href="css/hover.css">
-
+    <link rel="shortcut icon" type="image/x-icon" href="images/fav icon.png">
     {{-- <link href="{{ elixir('css/app.css') }}" rel="stylesheet"> --}}
 
     <style>

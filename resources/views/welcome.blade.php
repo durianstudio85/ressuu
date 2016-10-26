@@ -12,7 +12,7 @@ ressuuhome
 @section('content')
  <section class="contentarea container padtop30">
         
-        <a href="#"><img src="images/logo.png" /></a>
+        <a href="{{ url('/') }}"><img src="images/logo.png" /></a>
 
         <div class="clearfix"></div>
 

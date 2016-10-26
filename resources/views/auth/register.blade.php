@@ -11,7 +11,7 @@ signup ressuuhome
 @section('content')
 <content class="row ">
 
-    <center><img src="images/logo.png" class="signuplogo" /></center>
+    <center><a href="{{ url('/') }}"><img src="images/logo.png" class="signuplogo" /></a></center>
     <section class="container">
 
         <center>
