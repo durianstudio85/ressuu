@@ -2,7 +2,7 @@
 @extends('layouts.header')
 
 @section('title')
-    Settings
+   - Settings
 @endsection
 
 @section('body-class')

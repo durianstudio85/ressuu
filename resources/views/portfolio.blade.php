@@ -2,7 +2,7 @@
 @extends('layouts.header')
 
 @section('title')
-    Portfolio
+   - Portfolio
 @endsection
 
 @section('body-class')

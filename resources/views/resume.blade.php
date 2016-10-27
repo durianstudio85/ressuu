@@ -2,7 +2,7 @@
 @extends('layouts.header')
 
 @section('title')
-    Resume
+   - Resume
 @endsection
 
 @section('body-class')

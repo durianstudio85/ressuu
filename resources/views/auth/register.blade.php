@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('title')
-    Sign Up
+   - Sign Up
 @endsection
 
 @section('body-class')

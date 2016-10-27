@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('title')
-Ressume
+
 @endsection
 
 @section('body-class')

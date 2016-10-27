@@ -2,7 +2,7 @@
 @extends('layouts.header')
 
 @section('title')
-    Dashboard
+   - Dashboard
 @endsection
 
 @section('body-class')

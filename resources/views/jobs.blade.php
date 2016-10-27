@@ -2,7 +2,7 @@
 @extends('layouts.header')
 
 @section('title')
-    Jobs
+   - Jobs
 @endsection
 
 @section('body-class')
