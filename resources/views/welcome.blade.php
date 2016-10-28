@@ -27,6 +27,7 @@ ressuuhome
             <br>
 
             <center><a href="{{ url('/login') }}"><button class="btn btn-danger">Join us now!</button></a></center>
+            <center><a href="{{ url('/login') }}"><button class="btn btn-danger">New Button</button></a></center>
 
         </div>
 
@@ -50,7 +51,6 @@ ressuuhome
                 <center>
                     <a class="btn btn-success btn1"><i class="fa fa-twitter"></i>&nbsp;Sign In with Twitter</a>
                     <a href="auth/facebook" class="btn btn-success btn2"><i class="fa fa-facebook"></i>&nbsp;Sign In with Facebook</a>
-                    <a href="auth/facebook" class="btn btn2"><i class="fa fa-facebook"></i>&nbsp;New Button</a>
                 </center>
             </div>
         </div>
