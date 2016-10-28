@@ -22,7 +22,7 @@
                    <div class="name-panel">
                    <p class="name">
                    <?php if ($if_exist == 1) { ?>
-                         <?php echo $userProfile->name; ?>   
+                         <?php echo $userProfile->nameasdas; ?>   
                     <?php }else{ ?>
                         {{ $name }}
                     <?php } ?> 
