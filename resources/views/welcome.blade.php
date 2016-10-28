@@ -27,7 +27,6 @@ ressuuhome
             <br>
 
             <center><a href="{{ url('/login') }}"><button class="btn btn-danger">Join us now!</button></a></center>
-            <center><a href="{{ url('/login') }}"><button class="btn btn-danger">New Button</button></a></center>
 
         </div>
 
