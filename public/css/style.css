@@ -69,6 +69,10 @@
 
 }
 
+
+
+
+
 /*
 .signup {
 
@@ -183,10 +187,11 @@
 
 .btn-danger {
 
-	background-color: #1e786f!important;
+	background: #1e786f;
 	border: none!important;
 	padding: 0px 20px 0px 20px!important;
 }
+
 
 .btn1 {
 
@@ -204,6 +209,16 @@
 	background-color: #1e786f!important;
 	border: none!important;
 	
+}
+
+.login-btn{
+  background:#f27935 !important;
+  border: none!important;
+  padding: 0px 20px 0px 20px!important;
+  margin-right: 10px;
+}
+.login-btn:hover{
+  color: #ffffff;
 }
 
 .padtop30 {
