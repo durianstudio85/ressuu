@@ -13,7 +13,8 @@
     "laravelcollective/html": "^5.2.0",
     "hybridauth/hybridauth":"dev-master",
     "laravel/socialite":"^2.0",
-    "guzzlehttp/guzzle":"^6.2"
+    "guzzlehttp/guzzle":"^6.2",
+    "filp/whoops": "^2.1"
   },
   "require-dev":{  
     "fzaninotto/faker":"~1.4",
