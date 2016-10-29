@@ -58,7 +58,7 @@ ressuuhome
      
 
 
-<?php echo $idie ?>
+
    
        
 @endsection
