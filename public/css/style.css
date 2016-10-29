@@ -214,9 +214,10 @@
 .login-btn{
   background:#f27935 !important;
   border: none!important;
-  padding: 0px 20px 0px 20px!important;
+  padding: 0px 25px 0px 25px!important;
   margin-right: 10px;
 }
+
 .login-btn:hover{
   color: #ffffff;
 }
