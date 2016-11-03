@@ -13,8 +13,8 @@
   
     <!-- Styles -->
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
-    <link href="css/style.css" rel='stylesheet' type='text/css'>
-    <link rel="stylesheet" type="text/css" href="css/adminstyle.css">
+    <link href="/../css/style.css" rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="/../css/adminstyle.css">
     <link rel="stylesheet" type="text/css" href="css/font-awesome.css">
     <link rel="stylesheet" type="text/css" href="css/star-rating.css">
     <link rel="stylesheet" type="text/css" href="css/hover.css">

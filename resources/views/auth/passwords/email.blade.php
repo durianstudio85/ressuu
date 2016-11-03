@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('title')
-   - Sign Up
+    Reset Password
 @endsection
 
 @section('body-class')
@@ -11,41 +11,42 @@ signup ressuuhome
 @section('content')
 <content class="row ">
 
-    <center><img src="images/logo.png" class="signuplogo" /></center>
+    <center><a href="{{ url('/') }}"><img src="../images/logo.png" class="signuplogo" /></a></center>
     <section class="container">
 
         <center>
         
         <div class="clearfix"></div>
-            <h4>Welcome!</h4>
+            <h4>Reset Password</h4>
 
+             @if (session('status'))
+                <div class="alert alert-success">
+                    {{ session('status') }}
+                </div>
+             @endif
 
-        <form method="POST" accept-charset="UTF-8" action="{{ url('/login') }}">
-        {!! csrf_field() !!}
-            <div class="form-group {{ $errors->has('email') ? ' has-error' : '' }}">
-                <input required="required" class="" placeholder="Email Address" name="email" type="email">
+                <form method="POST" accept-charset="UTF-8" action="{{ url('/password/email') }}">
+                {!! csrf_field() !!}
+                    <div class="form-group {{ $errors->has('email') ? ' has-error' : '' }}">
 
-                 @if ($errors->has('email')) 
-                  <p class="label label-danger">{{ $errors->first('email') }}</p>
-                @endif
-            </div>
+                        <input id="email" type="email" placeholder="Email Address" class="form-control" name="email" value="{{ old('email') }}">
 
-            <div class="form-group {{ $errors->has('password') ? ' has-error' : '' }}">
-                <input required="required" class="" placeholder="Password" name="password" type="password">
-                 @if ($errors->has('password'))
-                   <p class="label label-danger">{{ $errors->first('password') }}</p>             
-                 @endif
-            </div>
-            <div class="form-group">
-               <input class="signin" type="submit" value="Sign In!">
-            </div>
+                         @if ($errors->has('email')) 
+                          <p class="label label-danger">{{ $errors->first('email') }}</p>
+                        @endif
 
-            
+                    </div>
 
-        </form>
+                    <div class="form-group">
+                       <input class="signin" type="submit" value="Send Password Reset Link">
+                    </div>
+
+                    
+
+                </form>
+                
             <div class="signupfooter">
-                <p><a href="{{ url('/password/reset') }}">Forgot you Password?</a></p>
-                <p><a href="{{ url('/register') }}">Create Account</a></p>
+            
             </div>  
         </center>
 
@@ -62,9 +63,8 @@ signup ressuuhome
             </div>
             <div class="col-md-6 btn-group btnwrap">
                 <center>
-                    <button class="btn btn-success btn1"><i class="fa fa-facebook"></i>&nbsp;Sign In with Twitter</button>
-                
-                    <button class="btn btn-success btn2"><i class="fa fa-twitter"></i>&nbsp;Sign In with Facebook</button>
+                    <a class="btn btn-success btn1"><i class="fa fa-twitter"></i>&nbsp;Sign In with Twitter</a>
+                    <a href="auth/facebook" class="btn btn-success btn2"><i class="fa fa-facebook"></i>&nbsp;Sign In with Facebook</a>
                 </center>
             </div>
         </div>
