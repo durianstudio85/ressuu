@@ -168,6 +168,31 @@
 
 </section>
 <section class="cph-wrapper">
+
+<div class="col-md-12 content-panel-header">
+            
+            <div class="col-md-10" >
+                      <div class="content-panel-status col-md-12">
+                             
+                            <div class="col-sm-2 div">
+                               <img src="images/user.png">
+                            </div>
+                            <div class="col-sm-10 div">
+                                  <h4><?php echo$name; ?></h4>
+                                  <p>Created New Account</p>
+                                  <div><a href="#">Link</a> | <a href="#">Comment</a></div>
+                            </div>       
+                      </div>
+            </div>
+             <div class="col-md-2 content-panel-lc">      
+                              <p>2 Day Ago</p>
+                              <img src="images/like.png"><span>2</span>
+                              <img src="images/comment.jpg"><span>2</span>           
+            </div>
+
+</div>
+
+
 <?php if ($if_exist == 1) { ?>
 
 <?php   foreach ($userFeeds as $value) { ?>
