@@ -259,13 +259,9 @@
 
                                       </section>
             <!-- Modal for newsFeed -->
-<?php } ?>
+<?php } } ?>
                 
 
- <?php }else{ ?>
- No File 
-            
-<?php } ?> 
 
 
 
