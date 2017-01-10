@@ -1,14 +1,12 @@
 @extends('layouts.app')
 
-
 @section('title')
-   - Dashboard
+   | Dashboard
 @endsection
 
 @section('body-class')
 
 @endsection
-
 
 @section('content')
 
@@ -16,16 +14,17 @@
    <nav class="navbar navbar-default navbar-static-top navs">
       <div class="container">
         <div class=" navbar-header">
-          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+         <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
             <span class="sr-only">Toggle navigation</span>
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
-          </button>
-         <div class="col-md-3 logo"><a href="{{ url('/home') }}"><img src="images/logo.png"></a></div>
+          </button> 
+         <div class="col-md-3 col-sm-12 logo"><a href="{{ url('/home') }}"><img src="images/logo.png"></a></div>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
-        <nav class="col-md-3 navicon">
+        <!-- <div id="navbar" class=""> -->
+        <nav class="col-md-3 col-sm-12 navicon">
               <ul>
                   <li><i class="glyphicon glyphicon-user"></i></li>
                   <li class="dropdown">
@@ -39,25 +38,42 @@
                       </ul>
                   </li>
                    <!---->
-                  <li><i <i class="glyphicon glyphicon-briefcase"></i></li>
+                  <li><i class="glyphicon glyphicon-briefcase"></i></li>
               </ul>
         </nav>
-          <div class="col-md-6">
+          <div class="col-md-6 col-sm-12 ">
                <div class="inner-addon left-addon">
                 <span class="glyphicon glyphicon-search"></span>
                 <input class="form-control input-lg searchbox " type="text" placeholder="Search">
                 </div>
-          </div>
+        </div>
+         <div class="row hiddenmenu ">
+              <ul>
+                  <li><a href="{{ url('/home') }}">Dashboard</a></li>
+                  <li><a href="{{ url('/profile') }}">My CV</a></li>
+                  <li><a href="{{ url('/profile') }}">Profile</a></li>
+                  <li><a href="{{ url('/resume') }}">Resume</a></li>
+                  <li><a href="{{ url('/portfolio') }}">Portfolio</a></li>
+                  <li><a href="{{ url('/jobs') }}">Jobs</a></li>
+                  <li><a href="{{ url('/setting') }}">Settings</a></li>
+                  <li><a href="{{ url('/logout') }}">Logout</a></li>
+              </ul>
+         </div>  
+        
+
+
+
         </div>
       </div>
     </nav>
+    
 </header> 
 
 
 <div class="container wrap">
-<sidebar class="col-md-3 ">
+<sidebar class="col-md-3 col-sm-12">
 
-               <div class="row">
+               <div class="row user-tabs">
                 <div class="user">
                   <img src="images/user.png">     
                 </div>
@@ -80,18 +96,17 @@
                  </div>
                  </div>
               </div>
+
               <div class="row panel-status">
-                        <div class="col-md-4 panel-status-1">
+                        <div class="col-md-4 col-sm-4 panel-status-1">
                             <img src="images/heart.png"> 
                             <p>2,718</p>
-                        </div>
-                        
-                                      
-                        <div class="col-md-4 panel-status-2">
+                        </div>                                     
+                        <div class="col-md-4 col-sm-4 panel-status-2">
                             <img src="images/users.png">
                             <p>5,718</p>  
                         </div>
-                        <div class="col-md-4 panel-status-3">
+                        <div class="col-md-4 col-sm-4 panel-status-3">
                             <img src="images/eye.png">
                             <p>6,718</p>  
                         </div>
@@ -118,23 +133,20 @@
 
 </sidebar>
  
-<content class="col-md-9"> 
-<section class="col-md-12 content-header">
+<content class="col-sm-12 col-md-9 hpage"> 
+<section class="col-xs-12 col-md-12 content-header">
   
-                    <div class="col-md-10">
+                    <div class="col-xs-12 col-md-10">
                       <h3>People You May Know</h3>     
                     </div>
 
                     <div  class="col-md-2">
                       <img src="images/cancel.png"  class="cancel-button">
-                    </div>
-                     
-                       
-                       
-                    <div class="col-md-12">
+                    </div>                    
+                    <div class="col-xs-12 col-md-12 content-people-wrap">
                     <?php  if(!empty($FollowedUsers)) { ?>
                              
-                             <div class="col-md-4 content-profile-people"> 
+                             <div class="col-xs-12 col-md-4 content-profile-people"> 
 
                               <div class="col-md-5 people-img">
                                   <img src="images/user1.png"> 
@@ -157,13 +169,13 @@
 
                               <?php foreach ($userFollow2 as $follow2) { ?>
                             
-                            <div class="col-md-4 content-profile-people"> 
+                            <div class="col-xs-12 col-md-4 col-sm-12 content-profile-people"> 
 
-                              <div class="col-md-5 people-img">
+                              <div class="col-md-5 col-sm-12 people-img">
                                   <img src="images/user1.png"> 
                               </div>
 
-                              <div class="col-md-7 people-status">
+                              <div class="col-md-7 col-sm-12 people-status">
                                    <p class="people-name"><?php echo$follow2->name; ?></p>
                                    <p class="people-subname"><?php echo$follow2->position; ?></p>
                                   <form method="GET" action="home/follow" class="" enctype="multipart/form-data" files="true">
@@ -183,7 +195,7 @@
 
                             <?php foreach ($userFollow as $follow) { ?>
                             
-                            <div class="col-md-4 content-profile-people"> 
+                            <div class="col-xs-12  col-md-4 content-profile-people"> 
 
                               <div class="col-md-5 people-img">
                                   <img src="images/user1.png"> 
@@ -210,43 +222,18 @@
                     </div>
 
 </section>
+
 <section class="cph-wrapper">
-
-<div class="col-md-12 content-panel-header">
-            
-            <div class="col-md-10" >
-                      <div class="content-panel-status col-md-12">
-                             
-                            <div class="col-sm-2 div">
-                               <img src="images/user.png">
-                            </div>
-                            <div class="col-sm-10 div">
-                                  <h4><?php echo$name; ?></h4>
-                                  <p>Created New Account</p>
-                                  <div><a href="#">Link</a> | <a href="#">Comment</a></div>
-                            </div>       
-                      </div>
-            </div>
-             <div class="col-md-2 content-panel-lc">      
-                              <p>2 Day Ago</p>
-                              <img src="images/like.png"><span>2</span>
-                              <img src="images/comment.jpg"><span>2</span>           
-            </div>
-
-</div>
-
-
 <?php if ($if_exist == 1) { ?>
 
 <?php   foreach ($userFeeds as $value) { ?>
 
 <?php $userConnReq = DB::select('select * from connection_requests where date = :date', ['date' => $value->date]); ?>
 
-  <div class="col-md-12 content-panel-header">
+  <div class="col-xs-12 col-md-12 content-panel-header">
             
             <div class="col-md-10" >
-                      <div class="content-panel-status col-md-12">
-                             
+                      <div class="content-panel-status col-xs-12 col-md-12">   
                             <div class="col-sm-2 div">
                                <img src="images/user.png">
                             </div>
@@ -254,20 +241,13 @@
                                   <h4><?php echo$userProfile->name; ?></h4>
                                   <p><?php echo $value->activity; ?> <a href="" data-toggle="modal" data-target="#newsfeed_{{ $value->id }}"><span>check it here.</span></a></p>
                                   <div><a href="#">Link</a> | <a href="#">Comment</a></div>
-                                 <?php 
-                                    /*foreach ($userConnReq as $data) {
-                                      echo $data->to_user_id."/";
-                                      echo $data->from_user_id;
-                                    }*/ 
-                                 ?>
-
                             </div>       
                       </div>
             </div>
-             <div class="col-md-2 content-panel-lc">      
+             <div class="col-xs-12 col-md-2 content-panel-lc">      
                               <p>2 Day Ago</p>
-                              <img src="images/like.png"><span>2</span>
-                              <img src="images/comment.jpg"><span>2</span>           
+                              <img src="images/like.png"><span>12</span>
+                              <img src="images/comment.jpg"><span>12</span>           
             </div>
 
   </div>
@@ -303,21 +283,34 @@
                                       </section>
             <!-- Modal for newsFeed -->
 <?php } } ?>
-                
+ 
+
+<div class="col-xs-12 col-md-12 content-panel-header">
+            
+            <div class="col-md-10" >
+                      <div class="content-panel-status col-xs-12 col-md-12">   
+                            <div class="col-sm-2 div">
+                               <img src="images/user.png">
+                            </div>
+                            <div class="col-sm-10 div">
+                                  <h4><?php echo$name; ?></h4>
+                                  <p>Created New Account <a><span></span></a></p>
+                                  <div><a href="#">Link</a> | <a href="#">Comment</a></div>
+                            </div>       
+                      </div>
+            </div>
+             <div class="col-xs-12 col-md-2 content-panel-lc">      
+                              <p>2 Day Ago</p>
+                              <img src="images/like.png"><span>12</span>
+                              <img src="images/comment.jpg"><span>12</span>           
+            </div>
+
+  </div>
 
 
 
-
-   &nbsp;                  
 </section>  
- <!--<section>
-            <div class="col-md-12 content-panel">
 
-                    <div class="content-dashboard">
-                        <center><button>Load More</button></center>
-                    </div>
-            </div>   
-</section>-->
 </content> 
 
                 

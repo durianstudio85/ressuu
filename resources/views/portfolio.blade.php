@@ -2,7 +2,7 @@
 
 
 @section('title')
-   - Portfolio
+   | Portfolio
 @endsection
 
 @section('body-class')
@@ -16,16 +16,17 @@
    <nav class="navbar navbar-default navbar-static-top navs">
       <div class="container">
         <div class=" navbar-header">
-          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
             <span class="sr-only">Toggle navigation</span>
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
-          </button>
-         <div class="col-md-3 logo"><a href="{{ url('/home') }}"><img src="images/logo.png"></a></div>
+          </button> 
+         <div class="col-md-3 col-sm-12 logo"><a href="{{ url('/home') }}"><img src="images/logo.png"></a></div>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
-        <nav class="col-md-3 navicon">
+        <!-- <div id="navbar" class=""> -->
+        <nav class="col-md-3 col-sm-12 navicon">
               <ul>
                   <li><i class="glyphicon glyphicon-user"></i></li>
                   <li class="dropdown">
@@ -39,28 +40,48 @@
                       </ul>
                   </li>
                    <!---->
-                  <li><i <i class="glyphicon glyphicon-briefcase"></i></li>
+                  <li><i class="glyphicon glyphicon-briefcase"></i></li>
               </ul>
         </nav>
-          <div class="col-md-6">
+          <div class="col-md-6 col-sm-12 ">
                <div class="inner-addon left-addon">
                 <span class="glyphicon glyphicon-search"></span>
                 <input class="form-control input-lg searchbox " type="text" placeholder="Search">
                 </div>
-          </div>
+        </div>
+         <div class="row hiddenmenu ">
+              <ul>
+                  <li><a href="{{ url('/home') }}">Dashboard</a></li>
+                  <li><a href="{{ url('/profile') }}">My CV</a></li>
+                  <li><a href="{{ url('/profile') }}">Profile</a></li>
+                  <li><a href="{{ url('/resume') }}">Resume</a></li>
+                  <li><a href="{{ url('/portfolio') }}">Portfolio</a></li>
+                  <li><a href="{{ url('/jobs') }}">Jobs</a></li>
+                  <li><a href="{{ url('/setting') }}">Settings</a></li>
+                  <li><a href="{{ url('/logout') }}">Logout</a></li>
+              </ul>
+         </div>  
+        
+
+
+
         </div>
       </div>
     </nav>
+    
 </header> 
+
+
 
 <div class="container wrap">
 
 <sidebar class="col-md-3 ">
 
-             <div class="row">
+           <div class="row user-tabs">
                 <div class="user">
                   <img src="images/user.png">     
-                </div>  
+                </div>
+                 <div class="name-panel">
                    <div class="name-panel">
                    <p class="name">
                    <?php if ($if_exist == 1) { ?>
@@ -76,7 +97,8 @@
                        Not Set!
                     <?php } ?>
                     </p>
-                 </div> 
+                 </div>
+                 </div>
               </div>
 
               <div class="row panel-status">
@@ -110,24 +132,25 @@
               </nav>
 
 </sidebar>
- <content class="col-md-9">
- 
- <section class="col-md-12 content-header portfolio">
 
-     <div class="col-md-10">
+ <content class="col-md-9 popage">
+ 
+ <section class="col-xs-12 col-md-12 content-header portfolio">
+
+     <div class="col-xs-10 col-md-10">
           <h3>Portfolio</h3> 
           <p class="">Subheading here</p>    
       </div>
                   
-     <div  class="col-md-2">
+     <div  class="tabmenu col-xs-2 col-md-2">
         <a href="#"><img  src="images/menu.png" class="nav-menu"></a>
      </div>
 
  </section>
 
 
-<section  class="col-md-12 content-portfolio"> 
-    <nav class="col-md-12">
+<section  class="col-xs-12 col-md-12 content-portfolio"> 
+    <nav class="col-xs-12 col-md-12">
         <ul>
              <li class="active">
               <a href="#tab0" role="tab" data-toggle="tab">All</a></li>
@@ -141,35 +164,35 @@
         <!-- All -->
         <section role="tabpanel" class="tab-pane active" id="tab0">
                @foreach ($userPorfolios as $userPorfolio)
-                    <div class="col-md-4" data-toggle="modal" data-target="#all_{{ $userPorfolio->id }}">
+                    <div class="col-xs-6 col-md-4" data-toggle="modal" data-target="#all_{{ $userPorfolio->id }}">
                         <center>
-                        <div class="portfolio-details form-group hvr-float-shadow">
+                                <div class="portfolio-details form-group hvr-float-shadow">
 
 
-                 <?php $fileName = "upload/".$userPorfolio->post_thumbnail;
-                    if(file_exists($fileName)){  ?>
-                             <img src="upload/{{ $userPorfolio->post_thumbnail }}" class="img-responsive">
-                 <?php }else{ ?>
-                              <img src="images/portfolio_images.png" class="img-responsive"> 
-                 <?php } ?>      
+                         <?php $fileName = "upload/".$userPorfolio->post_thumbnail;
+                            if(file_exists($fileName)){  ?>
+                                     <img src="upload/{{ $userPorfolio->post_thumbnail }}" class="img-responsive">
+                         <?php }else{ ?>
+                                      <img src="images/portfolio_images.png" class="img-responsive"> 
+                         <?php } ?>      
 
-                         
-                          <div class="ro$fileNamew">
-                            {{ $userPorfolio->port_title }}
-                          </div>
-                        </div>
+                                 
+                                  <div class="ro$fileNamew">
+                                    {{ $userPorfolio->port_title }}
+                                  </div>
+                                </div>
                         </center>
                     </div>
 
                   <!-- Modal for All_PorfolioCategory -->
-                          <section>
+                          <section class="portfolio_modal">
                                     <div class="modal fade" id="all_{{ $userPorfolio->id }}" role="dialog">
                                       <div class="modal-dialog">
                                             <!-- Modal content-->
                                               <div class="modal-content">
                                                     
                                                                         
-                                                    <div class="col-md-12 content-panel-header">
+                                                    <div class="col-xs-12 col-md-12 content-panel-header">
 
                                                         <center>
                                                          <h4>{{ $userPorfolio->port_title }}</h4>
@@ -215,7 +238,7 @@
          ?>
 
           <?php  foreach ($portfolioCat as $category) { ?>
-              <div class="col-md-4" data-toggle="modal" data-target="#cat_{{ $category->id }}">
+              <div class="col-xs-6 col-md-4" data-toggle="modal" data-target="#cat_{{ $category->id }}">
                         <center>
                         <div class="portfolio-details form-group hvr-float-shadow">
                           <?php $fileName = "upload/".$category->post_thumbnail;
@@ -234,7 +257,7 @@
                         </center>
               </div> 
                <!-- Modal for PorfolioCategory -->
-                          <section>
+                          <section class="portfolio_modal">
                                     <div class="modal fade" id="cat_{{ $category->id }}" role="dialog">
                                       <div class="modal-dialog">
                                             <!-- Modal content-->
@@ -287,7 +310,7 @@
 </section>
 
 <!-- Modal for add_Porfolio -->
- <section>
+<section>
     <div class="modal fade" id="myModal" role="dialog">
         <div class="modal-dialog">
                 <div class="modal-content">
@@ -338,7 +361,7 @@
                               <div class="modal-footer">
 
                                    <button type="submit" class="btn btn-default">Save</button>
-                      
+                                   <button type="submit" class="btn btn-default" data-dismiss="modal">Close</button> 
 
                               </div>
                     </form>

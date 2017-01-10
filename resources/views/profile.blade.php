@@ -2,7 +2,7 @@
 
 
 @section('title')
-   - Profile
+   | Profile
 @endsection
 
 @section('body-class')
@@ -16,16 +16,17 @@
    <nav class="navbar navbar-default navbar-static-top navs">
       <div class="container">
         <div class=" navbar-header">
-          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
             <span class="sr-only">Toggle navigation</span>
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
-          </button>
-         <div class="col-md-3 logo"><a href="{{ url('/home') }}"><img src="images/logo.png"></a></div>
+          </button> 
+         <div class="col-md-3 col-sm-12 logo"><a href="{{ url('/home') }}"><img src="images/logo.png"></a></div>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
-        <nav class="col-md-3 navicon">
+        <!-- <div id="navbar" class=""> -->
+        <nav class="col-md-3 col-sm-12 navicon">
               <ul>
                   <li><i class="glyphicon glyphicon-user"></i></li>
                   <li class="dropdown">
@@ -39,27 +40,46 @@
                       </ul>
                   </li>
                    <!---->
-                  <li><i <i class="glyphicon glyphicon-briefcase"></i></li>
+                  <li><i class="glyphicon glyphicon-briefcase"></i></li>
               </ul>
         </nav>
-          <div class="col-md-6">
+          <div class="col-md-6 col-sm-12 ">
                <div class="inner-addon left-addon">
                 <span class="glyphicon glyphicon-search"></span>
                 <input class="form-control input-lg searchbox " type="text" placeholder="Search">
                 </div>
-          </div>
+        </div>
+         <div class="row hiddenmenu ">
+              <ul>
+                  <li><a href="{{ url('/home') }}">Dashboard</a></li>
+                  <li><a href="{{ url('/profile') }}">My CV</a></li>
+                  <li><a href="{{ url('/profile') }}">Profile</a></li>
+                  <li><a href="{{ url('/resume') }}">Resume</a></li>
+                  <li><a href="{{ url('/portfolio') }}">Portfolio</a></li>
+                  <li><a href="{{ url('/jobs') }}">Jobs</a></li>
+                  <li><a href="{{ url('/setting') }}">Settings</a></li>
+                  <li><a href="{{ url('/logout') }}">Logout</a></li>
+              </ul>
+         </div>  
+        
+
+
+
         </div>
       </div>
     </nav>
+    
 </header> 
 
-<div class="container wrap">
-<sidebar class="col-md-3 ">
 
-              <div class="row">
+<div class="container wrap">
+<sidebar class="col-sm-12 col-md-3 ">
+
+                <div class="row user-tabs">
                 <div class="user">
                   <img src="images/user.png">     
-                </div>  
+                </div>
+                 <div class="name-panel">
                    <div class="name-panel">
                    <p class="name">
                    <?php if ($if_exist == 1) { ?>
@@ -76,18 +96,19 @@
                     <?php } ?>
                     </p>
                  </div>
+                 </div>
               </div>
 
               <div class="row panel-status">
-                        <div class="col-md-4 panel-status-1">
+                        <div class="col-sm-4 col-md-4 panel-status-1">
                             <img src="images/heart.png"> 
                             <p>2,718</p>
                         </div>
-                        <div class="col-md-4 panel-status-2">
+                        <div class="col-sm-4 col-md-4 panel-status-2">
                             <img src="images/users.png">
                             <p>5,718</p>  
                         </div>
-                        <div class="col-md-4 panel-status-3">
+                        <div class="col-sm-4 col-md-4 panel-status-3">
                             <img src="images/eye.png">
                             <p>6,718</p>  
                         </div>
@@ -109,10 +130,10 @@
               </nav>
 
 </sidebar>
-<content class="col-md-9">
-<section class="col-md-12 content-header">
+<content class="col-xs-12 col-md-9 ppage">
+<section class="col-xs-12 col-md-12  content-header">
 
-                    <div class="col-md-10">
+                    <div class="col-xs-12  col-md-10">
                       <h3>People You May Know</h3>
                     
                     </div>
@@ -121,8 +142,8 @@
                       <img src="images/cancel.png"  class="cancel-button">
                     </div>
 
-                    <div class="col-md-12">
-                         <div class="col-md-4 content-profile-people"> 
+                    <div class="col-xs-12 col-md-12  content-people-wrap">
+                         <div class="col-xs-12 col-md-4 content-profile-people"> 
 
                               <div class="col-md-5 people-img">
                                   <img src="images/user1.png"> 
@@ -136,7 +157,7 @@
                                   
                               
                           </div>
-                           <div class="col-md-4 content-profile-people"> 
+                           <div class="col-xs-12 col-md-4 content-profile-people"> 
 
                               <div class="col-md-5 people-img">
                                   <img src="images/user1.png"> 
@@ -150,7 +171,7 @@
                                   
                               
                           </div> 
-                          <div class="col-md-4 content-profile-people"> 
+                          <div class="col-xs-12 col-md-4 content-profile-people"> 
 
                               <div class="col-md-5 people-img">
                                   <img src="images/user1.png"> 
@@ -170,15 +191,15 @@
 
        
                    
-<section>
+<section class="profile">
           
-          <div class="col-md-12 content-panel-header"><h3>Profile</h3></div>
+          <div class="col-xs-12 col-md-12 content-panel-header"><h3>Profile</h3></div>
 
-          <div class="col-md-12  content-panel">
-                     <div class="col-md-3">
-                        <p>Name</p>
+          <div class="col-xs-12 col-md-12  content-panel">
+                     <div class="col-xs-3 col-md-3">
+                        <p class="title">Name</p>
                      </div>
-                     <div class="col-md-9">
+                     <div class="col-xs-9 col-md-9">
                             <?php if ($if_exist == 1) { ?> 
                                <p><?php echo$userProfile->name; ?></p>
                             <?php }else{ ?>
@@ -186,14 +207,14 @@
                             <?php } ?>                    
                                       
                      </div>
-                     <div class="col-md-12 line"></div>                
+                     <div class="col-xs-12 col-md-12 line"></div>                
          </div>
 
-         <div class="col-md-12  content-panel">
-                     <div class="col-md-3">
-                        <p>Job Title</p>
+         <div class="col-xs-12 col-md-12  content-panel">
+                     <div class="col-xs-3 col-md-3">
+                        <p class="title">Job Title</p>
                      </div>
-                     <div class="col-md-9">
+                     <div class="col-xs-9 col-md-9">
                             <?php if ($if_exist == 1) { ?> 
                                <p><?php echo$userProfile->position; ?></p>
                             <?php }else{ ?>
@@ -201,14 +222,14 @@
                             <?php } ?>                   
                           <p></p>            
                      </div>
-                     <div class="col-md-12 line"></div>                
+                     <div class="col-xs-12 col-md-12 line"></div>                
          </div>
 
-         <div class="col-md-12  content-panel">
-                     <div class="col-md-3">
-                        <p>Birthday</p>
+         <div class="col-xs-12 col-md-12  content-panel">
+                     <div class="col-xs-3 col-md-3">
+                        <p class="title">Birthday</p>
                      </div>
-                     <div class="col-md-9">
+                     <div class="col-xs-9 col-md-9">
                           <?php if ($if_exist == 1) { ?> 
                                <p><?php echo$userProfile->bday; ?></p>  
                             <?php }else{ ?>
@@ -216,14 +237,14 @@
                             <?php } ?>                     
                                     
                      </div>
-                     <div class="col-md-12 line"></div>                
+                     <div class="col-xs-12 col-md-12 line"></div>                
          </div>
 
-         <div class="col-md-12  content-panel">
-                     <div class="col-md-3">
-                        <p>Address</p>
+         <div class="col-xs-12 col-md-12  content-panel">
+                     <div class="col-xs-3 col-md-3">
+                        <p class="title">Address</p>
                      </div>
-                     <div class="col-md-9">
+                     <div class="col-xs-9 col-md-9">
                             <?php if ($if_exist == 1) { ?> 
                                <p><?php echo$userProfile->address; ?></p>     
                             <?php }else{ ?>
@@ -231,28 +252,28 @@
                             <?php } ?>                   
                                  
                      </div>
-                     <div class="col-md-12 line"></div>                
+                     <div class="col-xs-12 col-md-12 line"></div>                
          </div>
 
-         <div class="col-md-12  content-panel">
-                     <div class="col-md-3">
-                        <p>Email</p>
+         <div class="col-xs-12 col-md-12  content-panel">
+                     <div class="col-xs-3 col-md-3">
+                        <p class="title">Email</p>
                      </div>
-                     <div class="col-md-9">                   
+                     <div class="col-xs-9 col-md-9">                   
                            <?php if ($if_exist == 1) { ?> 
                                <p><?php echo$userProfile->email; ?></p>     
                             <?php }else{ ?>
                                <p>{{ $email }}</p>
                             <?php } ?>                 
                      </div>
-                     <div class="col-md-12 line"></div>                
+                     <div class="col-xs-12 col-md-12 line"></div>                
          </div>        
 
-          <div class="col-md-12  content-panel">
-                     <div class="col-md-3">
-                        <p>Phone</p>
+          <div class="col-xs-12 col-md-12  content-panel">
+                     <div class="col-xs-3 col-md-3">
+                        <p class="title">Phone</p>
                      </div>
-                     <div class="col-md-9">
+                     <div class="col-xs-9 col-md-9">
                       <?php if ($if_exist == 1) { ?> 
                                <p><?php echo$userProfile->phone; ?></p>       
                             <?php }else{ ?>
@@ -260,14 +281,14 @@
                             <?php } ?>                   
                                   
                      </div>
-                     <div class="col-md-12 line"></div>                
+                     <div class="col-xs-12 col-md-12 line"></div>                
          </div> 
           
-          <div class="col-md-12  content-panel">
-                     <div class="col-md-3">
-                        <p>Biography</p>
+          <div class="col-xs-12 col-md-12  content-panel">
+                     <div class="col-xs-3 col-md-3">
+                        <p class="title">Biography</p>
                      </div>
-                     <div class="col-md-9">
+                     <div class="col-xs-9 col-md-9">
                        <?php if ($if_exist == 1) { ?> 
                                 <p><?php echo$userProfile->bio; ?></p>    
                             <?php }else{ ?>
@@ -275,19 +296,19 @@
                             <?php } ?>                      
                                      
                      </div>
-                     <div class="col-md-12 line"></div>                
+                     <div class="col-xs-12 col-md-12 line"></div>                
          </div>                          
 </section>
 
-<section>
+<section class="social-media">
           
-          <div class="col-md-12 content-panel-header"><h3>Social Media</h3></div>
+          <div class="col-xs-12 col-md-12 content-panel-header"><h3>Social Media</h3></div>
 
-          <div class="col-md-12  content-panel">
-                     <div class="col-md-3">
-                        <p>Facebook</p>
+          <div class="col-xs-12 col-md-12  content-panel">
+                     <div class="col-xs-3 col-md-3">
+                        <p class="title">Facebook</p>
                      </div>
-                     <div class="col-md-9">
+                     <div class="col-xs-9 col-md-9">
                       <?php if ($if_exist == 1) { ?> 
                                 <p><?php echo$userProfile->facebook; ?></p>   
                             <?php }else{ ?>
@@ -295,14 +316,14 @@
                             <?php } ?>                     
                                     
                      </div>
-                     <div class="col-md-12 line"></div>                
+                     <div class="col-xs-12 col-md-12 line"></div>                
          </div>
 
-         <div class="col-md-12  content-panel">
-                     <div class="col-md-3">
-                        <p>Linkedin</p>
+         <div class="col-xs-12 col-md-12  content-panel">
+                     <div class="col-xs-3 col-md-3">
+                        <p  class="title">Linkedin</p>
                      </div>
-                     <div class="col-md-9">
+                     <div class="col-xs-9 col-md-9">
                         <?php if ($if_exist == 1) { ?> 
                                <p><?php echo$userProfile->linkedin; ?></p> 
                             <?php }else{ ?>
@@ -310,14 +331,14 @@
                             <?php } ?>                    
                                      
                      </div>
-                     <div class="col-md-12 line"></div>                
+                     <div class="col-xs-12 col-md-12 line"></div>                
          </div>
 
-        <div class="col-md-12  content-panel">
-                     <div class="col-md-3">
-                        <p>Twitter</p>
+        <div class="col-xs-12 col-md-12  content-panel">
+                     <div class="col-xs-3 col-md-3">
+                        <p class="title">Twitter</p>
                      </div>
-                     <div class="col-md-9"> 
+                     <div class="col-xs-9 col-md-9"> 
                       <?php if ($if_exist == 1) { ?> 
                                <p><?php echo$userProfile->twitter; ?></p> 
                             <?php }else{ ?>
@@ -325,14 +346,14 @@
                             <?php } ?>                    
                                      
                      </div>
-                     <div class="col-md-12 line"></div>                
+                     <div class="col-xs-12 col-md-12 line"></div>                
          </div>
 
-            <div class="col-md-12  content-panel">
-                     <div class="col-md-3">
-                        <p>Google</p>
+            <div class="col-xs-12 col-md-12  content-panel">
+                     <div class="col-xs-3 col-md-3">
+                        <p class="title">Google</p>
                      </div>
-                     <div class="col-md-9">
+                     <div class="col-xs-9 col-md-9">
                      <?php if ($if_exist == 1) { ?> 
                                <p><?php echo$userProfile->google; ?></p>
                       <?php }else{ ?>
@@ -340,13 +361,13 @@
                       <?php } ?>                      
                                       
                      </div>
-                     <div class="col-md-12 line"></div>                
+                     <div class="col-xs-12 col-md-12 line"></div>                
          </div>
                        
 </section> 
                   
-<section>
-            <div class="col-md-12 content-panel">
+<section class="ppfooter">
+            <div class="col-xs-12 col-md-12 content-panel">
                     <div class="content-profile">
                         <center><button data-toggle="modal" data-target="#myModal">Edit Profile</button></center>
                     </div>
@@ -370,195 +391,192 @@
          <?php } ?> 
 
 
-    <section class="theme1">
-          <section>
-                    
-                    <div class="col-md-12 content-panel-header">
-                       <button type="button" class="close" data-dismiss="modal">&times;</button>
-                       <h3>Profile</h3>
+                  <section class="theme1">
+                        <section>
+                                  
+                                  <div class="col-xs-12 col-md-12 content-panel-header">
+                                     <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                     <h3>Profile</h3>
 
-                    </div>
+                                  </div>
 
-                    <div class="col-md-12  content-panel">                 
-                               <div class="col-md-3">
-                                  <p>Name</p>
-                               </div>
-                               <div class="col-md-9">
-                                <?php if ($if_exist == 1) { ?> 
-                                        <input type="text" name="name" class="form-control" value="{{ $userProfile->name }}">
-                                <?php }else{ ?>
-                                        <input type="text" name="name" class="form-control" value="{{ $name }}">
-                                <?php } ?>                     
-                                              
-                               </div>
-                                            
-                    </div>
+                                  <div class="col-xs-12 col-md-12  content-panel">                 
+                                             <div class="col-xs-12 col-md-3">
+                                                <p class="title">Name</p>
+                                             </div>
+                                             <div class="col-xs-12 col-md-9">
+                                              <?php if ($if_exist == 1) { ?> 
+                                                      <input type="text" name="name" class="form-control" value="{{ $userProfile->name }}">
+                                              <?php }else{ ?>
+                                                      <input type="text" name="name" class="form-control" value="{{ $name }}">
+                                              <?php } ?>                     
+                                                            
+                                             </div>
+                                                          
+                                  </div>
 
-                   <div class="col-md-12  content-panel">
-                               <div class="col-md-3">
-                                  <p>Job Title</p>
-                               </div>
-                               <div class="col-md-9">
-                                <?php if ($if_exist == 1) { ?> 
-                                        <input type="text" name="jobtitle" class="form-control" value="{{ $userProfile->position }}">  
-                                <?php }else{ ?>
-                                        <input type="text" name="jobtitle" class="form-control">
-                                <?php } ?>
-                                                              
-                               </div>
-                                           
-                   </div>
-
-                   <div class="col-md-12  content-panel">
-                               <div class="col-md-3">
-                                  <p>Birthday</p>
-                               </div>
-                               <div class="col-md-9">
-                                                 
-                                <?php if ($if_exist == 1) { ?> 
-                                         <input type="text" name="bday" class="form-control" value="{{ $userProfile->bday }}"> 
-                                <?php }else{ ?>
-                                        <input type="text" name="bday" class="form-control">
-                                <?php } ?>                
-                               </div>
-                                             
-                   </div>
-
-                   <div class="col-md-12  content-panel">
-                               <div class="col-md-3">
-                                  <p>Address</p>
-                               </div>
-                               <div class="col-md-9">
-                                                       
-                                <?php if ($if_exist == 1) { ?> 
-                                         <input type="text" name="address"  class="form-control" value="{{ $userProfile->address }}"> 
-                                <?php }else{ ?>
-                                        <input type="text" name="address" class="form-control">
-                                <?php } ?>          
-                               </div>
-                                   
-                   </div>
-
-                   <div class="col-md-12  content-panel">
-                               <div class="col-md-3">
-                                  <p>Email</p>
-                               </div>
-                               <div class="col-md-9">
-                                                       
-                                <?php if ($if_exist == 1) { ?> 
-                                         <input type="email" name="email" class="form-control" value="{{ $userProfile->email }}">
-                                <?php }else{ ?>
-                                        <input type="text" name="email" class="form-control" value="{{ $email }}">
-                                <?php } ?>               
-                               </div>
-                                    
-                   </div>        
-
-                    <div class="col-md-12  content-panel">
-                               <div class="col-md-3">
-                                  <p>Phone</p>
-                               </div>
-                               <div class="col-md-9">
-                                                     
-                                <?php if ($if_exist == 1) { ?> 
-                                        <input type="text" name="phone" class="form-control" value="{{ $userProfile->phone }}">  
-                                <?php }else{ ?>
-                                        <input type="text" name="phone" class="form-control">
-                                <?php } ?>                 
-                               </div>
-                                              
-                   </div> 
-                    
-                    <div class="col-md-12  content-panel">
-                               <div class="col-md-3">
-                                  <p>Biography</p>
-                               </div>
-                               <div class="col-md-9">
-                                <?php if ($if_exist == 1) { ?> 
-                                         <textarea rows="5" cols="45" name="bio">
-                                            {{ $userProfile->bio }}
-                                          </textarea>    
-                                <?php }else{ ?>
-                                         <textarea rows="5" cols="45" name="bio">
-                                        </textarea>  
-                                <?php } ?> 
-                                                    
-                                           
-                               </div>
-                                              
-                   </div>                          
-          </section>
-
-            <section>
-                      
-                      <div class="col-md-12 content-panel-header"><h3>Social Media</h3></div>
-
-                      <div class="col-md-12  content-panel">
-                                 <div class="col-md-3">
-                                    <p>Facebook</p>
-                                 </div>
-                                 <div class="col-md-9">
+                                 <div class="col-md-12  content-panel">
+                                             <div class="col-xs-12 col-md-3">
+                                                <p class="title">Job Title</p>
+                                             </div>
+                                             <div class="col-xs-12 col-md-9">
+                                              <?php if ($if_exist == 1) { ?> 
+                                                      <input type="text" name="jobtitle" class="form-control" value="{{ $userProfile->position }}">  
+                                              <?php }else{ ?>
+                                                      <input type="text" name="jobtitle" class="form-control">
+                                              <?php } ?>
+                                                                            
+                                             </div>
                                                          
-                                <?php if ($if_exist == 1) { ?> 
-                                         <input type="text" name="facebook" class="form-control" value="{{ $userProfile->facebook }}">  
-                                <?php }else{ ?>
-                                        <input type="text" name="facebook" class="form-control">
-                                <?php } ?> 
                                  </div>
-                                        
-                     </div>
 
-                     <div class="col-md-12  content-panel">
-                                 <div class="col-md-3">
-                                    <p>Linkedin</p>
-                                 </div>
-                                 <div class="col-md-9">
-                                                          
-                                <?php if ($if_exist == 1) { ?> 
-                                         <input type="text" name="linkedin" class="form-control" value="{{ $userProfile->linkedin }}">  
-                                <?php }else{ ?>
-                                        <input type="text" name="linkedin" class="form-control">
-                                <?php } ?>             
-                                 </div>
-                                              
-                     </div>
-
-                    <div class="col-md-12  content-panel">
-                                 <div class="col-md-3">
-                                    <p>Twitter</p>
-                                 </div>
-                                 <div class="col-md-9">
+                                 <div class="col-md-12  content-panel">
+                                             <div class="col-xs-12 col-md-3">
+                                                <p class="title">Birthday</p>
+                                             </div>
+                                             <div class="col-xs-12 col-md-9">
+                                                               
+                                              <?php if ($if_exist == 1) { ?> 
+                                                       <input type="text" name="bday" class="form-control" value="{{ $userProfile->bday }}"> 
+                                              <?php }else{ ?>
+                                                      <input type="text" name="bday" class="form-control">
+                                              <?php } ?>                
+                                             </div>
                                                            
-                                <?php if ($if_exist == 1) { ?> 
-                                        <input type="text" name="twitter" class="form-control" value="{{ $userProfile->twitter }}">  
-                                <?php }else{ ?>
-                                        <input type="text" name="twitter" class="form-control">
-                                <?php } ?>             
                                  </div>
-                                               
-                     </div>
 
-                      <div class="col-md-12  content-panel">
-                                 <div class="col-md-3">
-                                    <p>Google</p>
+                                 <div class="col-md-12  content-panel">
+                                             <div class="col-xs-12 col-md-3">
+                                                <p class="title">Address</p>
+                                             </div>
+                                             <div class="col-xs-12 col-md-9">
+                                                                     
+                                              <?php if ($if_exist == 1) { ?> 
+                                                       <input type="text" name="address"  class="form-control" value="{{ $userProfile->address }}"> 
+                                              <?php }else{ ?>
+                                                      <input type="text" name="address" class="form-control">
+                                              <?php } ?>          
+                                             </div>
+                                                 
                                  </div>
-                                 <div class="col-md-9">
-                                                          
-                                    <?php if ($if_exist == 1) { ?> 
-                                        <input type="text"  name="google" class="form-control" value="{{ $userProfile->google }}">
-                                <?php }else{ ?>
-                                        <input type="text" name="google" class="form-control">
-                                <?php } ?>    
-                                 </div>
-                                               
-                     </div>
+
+                                 <div class="col-md-12  content-panel">
+                                             <div class="col-xs-12 col-md-3">
+                                                <p class="title">Email</p>
+                                             </div>
+                                             <div class="col-xs-12 col-md-9">
+                                                                     
+                                              <?php if ($if_exist == 1) { ?> 
+                                                      <input type="text" name="email" class="form-control" value="{{ $userProfile->email }}">
+                                              <?php }else{ ?>
+                                                      <input type="text" name="email" class="form-control" value="{{ $email }}">
+                                              <?php } ?>               
+                                             </div>
+                                                  
+                                 </div>        
+
+                                  <div class="col-md-12  content-panel">
+                                             <div class="col-xs-12 col-md-3">
+                                                <p class="title">Phone</p>
+                                             </div>
+                                             <div class="col-xs-12 col-md-9">
+                                                                   
+                                              <?php if ($if_exist == 1) { ?> 
+                                                      <input type="text" name="phone" class="form-control" value="{{ $userProfile->phone }}">  
+                                              <?php }else{ ?>
+                                                      <input type="text" name="phone" class="form-control">
+                                              <?php } ?>                 
+                                             </div>
+                                                            
+                                 </div> 
+                                  
+                                  <div class="col-md-12  content-panel">
+                                             <div class="col-xs-12 col-md-3">
+                                                <p class="title">Biography</p>
+                                             </div>
+                                             <div class="col-xs-12 col-md-9">
+                                              <?php if ($if_exist == 1) { ?> 
+                                                       <textarea  class="form-control"  rows="5" cols="45" name="bio">{{ $userProfile->bio }}</textarea>    
+                                              <?php }else{ ?>
+                                                       <textarea  class="form-control"  rows="5" cols="45" name="bio"></textarea>  
+                                              <?php } ?> 
+                                                                  
+                                                         
+                                             </div>
+                                                            
+                                 </div>                          
+                        </section>
+
+                          <section>
+                                    
+                                    <div class="col-md-12 content-panel-header"><h3>Social Media</h3></div>
+
+                                    <div class="col-md-12  content-panel">
+                                               <div class="col-md-3">
+                                                  <p class="title">Facebook</p>
+                                               </div>
+                                               <div class="col-md-9">
+                                                                       
+                                              <?php if ($if_exist == 1) { ?> 
+                                                       <input type="text" name="facebook" class="form-control" value="{{ $userProfile->facebook }}">  
+                                              <?php }else{ ?>
+                                                      <input type="text" name="facebook" class="form-control">
+                                              <?php } ?> 
+                                               </div>
+                                                      
+                                   </div>
+
+                                   <div class="col-md-12  content-panel">
+                                               <div class="col-md-3">
+                                                  <p class="title">Linkedin</p>
+                                               </div>
+                                               <div class="col-md-9">
+                                                                        
+                                              <?php if ($if_exist == 1) { ?> 
+                                                       <input type="text" name="linkedin" class="form-control" value="{{ $userProfile->linkedin }}">  
+                                              <?php }else{ ?>
+                                                      <input type="text" name="linkedin" class="form-control">
+                                              <?php } ?>             
+                                               </div>
+                                                            
+                                   </div>
+
+                                  <div class="col-md-12  content-panel">
+                                               <div class="col-md-3">
+                                                  <p class="title">Twitter</p>
+                                               </div>
+                                               <div class="col-md-9">
+                                                                         
+                                              <?php if ($if_exist == 1) { ?> 
+                                                      <input type="text" name="twitter" class="form-control" value="{{ $userProfile->twitter }}">  
+                                              <?php }else{ ?>
+                                                      <input type="text" name="twitter" class="form-control">
+                                              <?php } ?>             
+                                               </div>
+                                                             
+                                   </div>
+
+                                    <div class="col-md-12  content-panel">
+                                               <div class="col-md-3">
+                                                  <p class="title">Google</p>
+                                               </div>
+                                               <div class="col-md-9">
+                                                                        
+                                                  <?php if ($if_exist == 1) { ?> 
+                                                      <input type="text"  name="google" class="form-control" value="{{ $userProfile->google }}">
+                                              <?php }else{ ?>
+                                                      <input type="text" name="google" class="form-control">
+                                              <?php } ?>    
+                                               </div>
+                                                             
+                                   </div>
 
 
 
 
-                                   
-            </section>
-      </section>
+                                                 
+                          </section>
+                    </section>
 
           <div class="modal-footer">
 

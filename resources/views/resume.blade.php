@@ -2,7 +2,7 @@
 
 
 @section('title')
-   - Resume
+   | Resume
 @endsection
 
 @section('body-class')
@@ -16,16 +16,17 @@
    <nav class="navbar navbar-default navbar-static-top navs">
       <div class="container">
         <div class=" navbar-header">
-          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
             <span class="sr-only">Toggle navigation</span>
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
-          </button>
-         <div class="col-md-3 logo"><a href="{{ url('/home') }}"><img src="images/logo.png"></a></div>
+          </button> 
+         <div class="col-md-3 col-sm-12 logo"><a href="{{ url('/home') }}"><img src="images/logo.png"></a></div>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
-        <nav class="col-md-3 navicon">
+        <!-- <div id="navbar" class=""> -->
+        <nav class="col-md-3 col-sm-12 navicon">
               <ul>
                   <li><i class="glyphicon glyphicon-user"></i></li>
                   <li class="dropdown">
@@ -39,28 +40,47 @@
                       </ul>
                   </li>
                    <!---->
-                  <li><i <i class="glyphicon glyphicon-briefcase"></i></li>
+                  <li><i class="glyphicon glyphicon-briefcase"></i></li>
               </ul>
         </nav>
-          <div class="col-md-6">
+          <div class="col-md-6 col-sm-12 ">
                <div class="inner-addon left-addon">
                 <span class="glyphicon glyphicon-search"></span>
                 <input class="form-control input-lg searchbox " type="text" placeholder="Search">
                 </div>
-          </div>
+        </div>
+         <div class="row hiddenmenu ">
+              <ul>
+                  <li><a href="{{ url('/home') }}">Dashboard</a></li>
+                  <li><a href="{{ url('/profile') }}">My CV</a></li>
+                  <li><a href="{{ url('/profile') }}">Profile</a></li>
+                  <li><a href="{{ url('/resume') }}">Resume</a></li>
+                  <li><a href="{{ url('/portfolio') }}">Portfolio</a></li>
+                  <li><a href="{{ url('/jobs') }}">Jobs</a></li>
+                  <li><a href="{{ url('/setting') }}">Settings</a></li>
+                  <li><a href="{{ url('/logout') }}">Logout</a></li>
+              </ul>
+         </div>  
+        
+
+
+
         </div>
       </div>
     </nav>
+    
 </header> 
+
 
 <div class="container wrap">
 
 <sidebar class="col-md-3 ">
 
-              <div class="row">
+              <div class="row user-tabs">
                 <div class="user">
                   <img src="images/user.png">     
-                </div>  
+                </div>
+                 <div class="name-panel">
                    <div class="name-panel">
                    <p class="name">
                    <?php if ($if_exist == 1) { ?>
@@ -76,7 +96,7 @@
                        Not Set!
                     <?php } ?>
                     </p>
-
+                 </div>
                  </div>
               </div>
 
@@ -111,27 +131,26 @@
               </nav>
 
 </sidebar>
- <content class="col-md-9">
+ <content class="col-xs-12 col-md-9">
  
- <section class="col-md-12 content-header">
+ <section class="col-xs-12 col-md-12 rpage content-header">
 
-     <div class="col-md-10">
+     <div class="col-xs-10 col-md-10">
           <h3>Resume</h3>     
       </div>
                   
-     <div  class="col-md-2">
+     <div  class="tabmenu col-xs-2 col-md-2">
         <a href="#"><img  src="images/menu.png" class="nav-menu"></a>
      </div>
-
-     <nav class="content-nav-menu" role="tablist">
+     <nav class="col-xs-12 content-nav-menu" role="tablist">
           <ul role="presentation">
-            <li ><a href="#tab1" role="tab" data-toggle="tab">Experience</a></li>
+            <li><a href="#tab1" role="tab" data-toggle="tab">Experience</a></li>
             <li><a href="#tab2" role="tab" data-toggle="tab">Education</a></li>
             <li><a href="#tab3" role="tab" data-toggle="tab">Skill</a></li>
-            <li class="active"><a href="#tab4" role="tab" data-toggle="tab">Certification</a></li>
+            <li  class="active" ><a href="#tab4" role="tab" data-toggle="tab">Certification</a></li>
           </ul>
-
      </nav>
+
                  
                    
                     
@@ -139,17 +158,17 @@
  </section>
 
 
-<section  class="tab-content">
+<section  class="resume tab-content">
 
          <section role="tabpanel" class="tab-pane " id="tab1">
 
              @foreach ($userResume_Experience as $userExperience)
               
-            <div class="col-md-12 content-panel-header">
-              <div class="col-md-9">
+            <div class="col-xs-12 col-md-12 content-panel-header">
+              <div class="col-xs-8 col-md-9">
                 <h3>{{ $userExperience->job_title }}</h3>
               </div>
-              <div class="col-md-2 content-panel-pc">
+              <div class="col-xs-4 col-md-2 content-panel-pc">
                   <span class="glyphicon glyphicon-pencil" data-toggle="modal" data-target="#exp_{{ $userExperience->id }}"></span>
                   <span class="glyphicon glyphicon-remove" data-toggle="modal" data-target="#delexp_{{ $userExperience->id }}"></span>          
                                
@@ -158,36 +177,36 @@
 
             </div>
            
-                  <div class="col-md-12  content-panel">
-                             <div class="col-md-3">
-                                <p>Company</p>
+                  <div class="col-xs-12 col-md-12  content-panel">
+                             <div class="col-xs-4 col-md-3">
+                                <p class="title">Company</p>
                              </div>
-                             <div class="col-md-9">                   
+                             <div class="col-xs-8 col-md-9">                   
                                   <p>{{ $userExperience->company_name }}</p>            
                              </div>
                              <div class="col-md-12 line"></div>                
                    </div>
-                    <div class="col-md-12  content-panel">
-                             <div class="col-md-3">
-                                <p>Years</p>
+                    <div class="col-xs-12 col-md-12  content-panel">
+                             <div class="col-xs-4 col-md-3">
+                                <p class="title">Years</p>
                              </div>
-                             <div class="col-md-9">                   
+                             <div class="col-xs-8 col-md-9">                   
                                   <p>{{ $userExperience->start_date }} - {{ $userExperience->end_date }}</p>            
                              </div>
                              <div class="col-md-12 line"></div>                
                    </div>
-                   <div class="col-md-12  content-panel">
-                             <div class="col-md-3">
-                                <p><b>Description</b></p>
+                   <div class="col-xs-12 col-md-12  content-panel">
+                             <div class="col-xs-4 col-md-3">
+                                <p class="title"><b>Description</b></p>
                              </div>
-                             <div class="col-md-9">                   
+                             <div class="col-xs-8 col-md-9">                   
                                   <p>{{ $userExperience->description }}</p>            
                              </div>
                              <div class="col-md-12 line"></div>                
                    </div>
 
                    <!-- Modal for updateExperience -->
-                                      <section>
+                                      <section class="upexperience_modal">
 
                                                  <div class="modal fade" id="exp_{{ $userExperience->id }}" role="dialog">
                                                   <div class="modal-dialog">
@@ -195,51 +214,52 @@
                                                     <!-- Modal content-->
                                                     <div class="modal-content">
 
-                                      <form method="" action="resume/updateExperience/{{ $userExperience->id }}" class="theme1">
+                                                    <form method="" action="resume/updateExperience/{{ $userExperience->id }}" class="theme1">
 
-                                                          
-                                                          <div class="col-md-12 content-panel-header">
-                                                             <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                                             <h3>Update Experience</h3>
+                                                                        
+                                                                        <div class="col-md-12 content-panel-header">
+                                                                           <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                                           <h3>Update Experience</h3>
 
-                                                          </div>
-                                                          <section>
+                                                                        </div>
+                                                                        <section>
 
-                                                               <div class="form-group form-group">
-                                                                <div class="col-md-offset-1 col-sm-10">
-                                                                  <input class="form-control" name="update_job_title" type="text" value="{{ $userExperience->job_title }}">
-                                                                </div>
+                                                                             <div class="form-group form-group">
+                                                                              <div class="col-md-offset-1 col-sm-10">
+                                                                                <input class="form-control" name="update_job_title" type="text" value="{{ $userExperience->job_title }}">
+                                                                              </div>
+                                                                            </div>
+
+                                                                            <div class="form-group form-group">
+                                                                              <div class="col-md-offset-1 col-sm-10">
+                                                                                <input class="form-control" name="update_company" type="text" value="{{ $userExperience->company_name }}">
+                                                                              </div>
+                                                                            </div>
+
+                                                                            <div class="form-group form-group">
+                                                                              <div class="col-md-offset-1 col-md-5">
+                                                                                <input class="form-control" name="update_start_date" type="text" value="{{ $userExperience->start_date }}">
+                                                                              </div>
+                                                                              <div class="col-md-5">
+                                                                                <input class="form-control" name="update_end_date" type="text" value="{{ $userExperience->end_date }}">
+                                                                              </div>
+                                                                            </div>
+
+                                                                           
+
+                                                                            <div class="form-group form-group">
+                                                                              <div class="col-md-offset-1 col-md-10">
+                                                                                <textarea class="form-control" name="update_description" rows="5" cols="10">{{ $userExperience->description }}</textarea>
+                                                                              </div>
+                                                                             
+                                                                            </div>
+
+                                                                       </section>
+                                                              <div class="modal-footer">
+                                                                   <button type="submit" class="btn btn-default">Update</button> 
+                                                                   <button type="button" data-dismiss="modal" class="btn btn-default">Close</button> 
                                                               </div>
-
-                                                              <div class="form-group form-group">
-                                                                <div class="col-md-offset-1 col-sm-10">
-                                                                  <input class="form-control" name="update_company" type="text" value="{{ $userExperience->company_name }}">
-                                                                </div>
-                                                              </div>
-
-                                                              <div class="form-group form-group">
-                                                                <div class="col-md-offset-1 col-md-5">
-                                                                  <input class="form-control" name="update_start_date" type="text" value="{{ $userExperience->start_date }}">
-                                                                </div>
-                                                                <div class="col-md-5">
-                                                                  <input class="form-control" name="update_end_date" type="text" value="{{ $userExperience->end_date }}">
-                                                                </div>
-                                                              </div>
-
-                                                             
-
-                                                              <div class="form-group form-group">
-                                                                <div class="col-md-offset-1 col-md-10">
-                                                                  <textarea class="form-control" name="update_description" rows="5" cols="10">{{ $userExperience->description }}</textarea>
-                                                                </div>
-                                                               
-                                                              </div>
-
-                                                         </section>
-                                                <div class="modal-footer">
-                                                     <button type="submit" class="btn btn-default">Update</button>   
-                                                </div>
-                                      </form>
+                                                    </form>
                                             </div>
                                             
                                           </div>
@@ -249,7 +269,7 @@
                   <!-- Modal for updateExperience -->
 
                   <!-- Modal for deleteExperience -->
-                                      <section>
+                                      <section class="delexperience_modal">
 
                                                  <div class="modal fade" id="delexp_{{ $userExperience->id }}" role="dialog">
                                                   <div class="modal-dialog">
@@ -302,11 +322,11 @@
 
           @foreach ($userResume_Education as $userEducation)
 
-            <div class="col-md-12 content-panel-header">
-              <div class="col-md-9">
+            <div class="col-xs-12 col-md-12 content-panel-header">
+              <div class="col-xs-8 col-md-9">
                 <h3>{{  $userEducation->course }}</h3>
               </div>
-              <div class="col-md-2 content-panel-pc">
+              <div class="col-xs-4 col-md-2 content-panel-pc">
                   <span class="glyphicon glyphicon-pencil" data-toggle="modal" data-target="#edu_{{ $userEducation->id }}"></span>
                   <span class="glyphicon glyphicon-remove" data-toggle="modal" data-target="#deledu_{{ $userEducation->id }}"></span>             
               </div>
@@ -314,29 +334,29 @@
 
             </div>
 
-                  <div class="col-md-12  content-panel">
-                             <div class="col-md-3">
-                                <p>University/College</p>
+                  <div class="col-xs-12 col-md-12  content-panel">
+                             <div class="col-xs-4 col-md-3">
+                                <p  class="title">University/College</p>
                              </div>
-                             <div class="col-md-9">                   
-                                  <p>{{  $userEducation->school }}</p>            
+                             <div class="col-xs-8 col-md-9">                   
+                                <p>{{  $userEducation->school }}</p>            
                              </div>
                              <div class="col-md-12 line"></div>                
                    </div>
                     <div class="col-md-12  content-panel">
-                             <div class="col-md-3">
-                                <p>Years</p>
+                             <div class="col-xs-4 col-md-3">
+                                <p  class="title">Years</p>
                              </div>
-                             <div class="col-md-9">                   
+                             <div class="col-xs-8 col-md-9">                   
                                   <p>{{  $userEducation->date_start }} - {{  $userEducation->date_end }} </p>            
                              </div>
                              <div class="col-md-12 line"></div>                
                    </div>
                    <div class="col-md-12  content-panel">
-                             <div class="col-md-3">
-                                <p><b>Award</b></p>
+                             <div class="col-xs-4 col-md-3">
+                                <p  class="title"><b>Award</b></p>
                              </div>
-                             <div class="col-md-9">                   
+                             <div class="col-xs-8 col-md-9">                   
                                   <p>{{  $userEducation->awards_rec }}</p>            
                              </div>
                              <div class="col-md-12 line"></div>                
@@ -344,69 +364,74 @@
 
 
                     <!-- Modal for updateEducation -->
-                                      <section>
+                                      <section class="upeducation_modal">
 
                                                  <div class="modal fade" id="edu_{{ $userEducation->id }}" role="dialog">
-                                                  <div class="modal-dialog">
-                                                  
-                                                    <!-- Modal content-->
-                                                    <div class="modal-content">
 
-                                      <form method="" action="resume/updateEducation/{{ $userEducation->id }}" class="theme1">
+                                                      <div class="modal-dialog">
+                                                      
+                                                        <!-- Modal content-->
+                                                        <div class="modal-content">
 
-                                                          
-                                                          <div class="col-md-12 content-panel-header">
-                                                             <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                                             <h3>Update Education</h3>
+                                                        <form method="" action="resume/updateEducation/{{ $userEducation->id }}" class="theme1">
 
-                                                          </div>
-                                                          <section>
+                                                                            
+                                                                            <div class="col-md-12 content-panel-header">
+                                                                               <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                                               <h3>Update Education</h3>
 
-                                                               <div class="form-group form-group">
-                                                                <div class="col-md-offset-1 col-sm-10">
-                                                                  <input class="form-control" name="update_course" type="text" value="{{ $userEducation->course }}">
-                                                                </div>
-                                                              </div>
+                                                                            </div>
+                                                                            <section>
 
-                                                              <div class="form-group form-group">
-                                                                <div class="col-md-offset-1 col-sm-10">
-                                                                  <input class="form-control" name="update_school" type="text" value="{{ $userEducation->school }}">
-                                                                </div>
-                                                              </div>
+                                                                                 <div class="form-group form-group">
+                                                                                  <div class="col-md-offset-1 col-sm-10">
+                                                                                    <input class="form-control" name="update_course" type="text" value="{{ $userEducation->course }}">
+                                                                                  </div>
+                                                                                </div>
 
-                                                              <div class="form-group form-group">
-                                                                <div class="col-md-offset-1 col-md-5">
-                                                                  <input class="form-control" name="update_start_date" type="text" value="{{ $userEducation->date_start }}">
-                                                                </div>
-                                                                <div class="col-md-5">
-                                                                  <input class="form-control" name="update_end_date" type="text" value="{{ $userEducation->date_end }}">
-                                                                </div>
-                                                              </div>
+                                                                                <div class="form-group form-group">
+                                                                                  <div class="col-md-offset-1 col-sm-10">
+                                                                                    <input class="form-control" name="update_school" type="text" value="{{ $userEducation->school }}">
+                                                                                  </div>
+                                                                                </div>
 
-                                                             
+                                                                                <div class="form-group form-group">
+                                                                                  <div class="col-md-offset-1 col-md-5">
+                                                                                    <input class="form-control" name="update_start_date" type="text" value="{{ $userEducation->date_start }}">
+                                                                                  </div>
+                                                                                  <div class="col-md-5">
+                                                                                    <input class="form-control" name="update_end_date" type="text" value="{{ $userEducation->date_end }}">
+                                                                                  </div>
+                                                                                </div>
 
-                                                              <div class="form-group form-group">
-                                                                <div class="col-md-offset-1 col-md-10">
-                                                                  <textarea class="form-control" name="update_award" rows="5" cols="10">{{ $userEducation->awards_rec }}</textarea>
-                                                                </div>
-                                                               
-                                                              </div>
+                                                                               
 
-                                                         </section>
-                                                <div class="modal-footer">
-                                                     <button type="submit" class="btn btn-default">Update</button>   
+                                                                                <div class="form-group form-group">
+                                                                                  <div class="col-md-offset-1 col-md-10">
+                                                                                    <textarea class="form-control" name="update_award" rows="5" cols="10">{{ $userEducation->awards_rec }}</textarea>
+                                                                                  </div>
+                                                                                 
+                                                                                </div>
+
+                                                                           </section>
+
+                                                                          <div class="modal-footer">
+                                                                               <button type="submit" class="btn btn-default">Update</button>  
+                                                                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button> 
+                                                                          </div>
+                                                        </form>
+
+                                                        </div>
+                                                
+                                                      </div>
+
                                                 </div>
-                                      </form>
-                                            </div>
-                                            
-                                          </div>
-                                        </div>
 
                                       </section>
                   <!-- Modal for updateEducation -->
 
                   <!-- Modal for deleteEducation -->
-                                      <section>
+                                      <section  class="upeducation_modal">
 
                                                  <div class="modal fade" id="deledu_{{ $userEducation->id }}" role="dialog">
                                                   <div class="modal-dialog">
@@ -456,21 +481,21 @@
 
           @foreach ($userResume_Skills as $userSkill)
 
-            <div class="col-md-12 content-panel-header">
-              <div class="col-md-4">
+            <div class="col-xs-12 col-md-12 content-panel-header skills-xs">
+              <div class="col-xs-4 col-md-4">
                 <h3>{{ $userSkill->skillname }}</h3>
               </div>
-              <div class="col-md-6">
+              <div class="col-xs-4 col-md-6">
                 <input id="" value="{{ $userSkill->rate }}" type="number" class="rating" min=0 max=5 step=0.2 data-size="xs">
               </div>
-              <div class="col-md-2 content-panel-pc">
+              <div class="col-xs-4 col-md-2 content-panel-pc">
                   <span class="glyphicon glyphicon-pencil" data-toggle="modal" data-target="#ski_{{ $userSkill->id }}"></span>
                   <span class="glyphicon glyphicon-remove" data-toggle="modal" data-target="#delski_{{ $userSkill->id }}"></span>                     
               </div>
             </div> 
 
                     <!-- Modal for updateSkills -->
-                    <section>
+                    <section class="upskills_modal">
 
                                <div class="modal fade" id="ski_{{ $userSkill->id }}" role="dialog">
                                 <div class="modal-dialog">
@@ -478,53 +503,53 @@
                                   <!-- Modal content-->
                                   <div class="modal-content">
 
-                    <form method="" action="resume/updateSkill/{{ $userSkill->id}}" class="theme1">
+                                    <form method="" action="resume/updateSkill/{{ $userSkill->id}}" class="theme1">
 
-                                        <div class="col-md-12 content-panel-header">
-                                           <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                           <h3>Update Skill</h3>
+                                                        <div class="col-md-12 content-panel-header">
+                                                           <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                           <h3>Update Skill</h3>
 
-                                        </div>
+                                                        </div>
 
-                                        <section>
+                                                        <section>
 
-                                             <div class="form-group form-group">
-                                              <div class="col-md-offset-1 col-sm-10">
-                                                <input class="form-control" name="skills" type="text" value="{{ $userSkill->skillname }}">
+                                                             <div class="form-group form-group">
+                                                              <div class="col-md-offset-1 col-sm-10">
+                                                                <input class="form-control" name="skills" type="text" value="{{ $userSkill->skillname }}">
+                                                              </div>
+                                                            </div>
+
+                                                            <div class="form-group form-group">
+                                                              <div class="col-md-offset-1 col-sm-10">
+                                                                <input type="number" value="{{ $userSkill->rate }}" class="form-control" name="rate" min=1 max=5 placeholder="Rate">
+                                                              </div>
+                                                            </div>
+
+                                                            <div class="form-group form-group">
+                                                              <div class="col-md-offset-1 col-md-10">
+                                                                <textarea class="form-control" name="description" rows="5" cols="10">{{ $userSkill->description }}</textarea>
+                                                              </div>
+                                                             
+                                                            </div>
+
+                                                       </section>
+
+                                              <div class="modal-footer">
+
+                                                   <button type="submit" class="btn btn-default">Update</button>
+                                                   <button type="button" class="btn btn-default" data-dismiss="modal">Close</button> 
+
                                               </div>
-                                            </div>
-
-                                            <div class="form-group form-group">
-                                              <div class="col-md-offset-1 col-sm-10">
-                                                <input type="number" value="{{ $userSkill->rate }}" class="form-control" name="rate" min=1 max=5 placeholder="Rate">
-                                              </div>
-                                            </div>
-
-                                            <div class="form-group form-group">
-                                              <div class="col-md-offset-1 col-md-10">
-                                                <textarea class="form-control" name="description" rows="5" cols="10">{{ $userSkill->description }}</textarea>
-                                              </div>
-                                             
-                                            </div>
-
-                                       </section>
-
-                              <div class="modal-footer">
-
-                                   <button type="submit" class="btn btn-default">Update</button>
-                      
-
+                                          </form>
+                                </div>
+                                
                               </div>
-                    </form>
-                          </div>
-                          
-                        </div>
                       </div>
 
                     </section>
                     <!-- Modal for updateSkills -->
                     <!-- Modal for deleteSkills -->
-                                      <section>
+                                      <section class="delskills_modal">
 
                                                  <div class="modal fade" id="delski_{{ $userSkill->id }}" role="dialog">
                                                   <div class="modal-dialog">
@@ -540,7 +565,6 @@
                                                                         
                                                               <div class="col-md-12 content-panel-header">
                                                                     <h3>Are you sure you want to delete your skills in {{ $userSkill->skillname }}?</h3>
-
                                                               </div>
 
                                                               <div class="modal-footer">
@@ -574,12 +598,11 @@
 
           @foreach ($userResume_Certification as $userCertification)
 
-            <div class="col-md-12 content-panel-header">
-              <div class="col-md-9">
+            <div class="col-xs-12 col-md-12 content-panel-header">
+              <div class="col-xs-8 col-md-9">
                 <h3>{{  $userCertification->certificate_title }}</h3>
               </div>
-              <div class="col-md-2 content-panel-pc">
-         
+              <div class="col-xs-4 col-md-2 content-panel-pc">       
                   <a href="#" data-toggle="modal" data-target="#cer_{{  $userCertification->id }}"><span class="glyphicon glyphicon-pencil"></span></a>
                   <a href="#"  data-toggle="modal" data-target="#delcer_{{  $userCertification->id }}"><span class="glyphicon glyphicon-remove"></span></a>             
               </div>
@@ -587,27 +610,27 @@
 
             </div>
 
-                  <div class="col-md-12  content-panel">
-                             <div class="col-md-3">
-                                <p>Awarded By:</p>
+                  <div class="col-xs-12 col-md-12  content-panel">
+                             <div class="col-xs-4 col-md-3">
+                                <p class="title">Awarded By:</p>
                              </div>
-                             <div class="col-md-9">                   
+                             <div class="col-xs-8 col-md-9">                   
                                   <p>{{  $userCertification->certificate_company }}</p>            
                              </div>
                              <div class="col-md-12 line"></div>                
                    </div>
-                    <div class="col-md-12  content-panel">
-                             <div class="col-md-3">
-                                <p>Years</p>
+                    <div class="col-xs-6 col-md-12  content-panel">
+                             <div class="col-xs-4 col-md-3">
+                                <p class="title">Years</p>
                              </div>
-                             <div class="col-md-9">                   
+                             <div class="col-xs-8 col-xs-6 col-md-9">                   
                                   <p>{{  $userCertification->certificate_receive }} </p>            
                              </div>
                              <div class="col-md-12 line"></div>                
                    </div>
 
-                  <!-- Modal for updateSkills -->
-                    <section>
+                  <!-- Modal for updateCertification -->
+                    <section class="upcertification_modal">
 
                                <div class="modal fade" id="cer_{{ $userCertification->id }}" role="dialog">
                                 <div class="modal-dialog">
@@ -615,54 +638,54 @@
                                   <!-- Modal content-->
                                   <div class="modal-content">
 
-                    <form method="" action="resume/updateCertification/{{ $userCertification->id }}" class="theme1">
+                                <form method="" action="resume/updateCertification/{{ $userCertification->id }}" class="theme1">
 
-                                        <div class="col-md-12 content-panel-header">
-                                           <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                           <h3>Update Certificate</h3>
+                                                    <div class="col-md-12 content-panel-header">
+                                                       <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                       <h3>Update Certificate</h3>
 
-                                        </div>
+                                                    </div>
 
-                                        <section>
+                                                    <section>
 
-                                             <div class="form-group form-group">
-                                              <div class="col-md-offset-1 col-sm-10">
-                                                <input class="form-control" name="title" type="text" value="{{ $userCertification->certificate_title }}">
-                                              </div>
-                                            </div>
+                                                         <div class="form-group form-group">
+                                                          <div class="col-md-offset-1 col-sm-10">
+                                                            <input class="form-control" name="title" type="text" value="{{ $userCertification->certificate_title }}">
+                                                          </div>
+                                                        </div>
 
-                                             <div class="form-group form-group">
-                                              <div class="col-md-offset-1 col-sm-10">
-                                                <input class="form-control" name="company" type="text" value="{{ $userCertification->certificate_company }}">
-                                              </div>
-                                            </div>
+                                                         <div class="form-group form-group">
+                                                          <div class="col-md-offset-1 col-sm-10">
+                                                            <input class="form-control" name="company" type="text" value="{{ $userCertification->certificate_company }}">
+                                                          </div>
+                                                        </div>
 
-                                             <div class="form-group form-group">
-                                              <div class="col-md-offset-1 col-sm-10">
-                                                <input class="form-control" name="title" type="text" value="{{ $userCertification->certificate_receive }}">
-                                              </div>
-                                            </div>
+                                                         <div class="form-group form-group">
+                                                          <div class="col-md-offset-1 col-sm-10">
+                                                            <input class="form-control" name="title" type="text" value="{{ $userCertification->certificate_receive }}">
+                                                          </div>
+                                                        </div>
 
-                                           
+                                                       
 
-                                       </section>
+                                                   </section>
 
-                              <div class="modal-footer">
+                                          <div class="modal-footer">
 
-                                   <button type="submit" class="btn btn-default">Update</button>
-                      
+                                               <button type="submit" class="btn btn-default">Update</button>
+                                                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button> 
 
-                              </div>
-                    </form>
+                                          </div>
+                                </form>
                           </div>
                           
                         </div>
                       </div>
 
                     </section>
-                    <!-- Modal for updateSkills -->
-                    <!-- Modal for deleteSkills -->
-                                      <section>
+                    <!-- Modal for updateCertification -->
+                    <!-- Modal for deleteCertification -->
+                                      <section class="delcertification_modal">
 
                                                  <div class="modal fade" id="delcer_{{$userCertification->id}}" role="dialog">
                                                   <div class="modal-dialog">
@@ -691,7 +714,7 @@
                                         </div>
 
                                       </section>
-                  <!-- Modal for deleteSkills -->
+                  <!-- Modal for deleteCertification -->
  
 
 
@@ -716,7 +739,7 @@
 </section>
 
 <!-- Modal for Experience -->
-<section>
+<section class="experience_modal">
 
            <div class="modal fade" id="myModal1" role="dialog">
             <div class="modal-dialog">
@@ -724,58 +747,58 @@
               <!-- Modal content-->
               <div class="modal-content">
 
-<form method="" action="resume/addExperience" class="theme1">
+                  <form method="" action="resume/addExperience" class="theme1">
 
-                    
-                    <div class="col-md-12 content-panel-header">
-                       <button type="button" class="close" data-dismiss="modal">&times;</button>
-                       <h3>Add Experience</h3>
+                                      
+                                      <div class="col-md-12 content-panel-header">
+                                         <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                         <h3>Add Experience</h3>
 
-                    </div>
-                    <section>
+                                      </div>
+                                      <section>
 
-                         <div class="form-group form-group">
-                          <div class="col-md-offset-1 col-sm-10">
-                            <input class="form-control" name="job_title" type="text" placeholder="Job Title">
-                          </div>
-                        </div>
+                                           <div class="form-group form-group">
+                                            <div class="col-xs-12 col-sm-10 col-md-offset-1 ">
+                                              <input class="form-control" name="job_title" type="text" placeholder="Job Title">
+                                            </div>
+                                          </div>
 
-                        <div class="form-group form-group">
-                          <div class="col-md-offset-1 col-sm-10">
-                            <input class="form-control" name="company" type="text" placeholder="Company Name">
-                          </div>
-                        </div>
+                                          <div class="form-group form-group">
+                                            <div class="col-xs-12 col-md-offset-1 col-sm-10">
+                                              <input class="form-control" name="company" type="text" placeholder="Company Name">
+                                            </div>
+                                          </div>
 
-                        <div class="form-group form-group">
-                          <div class="col-md-offset-1 col-md-5">
-                            <input class="form-control" name="start_date" type="text" placeholder="Start Date">
-                          </div>
-                          <div class="col-md-5">
-                            <input class="form-control" name="end_date" type="text" placeholder="End Date">
-                          </div>
-                        </div>
+                                          <div class="form-group form-group">
+                                            <div class="col-xs-12 col-md-offset-1 col-md-5">
+                                              <input class="form-control" name="start_date" type="text" placeholder="Start Date">
+                                            </div>
+                                            <div class="col-xs-12 col-md-5">
+                                              <input class="form-control" name="end_date" type="text" placeholder="End Date">
+                                            </div>
+                                          </div>
 
-                       
+                                         
 
-                        <div class="form-group form-group">
-                          <div class="col-md-offset-1 col-md-10">
-                            <textarea class="form-control" name="description" rows="5" cols="10">Description</textarea>
-                          </div>
-                         
-                        </div>
+                                          <div class="form-group form-group">
+                                            <div class="col-xs-12 col-md-offset-1 col-md-10">
+                                              <textarea class="form-control" name="description" rows="5" cols="10">Description</textarea>
+                                            </div>
+                                           
+                                          </div>
 
-                   </section>
-          <div class="modal-footer">
+                                     </section>
+                            <div class="modal-footer">
 
-               <button type="submit" class="btn btn-default">Save</button>
-              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                 <button type="submit" class="btn btn-default">Save</button>
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 
-          </div>
-</form>
-      </div>
+                            </div>
+                  </form>
+              </div>
       
-    </div>
-  </div>
+            </div>
+          </div>
 
 </section>
 <!-- Modal for Experience -->
@@ -783,76 +806,80 @@
 
 
 
-<!-- Modal for Experience -->
-<section>
+<!-- Modal for Education -->
+
+<section class="education_modal">
 
            <div class="modal fade" id="myModal2" role="dialog">
+
             <div class="modal-dialog">
             
               <!-- Modal content-->
               <div class="modal-content">
 
-<form method="" action="resume/addEducation" class="theme1">
+                <form method="" action="resume/addEducation" class="theme1">
 
-                    
-                    <div class="col-md-12 content-panel-header">
-                       <button type="button" class="close" data-dismiss="modal">&times;</button>
-                       <h3>Add Education</h3>
+                                    
+                                    <div class="col-md-12 content-panel-header">
+                                       <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                       <h3>Add Education</h3>
 
-                    </div>
+                                    </div>
 
-                    <section>
+                                    <section>
 
-                         <div class="form-group form-group">
-                          <div class="col-md-offset-1 col-sm-10">
-                            <input class="form-control" name="course" type="text" placeholder="Course">
-                          </div>
-                        </div>
+                                         <div class="form-group form-group">
+                                          <div class="col-xs-12 col-md-offset-1 col-sm-10">
+                                            <input class="form-control" name="course" type="text" placeholder="Course">
+                                          </div>
+                                        </div>
 
-                        <div class="form-group form-group">
-                          <div class="col-md-offset-1 col-sm-10">
-                            <input class="form-control" name="school" type="text" placeholder="School">
-                          </div>
-                        </div>
+                                        <div class="form-group form-group">
+                                          <div class="col-xs-12 col-md-offset-1 col-sm-10">
+                                            <input class="form-control" name="school" type="text" placeholder="School">
+                                          </div>
+                                        </div>
 
-                        <div class="form-group form-group">
-                          <div class="col-md-offset-1 col-md-5">
-                            <input class="form-control" name="start_date" type="text" placeholder="Start Date">
-                          </div>
-                          <div class="col-md-5">
-                            <input class="form-control" name="end_date" type="text" placeholder="End Date">
-                          </div>
-                        </div>
+                                        <div class="form-group form-group">
+                                          <div class="col-xs-12 col-md-offset-1 col-md-5">
+                                            <input class="form-control" name="start_date" type="text" placeholder="Start Date">
+                                          </div>
+                                          <div class="col-xs-12 col-md-5">
+                                            <input class="form-control" name="end_date" type="text" placeholder="End Date">
+                                          </div>
+                                        </div>
 
-                       
+                                       
 
-                        <div class="form-group form-group">
-                          <div class="col-md-offset-1 col-md-10">
-                            <textarea class="form-control" name="award" rows="5" cols="10">Award</textarea>
-                          </div>
-                         
-                        </div>
+                                        <div class="form-group form-group">
+                                          <div class="col-xs-12 col-md-offset-1 col-md-10">
+                                            <textarea class="form-control" name="award" rows="5" cols="10">Award</textarea>
+                                          </div>
+                                         
+                                        </div>
 
-                   </section>
+                                   </section>
 
-          <div class="modal-footer">
+                                  <div class="modal-footer">
 
-               <button type="submit" class="btn btn-default">Save</button>
-              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                       <button type="submit" class="btn btn-default">Save</button>
+                                      <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+
+                                  </div>
+                </form>
+
+              </div>
+      
+             </div>
 
           </div>
-</form>
-      </div>
-      
-    </div>
-  </div>
 
 </section>
-<!-- Modal for Experience -->
+<!-- Modal for Education -->
 
 
 <!-- Modal for Skills -->
-<section>
+<section class="skills_modal">
 
            <div class="modal fade" id="myModal3" role="dialog">
             <div class="modal-dialog">
@@ -860,49 +887,49 @@
               <!-- Modal content-->
               <div class="modal-content">
 
-<form method="" action="resume/addSkill" class="theme1">
+                  <form method="" action="resume/addSkill" class="theme1">
 
-                    
-                    <div class="col-md-12 content-panel-header">
-                       <button type="button" class="close" data-dismiss="modal">&times;</button>
-                       <h3>Add Skill</h3>
+                                      
+                                      <div class="col-md-12 content-panel-header">
+                                         <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                         <h3>Add Skill</h3>
 
-                    </div>
+                                      </div>
 
-                    <section>
+                                      <section>
 
-                         <div class="form-group form-group">
-                          <div class="col-md-offset-1 col-sm-10">
-                            <input class="form-control" name="skills" type="text" placeholder="Skill">
-                          </div>
-                        </div>
+                                           <div class="form-group form-group">
+                                            <div class="col-md-offset-1 col-sm-10">
+                                              <input class="form-control" name="skills" type="text" placeholder="Skill">
+                                            </div>
+                                          </div>
 
-                        <div class="form-group form-group">
-                          <div class="col-md-offset-1 col-sm-10">
-                            <input type="number" class="form-control" name="rate" min=1 max=5 placeholder="Rate">
-                          </div>
-                        </div>
+                                          <div class="form-group form-group">
+                                            <div class="col-md-offset-1 col-sm-10">
+                                              <input type="number" class="form-control" name="rate" min=1 max=5 placeholder="Rate">
+                                            </div>
+                                          </div>
 
-                        <div class="form-group form-group">
-                          <div class="col-md-offset-1 col-md-10">
-                            <textarea class="form-control" name="description" rows="5" cols="10">Description</textarea>
-                          </div>
-                         
-                        </div>
+                                          <div class="form-group form-group">
+                                            <div class="col-md-offset-1 col-md-10">
+                                              <textarea class="form-control" name="description" rows="5" cols="10">Description</textarea>
+                                            </div>
+                                           
+                                          </div>
 
-                   </section>
+                                     </section>
 
-          <div class="modal-footer">
+                            <div class="modal-footer">
 
-               <button type="submit" class="btn btn-default">Save</button>
-              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                 <button type="submit" class="btn btn-default">Save</button>
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 
+                            </div>
+                  </form>
+              </div>
+              
+            </div>
           </div>
-</form>
-      </div>
-      
-    </div>
-  </div>
 
 </section>
 <!-- Modal for Skills -->
@@ -915,8 +942,8 @@
 
 
 
-<!-- Modal for Experience -->
-<section>
+<!-- Modal for Certification -->
+<section class="certification_modal">
 
            <div class="modal fade" id="myModal4" role="dialog">
             <div class="modal-dialog">
@@ -924,52 +951,52 @@
               <!-- Modal content-->
               <div class="modal-content">
 
-<form method="" action="resume/addCertification" class="theme1">
+                  <form method="" action="resume/addCertification" class="theme1">
 
-                    
-                    <div class="col-md-12 content-panel-header">
-                       <button type="button" class="close" data-dismiss="modal">&times;</button>
-                       <h3>Add Certification</h3>
+                                      
+                                      <div class="col-md-12 content-panel-header">
+                                         <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                         <h3>Add Certification</h3>
 
-                    </div>
+                                      </div>
 
-                    <section>
+                                      <section>
 
-                         <div class="form-group form-group">
-                          <div class="col-md-offset-1 col-sm-10">
-                            <input class="form-control" name="title" type="text" placeholder="Certificate Title">
-                          </div>
-                        </div>
+                                           <div class="form-group form-group">
+                                            <div class="col-xs-12 col-md-offset-1 col-sm-10">
+                                              <input class="form-control" name="title" type="text" placeholder="Certificate Title">
+                                            </div>
+                                          </div>
 
-                        <div class="form-group form-group">
-                          <div class="col-md-offset-1 col-sm-10">
-                            <input class="form-control" name="company" type="text" placeholder="Awarded At">
-                          </div>
-                        </div>
+                                          <div class="form-group form-group">
+                                            <div class="col-xs-12 col-md-offset-1 col-sm-10">
+                                              <input class="form-control" name="company" type="text" placeholder="Awarded At">
+                                            </div>
+                                          </div>
 
-                        <div class="form-group form-group">
-                         <div class="col-md-offset-1 col-sm-10">
-                            <input class="form-control" name="receive" type="text" placeholder="Date Receive">
-                          </div>
-                          
-                        </div>
-                       
-                   </section>
+                                          <div class="form-group form-group">
+                                           <div class="col-xs-12 col-md-offset-1 col-sm-10">
+                                              <input class="form-control" name="receive" type="text" placeholder="Date Receive">
+                                            </div>
+                                            
+                                          </div>
+                                         
+                                     </section>
 
-          <div class="modal-footer">
+                            <div class="modal-footer">
 
-               <button type="submit" class="btn btn-default">Save</button>
-              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                 <button type="submit" class="btn btn-default">Save</button>
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 
-          </div>
-</form>
-      </div>
-      
-    </div>
-  </div>
+                            </div>
+                  </form>
+                </div>
+                
+              </div>
+            </div>
 
 </section>
-<!-- Modal for Experience -->
+<!-- Modal for Certification -->
 
 
 

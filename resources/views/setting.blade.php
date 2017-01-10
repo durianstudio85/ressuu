@@ -2,7 +2,7 @@
 
 
 @section('title')
-   - Settings
+   | Settings
 @endsection
 
 @section('body-class')
@@ -16,16 +16,17 @@
    <nav class="navbar navbar-default navbar-static-top navs">
       <div class="container">
         <div class=" navbar-header">
-          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
             <span class="sr-only">Toggle navigation</span>
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
-          </button>
-         <div class="col-md-3 logo"><a href="{{ url('/home') }}"><img src="images/logo.png"></a></div>
+          </button> 
+         <div class="col-md-3 col-sm-12 logo"><a href="{{ url('/home') }}"><img src="images/logo.png"></a></div>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
-        <nav class="col-md-3 navicon">
+        <!-- <div id="navbar" class=""> -->
+        <nav class="col-md-3 col-sm-12 navicon">
               <ul>
                   <li><i class="glyphicon glyphicon-user"></i></li>
                   <li class="dropdown">
@@ -39,31 +40,48 @@
                       </ul>
                   </li>
                    <!---->
-                  <li><i <i class="glyphicon glyphicon-briefcase"></i></li>
+                  <li><i class="glyphicon glyphicon-briefcase"></i></li>
               </ul>
         </nav>
-          <div class="col-md-6">
+          <div class="col-md-6 col-sm-12 ">
                <div class="inner-addon left-addon">
                 <span class="glyphicon glyphicon-search"></span>
                 <input class="form-control input-lg searchbox " type="text" placeholder="Search">
                 </div>
-          </div>
+        </div>
+         <div class="row hiddenmenu ">
+              <ul>
+                  <li><a href="{{ url('/home') }}">Dashboard</a></li>
+                  <li><a href="{{ url('/profile') }}">My CV</a></li>
+                  <li><a href="{{ url('/profile') }}">Profile</a></li>
+                  <li><a href="{{ url('/resume') }}">Resume</a></li>
+                  <li><a href="{{ url('/portfolio') }}">Portfolio</a></li>
+                  <li><a href="{{ url('/jobs') }}">Jobs</a></li>
+                  <li><a href="{{ url('/setting') }}">Settings</a></li>
+                  <li><a href="{{ url('/logout') }}">Logout</a></li>
+              </ul>
+         </div>  
+        
+
+
+
         </div>
       </div>
     </nav>
+    
 </header> 
 
 <div class="container wrap">
 
 <sidebar class="col-md-3 ">
 
-             <div class="row">
+               <div class="row user-tabs">
                 <div class="user">
                   <img src="images/user.png">     
-                </div>  
+                </div>
+                 <div class="name-panel">
                    <div class="name-panel">
                    <p class="name">
-
                    <?php if ($if_exist == 1) { ?>
                          <?php echo $userProfile->name; ?>   
                     <?php }else{ ?>
@@ -77,6 +95,7 @@
                        Not Set!
                     <?php } ?>
                     </p>
+                 </div>
                  </div>
               </div>
 
@@ -112,10 +131,11 @@
               </nav>
 
 </sidebar>
-<content class="col-md-9">
-<section class="col-md-12 content-header">
+<content class="col-md-9 spage">
+
+<section class="col-xs-12 col-md-12 content-header">
   
-                    <div class="col-md-10">
+                    <div class="col-xs-12 col-md-10">
                       <h3>People You May Know</h3>
                       
                     </div>
@@ -124,8 +144,8 @@
                       <img src="images/cancel.png"  class="cancel-button">
                     </div>
 
-                    <div class="col-md-12">
-                        <div class="col-md-4 content-profile-people">                        
+                    <div class="col-xs-12 col-md-12 content-people-wrap">
+                        <div class="col-xs-12 col-md-4 content-profile-people">                        
                             <img src="images/user1.png">     
                            <div class="people-status">
                              <p class="people-name">Arya Stark</p>
@@ -134,7 +154,7 @@
                            </div>
 
                         </div>
-                        <div class="col-md-4 content-profile-people">                        
+                        <div class="col-xs-12 col-md-4 content-profile-people">                        
                             <img src="images/user1.png">     
                            <div class="people-status">
                              <p class="people-name">Arya Stark</p>
@@ -143,7 +163,7 @@
                            </div>
 
                         </div>
-                        <div class="col-md-4 content-profile-people">                        
+                        <div class="col-xs-12 col-md-4 content-profile-people">                        
                             <img src="images/user1.png">     
                            <div class="people-status">
                              <p class="people-name">Arya Stark</p>
@@ -160,13 +180,13 @@
                    
 <section>
           
-          <div class="col-md-12 content-panel-header"><h3>Settings</h3></div>
+          <div class="col-xs-12  col-md-12 content-panel-header"><h3>Settings</h3></div>
 
-          <div class="col-md-12  content-panel">
-                     <div class="col-md-3">
-                        <p>Themes</p>
+          <div class="col-xs-12 col-md-12 content-panel">
+                     <div class="col-xs-3 col-md-3">
+                        <p class="title">Themes</p>
                      </div>
-                     <div class="col-md-9">
+                     <div class="col-xs-9 col-md-9">
                      <?php if ($if_exist_settings == 0) { ?>
                                <p>Active Theme</p>                   
                               <img src="images/theme1.jpg" class="img-themes"> 
@@ -184,11 +204,11 @@
                      <div class="col-md-12 line"></div>                
          </div>
 
-         <div class="col-md-12  content-panel">
-                     <div class="col-md-3">
-                        <p>CV Status</p>
+         <div class="col-xs-12 col-md-12  content-panel">
+                     <div class="col-xs-3 col-md-3">
+                        <p class="title">CV Status</p>
                      </div>
-                     <div class="col-md-9">
+                     <div class="col-xs-9 col-md-9">
                       <?php if ($if_exist_settings == 0) { ?>
                                <p>Not Set</p>
                       <?php }else{?> 
@@ -199,36 +219,36 @@
                      <div class="col-md-12 line"></div>                
          </div>
 
-         <div class="col-md-12  content-panel">
-                     <div class="col-md-3">
-                        <p>Username</p>
+         <div class="col-xs-12 col-md-12  content-panel">
+                     <div class="col-xs-3 col-md-3">
+                        <p class="title" >Username</p>
                      </div>
-                     <div class="col-md-9">
+                     <div class="col-xs-9 col-md-9">
                         <p>{{$email}}</p>            
                      </div>
                      <div class="col-md-12 line"></div>                
          </div>
 
-         <div class="col-md-12  content-panel">
-                     <div class="col-md-3">
-                        <p>CV Link</p>
+         <div class="col-xs-12 col-md-12  content-panel">
+                     <div class="col-xs-3 col-md-3">
+                        <p class="title" >CV Link</p>
                      </div>
-                     <div class="col-md-9">
+                     <div class="col-xs-9 col-md-9">
                      <?php if ($if_exist_settings == 0) { ?>
                                <p>Not Set</p>
                       <?php }else{?> 
-                               <p>{{$userSettings->permalink }}</p>
+                               <p style="width:100px;">{{$userSettings->permalink }}</p>
                       <?php } ?>                     
                                       
                      </div>
                      <div class="col-md-12 line"></div>                
          </div>
 
-         <div class="col-md-12  content-panel">
-                     <div class="col-md-3">
-                        <p>Embeded Code</p>
+         <div class="col-xs-12 col-md-12  content-panel">
+                     <div class="col-xs-3 col-md-3">
+                        <p class="title">Embeded Code</p>
                      </div>
-                     <div class="col-md-9">
+                     <div class="col-xs-9 col-md-9">
                    
                       <?php if ($if_exist_settings == 0) { ?>
                             <p><code>Not Set</code></p>
@@ -240,15 +260,15 @@
                      <div class="col-md-12 line"></div>                
          </div>        
 
-          <div class="col-md-12  content-panel">
-                     <div class="col-md-3">
-                        <p>Token Key</p>
+          <div class="col-xs-12 col-md-12  content-panel">
+                     <div class="col-xs-3 col-md-3">
+                        <p class="title">Token Key</p>
                      </div>
-                     <div class="col-md-9">
+                     <div class="col-xs-9 col-md-9">
                       <?php if ($if_exist_settings == 0) { ?>
                             <p>Not Set</p>
                       <?php }else{?>
-                             <p>{{$userSettings->key}}</p>   
+                            <p>{{$userSettings->key}}</p>   
                       <?php } ?>                
                          
                      </div>
@@ -258,8 +278,8 @@
                                 
 </section>
                   
-<section>
-             <div class="col-md-12 content-panel">
+<section class="setting-foot">
+             <div class="col-xs-12 col-md-12  content-panel">
                     <div class="content-profile">
                         <center><button data-toggle="modal" data-target="#myModal">Update</button></center>
                     </div>
@@ -389,8 +409,8 @@
                               <div class="modal-footer">
 
                                    <button type="submit" class="btn btn-default">Save</button>
-                      
-
+                                   <button type="button" class="btn btn-default" data-dismiss="modal">Close</button> 
+                                   
                               </div>
                     </form>
                           </div>                         

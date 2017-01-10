@@ -69,65 +69,6 @@
 
 }
 
-
-
-
-
-/*
-.signup {
-
-	background: #000fff;
-    background: -moz-linear-gradient(top, #01ba8e  0%, #01ba8e  50%, #ffffff 50%, #ffffff 100%); 
-    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#01ba8e ), color-stop(50%,#01ba8e ), color-stop(50%,#ffffff), color-stop(100%,#ffffff)); 
-    background: -webkit-linear-gradient(top, #01ba8e  0%,#01ba8e  50%,#ffffff 50%,#ffffff 100%); 
-    background: -o-linear-gradient(top, #01ba8e  0%,#01ba8e  50%,#ffffff 50%,#ffffff 100%); 
-    background: -ms-linear-gradient(top, #01ba8e  0%,#01ba8e  50%,#ffffff 50%,#ffffff 100%); 
-    background: linear-gradient(top, #01ba8e  0%,#01ba8e  50%,#ffffff 50%,#ffffff 100%);
-
-	height: 100vh;
-}
-
-.signup section{
-	width: 351px;
-	height:100%;
-	background: #ffffff;
-}
-.signup input{
-	width: 277px;
-	height: 50px;
-	font-size: 18px;
-	border-width:0px 0px 1px 0px;
-	border-radius: 0px;
-	padding-left: 20px;
-}
-.signup h4{
-	color: #acacac;
-	font-family: Myriad Pro;
-}
-.signup img{
-	padding:10px 0px;
-}
-.singup p a{
-	text-decoration: none !important;
-	text-transform: none !important;
-	color:#acacac !important;
-}
-.signuplogo{
-	margin-top:50px;
-}
-.signin{
-   width: 281px;
-   height: 51px;
-   color:#ffffff;
-   font-size: 18px;
-   border-radius:5px;
-   border: none;
-   color:#000000;
-   background:#ebebeb;
-   margin: 25px 0px 30px 0px;
-}
-
-*/
 .contentarea button {
 
 	font-family: 'Signika', sans-serif;
@@ -152,7 +93,7 @@
 }
 .ressuufooter {
 	
-      background-color: #16a087;
+    background-color: #16a087;
     width: 100%;
     float: left;
     height:66px; 
@@ -187,11 +128,10 @@
 
 .btn-danger {
 
-	background: #1e786f;
+	background-color: #1e786f!important;
 	border: none!important;
 	padding: 0px 20px 0px 20px!important;
 }
-
 
 .btn1 {
 
@@ -221,6 +161,9 @@
 .login-btn:hover{
   color: #ffffff;
 }
+
+
+
 
 .padtop30 {
 
@@ -330,3 +273,6 @@
 	}
 
 }
+
+
+

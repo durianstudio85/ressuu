@@ -1,8 +1,7 @@
 @extends('layouts.app')
 
-
 @section('title')
-   - Jobs
+   | Jobs
 @endsection
 
 @section('body-class')
@@ -16,16 +15,17 @@
    <nav class="navbar navbar-default navbar-static-top navs">
       <div class="container">
         <div class=" navbar-header">
-          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
             <span class="sr-only">Toggle navigation</span>
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
-          </button>
-         <div class="col-md-3 logo"><a href="{{ url('/home') }}"><img src="images/logo.png"></a></div>
+          </button> 
+         <div class="col-md-3 col-sm-12 logo"><a href="{{ url('/home') }}"><img src="images/logo.png"></a></div>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
-        <nav class="col-md-3 navicon">
+        <!-- <div id="navbar" class=""> -->
+        <nav class="col-md-3 col-sm-12 navicon">
               <ul>
                   <li><i class="glyphicon glyphicon-user"></i></li>
                   <li class="dropdown">
@@ -39,28 +39,48 @@
                       </ul>
                   </li>
                    <!---->
-                  <li><i <i class="glyphicon glyphicon-briefcase"></i></li>
+                  <li><i class="glyphicon glyphicon-briefcase"></i></li>
               </ul>
         </nav>
-          <div class="col-md-6">
+          <div class="col-md-6 col-sm-12 ">
                <div class="inner-addon left-addon">
                 <span class="glyphicon glyphicon-search"></span>
                 <input class="form-control input-lg searchbox " type="text" placeholder="Search">
                 </div>
-          </div>
+        </div>
+         <div class="row hiddenmenu ">
+              <ul>
+                  <li><a href="{{ url('/home') }}">Dashboard</a></li>
+                  <li><a href="{{ url('/profile') }}">My CV</a></li>
+                  <li><a href="{{ url('/profile') }}">Profile</a></li>
+                  <li><a href="{{ url('/resume') }}">Resume</a></li>
+                  <li><a href="{{ url('/portfolio') }}">Portfolio</a></li>
+                  <li><a href="{{ url('/jobs') }}">Jobs</a></li>
+                  <li><a href="{{ url('/setting') }}">Settings</a></li>
+                  <li><a href="{{ url('/logout') }}">Logout</a></li>
+              </ul>
+         </div>  
+        
+
+
+
         </div>
       </div>
     </nav>
+    
 </header> 
+
+
 
 <div class="container wrap">
 
 <sidebar class="col-md-3 ">
 
-             <div class="row">
+             <div class="row user-tabs">
                 <div class="user">
                   <img src="images/user.png">     
-                </div>  
+                </div>
+                 <div class="name-panel">
                    <div class="name-panel">
                    <p class="name">
                    <?php if ($if_exist == 1) { ?>
@@ -77,7 +97,9 @@
                     <?php } ?>
                     </p>
                  </div>
+                 </div>
               </div>
+
 
               <div class="row panel-status">
                         <div class="col-md-4 panel-status-1">
@@ -110,19 +132,19 @@
               </nav>
 
 </sidebar>
-<content class="col-md-9"> 
-<section class="col-md-12 content-header">
+<content class="col-xs-12 col-md-9"> 
+<section class="col-xs-12 col-md-12 jpage content-header">
   
-                    <div class="col-md-10">
+                    <div class="col-xs-12 col-md-10">
                       <h3>Jobs</h3>     
                     </div>
 
-                    <div  class="col-md-2">
+                    <div class="col-md-2">
                       <img src="images/cancel.png"  class="cancel-button">
                     </div>
 
-                    <div class="col-md-12">
-                        <div class="col-md-4 content-header-tabs">                        
+                    <div class="col-xs-12 col-md-12">
+                        <div class="col-xs-4 col-md-4 content-header-tabs">                        
                            <div class="jobs">
                              <h4>1,890</h4>
                              <p>Jobs Available</p>
@@ -130,7 +152,7 @@
                            </div>
 
                         </div>
-                        <div class="col-md-4 content-profile-people">
+                        <div class="col-xs-4 col-md-4 content-header-tabs">
                         <div class="jobs">
                              <h4>250</h4>
                              <p>In your location</p>
@@ -139,7 +161,7 @@
                            
 
                         </div>
-                        <div class="col-md-4 content-profile-people">   
+                        <div class="col-xs-4 col-md-4 content-header-tabs">   
                         <div class="jobs">
                              <h4>16</h4>
                              <p>Your Application</p>
@@ -151,24 +173,25 @@
                     </div>
 
 </section>
-<section>   
+
+<section class="jobs-wrap">   
 
 
 <?php foreach ($userJobs as $jobs) { ?>
 
 
 
-          <div class="col-md-12  content-panel-header">
+          <div class="col-xs-12 col-md-12 content-panel-header">
               
-            <div class="col-md-2 img">
+            <div class="col-xs-12 col-md-2 img">
                     <img src="images/job_pic.png" class="img-responsive"> 
             </div>
-            <div class="col-md-8 content-panel-jobs">
+            <div class="col-xs-8 col-md-8 content-panel-jobs">
                        <h4>{{ $jobs->company_job }}</h4>
                        <p>{{ $jobs->company_address }}</p>
                        <div><a href="#">Link</a> | <a href="#">Comment</a></div>
             </div>
-             <div class="col-md-2 apply">      
+             <div class="col-xs-4 col-md-2 apply">      
                         <p>2 Day Ago</p>
                         <button data-toggle="modal" data-target="#jobs_{{ $jobs->job_id }}">Apply</button>           
             </div>
