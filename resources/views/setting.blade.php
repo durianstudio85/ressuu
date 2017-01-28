@@ -371,8 +371,9 @@
                                               <div class="col-md-offset-1 col-sm-10">
                                                 <?php if ($if_exist_settings == 0) { ?>
                                                  <input class="form-control" name="cv_link" type="text" placeholder="CV link">
-                                                <?php }else{?>
-                                                 <input class="form-control" name="cv_link" type="text" value="{{ $userSettings->permalink }}">
+                                                <?php }else{?>                                               
+                                                 <input class="form-control" name="" type="text" value="{{$create_cvlink}}">
+                                                 <input class="form-control" name="cv_link" type="hidden" value="{{$cvlink}}">
                                                 <?php } ?>
                                               </div>
                                             </div>

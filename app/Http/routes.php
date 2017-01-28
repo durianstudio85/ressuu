@@ -63,6 +63,10 @@ Route::get('/resume/deleteSkill/{id}', 'HomeController@deleteSkill');
 
 
 
+/*cv output */
+Route::get('/cv/{id}', 'CvController@cvdetails');
+
+
 //image upload
 //Route::get('/portfolio/addPortfolio', function() {
 //  return View::make('pages.upload');

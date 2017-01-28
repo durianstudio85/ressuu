@@ -208,13 +208,12 @@ class HomeController extends Controller
 
         $userProfile = DB::table('profiles')->where('user_id',$userId)->first();
 
-        /*$userSettings = DB::table('settings')
-                ->where('user_id', $userId)
-                ->get();*/
         $userSettings = DB::table('settings')->where('user_id',$userId)->first();          
         $if_exist_settings = DB::table('settings')->where('user_id',$userId)->count();        
 
-
+        $cvlink = strtolower(str_replace (" ", "", $name)).".".$userId;
+        // $create_cvlink = "http://localhost:8000/cv/".($cvlink);
+         $create_cvlink = "https://ressuu.me/cv/".($cvlink);
 
         return view('setting')
                 ->with("userProfile",$userProfile)
@@ -223,7 +222,11 @@ class HomeController extends Controller
                  ->with("if_exist",$if_exist)
                  ->with("userSettings",$userSettings)
                   ->with("if_exist_settings",$if_exist_settings)
+                  ->with("create_cvlink",$create_cvlink)
+                  ->with("cvlink",$cvlink)
         ;
+
+
     }
 
     public function edit(){
