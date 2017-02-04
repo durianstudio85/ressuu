@@ -2,7 +2,7 @@
 
 
 
-<?php if($theme_selection == "theme1"){ ?>
+<?php if($theme_selection == "theme2"){ ?>
 
  <!DOCTYPE html>
 <!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
@@ -268,7 +268,7 @@
 
 
 
-<?php } elseif($theme_selection == "theme2"){ ?>
+<?php } elseif($theme_selection == "theme1"){ ?>
 
 
 
