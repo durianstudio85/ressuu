@@ -192,3 +192,8 @@ blockquote p { font-family: "Droid Serif", Georgia, "Times New Roman", Times, se
 
 .image_filter{position: absolute; top: 0; left: 0}
 .image_pic{position: relative; top: 0}
+.cv_theme1_img{
+  height:154px;
+  width:154px;
+  border-radius: 90px;
+}

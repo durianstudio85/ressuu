@@ -38,7 +38,9 @@
          <!-- Author Info -->
          <section class="author-info">
             <figure class="author-img">
-               <a href="#"><img src="../../cv/clean_modern/images/author-image.png" alt="Author Image" /></a>
+               <a href="#">
+                  <img src="../../profilepic/eduardo.jpg" class="cv_theme1_img" />
+               </a>
             </figure>
             <h1 class="name"><?php echo $profiles->name; ?></h1>
             <p class="statement"><?php echo $profiles->position; ?></p>
