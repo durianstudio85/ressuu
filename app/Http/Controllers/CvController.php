@@ -70,5 +70,62 @@ class CvController extends Controller
 
     }
 
+      public function previewcv($themename,$id){
+
+
+        $theme_name = $themename;
+        $user_id = $id;
+
+        $profiles = DB::table('profiles')->where('user_id',$user_id)->first();
+
+        $work_experience = DB::table('work_experience')
+                ->where('user_id', $user_id)
+                ->orderBy('id', 'desc')
+                ->get();
+
+        $education = DB::table('education')
+                    ->where('user_id', $user_id)
+                    ->orderBy('id', 'desc')
+                    ->get();  
+
+        $skills = DB::table('skills')
+                    ->where('user_id', $user_id)
+                    ->orderBy('id', 'desc')
+                    ->get();   
+        $certification = DB::table('certification')
+                    ->where('user_id', $user_id)
+                    ->orderBy('id', 'desc')
+                    ->get(); 
+
+        $userPorfoliosCategories = DB::table('portfolio_cat')
+                    ->get();            
+
+        $userPorfolios = DB::table('portfolio')
+                    ->where('user_id', $user_id)
+                    ->orderBy('id', 'desc')
+                    ->get();            
+
+        $settings =  DB::table('settings')
+                    ->where('user_id', $user_id)
+                    ->first();        
+                  
+
+        return view('previewcv.index')
+               ->with("user_id",$user_id)
+               ->with("theme_name",$theme_name)
+               ->with("profiles",$profiles)
+               ->with("education",$education)
+                ->with("profiles",$profiles)
+                ->with("skills",$skills)
+                ->with("work_experience",$work_experience)
+                ->with("userPorfoliosCategories",$userPorfoliosCategories)
+                ->with("userPorfolios",$userPorfolios)
+                ->with("settings",$settings)
+
+
+            ;    
+
+        }
+
 
 }

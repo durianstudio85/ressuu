@@ -260,11 +260,11 @@ class HomeController extends Controller
                 'google' => $inputGoogle
                 ));
             
-          DB::table('news_feeds')->insert([
-                 'user_id' => $userId,
-                 'activity' => "Update Profile",
-                 'date'=> "zzzz"
-          ]);
+          // DB::table('news_feeds')->insert([
+          //        'user_id' => $userId,
+          //        'activity' => "Update Profile",
+          //        'date'=> "zzzz"
+          // ]);
 
 
 
@@ -575,11 +575,11 @@ class HomeController extends Controller
                  'description'=>$inputDescription
                 ));  
 
-          DB::table('news_feeds')->insert([
-                 'user_id' => $userId,
-                 'activity' => "Update Skills in ". $inputSkills,
-                 'date'=> ""
-          ]); 
+          // DB::table('news_feeds')->insert([
+          //        'user_id' => $userId,
+          //        'activity' => "Update Skills in ". $inputSkills,
+          //        'date'=> ""
+          // ]); 
 
            return back();
 
@@ -614,11 +614,11 @@ class HomeController extends Controller
                 
           ]);
 
-           DB::table('news_feeds')->insert([
-                 'user_id' => $userId,
-                 'activity' => "Update Settings ",
-                 'date'=> ""
-          ]);
+          //  DB::table('news_feeds')->insert([
+          //        'user_id' => $userId,
+          //        'activity' => "Update Settings ",
+          //        'date'=> ""
+          // ]);
 
          }else{
 
@@ -634,11 +634,11 @@ class HomeController extends Controller
                  ]);     
          }       
 
-           DB::table('news_feeds')->insert([
-                 'user_id' => $userId,
-                 'activity' => "Update Settings ",
-                 'date'=> ""
-          ]);
+          //  DB::table('news_feeds')->insert([
+          //        'user_id' => $userId,
+          //        'activity' => "Update Settings ",
+          //        'date'=> ""
+          // ]);
 
            return back();
 

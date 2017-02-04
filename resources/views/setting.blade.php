@@ -188,7 +188,7 @@
                      <div class="col-xs-3 col-md-3">
                         <p class="title">Themes</p>
                      </div>
-                     <div class="col-xs-9 col-md-9">
+                     <div class="col-xs-4 col-md-4">
                      <?php if ($if_exist_settings == 0) { ?>
                                <p>Active Theme</p>                   
                               <img src="images/theme1.jpg" class="img-themes"> 
@@ -202,6 +202,13 @@
                               <?php } ?>
                       <?php } ?> 
                                    
+                     </div>
+                      <div class="col-xs-4 col-md-5">
+                        <p>Preview Available Themes</p>
+                        <ul>
+                          <li><a href="/previewcv/theme1/<?php echo Auth::id(); ?>">Theme 1</a></li>
+                          <li><a href="/previewcv/theme2/<?php echo Auth::id(); ?>">Theme 2</a></li>
+                        </ul>
                      </div>
                      <div class="col-md-12 line"></div>                
          </div>
