@@ -362,9 +362,75 @@
                        <div><a href="#">Link</a> | <a href="#">Comment</a></div>
             </div>
              <div class="col-xs-4 col-md-2 apply">      
-                        <p>2 Day Ago</p>
-                        <button data-toggle="modal" data-target="#jobs_1">Apply</button>           
+                        <p>4 Day Ago</p>
+                        <button data-toggle="modal" data-target="#2">Apply</button>           
             </div>
+
+             <!-- Modal for deleteSkills -->
+                 <section>
+
+                      <div class="modal fade" id="2" role="dialog">
+                         <div class="modal-dialog">
+                                                  
+                          <!-- Modal content-->
+                          <div class="modal-content">
+
+                            <form method="" action="jobs/addJob" class="theme1">
+                                   <div class="modal-header col-md-12 content-panel-header">
+                                       <h3>Technical Support</h3>
+                                   </div>
+                                                                        
+                                       <div class="col-md-12  content-panel">
+                                            <div class="col-md-4">
+                                                      <p>Company Name: </p>
+                                            </div>
+                                            <div class="col-md-7">
+                                                      <p>IBM</p>
+                                            </div>
+                                                  
+                                       </div>      
+
+                                       <div class="col-md-12  content-panel">
+                                            <div class="col-md-4">
+                                                      <p>Company Address: </p>
+                                            </div>
+                                            <div class="col-md-7">
+                                                      <p>Suwon, South Korea</p>
+                                            </div>
+                                             
+                                       </div> 
+
+                                       <div class="col-md-12  content-panel">
+                                            <div class="col-md-4">
+                                                      <p>Company Details: </p>
+                                            </div>
+                                            <div class="col-md-7">
+                                                      <p>Praesent sit amet porttitor neque, vel congue erat. Donec id massa dolor. Pellentesque suscipit lobortis metus, luctus placerat massa. In finibus at libero id consectetur.</p>
+                                            </div>
+                                                          
+                                       </div>
+
+                                       <div class="col-md-12  content-panel">
+                                            <div class="col-md-4">
+                                                      <p>Salary Rate </p>
+                                            </div>  
+                                            <div class="col-md-7">
+                                                      <p class="job_salary">$200/Month</p>
+                                            </div>
+                                                          
+                                       </div>
+
+                                      <div class="modal-footer">
+                                           <button type="submit" class="btn btn-default">Confirm</button> 
+                                      </div>
+                                </form>
+                            </div>
+                                            
+                         </div>
+                      </div>
+
+                    </section>
+                <!-- Modal for deleteSkills -->
 
 </div>
 
@@ -379,9 +445,75 @@
                        <div><a href="#">Link</a> | <a href="#">Comment</a></div>
             </div>
              <div class="col-xs-4 col-md-2 apply">      
-                        <p>2 Day Ago</p>
-                        <button data-toggle="modal" data-target="#jobs_3">Apply</button>           
+                        <p>1 Week Ago</p>
+                        <button data-toggle="modal" data-target="3">Apply</button>           
             </div>
+
+             <!-- Modal for deleteSkills -->
+                 <section>
+
+                      <div class="modal fade" id="3" role="dialog">
+                         <div class="modal-dialog">
+                                                  
+                          <!-- Modal content-->
+                          <div class="modal-content">
+
+                            <form method="" action="jobs/addJob" class="theme1">
+                                   <div class="modal-header col-md-12 content-panel-header">
+                                       <h3>Android App Developer</h3>
+                                   </div>
+                                                                        
+                                       <div class="col-md-12  content-panel">
+                                            <div class="col-md-4">
+                                                      <p>Company Name: </p>
+                                            </div>
+                                            <div class="col-md-7">
+                                                      <p>AppGuruz</p>
+                                            </div>
+                                                  
+                                       </div>      
+
+                                       <div class="col-md-12  content-panel">
+                                            <div class="col-md-4">
+                                                      <p>Company Address: </p>
+                                            </div>
+                                            <div class="col-md-7">
+                                                      <p>Suwon, South Korea</p>
+                                            </div>
+                                             
+                                       </div> 
+
+                                       <div class="col-md-12  content-panel">
+                                            <div class="col-md-4">
+                                                      <p>Company Details: </p>
+                                            </div>
+                                            <div class="col-md-7">
+                                                      <p>Praesent sit amet porttitor neque, vel congue erat. Donec id massa dolor. Pellentesque suscipit lobortis metus, luctus placerat massa. In finibus at libero id consectetur.</p>
+                                            </div>
+                                                          
+                                       </div>
+
+                                       <div class="col-md-12  content-panel">
+                                            <div class="col-md-4">
+                                                      <p>Salary Rate </p>
+                                            </div>  
+                                            <div class="col-md-7">
+                                                      <p class="job_salary">$200/Month</p>
+                                            </div>
+                                                          
+                                       </div>
+
+                                      <div class="modal-footer">
+                                           <button type="submit" class="btn btn-default">Confirm</button> 
+                                      </div>
+                                </form>
+                            </div>
+                                            
+                         </div>
+                      </div>
+
+                    </section>
+                <!-- Modal for deleteSkills -->
 
 </div>      
           

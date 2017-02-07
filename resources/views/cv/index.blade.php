@@ -14,7 +14,7 @@ if($theme_selection == "default"){ ?>
 <head>
    <meta charset="utf-8">
         
-   <title>Hello - Clean and modern vCard</title>
+   <title>Ressuu.me | <?php echo $profiles->name; ?></title>
     
    <!-- Mobile viewport optimized -->
    <meta name="viewport" content="width=device-width">
@@ -281,7 +281,7 @@ if($theme_selection == "default"){ ?>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Personal vCard Template</title>
+    <title>Ressuu.me | <?php echo $profiles->name; ?></title>
 
     <link rel="stylesheet" type="text/css" href="../cv/yellow_theme/css/style.css"/>
     <link rel="stylesheet" type="text/css" href="../cv/yellow_theme/css/fancybox.css"/>
