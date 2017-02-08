@@ -34,13 +34,13 @@ ressuuhome
             
              <center>
                <img src="images/phone.png" class="phoneimg"/>
-               <div id="slider" class="phone_slide" style="">
+               <!-- <div id="slider" class="phone_slide" style="">
                  <figure>
                    <img src="images/dashboard_slide.png" class=""/>                 
                    <img src="images/profile_slide.png" class=""/>
                    <img src="images/resume_slide.png" class=""/>
                 </figure>
-            </div>               
+                </div> -->               
             </center>
 
         </div>
