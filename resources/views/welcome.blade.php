@@ -32,7 +32,16 @@ ressuuhome
 
         <div class="col-md-3">
             
-            <center><img src="images/phone.png" class="phoneimg"/></center>
+             <center>
+               <img src="images/phone.png" class="phoneimg"/>
+               <div id="slider" class="phone_slide" style="">
+                 <figure>
+                   <img src="images/dashboard_slide.png" class=""/>                 
+                   <img src="images/profile_slide.png" class=""/>
+                   <img src="images/resume_slide.png" class=""/>
+                </figure>
+            </div>               
+            </center>
 
         </div>
 
