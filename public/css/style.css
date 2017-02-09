@@ -207,9 +207,9 @@
   }
   .phone_slide{
   	width: 184px;
-  	height: 322px;
+  	height: 328px;
   	position: relative;
-  	margin:-389px 0px 73px 0px;
+  	margin:-389px 0px 73px 2px;
   	background-image:url('images/dashboard_slide.png');
   }
 
