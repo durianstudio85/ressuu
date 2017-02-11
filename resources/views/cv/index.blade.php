@@ -26,8 +26,8 @@ if($theme_selection == "default"){ ?>
    <!-- Favicon -->
    <link rel="shortcut icon" href="favicon.ico">    
    <!-- Google Fonts -->
-   <link href='http://fonts.googleapis.com/css?family=Lato:400,700' rel='stylesheet' type='text/css'>
-   <link href='http://fonts.googleapis.com/css?family=Droid+Serif:400,400italic' rel='stylesheet' type='text/css'>
+   <link href='https://fonts.googleapis.com/css?family=Lato:400,700' rel='stylesheet' type='text/css'>
+   <link href='https://fonts.googleapis.com/css?family=Droid+Serif:400,400italic' rel='stylesheet' type='text/css'>
     
    <!--[if lt IE 9]>
         <script src="js/html5.js"></script>             
@@ -293,7 +293,7 @@ if($theme_selection == "default"){ ?>
     <script type="text/javascript" src="../cv/yellow_theme/js/jquery.adipoli.min.js"></script>
     <script type="text/javascript" src="../cv/yellow_theme/js/jquery.fancybox-1.3.4.pack.js"></script>
     <script type="text/javascript" src="../cv/yellow_theme/js/jquery.isotope.min.js"></script>
-    <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
+    <script type="text/javascript" src="https://maps.google.com/maps/api/js?sensor=false"></script>
     <script type="text/javascript" src="../cv/yellow_theme/js/jquery.gmap.min.js"></script>
     <script type="text/javascript" src="../cv/yellow_theme/js/custom.js"></script>
 
