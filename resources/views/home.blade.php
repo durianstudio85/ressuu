@@ -247,23 +247,26 @@
             </div>
              <div class="col-xs-12 col-md-2 content-panel-lc">      
                               <p><?php
+                              
+                              if(!empty($value->date)){
+                               
+                                 $value_date = date("Y-m-d", strtotime( $value->date ) );
+                                 $from=date_create(date('Y-m-d'));
+                                 $to=date_create($value_date);
+                                 $diff=date_diff($to,$from);
+                                 $days_diff = $diff->format('%a');
 
-                               $value_date = date("Y-m-d", strtotime( $value->date ) );
-                               $from=date_create(date('Y-m-d'));
-                               $to=date_create($value_date);
-                               $diff=date_diff($to,$from);
-                               $days_diff = $diff->format('%a');
-
-                               if($days_diff == "0"){
-                                echo "Just now";
-                               }else{
-                                echo $diff->format('%a Days');
-                               }
+                                 if($days_diff == "0"){
+                                  echo "Just now";
+                                 }else{
+                                  echo $diff->format('%a Days');
+                                 }
 
 
+                              }
 
                                ?>
-                               </p>
+                               </p
                               <img src="images/like.png"><span>12</span>
                               <img src="images/comment.jpg"><span>12</span>           
             </div>
