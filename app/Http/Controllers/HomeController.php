@@ -321,6 +321,7 @@ class HomeController extends Controller
          $inputStartdate = Input::get('start_date');
          $inputEnddate = Input::get('end_date');
          $inputDescription = Input::get('description');
+         $inputDate = date('Y-m-d');
 
           DB::table('work_experience')->insert([
                  'user_id' => $userId,
@@ -334,7 +335,7 @@ class HomeController extends Controller
            DB::table('news_feeds')->insert([
                  'user_id' => $userId,
                  'activity' => "Add New Experience as ".$inputJobtitle. " in ".$inputCompanyname,
-                 'date'=> "zzzz"
+                 'date'=> $inputDate
           ]);
 
            return back();
@@ -349,6 +350,7 @@ class HomeController extends Controller
          $inputStartdate = Input::get('start_date');
          $inputEnddate = Input::get('end_date');
          $inputAward = Input::get('award');
+          $inputDate = date('Y-m-d');
 
           DB::table('education')->insert([
                  'user_id' => $userId,
@@ -362,7 +364,7 @@ class HomeController extends Controller
           DB::table('news_feeds')->insert([
                  'user_id' => $userId,
                  'activity' => "Add New Educational Background as ".$inputCourse. " in ".$inputSchool,
-                 'date'=> "NONE"
+                  'date'=> $inputDate
           ]);
 
            return back();
@@ -375,6 +377,7 @@ class HomeController extends Controller
          $inputSkills = Input::get('skills');
          $inputRate = Input::get('rate');
          $inputDescription = Input::get('description');
+         $inputDate = date('Y-m-d');
        
           DB::table('skills')->insert([
                  'skill_cat_id' => 0,
@@ -388,7 +391,7 @@ class HomeController extends Controller
           DB::table('news_feeds')->insert([
                  'user_id' => $userId,
                  'activity' => "Add New Skills about ". $inputSkills,
-                 'date'=> ""
+                 'date'=> $inputDate
           ]);
 
            return back();
@@ -401,6 +404,7 @@ class HomeController extends Controller
          $inputTitle = Input::get('title');
          $inputCompany = Input::get('company');
          $inputReceive = Input::get('receive');
+         $inputDate = date('Y-m-d');
        
           DB::table('certification')->insert([
                  'user_id' => $userId,
@@ -411,12 +415,12 @@ class HomeController extends Controller
                 
           ]);
 
-          /*DB::table('news_feeds')->insert([
+          DB::table('news_feeds')->insert([
                  'user_id' => $userId,
-                 'activity' => "Add New Skills about ". $inputSkills,
-                 'date'=> ""
+                 'activity' => "Add Certification about ". $inputTitle,
+                 'date'=> $inputDate
           ]);
-            */
+            
            return back();
 
     }
@@ -448,6 +452,7 @@ class HomeController extends Controller
          $inputDescription = Input::get('description');
          $inputThumbnail = $fileName;
          $portfolio_Category = DB::table('portfolio_cat')->where('id',$inputCategoryId)->first();
+         $inputDate = date('Y-m-d');
 
           DB::table('portfolio')->insert([
                  'user_id' => $userId,
@@ -461,7 +466,7 @@ class HomeController extends Controller
            DB::table('news_feeds')->insert([
                  'user_id' => $userId,
                  'activity' => "Add New Portfolio in ". $portfolio_Category->title,
-                 'date'=> ""
+                 'date'=> $inputDate
           ]);
 
       Session::flash('success', 'Upload successfully'); 
