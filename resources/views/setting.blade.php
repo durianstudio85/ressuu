@@ -134,52 +134,13 @@
 
 </sidebar>
 <content class="col-md-9 spage">
+<a href="https://duriangraphics.com/"> 
+<section class="col-xs-12 col-md-12 content-header ads-bg">
 
-<section class="col-xs-12 col-md-12 content-header">
-  
-                    <div class="col-xs-12 col-md-10">
-                      <h3>People You May Know</h3>
-                      
-                    </div>
+                    <div class="col-xs-12 col-md-12 content-people-wrap "> </div>
 
-                    <div  class="col-md-2">
-                      <img src="images/cancel.png"  class="cancel-button">
-                    </div>
-
-                    <div class="col-xs-12 col-md-12 content-people-wrap">
-                        <div class="col-xs-12 col-md-4 content-profile-people">                        
-                            <img src="images/user1.png">     
-                           <div class="people-status">
-                             <p class="people-name">Arya Stark</p>
-                             <p class="people-subname">Winterfell</p>
-                             <button class="following">Following</button>
-                           </div>
-
-                        </div>
-                        <div class="col-xs-12 col-md-4 content-profile-people">                        
-                            <img src="images/user1.png">     
-                           <div class="people-status">
-                             <p class="people-name">Arya Stark</p>
-                             <p class="people-subname">Winterfell</p>
-                             <button class="follow">Follow</button>
-                           </div>
-
-                        </div>
-                        <div class="col-xs-12 col-md-4 content-profile-people">                        
-                            <img src="images/user1.png">     
-                           <div class="people-status">
-                             <p class="people-name">Arya Stark</p>
-                             <p class="people-subname">Winterfell</p>
-                             <button class="follow">Follow</button>
-                           </div>
-
-                        </div>
-                    </div>
-
-</section> 
-
-       
-                   
+</section>
+</a>             
 <section>
           
           <div class="col-xs-12  col-md-12 content-panel-header"><h3>Settings</h3></div>

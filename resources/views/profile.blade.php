@@ -133,63 +133,17 @@
 
 </sidebar>
 <content class="col-xs-12 col-md-9 ppage">
-<section class="col-xs-12 col-md-12  content-header">
+<a href="https://duriangraphics.com/"> 
+<section class="col-xs-12 col-md-12 content-header ads-bg">
+  
 
-                    <div class="col-xs-12  col-md-10">
-                      <h3>People You May Know</h3>
+                    <div class="col-xs-12 col-md-12 content-people-wrap ">
+                       
                     
                     </div>
 
-                    <div  class="col-md-2">
-                      <img src="images/cancel.png"  class="cancel-button">
-                    </div>
-
-                    <div class="col-xs-12 col-md-12  content-people-wrap">
-                         <div class="col-xs-12 col-md-4 content-profile-people"> 
-
-                              <div class="col-md-5 people-img">
-                                  <img src="images/user1.png"> 
-                              </div>
-
-                              <div class="col-md-7 people-status">
-                                   <p class="people-name">Arya Stark</p>
-                                   <p class="people-subname">Winterfell</p>
-                                  <button class="following">Following</button>  
-                              </div>                         
-                                  
-                              
-                          </div>
-                           <div class="col-xs-12 col-md-4 content-profile-people"> 
-
-                              <div class="col-md-5 people-img">
-                                  <img src="images/user1.png"> 
-                              </div>
-
-                              <div class="col-md-7 people-status">
-                                   <p class="people-name">Arya Stark</p>
-                                   <p class="people-subname">Winterfell</p>
-                                  <button class="follow">Follow</button>  
-                              </div>                         
-                                  
-                              
-                          </div> 
-                          <div class="col-xs-12 col-md-4 content-profile-people"> 
-
-                              <div class="col-md-5 people-img">
-                                  <img src="images/user1.png"> 
-                              </div>
-
-                              <div class="col-md-7 people-status">
-                                   <p class="people-name">Arya Stark</p>
-                                   <p class="people-subname">Winterfell</p>
-                                  <button class="follow">Follow</button>  
-                              </div>                         
-                                  
-                              
-                          </div>
-                    </div>
-
-</section> 
+</section>
+</a>
 
        
                    

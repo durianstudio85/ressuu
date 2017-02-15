@@ -135,95 +135,18 @@
 </sidebar>
  
 <content class="col-sm-12 col-md-9 hpage"> 
-<section class="col-xs-12 col-md-12 content-header">
+
+<a href="https://duriangraphics.com/"> 
+<section class="col-xs-12 col-md-12 content-header ads-bg">
   
-                    <div class="col-xs-12 col-md-10">
-                      <h3>People You May Know</h3>     
-                    </div>
 
-                    <div  class="col-md-2">
-                      <img src="images/cancel.png"  class="cancel-button">
-                    </div>                    
-                    <div class="col-xs-12 col-md-12 content-people-wrap">
-                    <?php  if(!empty($FollowedUsers)) { ?>
-                             
-                             <div class="col-xs-12 col-md-4 content-profile-people"> 
-
-                              <div class="col-md-5 people-img">
-                                  <img src="images/user1.png"> 
-                              </div>
-
-                              <div class="col-md-7 people-status">
-                                   <p class="people-name">Arky Stark</p>
-                                   <p class="people-subname">Web Master</p>
-                                  <form method="GET" action="home/follow" class="" enctype="multipart/form-data" files="true">
-                                    {{ csrf_field() }}     
-                                        <input type="hidden" value="" name="id">
-                                        <input type="hidden" value="{{ csrf_token() }}" name="_token" >
-                                       <button class="following">Following</button>
-                                  </form>     
-                              </div>                         
-                                  
-                              
-                            </div>
-
-
-                              <?php foreach ($userFollow2 as $follow2) { ?>
-                            
-                            <div class="col-xs-12 col-md-4 col-sm-12 content-profile-people"> 
-
-                              <div class="col-md-5 col-sm-12 people-img">
-                                  <img src="images/user1.png"> 
-                              </div>
-
-                              <div class="col-md-7 col-sm-12 people-status">
-                                   <p class="people-name"><?php echo$follow2->name; ?></p>
-                                   <p class="people-subname"><?php echo$follow2->position; ?></p>
-                                  <form method="GET" action="home/follow" class="" enctype="multipart/form-data" files="true">
-                                    {{ csrf_field() }}     
-                                        <input type="hidden" value="<?php echo$follow2->user_id; ?>" name="id">
-                                        <input type="hidden" value="{{ csrf_token() }}" name="_token" >
-                                       <button class="follow">Follow</button>
-                                  </form>     
-                              </div>                         
-                                  
-                              
-                            </div>
-                             <?php } ?>         
-
-
-                    <?php } else { ?>
-
-                            <?php foreach ($userFollow as $follow) { ?>
-                            
-                            <div class="col-xs-12  col-md-4 content-profile-people"> 
-
-                              <div class="col-md-5 people-img">
-                                  <img src="images/user1.png"> 
-                              </div>
-
-                              <div class="col-md-7 people-status">
-                                   <p class="people-name"><?php echo$follow->name; ?></p>
-                                   <p class="people-subname"><?php echo$follow->position; ?></p>
-                                  <form method="GET" action="home/follow" class="" enctype="multipart/form-data" files="true">
-                                    {{ csrf_field() }}     
-                                        <input type="hidden" value="<?php echo$follow->user_id; ?>" name="id">
-                                        <input type="hidden" value="{{ csrf_token() }}" name="_token" >
-                                       <button class="follow">Follow</button>
-                                  </form>     
-                              </div>                         
-                                  
-                              
-                            </div>
-                             <?php } ?>
-
-                    <?php }  ?>
-                      
+                    <div class="col-xs-12 col-md-12 content-people-wrap ">
+                       
                     
                     </div>
 
 </section>
-
+</a>
 <section class="cph-wrapper">
 <?php if ($if_exist == 1) { ?>
 

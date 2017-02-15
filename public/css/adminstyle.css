@@ -321,6 +321,10 @@ sidebar{
   background:#dbe1e8;
   padding-bottom: 55px;
 }
+.ads-bg{
+  background-image: url('../images/dg.jpg');
+  height: 266px;
+}
 .content-header h3{
   font-size: 24px;
   color: #5e6d81;
