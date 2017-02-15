@@ -243,6 +243,7 @@ class HomeController extends Controller
         $inputLinked =      Input::get('linkedin');
         $inputTwitter =     Input::get('twitter');
         $inputGoogle =      Input::get('google');
+        $inputDate = date('Y-m-d');
        
          DB::table('profiles')
             ->where('user_id', $userId)
@@ -260,11 +261,11 @@ class HomeController extends Controller
                 'google' => $inputGoogle
                 ));
             
-          // DB::table('news_feeds')->insert([
-          //        'user_id' => $userId,
-          //        'activity' => "Update Profile",
-          //        'date'=> "zzzz"
-          // ]);
+        DB::table('news_feeds')->insert([
+                'user_id' => $userId,
+                 'activity' => "Update Profile",
+                 'date'=> $inputDate
+          ]);
 
 
 
@@ -518,6 +519,7 @@ class HomeController extends Controller
         $inputStartdate = Input::get('update_start_date');
         $inputEnddate = Input::get('update_end_date');
         $inputDescription = Input::get('update_description');
+        $inputDate = date('Y-m-d');
 
 
          DB::table('work_experience')
@@ -529,7 +531,13 @@ class HomeController extends Controller
                  'start_date' => $inputStartdate,
                  'end_date'=>$inputEnddate,
                  'description' => $inputDescription
-                ));    
+                ));  
+
+          DB::table('news_feeds')->insert([
+                             'user_id' => $userId,
+                             'activity' => "Updating Experience in ". $inputCompanyname,
+                             'date'=> $inputDate
+         ]);          
 
         return back();
 
@@ -545,6 +553,7 @@ class HomeController extends Controller
         $inputStartdate = Input::get('update_start_date');
         $inputEnddate = Input::get('update_end_date');
         $inputAward = Input::get('update_award');
+         $inputDate = date('Y-m-d');
 
 
          DB::table('education')
@@ -558,6 +567,13 @@ class HomeController extends Controller
                  'awards_rec' => $inputAward
                 ));    
 
+         DB::table('news_feeds')->insert([
+                             'user_id' => $userId,
+                             'activity' => "Updating Education in ". $inputSchool,
+                             'date'=> $inputDate
+         ]);   
+
+
         return back();
 
     }
@@ -569,6 +585,7 @@ class HomeController extends Controller
          $inputSkills = Input::get('skills');
          $inputRate = Input::get('rate');
          $inputDescription = Input::get('description');
+          $inputDate = date('Y-m-d');
 
            DB::table('skills')
             ->where('id', $skiId)
@@ -580,11 +597,12 @@ class HomeController extends Controller
                  'description'=>$inputDescription
                 ));  
 
-          // DB::table('news_feeds')->insert([
-          //        'user_id' => $userId,
-          //        'activity' => "Update Skills in ". $inputSkills,
-          //        'date'=> ""
-          // ]); 
+          DB::table('news_feeds')->insert([
+                 'user_id' => $userId,
+                 'activity' => "Update Skills in ". $inputSkills,
+                 'date'=> $inputDate
+          ]);
+
 
            return back();
 
@@ -601,6 +619,7 @@ class HomeController extends Controller
          $inputKey = Input::get('token_key');
          $inputUsername = Input::get('username');
          $inputPreview = Input::get('embeded_code');
+           $inputDate = date('Y-m-d');
         
 
          $if_exist_settings = DB::table('settings')->where('user_id',$userId)->count(); 
@@ -619,11 +638,11 @@ class HomeController extends Controller
                 
           ]);
 
-          //  DB::table('news_feeds')->insert([
-          //        'user_id' => $userId,
-          //        'activity' => "Update Settings ",
-          //        'date'=> ""
-          // ]);
+          DB::table('news_feeds')->insert([
+                'user_id' => $userId,
+                'activity' => "Update Settings ",
+                 'date'=> $inputDate
+          ]);
 
          }else{
 
@@ -639,11 +658,11 @@ class HomeController extends Controller
                  ]);     
          }       
 
-          //  DB::table('news_feeds')->insert([
-          //        'user_id' => $userId,
-          //        'activity' => "Update Settings ",
-          //        'date'=> ""
-          // ]);
+            DB::table('news_feeds')->insert([
+                 'user_id' => $userId,
+                 'activity' => "Update Settings ",
+                 'date'=> $inputDate
+         ]);
 
            return back();
 
@@ -660,11 +679,24 @@ class HomeController extends Controller
 
     public function deleteExperience($id){
 
+
         $userId = Auth::id();
         $expId = $id;
+        $inputDate = date('Y-m-d');
         
+        $experience = DB::table('work_experience')->where('id',$expId)->first(); 
+
+        DB::table('news_feeds')->insert([
+                 'user_id' => $userId,
+                 'activity' => "Delete Experience in ".$experience->company_name,
+                 'date'=> $inputDate
+       ]);        
+
+
         DB::table('work_experience')
                 ->where('id',$expId)->delete();
+
+        
 
         return back();
 
@@ -672,13 +704,28 @@ class HomeController extends Controller
 
     public function deleteEducation($id){
 
+
         $userId = Auth::id();
         $eduId = $id;
+        $inputDate = date('Y-m-d');
+
+        $education = DB::table('education')->where('id',$eduId)->first(); 
         
         DB::table('education')
                 ->where('id',$eduId)->delete();
 
+
+
+         DB::table('news_feeds')->insert([
+                 'user_id' => $userId,
+                 'activity' => "Delete Education in ".$education->school,
+                'date'=> $inputDate
+         ]);          
+        
+
         return back();
+
+
 
     }
 
@@ -686,9 +733,21 @@ class HomeController extends Controller
 
         $userId = Auth::id();
         $skiId = $id;
-        
+        $inputDate = date('Y-m-d');
+
+        $skills = DB::table('skills')->where('id',$skiId)->first(); 
+
+
         DB::table('skills')
                 ->where('id',$skiId)->delete();
+
+
+        DB::table('news_feeds')->insert([
+                 'user_id' => $userId,
+                 'activity' => "Delete Skills ".$skills->skillname,
+                'date'=> $inputDate
+         ]);                 
+
 
         return back();
 

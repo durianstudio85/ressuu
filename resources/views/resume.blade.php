@@ -269,7 +269,6 @@
 
                                       </section>
                   <!-- Modal for updateExperience -->
-
                   <!-- Modal for deleteExperience -->
                                       <section class="delexperience_modal">
 
@@ -279,7 +278,7 @@
                                                     <!-- Modal content-->
                                                     <div class="modal-content">
 
-                                                    <form method="" action="resume/deleteExperience/{{ $userExperience->id }}" class="theme1">
+                                                    <form method="" action="resume/deleteExperience/<?php echo $userExperience->id; ?>" class="theme1">
                                                                <div class="modal-header">
                                                                 <button type="button" class="close" data-dismiss="modal">&times;</button>
                                                                 <h4>Delete this Experience?</h4>
@@ -431,7 +430,6 @@
 
                                       </section>
                   <!-- Modal for updateEducation -->
-
                   <!-- Modal for deleteEducation -->
                                       <section  class="upeducation_modal">
 
@@ -441,7 +439,7 @@
                                                     <!-- Modal content-->
                                                     <div class="modal-content">
 
-                                                    <form method="" action="resume/deleteEducation/{{ $userEducation->id }}" class="theme1">
+                                                    <form method="" action="resume/deleteEducation/<?php echo $userEducation->id; ?>" class="theme1">
                                                                <div class="modal-header">
                                                                 <button type="button" class="close" data-dismiss="modal">&times;</button>
                                                                 <h4>Delete Educational Background?</h4>
@@ -550,7 +548,7 @@
 
                     </section>
                     <!-- Modal for updateSkills -->
-                    <!-- Modal for deleteSkills -->
+                  <!-- Modal for deleteSkills -->
                                       <section class="delskills_modal">
 
                                                  <div class="modal fade" id="delski_{{ $userSkill->id }}" role="dialog">
@@ -559,7 +557,7 @@
                                                     <!-- Modal content-->
                                                     <div class="modal-content">
 
-                                                    <form method="" action="resume/deleteSkill/{{ $userSkill->id }}" class="theme1">
+                                                    <form method="" action="resume/deleteSkill/<?php echo $userSkill->id; ?>" class="theme1">
                                                                <div class="modal-header">
                                                                 <button type="button" class="close" data-dismiss="modal">&times;</button>
                                                                 <h4>Delete Skills</h4>
@@ -580,6 +578,7 @@
 
                                       </section>
                   <!-- Modal for deleteSkills -->
+
 
           @endforeach 
                
@@ -695,15 +694,14 @@
                                                     <!-- Modal content-->
                                                     <div class="modal-content">
 
-                                                    <form method="" action="resume/deleteSkill/{{ $userSkill->id }}" class="theme1">
-                                                               <div class="modal-header">
+                                                    <form method="" action="/resume/deleteCertification/<?php echo $userCertification->id; ?>" class="theme1">
+                                                              <div class="modal-header">
                                                                 <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                                                <h4>Delete Skills</h4>
+                                                                <h4>Delete Certification</h4>
                                                               </div>
                                                                         
                                                               <div class="col-md-12 content-panel-header">
-                                                                    <h3>Are you sure you want to delete your skills in {{ $userSkill->skillname }}?</h3>
-
+                                                                    <h3>Are you sure you want to delete your certification in {{ $userCertification->certificate_title }}?</h3>
                                                               </div>
 
                                                               <div class="modal-footer">

@@ -60,6 +60,9 @@ Route::get('/home/follow', 'HomeController@follow');
 Route::get('/resume/deleteExperience/{id}', 'HomeController@deleteExperience');
 Route::get('/resume/deleteEducation/{id}', 'HomeController@deleteEducation');
 Route::get('/resume/deleteSkill/{id}', 'HomeController@deleteSkill');
+Route::get('/resume/deleteCertification/{id}', 'HomeController@deleteCertification');
+
+
 
 
 
