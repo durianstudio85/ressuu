@@ -365,10 +365,20 @@
                                               <?php if ($if_exist_settings == 0) { ?>
                                                 <input class="form-control" name="token_key" type="text" value="<?php echo$token; ?>">
                                               <?php }else{?>
-                                               <input class="form-control" name="token_key" type="text" value="{{ $userSettings->key }}">
+
+                                                  <?php if(empty($userSettings->key)){ ?>
+                                                         <input class="form-control" name="token_key" type="text" placeholder="Token Key" value="<?php echo$token; ?>">
+
+                                                  <?php }else{ ?>
+                                                      <input class="form-control" name="token_key" type="text" value="{{ $userSettings->key }}">
+
+                                                  <?php } ?>
+
+
                                               <?php } ?>
                                                
                                               </div>
+
                                             </div>
 
 
