@@ -24,7 +24,7 @@ if($theme_selection == "default"){ ?>
    <link rel="stylesheet" href="../cv/clean_modern/style.css">
    <link rel="stylesheet" href="../cv/clean_modern/scripts/prettyPhoto/css/prettyPhoto.css">   
    <!-- Favicon -->
-   <link rel="shortcut icon" href="favicon.ico">    
+   <link rel="shortcut icon" type="image/x-icon" href="/../../images/fav icon.png">   
    <!-- Google Fonts -->
    <link href='https://fonts.googleapis.com/css?family=Lato:400,700' rel='stylesheet' type='text/css'>
    <link href='https://fonts.googleapis.com/css?family=Droid+Serif:400,400italic' rel='stylesheet' type='text/css'>
@@ -296,6 +296,7 @@ if($theme_selection == "default"){ ?>
     <script type="text/javascript" src="https://maps.google.com/maps/api/js?sensor=false"></script>
     <script type="text/javascript" src="../cv/yellow_theme/js/jquery.gmap.min.js"></script>
     <script type="text/javascript" src="../cv/yellow_theme/js/custom.js"></script>
+    <link rel="shortcut icon" type="image/x-icon" href="/../../images/fav icon.png">   
 
 </head>
     <body>

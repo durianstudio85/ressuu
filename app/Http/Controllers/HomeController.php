@@ -489,7 +489,7 @@ class HomeController extends Controller
           ]);
 
       Session::flash('success', 'Upload successfully'); 
-      return back();
+      return back();    
     }
     else {
       // sending back with error message.

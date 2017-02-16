@@ -21,6 +21,7 @@
 
    <link rel="stylesheet" href="../../cv/clean_modern/style.css">
    <link rel="stylesheet" href="../../cv/clean_modern/scripts/prettyPhoto/css/prettyPhoto.css">   
+      <link rel="shortcut icon" type="image/x-icon" href="/../../images/fav icon.png">   
    <!-- Favicon -->
    <link rel="shortcut icon" href="favicon.ico">    
    <!-- Google Fonts -->
@@ -297,6 +298,7 @@
     <script type="text/javascript" src="https://maps.google.com/maps/api/js?sensor=false"></script>
     <script type="text/javascript" src="../../cv/yellow_theme/js/jquery.gmap.min.js"></script>
     <script type="text/javascript" src="../../cv/yellow_theme/js/custom.js"></script>
+       <link rel="shortcut icon" type="image/x-icon" href="/../../images/fav icon.png">   
 
 </head>
     <body>
