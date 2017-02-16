@@ -201,6 +201,20 @@ class HomeController extends Controller
 
     public function setting()
     {
+
+        function random_string($length) {
+            $key = '';
+            $keys = array_merge(range(0, 9), range('a', 'z'));
+
+            for ($i = 0; $i < $length; $i++) {
+                $key .= $keys[array_rand($keys)];
+            }
+
+            return $key;
+        }
+
+
+
         $userId = Auth::id();
         $name = Auth::user()->name;
         $email = Auth::user()->email;
@@ -214,6 +228,7 @@ class HomeController extends Controller
         $cvlink = strtolower(str_replace (" ", "", $name)).".".$userId;
         // $create_cvlink = "http://localhost:8000/cv/".($cvlink);
          $create_cvlink = "https://ressuu.me/cv/".($cvlink);
+         $token = random_string(40);
 
         return view('setting')
                 ->with("userProfile",$userProfile)
@@ -224,7 +239,10 @@ class HomeController extends Controller
                   ->with("if_exist_settings",$if_exist_settings)
                   ->with("create_cvlink",$create_cvlink)
                   ->with("cvlink",$cvlink)
+                  ->with("token",$token)
         ;
+
+
 
 
     }

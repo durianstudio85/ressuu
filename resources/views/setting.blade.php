@@ -277,7 +277,6 @@
                                               <div class="col-md-offset-1 col-sm-10">
                                             <?php if ($if_exist_settings == 0) { ?>
                                                   <select class="form-control" name="themes">
-                                                    <option value="static">Themes</option>
                                                     <option value="clean-modern">Theme1</option>
                                                     <option value="default">Theme2</option>
                                                 </select>
@@ -302,7 +301,6 @@
                                               <div class="col-md-offset-1 col-sm-10">
                                             <?php if ($if_exist_settings == 0) { ?>
                                                     <select class="form-control" name="cv_status">
-                                                    <option value="static">Status</option>
                                                     <option value="public">Public</option>
                                                     <option value="private">Private</option>
                                                 </select>
@@ -340,7 +338,7 @@
                                              <div class="form-group form-group">
                                               <div class="col-md-offset-1 col-sm-10">
                                                 <?php if ($if_exist_settings == 0) { ?>
-                                                 <input class="form-control" name="cv_link" type="text" placeholder="CV link">
+                                                 <input class="form-control" name="cv_link" type="text" placeholder="CV link" value="{{$cvlink}}">
                                                 <?php }else{?>                                               
                                                  <input class="form-control" name="" type="text" value="{{$create_cvlink}}">
                                                  <input class="form-control" name="cv_link" type="hidden" value="{{$cvlink}}">
@@ -351,10 +349,10 @@
                                             <div class="form-group form-group">
                                               <div class="col-md-offset-1 col-md-10">
                                               <?php if ($if_exist_settings == 0) { ?>
-                                               <textarea class="form-control" name="embeded_code" rows="5" cols="10">Embeded Code
+                                               <textarea class="form-control" name="embeded_code" rows="5" cols="10">&lt;iframe src="<?php echo $create_cvlink; ?>" width="100%" height="720" scrolling="no" style="border:0"&gt; &lt;/iframe&gt;
                                                </textarea>
                                               <?php }else{?>
-                                               <textarea class="form-control" name="embeded_code" rows="5" cols="10">{{ $userSettings->preview }}
+                                               <textarea class="form-control" name="embeded_code" rows="5" cols="10">&lt;iframe src="<?php echo $create_cvlink; ?>" width="100%" height="720" scrolling="no" style="border:0"&gt; &lt;/iframe&gt;
                                                </textarea>
                                               <?php } ?>
                                                
@@ -365,7 +363,7 @@
                                               <div class="form-group form-group">
                                               <div class="col-md-offset-1 col-sm-10">
                                               <?php if ($if_exist_settings == 0) { ?>
-                                                <input class="form-control" name="token_key" type="text" placeholder="Token Key">
+                                                <input class="form-control" name="token_key" type="text" value="<?php echo$token; ?>">
                                               <?php }else{?>
                                                <input class="form-control" name="token_key" type="text" value="{{ $userSettings->key }}">
                                               <?php } ?>
