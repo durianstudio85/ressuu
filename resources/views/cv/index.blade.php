@@ -1,9 +1,100 @@
-
 <?php
     
 $theme_selection = $settings->theme;
+$status = $settings->status;
+$actual_link = "https://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
 
-if($theme_selection == "default"){ ?>
+?>
+
+<?php if( ($status == "private" AND !isset($_COOKIE['tokenKey'])) OR $_COOKIE['tokenKey'] == "Mis Match"){ ?>
+
+
+<html>
+  <head>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/../css/style.css" rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="/../css/adminstyle.css">
+
+  </head>
+  <body class="ressuuhome">
+    <section class="contentarea container padtop30">
+        
+        <a href="{{ url('/') }}"><img src="../images/logo.png" /></a>
+
+        <div class="clearfix"></div>
+
+        <div class="col-md-9 padtop70">
+                
+            <h1>Enter Token Key</h1>
+
+            <br>
+
+            <input type="text" id="myText" class="tokenKey_textbox" style=""> 
+            <center><button onclick="myFunction()" class="btn btn-danger mgtop10">Submit</button></center>
+
+            <h6 id="demo"></h6>
+            <input id="tokenkey" type="hidden" value="<?php echo $settings->key;  ?>">
+            <input id="link" type="hidden" value="<?php echo $actual_link;  ?>">
+              <br>
+
+            
+        </div>
+
+        <div class="col-md-3">
+            
+            <center>
+               <img src="../images/phone.png" class="phoneimg"/>
+               <div id="slider" class="phone_slide" style="">
+                 <figure>
+                   <img src="../images/dashboard_slide.png" class=""/>                 
+                   <img src="../images/profile_slide.png" class=""/>
+                   <img src="../images/resume_slide.png" class=""/>
+                </figure>
+            </div>               
+            </center>
+
+        </div>
+
+        <br>
+        <br>
+    </section>
+
+<script>
+function myFunction() {
+
+    var token = document.getElementById("tokenkey").value;
+    var x = document.getElementById("myText").value;
+    var htmlString = document.getElementById("link").value;
+
+    if (token == x) {
+       document.cookie = "tokenKey=MATCH";
+       greeting = "Match";
+       window.location.replace(htmlString);
+     
+    } else {
+        greeting = "Error Token";
+        //window.location.replace("http://localhost:8000/cv/orlandjaecastro.3");
+    }
+    document.getElementById("demo").innerHTML = greeting;
+
+
+}
+</script>
+
+
+  </body>
+
+
+
+</html>
+ 
+
+<?php }else{ ?> 
+<script>
+ //document.cookie = "tokenKey=Mis Match";
+</script>
+
+<?php if($theme_selection == "default"){ ?>
 
 
 <!DOCTYPE html>
@@ -14,7 +105,7 @@ if($theme_selection == "default"){ ?>
 <head>
    <meta charset="utf-8">
         
-   <title>Ressuu.me | <?php echo $profiles->name; ?></title>
+   <title>Resse.me | <?php echo $profiles->name; ?></title>
     
    <!-- Mobile viewport optimized -->
    <meta name="viewport" content="width=device-width">
@@ -24,7 +115,7 @@ if($theme_selection == "default"){ ?>
    <link rel="stylesheet" href="../cv/clean_modern/style.css">
    <link rel="stylesheet" href="../cv/clean_modern/scripts/prettyPhoto/css/prettyPhoto.css">   
    <!-- Favicon -->
-   <link rel="shortcut icon" type="image/x-icon" href="/../../images/fav icon.png">   
+   <link rel="shortcut icon" href="favicon.ico">    
    <!-- Google Fonts -->
    <link href='https://fonts.googleapis.com/css?family=Lato:400,700' rel='stylesheet' type='text/css'>
    <link href='https://fonts.googleapis.com/css?family=Droid+Serif:400,400italic' rel='stylesheet' type='text/css'>
@@ -41,7 +132,7 @@ if($theme_selection == "default"){ ?>
          <section class="author-info">
             <figure class="author-img">
                <a href="#">
-                    <img src="../profilepic/eduardo.jpg" class="cv_theme1_img" />
+                  <img src="../profilepic/eduardo.jpg" class="cv_theme1_img" />
                </a>
             </figure>
             <h1 class="name"><?php echo $profiles->name; ?></h1>
@@ -281,11 +372,11 @@ if($theme_selection == "default"){ ?>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Ressuu.me | <?php echo $profiles->name; ?></title>
+    <title>Resse.me | <?php echo $profiles->name; ?></title>
 
     <link rel="stylesheet" type="text/css" href="../cv/yellow_theme/css/style.css"/>
     <link rel="stylesheet" type="text/css" href="../cv/yellow_theme/css/fancybox.css"/>
-    <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Open+Sans:400,600,300,800,700,400italic|PT+Serif:400,400italic"/>
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Open+Sans:400,600,300,800,700,400italic|PT+Serif:400,400italic"/>
     
     <script type="text/javascript" src="../cv/yellow_theme/js/jquery.min.js"></script>
     <script type="text/javascript" src="../cv/yellow_theme/js/jquery.easytabs.min.js"></script>
@@ -296,7 +387,6 @@ if($theme_selection == "default"){ ?>
     <script type="text/javascript" src="https://maps.google.com/maps/api/js?sensor=false"></script>
     <script type="text/javascript" src="../cv/yellow_theme/js/jquery.gmap.min.js"></script>
     <script type="text/javascript" src="../cv/yellow_theme/js/custom.js"></script>
-    <link rel="shortcut icon" type="image/x-icon" href="/../../images/fav icon.png">   
 
 </head>
     <body>
@@ -549,3 +639,9 @@ if($theme_selection == "default"){ ?>
 </body>
 </html>
 <?php } ?>
+
+
+
+<?php } ?>
+
+
