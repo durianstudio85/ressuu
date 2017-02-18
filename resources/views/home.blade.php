@@ -75,7 +75,56 @@
 
                <div class="row user-tabs">
                 <div class="user">
-                  <img src="images/user.png">     
+                  <?php if ($if_exist == 1) { ?>
+      
+                    <?php if(!empty($userProfile->profile_picture) AND $userProfile->profile_picture != " " ){ ?>
+                       <a href="#" data-toggle="modal" data-target="#profilepic" ><img class="img-reponsive profile-pic" src="profilepic/<?php echo $userProfile->profile_picture; ?>"></a> 
+                    <?php  }else{ ?>
+                       <a href="#" data-toggle="modal" data-target="#profilepic" ><img class="img-responsive profile-pic" src="profilepic/default_avatar.jpg"></a> 
+                    <?php } ?>
+
+                    <?php }else{ ?>
+                       <a href="#" data-toggle="modal" data-target="#profilepic" ><img class="img-responsive profile-pic" src="profilepic/default_avatar.jpg" ></a>
+                  <?php } ?>     
+                <!-- Modal for profilepic -->
+                      <section class="profilepic">
+
+                          <div class="modal fade" id="profilepic" role="dialog">
+                              <div class="modal-dialog modal-sm">
+                                                  
+                                                    <!-- Modal content-->
+                                  <div class="modal-content">
+
+                                  <form method="POST" action="apply/upload" enctype="multipart/form-data" files="true">
+                              {{ csrf_field() }}
+                                         <div class="modal-header">
+                                            <h5>Change Profile Pic</h5>
+                                          </div>
+                                                                        
+                                          <div class="col-md-12 content-panel-header profile_wrap">
+                                              
+                                              <div class="form-group form-group">
+                                              <div class="col-md-offset-1 col-sm-10">
+                                                  <input class="form-control" name="image" type="file" id="icondemo" style="height:20px;">
+                                              </div>
+                                                
+                                           </div>
+
+
+                                          </div>
+                                          <input type="hidden" value="{{ csrf_token() }}" name="_token" >
+                                        <div class="modal-footer">
+                                             <button type="submit" class="btn btn-default">Save</button>
+                                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>    
+                                        </div>
+                                  </form>
+                                  </div>
+                                            
+                              </div>
+                           </div>
+
+                        </section>
+                  <!-- Modal for profilepic -->
                 </div>
                  <div class="name-panel">
                    <div class="name-panel">
@@ -136,7 +185,7 @@
  
 <content class="col-sm-12 col-md-9 hpage"> 
 
-<a href="https://duriangraphics.com/"> 
+<a href="https://duriangraphics.com/" target="_blank"> 
 <section class="col-xs-12 col-md-12 content-header ads-bg">
   
 
@@ -159,7 +208,17 @@
             <div class="col-md-10" >
                       <div class="content-panel-status col-xs-12 col-md-12">   
                             <div class="col-sm-2 div">
-                               <img src="images/user.png">
+                                <?php if ($if_exist == 1) { ?>
+      
+                                <?php if(!empty($userProfile->profile_picture)  AND $userProfile->profile_picture != " " ){ ?>
+                                  <img class="img-reponsive profile-pic" src="profilepic/<?php echo $userProfile->profile_picture; ?>">
+                                <?php  }else{ ?>
+                                  <img class="img-responsive profile-pic" src="profilepic/default_avatar.jpg">
+                                <?php } ?>
+
+                                <?php }else{ ?>
+                                  <img class="img-responsive profile-pic" src="profilepic/default_avatar.jpg" >
+                              <?php } ?> 
                             </div>
                             <div class="col-sm-10 div">
                                   <h4><?php echo$userProfile->name; ?></h4>
@@ -182,7 +241,7 @@
                                  if($days_diff == "0"){
                                   echo "Just now";
                                  }else{
-                                  echo $diff->format('%a Days');
+                                  echo $diff->format('%a Days Ago');
                                  }
 
 
@@ -234,7 +293,17 @@
             <div class="col-md-10" >
                       <div class="content-panel-status col-xs-12 col-md-12">   
                             <div class="col-sm-2 div">
-                               <img src="images/user.png">
+                                <?php if ($if_exist == 1) { ?>
+      
+                                <?php if(!empty($userProfile->profile_picture)  AND $userProfile->profile_picture != " " ){ ?>
+                                  <img class="img-reponsive profile-pic" src="profilepic/<?php echo $userProfile->profile_picture; ?>">
+                                <?php  }else{ ?>
+                                  <img class="img-responsive profile-pic" src="profilepic/default_avatar.jpg">
+                                <?php } ?>
+
+                                <?php }else{ ?>
+                                  <img class="img-responsive profile-pic" src="profilepic/default_avatar.jpg" >
+                              <?php } ?> 
                             </div>
                             <div class="col-sm-10 div">
                                   <h4><?php echo$name; ?></h4>

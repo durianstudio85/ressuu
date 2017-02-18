@@ -446,57 +446,57 @@ class HomeController extends Controller
 
      public function addPortfolio(){
         
-  // getting all of the post data
-  $file = array('image' => Input::file('image'));
-  // setting up rules
-  $rules = array('image' => 'required',); //mimes:jpeg,bmp,png and for max size max:10000
-  // doing the validation, passing post data, rules and the messages
-  $validator = Validator::make($file, $rules);
-  if ($validator->fails()) {
-    // send back to the page with the input data and errors
-    return Redirect::to('upload')->withInput()->withErrors($validator);
-  }
-  else {
-    // checking file is valid.
-    if (Input::file('image')->isValid()) {
-      $destinationPath = 'upload'; // upload path
-      $extension = Input::file('image')->getClientOriginalExtension(); // getting image extension
-      $fileName = rand(11111,99999).'.'.$extension; // renameing image
-      Input::file('image')->move($destinationPath, $fileName); // uploading file to given path
-      // sending back with message
+          // getting all of the post data
+          $file = array('image' => Input::file('image'));
+          // setting up rules
+          $rules = array('image' => 'required',); //mimes:jpeg,bmp,png and for max size max:10000
+          // doing the validation, passing post data, rules and the messages
+          $validator = Validator::make($file, $rules);
+          if ($validator->fails()) {
+            // send back to the page with the input data and errors
+            return Redirect::to('upload')->withInput()->withErrors($validator);
+          }
+          else {
+            // checking file is valid.
+            if (Input::file('image')->isValid()) {
+              $destinationPath = 'upload'; // upload path
+              $extension = Input::file('image')->getClientOriginalExtension(); // getting image extension
+              $fileName = rand(11111,99999).'.'.$extension; // renameing image
+              Input::file('image')->move($destinationPath, $fileName); // uploading file to given path
+              // sending back with message
 
-         $userId = Auth::id();
-         $inputPortTitle = Input::get('port_title');
-         $inputCategoryId = Input::get('category_id');
-         $inputDescription = Input::get('description');
-         $inputThumbnail = $fileName;
-         $portfolio_Category = DB::table('portfolio_cat')->where('id',$inputCategoryId)->first();
-         $inputDate = date('Y-m-d');
+                 $userId = Auth::id();
+                 $inputPortTitle = Input::get('port_title');
+                 $inputCategoryId = Input::get('category_id');
+                 $inputDescription = Input::get('description');
+                 $inputThumbnail = $fileName;
+                 $portfolio_Category = DB::table('portfolio_cat')->where('id',$inputCategoryId)->first();
+                 $inputDate = date('Y-m-d');
 
-          DB::table('portfolio')->insert([
-                 'user_id' => $userId,
-                 'port_title'=> $inputPortTitle,
-                 'port_excerpt' => $inputDescription,
-                 'post_thumbnail'=>$inputThumbnail,
-                 'category_id'=>$inputCategoryId
-                
-          ]);
+                  DB::table('portfolio')->insert([
+                         'user_id' => $userId,
+                         'port_title'=> $inputPortTitle,
+                         'port_excerpt' => $inputDescription,
+                         'post_thumbnail'=>$inputThumbnail,
+                         'category_id'=>$inputCategoryId
+                        
+                  ]);
 
-           DB::table('news_feeds')->insert([
-                 'user_id' => $userId,
-                 'activity' => "Add New Portfolio in ". $portfolio_Category->title,
-                 'date'=> $inputDate
-          ]);
+                   DB::table('news_feeds')->insert([
+                         'user_id' => $userId,
+                         'activity' => "Add New Portfolio in ". $portfolio_Category->title,
+                         'date'=> $inputDate
+                  ]);
 
-      Session::flash('success', 'Upload successfully'); 
-      return back();    
-    }
-    else {
-      // sending back with error message.
-      Session::flash('error', 'uploaded file is not valid');
-     return back();
-    }
-  }
+              Session::flash('success', 'Upload successfully'); 
+              return back();    
+            }
+            else {
+              // sending back with error message.
+              Session::flash('error', 'uploaded file is not valid');
+             return back();
+            }
+          }
 
     }
 
@@ -516,7 +516,57 @@ class HomeController extends Controller
        
     }
 
+     public function uploadPicture(){
+        
+              // getting all of the post data
+              $file = array('image' => Input::file('image'));
+              // setting up rules
+              $rules = array('image' => 'required',); //mimes:jpeg,bmp,png and for max size max:10000
+              // doing the validation, passing post data, rules and the messages
+              $validator = Validator::make($file, $rules);
+              if ($validator->fails()) {
+                // send back to the page with the input data and errors
+                return Redirect::to('upload')->withInput()->withErrors($validator);
+              }
+              else {
+                // checking file is valid.
+                if (Input::file('image')->isValid()) {
+                  $destinationPath = 'profilepic'; // upload path
+                  $extension = Input::file('image')->getClientOriginalExtension(); // getting image extension
+                  $fileName = rand(11111,99999).'.'.$extension; // renameing image
+                  Input::file('image')->move($destinationPath, $fileName); // uploading file to given path
+                  // sending back with message
 
+                     $userId = Auth::id();
+                     $inputDate = date('Y-m-d');
+                     $inputThumbnail = $fileName;
+
+
+                       DB::table('profiles')
+                        ->where('user_id', $userId)
+                        ->update(array(
+                             'profile_picture' => $inputThumbnail 
+                            ));    
+
+                       DB::table('news_feeds')->insert([
+                             'user_id' => $userId,
+                             'activity' => "Update Profile Picture ",
+                             'date'=> $inputDate
+                      ]);
+
+
+
+                  Session::flash('success', 'Upload successfully'); 
+                  return back();
+                }
+                else {
+                  // sending back with error message.
+                  Session::flash('error', 'uploaded file is not valid');
+                 return back();
+                }
+              }
+
+    }
 
 
 

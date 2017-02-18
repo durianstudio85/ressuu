@@ -17,51 +17,41 @@ $actual_link = "https://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
     <link href="/../css/style.css" rel='stylesheet' type='text/css'>
     <link rel="stylesheet" type="text/css" href="/../css/adminstyle.css">
-    <link rel="shortcut icon" type="image/x-icon" href="/../images/fav icon.png">
+     <link rel="shortcut icon" type="image/x-icon" href="/../images/fav icon.png">
 
   </head>
-  <body class="ressuuhome">
-    <section class="contentarea container padtop30">
+  <body class="signup ressuuhome">
+
+
+    <content class="row ">
+
+    <center><a href="{{ url('/') }}"><img src="../images/logo.png" class="signuplogo" /></a></center>
+    <section class="container">
+
+        <center>
         
-        <a href="{{ url('/') }}"><img src="../images/logo.png" /></a>
-
         <div class="clearfix"></div>
+            <h4>Welcome!</h4>
 
-        <div class="col-md-9 padtop70">
-                
-            <h1>Enter Token Key</h1>
 
-            <br>
 
-            <input type="text" id="myText" class="tokenKey_textbox" style=""> 
-            <center><button onclick="myFunction()" class="btn btn-danger mgtop10">Submit</button></center>
+            <div class="form-group">
+                <input required="required" placeholder="Enter Token" id="myText" >
+            </div>
 
-            <h6 id="demo"></h6>
-            <input id="tokenkey" type="hidden" value="<?php echo $settings->key;  ?>">
+            <div class="form-group">
+                <button onclick="myFunction()" class="signin" >Submit</button>
+            </div>
+
+           <div class="signupfooter">
+                 <p id="demo"></p>
+                 <input id="tokenkey" type="hidden" value="<?php echo $settings->key;  ?>">
             <input id="link" type="hidden" value="<?php echo $actual_link;  ?>">
-              <br>
-
-            
-        </div>
-
-        <div class="col-md-3">
-            
-            <center>
-               <img src="../images/phone.png" class="phoneimg"/>
-               <div id="slider" class="phone_slide" style="">
-                 <figure>
-                   <img src="../images/dashboard_slide.png" class=""/>                 
-                   <img src="../images/profile_slide.png" class=""/>
-                   <img src="../images/resume_slide.png" class=""/>
-                </figure>
-            </div>               
-            </center>
-
-        </div>
-
-        <br>
-        <br>
+            </div>  
+        </center>
     </section>
+
+</content>
 
 <script>
 function myFunction() {
@@ -87,7 +77,21 @@ function myFunction() {
 
 
   </body>
+<footer class="ressuufooter">
+        
+        <div class="container">
+            <div class="col-md-6">
+                <p>You can Sign In with popular Social Networks</p>
+            </div>
+            <div class="col-md-6 btn-group btnwrap">
+                <center>
+                    <a class="btn btn-success btn1"><i class="fa fa-twitter"></i>&nbsp;Sign In with Twitter</a>
+                    <a href="auth/facebook" class="btn btn-success btn2"><i class="fa fa-facebook"></i>&nbsp;Sign In with Facebook</a>
+                </center>
+            </div>
+        </div>
 
+</footer>
 
 
 </html>
@@ -136,9 +140,15 @@ function myFunction() {
          <!-- Author Info -->
          <section class="author-info">
             <figure class="author-img">
-               <a href="#">
-                  <img src="../profilepic/eduardo.jpg" class="cv_theme1_img" />
-               </a>
+                <?php if(!empty($profiles->profile_picture)   AND $profiles->profile_picture != " "   ){ ?>
+                        <a href="#">
+                          <img class="cv_theme1_img" src="../profilepic/<?php echo $profiles->profile_picture; ?>">
+                       </a>    
+                    <?php  }else{ ?>
+                       <a href="#">
+                          <img class="cv_theme1_img" src="../profilepic/default_avatar.jpg">
+                       </a>
+                  <?php } ?>
             </figure>
             <h1 class="name"><?php echo $profiles->name; ?></h1>
             <p class="statement"><?php echo $profiles->position; ?></p>
@@ -430,7 +440,15 @@ function myFunction() {
                 <div id="profile"> 
                     <!-- About section -->
                     <div class="about">
-                        <div class="photo-inner"><img src="../profilepic/eduardo.jpg" height="186" width="153" /></div>
+
+                        <div class="photo-inner"> 
+                         <?php if(!empty($profiles->profile_picture)   AND $profiles->profile_picture != " "  ){ ?>
+                              <img class="img-reponsive"  height="186" width="153" src="../profilepic/<?php echo $profiles->profile_picture; ?>"></a> 
+                                <?php  }else{ ?>
+                              <img class="img-responsive"   height="186" width="153" src="../profilepic/default_avatar.jpg" >
+
+                          <?php } ?>
+                        </div>
                         <h1><?php echo $profiles->name; ?></h1>
                         <h3><?php echo $profiles->position; ?></h3>
                         <p><?php echo $profiles->bio;?></p>
@@ -711,9 +729,19 @@ function myFunction() {
          <!-- Author Info -->
          <section class="author-info">
             <figure class="author-img">
-               <a href="#">
-                  <img src="../profilepic/eduardo.jpg" class="cv_theme1_img" />
-               </a>
+                   <?php if(!empty($profiles->profile_picture)   AND $profiles->profile_picture != " "  ){ ?>
+
+                        <a href="#">
+                          <img class="cv_theme1_img" src="../profilepic/<?php echo $profiles->profile_picture; ?>">
+                       </a>
+
+                    <?php  }else{ ?>
+
+                       <a href="#">
+                          <img class="cv_theme1_img" src="../profilepic/default_avatar.jpg">
+                       </a>
+
+                  <?php } ?>
             </figure>
             <h1 class="name"><?php echo $profiles->name; ?></h1>
             <p class="statement"><?php echo $profiles->position; ?></p>
@@ -1005,7 +1033,15 @@ function myFunction() {
                 <div id="profile"> 
                     <!-- About section -->
                     <div class="about">
-                        <div class="photo-inner"><img src="../profilepic/eduardo.jpg" height="186" width="153" /></div>
+                        <div class="photo-inner">
+                          <?php if(!empty($profiles->profile_picture)  AND $profiles->profile_picture != " "  ){ ?>
+                              <img class="img-reponsive"  height="186" width="153" src="../profilepic/<?php echo $profiles->profile_picture; ?>"></a> 
+                                <?php  }else{ ?>
+                              <img class="img-responsive"   height="186" width="153" src="../profilepic/default_avatar.jpg" >
+
+                          <?php } ?>
+
+                        </div>
                         <h1><?php echo $profiles->name; ?></h1>
                         <h3><?php echo $profiles->position; ?></h3>
                         <p><?php echo $profiles->bio;?></p>

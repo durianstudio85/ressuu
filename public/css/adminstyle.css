@@ -149,6 +149,26 @@ body{
   margin: 0px !important;
 }
 
+.profilepic input[type=text]{
+
+    margin: 0px 0px 0px 0px;
+    border-width: 0px 0px 2px 0px;
+    border-radius: 2px;
+    padding-left: 20px;
+    width: 100%;
+    color: #5e6d81;
+    font-size: 15px;
+    padding: 0px 0px 0px 0px;
+
+
+}
+.profilepic .profile_wrap{
+  margin-top: 10px;
+}
+
+
+
+
 /*sidebar */
 
 sidebar{

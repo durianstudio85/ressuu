@@ -71,6 +71,7 @@ Route::get('/cv/{id}', 'CvController@cvdetails');
 
 Route::get('/previewcv/{themename}/{id}', 'CvController@previewcv');
 
+Route::post('/apply/upload', 'HomeController@uploadPicture');
 
 //image upload
 //Route::get('/portfolio/addPortfolio', function() {
