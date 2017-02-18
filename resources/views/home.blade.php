@@ -223,7 +223,7 @@
                             <div class="col-sm-10 div">
                                   <h4><?php echo$userProfile->name; ?></h4>
                                   <p><?php echo $value->activity; ?> <a href="" data-toggle="modal" data-target="#newsfeed_{{ $value->id }}"><span>check it here.</span></a></p>
-                                  <div><a href="#">Link</a> | <a href="#">Comment</a></div>
+                                  <div><!--<a href="#">Link</a> | <a href="#">Comment</a>--></div>
                             </div>       
                       </div>
             </div>

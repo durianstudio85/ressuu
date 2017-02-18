@@ -241,7 +241,7 @@
             <div class="col-xs-8 col-md-8 content-panel-jobs">
                        <h4>{{ $jobs->company_job }}</h4>
                        <p>{{ $jobs->company_address }}</p>
-                       <div><a href="#">Link</a> | <a href="#">Comment</a></div>
+                       <div><!--<a href="#">Link</a> | <a href="#">Comment</a>--></div>
             </div>
              <div class="col-xs-4 col-md-2 apply">      
                         <p>2 Day Ago</p>
@@ -327,7 +327,7 @@
             <div class="col-xs-8 col-md-8 content-panel-jobs">
                        <h4>IT Expert</h4>
                        <p>Suwon, South Korea</p>
-                       <div><a href="#">Link</a> | <a href="#">Comment</a></div>
+                       <div><!--<a href="#">Link</a> | <a href="#">Comment</a>--></div>
             </div>
              <div class="col-xs-4 col-md-2 apply">      
                         <p>2 Day Ago</p>
@@ -409,7 +409,7 @@
             <div class="col-xs-8 col-md-8 content-panel-jobs">
                        <h4>Technical Support</h4>
                        <p>Suwon, South Korea</p>
-                       <div><a href="#">Link</a> | <a href="#">Comment</a></div>
+                       <div><!--<a href="#">Link</a> | <a href="#">Comment</a>--></div>
             </div>
              <div class="col-xs-4 col-md-2 apply">      
                         <p>4 Day Ago</p>
@@ -492,7 +492,7 @@
             <div class="col-xs-8 col-md-8 content-panel-jobs">
                        <h4>Android App Developer</h4>
                        <p>Suwon, South Korea</p>
-                       <div><a href="#">Link</a> | <a href="#">Comment</a></div>
+                       <div><!--<a href="#">Link</a> | <a href="#">Comment</a>--></div>
             </div>
              <div class="col-xs-4 col-md-2 apply">      
                         <p>1 Week Ago</p>
