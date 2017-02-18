@@ -248,9 +248,9 @@
                               }
 
                                ?>
-                               </p
-                              <img src="images/like.png"><span>12</span>
-                              <img src="images/comment.jpg"><span>12</span>           
+                               </p>
+                              <!--<img src="images/like.png"><span>12</span>
+                              <img src="images/comment.jpg"><span>12</span>-->       
             </div>
 
   </div>
@@ -308,14 +308,14 @@
                             <div class="col-sm-10 div">
                                   <h4><?php echo$name; ?></h4>
                                   <p>Created New Account <a><span></span></a></p>
-                                  <div><a href="#">Link</a> | <a href="#">Comment</a></div>
+                                  <div><!--<a href="#">Link</a> | <a href="#">Comment</a>--></div>
                             </div>       
                       </div>
             </div>
              <div class="col-xs-12 col-md-2 content-panel-lc">      
                               <p></p>
-                              <img src="images/like.png"><span>12</span>
-                              <img src="images/comment.jpg"><span>12</span>           
+                              <!--<img src="images/like.png"><span>12</span>
+                              <img src="images/comment.jpg"><span>12</span>  -->         
             </div>
 
   </div>

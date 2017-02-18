@@ -31,12 +31,12 @@ $actual_link = "https://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
         <center>
         
         <div class="clearfix"></div>
-            <h4>Please Enter Token Key!</h4>
+            <h4>Welcome!</h4>
 
 
 
             <div class="form-group">
-                <input required="required" placeholder="Enter Token" id="myText" >
+                <input required="required" placeholder="Please Enter Token Key" id="myText" >
             </div>
 
             <div class="form-group">

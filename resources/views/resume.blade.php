@@ -195,10 +195,10 @@
      </div>
      <nav class="col-xs-12 content-nav-menu" role="tablist">
           <ul role="presentation">
-            <li><a href="#tab1" role="tab" data-toggle="tab">Experience</a></li>
+            <li class="active" ><a href="#tab1" role="tab" data-toggle="tab">Experience</a></li>
             <li><a href="#tab2" role="tab" data-toggle="tab">Education</a></li>
             <li><a href="#tab3" role="tab" data-toggle="tab">Skill</a></li>
-            <li  class="active" ><a href="#tab4" role="tab" data-toggle="tab">Certification</a></li>
+            <li><a href="#tab4" role="tab" data-toggle="tab">Certification</a></li>
           </ul>
      </nav>
 
