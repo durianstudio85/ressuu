@@ -17,6 +17,7 @@ $actual_link = "https://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
     <link href="/../css/style.css" rel='stylesheet' type='text/css'>
     <link rel="stylesheet" type="text/css" href="/../css/adminstyle.css">
+    <link rel="shortcut icon" type="image/x-icon" href="/../images/fav icon.png">
 
   </head>
   <body class="ressuuhome">
