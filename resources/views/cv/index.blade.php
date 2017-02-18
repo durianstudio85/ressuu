@@ -31,7 +31,7 @@ $actual_link = "https://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
         <center>
         
         <div class="clearfix"></div>
-            <h4>Welcome!</h4>
+            <h4>Please Enter Token Key!</h4>
 
 
 
