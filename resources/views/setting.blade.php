@@ -398,10 +398,10 @@
                                             <div class="form-group form-group">
                                               <div class="col-md-offset-1 col-md-10">
                                               <?php if ($if_exist_settings == 0) { ?>
-                                               <textarea class="form-control" name="embeded_code" rows="5" cols="10">&lt;iframe src="<?php echo $create_cvlink; ?>" width="100%" height="720" scrolling="no" style="border:0"&gt; &lt;/iframe&gt;
+                                               <textarea class="form-control" name="embeded_code" rows="5" cols="10">&lt;iframe src="<?php echo $create_cvlink; ?>" width="100%" scrolling="yes" style="border:0"&gt; &lt;/iframe&gt;
                                                </textarea>
                                               <?php }else{?>
-                                               <textarea class="form-control" name="embeded_code" rows="5" cols="10">&lt;iframe src="<?php echo $create_cvlink; ?>" width="100%" height="720" scrolling="no" style="border:0"&gt; &lt;/iframe&gt;
+                                               <textarea class="form-control" name="embeded_code" rows="5" cols="10">&lt;iframe src="<?php echo $create_cvlink; ?>" width="100%" scrolling="yes" style="border:0"&gt; &lt;/iframe&gt;
                                                </textarea>
                                               <?php } ?>
                                                

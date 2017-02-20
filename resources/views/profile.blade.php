@@ -302,7 +302,21 @@
                                      
                      </div>
                      <div class="col-xs-12 col-md-12 line"></div>                
-         </div>                          
+         </div> 
+         <div class="col-xs-12 col-md-12  content-panel">
+                     <div class="col-xs-3 col-md-3">
+                        <p class="title">Website</p>
+                     </div>
+                     <div class="col-xs-9 col-md-9">
+                       <?php if ($if_exist == 1) { ?> 
+                                <p><?php echo$userProfile->url; ?></p>    
+                            <?php }else{ ?>
+                               <p>Not Set</p>
+                            <?php } ?>                      
+                                     
+                     </div>
+                     <div class="col-xs-12 col-md-12 line"></div>                
+         </div>                            
 </section>
 
 <section class="social-media">
@@ -509,7 +523,22 @@
                                                          
                                              </div>
                                                             
-                                 </div>                          
+                                 </div>
+
+                                 <div class="col-md-12  content-panel">
+                                             <div class="col-xs-12 col-md-3">
+                                                <p class="title">Website</p>
+                                             </div>
+                                             <div class="col-xs-12 col-md-9">
+                                                                   
+                                              <?php if ($if_exist == 1) { ?> 
+                                                      <input type="text" name="url" class="form-control" value="{{ $userProfile->url }}">  
+                                              <?php }else{ ?>
+                                                      <input type="text" name="url" class="form-control">
+                                              <?php } ?>                 
+                                             </div>
+                                                            
+                                  </div>                               
                         </section>
 
                           <section>

@@ -257,6 +257,7 @@ class HomeController extends Controller
         $inputEmail =       Input::get('email');
         $inputPhone =       Input::get('phone');
         $inputBio =         Input::get('bio');
+        $inputUrl =         Input::get('url');
         $inputFacebook =    Input::get('facebook');
         $inputLinked =      Input::get('linkedin');
         $inputTwitter =     Input::get('twitter');
@@ -272,6 +273,7 @@ class HomeController extends Controller
                 'bday' => $inputBday,
                 'address' => $inputAddress,
                 'phone' => $inputPhone,
+                'url' => $inputUrl,
                 'bio' => $inputBio, 
                 'facebook' => $inputFacebook,
                 'linkedin' => $inputLinked,
@@ -301,6 +303,7 @@ class HomeController extends Controller
         $inputEmail =       Input::get('email');
         $inputPhone =       Input::get('phone');
         $inputBio =         Input::get('bio');
+        $inputUrl =         Input::get('url');
         $inputFacebook =    Input::get('facebook');
         $inputLinked =      Input::get('linkedin');
         $inputTwitter =     Input::get('twitter');
@@ -314,7 +317,7 @@ class HomeController extends Controller
                 'bday' => $inputBday,
                 'address' => $inputAddress,
                 'phone' => $inputPhone,
-                'url' => " ",
+                'url' => $inputUrl,
                 'bio' => $inputBio,
                 'profile_picture' => " ",
                 'facebook' => $inputFacebook,

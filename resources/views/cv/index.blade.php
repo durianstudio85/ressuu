@@ -464,7 +464,7 @@ function myFunction() {
                         <li><label>Address</label><span><?php echo $profiles->address; ?></span></li>
                         <li><label>Email</label><span><?php echo $profiles->email; ?></span></li>
                         <li><label>Phone</label><span><?php echo $profiles->phone; ?></span></li>
-                        <li><label>Website</label><span><?php echo $profiles->facebook; ?></span></li>
+                        <li><label>Website</label><span><?php echo $profiles->url; ?></span></li>
                     </ul>
                     <!-- /Personal info section -->
                 </div>        
@@ -1059,7 +1059,7 @@ function myFunction() {
                         <li><label>Address</label><span><?php echo $profiles->address; ?></span></li>
                         <li><label>Email</label><span><?php echo $profiles->email; ?></span></li>
                         <li><label>Phone</label><span><?php echo $profiles->phone; ?></span></li>
-                        <li><label>Website</label><span><?php echo $profiles->facebook; ?></span></li>
+                        <li><label>Website</label><span><?php echo $profiles->url; ?></span></li>
                     </ul>
                     <!-- /Personal info section -->
                 </div>        
