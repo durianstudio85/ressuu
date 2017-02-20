@@ -491,7 +491,8 @@ function myFunction() {
                             <li>
                                                    
                                 <div class="timelineUnit">
-                                    <h4>{{ $work->job_title }}<span class="timelineDate">{{ $work->start_date }} - {{ $work->end_date }}</span></h4>
+                                    <h4>{{ $work->job_title }}</h4>
+                                    <h4 class="timelineDate">{{ $work->start_date }} - {{ $work->end_date }}</h4>
                                     <h5>{{ $work->company_name }}</h5>
                                     <p>{{ $work->description }}</p>
                                 </div>
@@ -508,7 +509,8 @@ function myFunction() {
                         @foreach ($education as $edu)  
                             <li>            
                                 <div class="timelineUnit">
-                                    <h4>{{ $edu->school }}<span class="timelineDate">{{ $edu->date_start }} - {{ $edu->date_end }}</span></h4>
+                                    <h4>{{ $edu->school }}</h4>
+                                    <h4 class="timelineDate">{{ $edu->date_start }} - {{ $edu->date_end }}</h4>
                                     <h5>{{ $edu->course }}</h5>
                                     <p>{{ $edu->awards_rec }}</p>
                                 </div>
@@ -1086,7 +1088,8 @@ function myFunction() {
                             <li>
                                                    
                                 <div class="timelineUnit">
-                                    <h4>{{ $work->job_title }}<span class="timelineDate">{{ $work->start_date }} - {{ $work->end_date }}</span></h4>
+                                    <h4>{{ $work->job_title }}</h4>
+                                    <h4 class="timelineDate">{{ $work->start_date }} - {{ $work->end_date }}</h4>
                                     <h5>{{ $work->company_name }}</h5>
                                     <p>{{ $work->description }}</p>
                                 </div>
@@ -1103,7 +1106,8 @@ function myFunction() {
                         @foreach ($education as $edu)  
                             <li>            
                                 <div class="timelineUnit">
-                                    <h4>{{ $edu->school }}<span class="timelineDate">{{ $edu->date_start }} - {{ $edu->date_end }}</span></h4>
+                                    <h4>{{ $edu->school }}</h4>
+                                    <h4 class="timelineDate">{{ $edu->date_start }} - {{ $edu->date_end }}</h4>
                                     <h5>{{ $edu->course }}</h5>
                                     <p>{{ $edu->awards_rec }}</p>
                                 </div>
