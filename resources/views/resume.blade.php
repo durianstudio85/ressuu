@@ -211,7 +211,7 @@
 
 <section  class="resume tab-content">
 
-         <section role="tabpanel" class="tab-pane " id="tab1">
+         <section role="tabpanel" class="tab-pane active" id="tab1">
 
              @foreach ($userResume_Experience as $userExperience)
               
@@ -644,7 +644,7 @@
 
 
 
-         <section role="tabpanel" class="tab-pane active" id="tab4">
+         <section role="tabpanel" class="tab-pane" id="tab4">
 
           @foreach ($userResume_Certification as $userCertification)
 

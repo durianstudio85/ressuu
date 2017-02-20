@@ -17,7 +17,8 @@ $actual_link = "https://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
     <link href="/../css/style.css" rel='stylesheet' type='text/css'>
     <link rel="stylesheet" type="text/css" href="/../css/adminstyle.css">
-     <link rel="shortcut icon" type="image/x-icon" href="/../images/fav icon.png">
+    <link rel="shortcut icon" type="image/x-icon" href="/../../images/fav icon.png"> 
+    <title>Ressu.me</title> 
 
   </head>
   <body class="signup ressuuhome">
@@ -114,7 +115,7 @@ function myFunction() {
 <head>
    <meta charset="utf-8">
         
-   <title>Resse.me | <?php echo $profiles->name; ?></title>
+   <title>Ressu.me | <?php echo $profiles->name; ?></title>
     
    <!-- Mobile viewport optimized -->
    <meta name="viewport" content="width=device-width">
@@ -124,7 +125,7 @@ function myFunction() {
    <link rel="stylesheet" href="../cv/clean_modern/style.css">
    <link rel="stylesheet" href="../cv/clean_modern/scripts/prettyPhoto/css/prettyPhoto.css">   
    <!-- Favicon -->
-   <link rel="shortcut icon" href="favicon.ico">    
+   <link rel="shortcut icon" type="image/x-icon" href="/../../images/fav icon.png">     
    <!-- Google Fonts -->
    <link href='https://fonts.googleapis.com/css?family=Lato:400,700' rel='stylesheet' type='text/css'>
    <link href='https://fonts.googleapis.com/css?family=Droid+Serif:400,400italic' rel='stylesheet' type='text/css'>
@@ -387,11 +388,12 @@ function myFunction() {
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Resse.me | <?php echo $profiles->name; ?></title>
+    <title>Ressu.me | <?php echo $profiles->name; ?></title>
 
     <link rel="stylesheet" type="text/css" href="../cv/yellow_theme/css/style.css"/>
     <link rel="stylesheet" type="text/css" href="../cv/yellow_theme/css/fancybox.css"/>
     <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Open+Sans:400,600,300,800,700,400italic|PT+Serif:400,400italic"/>
+    <link rel="shortcut icon" type="image/x-icon" href="/../../images/fav icon.png"> 
     
     <script type="text/javascript" src="../cv/yellow_theme/js/jquery.min.js"></script>
     <script type="text/javascript" src="../cv/yellow_theme/js/jquery.easytabs.min.js"></script>
@@ -703,7 +705,7 @@ function myFunction() {
 <head>
    <meta charset="utf-8">
         
-   <title>Resse.me | <?php echo $profiles->name; ?></title>
+   <title>Ressu.me | <?php echo $profiles->name; ?></title>
     
    <!-- Mobile viewport optimized -->
    <meta name="viewport" content="width=device-width">
@@ -711,7 +713,8 @@ function myFunction() {
    <!-- Style Sheets -->
 
    <link rel="stylesheet" href="../cv/clean_modern/style.css">
-   <link rel="stylesheet" href="../cv/clean_modern/scripts/prettyPhoto/css/prettyPhoto.css">   
+   <link rel="stylesheet" href="../cv/clean_modern/scripts/prettyPhoto/css/prettyPhoto.css">
+   <link rel="shortcut icon" type="image/x-icon" href="/../../images/fav icon.png">    
    <!-- Favicon -->
    <link rel="shortcut icon" href="favicon.ico">    
    <!-- Google Fonts -->
@@ -980,11 +983,12 @@ function myFunction() {
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Resse.me | <?php echo $profiles->name; ?></title>
+    <title>Ressu.me | <?php echo $profiles->name; ?></title>
 
     <link rel="stylesheet" type="text/css" href="../cv/yellow_theme/css/style.css"/>
     <link rel="stylesheet" type="text/css" href="../cv/yellow_theme/css/fancybox.css"/>
     <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Open+Sans:400,600,300,800,700,400italic|PT+Serif:400,400italic"/>
+    <link rel="shortcut icon" type="image/x-icon" href="/../../images/fav icon.png"> 
     
     <script type="text/javascript" src="../cv/yellow_theme/js/jquery.min.js"></script>
     <script type="text/javascript" src="../cv/yellow_theme/js/jquery.easytabs.min.js"></script>
