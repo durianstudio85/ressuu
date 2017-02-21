@@ -323,6 +323,7 @@
 		padding-left:15px;
 	}
 	.timeline li .timelineUnit .timelineDate {
+		line-height:0px;
 		color: #f4c024;
 		font-size:14px;	
 		font-weight: normal;
