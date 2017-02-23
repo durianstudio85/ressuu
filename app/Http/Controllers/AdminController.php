@@ -42,30 +42,37 @@ class AdminController extends Controller
 
 	public function adminUsers(){
 
-
+      $adminProfile = DB::table('admin_users')->where('id',session('id'))->first(); 
       $userList = DB::table('users')->orderBy('name', 'desc')->get();
 
 			//$userList = DB::table('profiles')->orderBy('name', 'desc')->get();
 	
              return view('admin.users')
              		 ->with("userList",$userList)
+                 ->with("adminProfile",$adminProfile)
              ;
 
 	}
 
 	public function adminAds(){
 
-             return view('admin.ads');
+      $adminProfile = DB::table('admin_users')->where('id',session('id'))->first(); 
+             return view('admin.ads')
+                 ->with("adminProfile",$adminProfile)
+
+      ;
 
 	}
 
 	public function adminJobs(){
 
+        $adminProfile = DB::table('admin_users')->where('id',session('id'))->first(); 
 		    $jobList = DB::table('job')->orderBy('id', 'desc')
 		                ->get();
 
              return view('admin.jobs')
              		->with("jobList",$jobList)
+                ->with("adminProfile",$adminProfile)
 
              ;
 
@@ -73,7 +80,13 @@ class AdminController extends Controller
 
 	public function adminSettings(){
 
-             return view('admin.settings');
+
+        $adminProfile = DB::table('admin_users')->where('id',session('id'))->first(); 
+             return view('admin.settings')
+                  ->with("adminProfile",$adminProfile)
+
+
+             ;
 
 	}
 
@@ -334,6 +347,98 @@ public function deleteJobs($id){
 
 
 }
+
+
+ public function editSettings(){
+
+
+
+        if(empty(Input::file('logo'))){
+
+             $inputAdmin_Name =  Input::get('admin_name');
+             $inputAdmin_Email  =  Input::get('admin_email');
+             $inputAdmin_Password  =  Input::get('admin_password');
+             $inputDate = date('Y-m-d');
+
+               DB::table('admin_users')
+                  ->where('id', session('id'))
+                  ->update(array(
+                            'name' => $inputAdmin_Name,
+                            'email' => $inputAdmin_Email,
+                            'password' => $inputAdmin_Password,
+                      ));  
+
+                  DB::table('admin_news_feeds')->insert([
+                      'user_id' => session('id'),
+                      'activity' => "Update Settings ",
+                      'date'=> $inputDate
+                ]);
+
+              //Session::flash('success', 'Upload successfully'); 
+              return back();
+
+        }else{
+
+              // getting all of the post data
+              $file = array('image' => Input::file('logo'));
+              // setting up rules
+              $rules = array('image' => 'required',); //mimes:jpeg,bmp,png and for max size max:10000
+              // doing the validation, passing post data, rules and the messages
+              $validator = Validator::make($file, $rules);
+              if ($validator->fails()) {
+                // send back to the page with the input data and errors
+                return Redirect::to('upload')->withInput()->withErrors($validator);
+              }
+              else {
+                // checking file is valid.
+                if (Input::file('logo')->isValid()) {
+                  $destinationPath = 'profilepic'; // upload path
+                  $extension = Input::file('logo')->getClientOriginalExtension(); // getting image extension
+                  $fileName = rand(11111,99999).'.'.$extension; // renameing image
+                  Input::file('logo')->move($destinationPath, $fileName); // uploading file to given path
+                     // sending back with message
+
+                    $inputCompany_Picture  =  $fileName;
+                    $inputAdmin_Name =  Input::get('admin_name');
+                    $inputAdmin_Email  =  Input::get('admin_email');
+                    $inputAdmin_Password  =  Input::get('admin_password');
+                    $inputDate = date('Y-m-d');
+
+                     DB::table('admin_users')
+                    ->where('id', session('id'))
+                    ->update(array(
+                              'name' => $inputAdmin_Name,
+                              'email' => $inputAdmin_Email,
+                              'password' => $inputAdmin_Password,
+                              'profile_pic' => $inputCompany_Picture,
+                        ));  
+
+                      DB::table('admin_news_feeds')->insert([
+                          'user_id' => session('id'),
+                          'activity' => "Update Settings ",
+                          'date'=> $inputDate
+                    ]);
+
+              
+
+
+
+
+                  Session::flash('success', 'Upload successfully'); 
+                  return back();
+                }
+                else {
+                  // sending back with error message.
+                  Session::flash('error', 'uploaded file is not valid');
+                 return back();
+                }
+              }
+
+        }
+
+
+
+  }
 
 
 

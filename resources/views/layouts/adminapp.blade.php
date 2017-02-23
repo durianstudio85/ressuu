@@ -13,7 +13,8 @@
  <!-- Styles -->
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.13/datatables.min.css"/>
-    <link rel="stylesheet" type="text/css" href="/css/adminstyle.css">
+    <link rel="stylesheet" type="text/css" href="../css/adminstyle.css">
+    <link rel="stylesheet" type="text/css" href="../css/style.css">
     <link rel="stylesheet" type="text/css" href="/css/font-awesome.css">
     <link rel="shortcut icon" type="image/x-icon" href="../images/fav icon.png">
     {{-- <link href="{{ elixir('css/app.css') }}" rel="stylesheet"> --}}

@@ -20,17 +20,21 @@
 <div class="container wrap">
 <sidebar class="col-md-3 ">
 
-               <div class="row">
+              <div class="row">
                 <div class="user">
-                  <img src="../images/user.png">     
+                    <?php if(!empty($adminProfile->profile_pic) AND $adminProfile->profile_pic != " " ){ ?>
+                           <a href="#" data-toggle="modal" data-target="#profilepic" ><img class="img-reponsive profile-pic" src="../profilepic/<?php echo $adminProfile->profile_pic; ?>"></a> 
+                    <?php }else{ ?>
+                           <a href="#" data-toggle="modal" data-target="#profilepic" ><img class="img-responsive profile-pic" src="../profilepic/default_avatar.jpg"></a> 
+                    <?php } ?>    
                 </div>
                  <div class="name-panel">
                    <div class="name-panel">
                    <p class="name">
-                 	Hellow Admin
+                     <?php echo $adminProfile->name; ?>
                    </p>
                    <p class="subname">
-                  Administrator
+                   <?php echo $adminProfile->position; ?>
                     </p>
                  </div>
                  </div>
@@ -71,10 +75,14 @@
                       <div class="content-panel-status col-md-12">
                              
                             <div class="col-sm-2 div">
-                               <img src="../images/user.png">
+                                <?php if(!empty($adminProfile->profile_pic) AND $adminProfile->profile_pic != " " ){ ?>
+                                   <a href="#" data-toggle="modal" data-target="#profilepic" ><img class="img-reponsive profile-pic" src="../profilepic/<?php echo $adminProfile->profile_pic; ?>"></a> 
+                                <?php  }else{ ?>
+                                   <a href="#" data-toggle="modal" data-target="#profilepic" ><img class="img-responsive profile-pic" src="../profilepic/default_avatar.jpg"></a> 
+                                <?php } ?>
                             </div>
                             <div class="col-sm-10 div">
-                                  <h4>Hellow Admin</h4>
+                                 <h4><?php echo $adminProfile->name; ?></h4>
                                   <p>{{ $newsfeed->activity }} <a href="" data-toggle="modal" data-target="#newsfeed"><span>check it here.</span></a></p>
                                   <div><!--<a href="#">Link</a> | <a href="#">Comment</a>--></div>
                                  

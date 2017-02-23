@@ -21,15 +21,19 @@
 
                <div class="row">
                 <div class="user">
-                  <img src="../images/user.png">     
+                    <?php if(!empty($adminProfile->profile_pic) AND $adminProfile->profile_pic != " " ){ ?>
+                           <a href="#" data-toggle="modal" data-target="#profilepic" ><img class="img-reponsive profile-pic" src="../profilepic/<?php echo $adminProfile->profile_pic; ?>"></a> 
+                    <?php }else{ ?>
+                           <a href="#" data-toggle="modal" data-target="#profilepic" ><img class="img-responsive profile-pic" src="../profilepic/default_avatar.jpg"></a> 
+                    <?php } ?>    
                 </div>
                  <div class="name-panel">
                    <div class="name-panel">
                    <p class="name">
-                 	Hellow Admin
+                     <?php echo $adminProfile->name; ?>
                    </p>
                    <p class="subname">
-                  Administrator
+                   <?php echo $adminProfile->position; ?>
                     </p>
                  </div>
                  </div>
@@ -65,15 +69,22 @@
           
           <div class="col-xs-12  col-md-12 content-panel-header"><h3>Settings</h3></div>
 
+         <div class="col-xs-12 col-md-12 content-panel">
+                     <div class="col-xs-3 col-md-3">
+                        <p class="title">Picture</p>
+                     </div>
+                     <div class="col-xs-4 col-md-4">&nbsp;      
+                              <img  class="setting-admin-pic"  src="../profilepic/<?php echo $adminProfile->profile_pic; ?>">            
+                     </div>
+                     <div class="col-md-12 line"></div>                
+         </div>
 
          <div class="col-xs-12 col-md-12  content-panel">
                      <div class="col-xs-3 col-md-3">
                         <p class="title">Name</p>
                      </div>
                      <div class="col-xs-9 col-md-9">
-                  
-                               <p>Not Set</p>
-                   
+                                 <p><?php echo $adminProfile->name; ?></p>
                      </div>
                      <div class="col-md-12 line"></div>                
          </div>
@@ -83,20 +94,7 @@
                         <p class="title" >Email</p>
                      </div>
                      <div class="col-xs-9 col-md-9">
-                        <p>Not Set</p>            
-                     </div>
-                     <div class="col-md-12 line"></div>                
-         </div>
-
-         <div class="col-xs-12 col-md-12  content-panel">
-                     <div class="col-xs-3 col-md-3">
-                        <p class="title" >Username</p>
-                     </div>
-                     <div class="col-xs-9 col-md-9">
-                    
-                               <p>Not Set</p>
-       
-                  
+                        <p><?php echo $adminProfile->email; ?></p>            
                      </div>
                      <div class="col-md-12 line"></div>                
          </div>
@@ -106,11 +104,8 @@
                         <p class="title">Password</p>
                      </div>
                      <div class="col-xs-9 col-md-9">
-                   
-                  
-                            <p>Not Set</p>
-                           
-                                   
+                        <?php $password = str_repeat("*", strlen($adminProfile->password));  ?>
+                        <p><?php echo $password; ?></p>             
                      </div>
                      <div class="col-md-12 line"></div>                
          </div>        
@@ -120,12 +115,88 @@
 <section class="setting-foot">
              <div class="col-xs-12 col-md-12  content-panel">
                     <div class="content-profile">
-                        <center><button data-toggle="modal" data-target="#myModal">Update</button></center>
+                        <center><button data-toggle="modal" data-target="#editSettings">Update</button></center>
                     </div>
             </div>   
 </section>
 </content> 
 
+  <!-- Modal for editSettings -->
+                   <section class="upeducation_modal">
+
+                                                 <div class="modal fade" id="editSettings" role="dialog">
+
+                                                      <div class="modal-dialog">
+                                                      
+                                                        <!-- Modal content-->
+                                                        <div class="modal-content">
+
+                                                        <form method="POST" action="/settings/editSettings" class="theme1"  enctype="multipart/form-data">
+                                                            {{ csrf_field() }}  
+                                                                            
+                                                                            <div class="col-md-12 content-panel-header">
+                                                                               <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                                               <h3>Update Admin </h3>
+
+                                                                            </div>
+                                                                            <section>
+                                                                                       
+
+                                                                                 <div class="form-group form-group">
+
+                                                                                  <div class="col-md-offset-1 col-sm-10">
+                                                                                    <input class="form-control job_input" name="admin_name" type="text" value="<?php echo $adminProfile->name;?>">
+
+                                                                                  </div>
+                                                                                </div>
+
+                                                                                <div class="form-group form-group">
+                                                                                  <div class="col-md-offset-1 col-sm-10">
+                                                                                    <input class="form-control job_input" name="admin_email" type="text" value="<?php echo $adminProfile->email;?>">
+                                                                                  </div>
+                                                                                </div>
+
+                                                                                <div class="form-group form-group">
+                                                                                  <div class="col-md-offset-1 col-sm-10">
+                                                                                    <input class="form-control job_input" name="admin_password" type="password" value="<?php echo $adminProfile->password;?>">
+                                                                                  </div>
+                                                                                </div>
+
+
+
+                                                                                   <div class="form-group form-group">
+                                                                                    <div class="col-xs-12 col-md-offset-1 col-sm-10">
+                                                                                       <p>Picture</p>
+                                                                                      </div>
+                                                                                     <div class="col-xs-12 col-md-offset-1 col-sm-10">
+                                                                                        <input class="form-control jobfile" name="logo" type="file" placeholder="Logo">
+                                                                                        
+                                                                                      </div>
+                                                                                      
+                                                                                    </div>
+
+
+
+
+                                                                           </section>
+
+                                                                          <div class="modal-footer">
+                                                                               <button type="submit" class="btn btn-default">Update</button>  
+                                                                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button> 
+                                                                          </div>
+                                                                <input type="hidden" value="{{ csrf_token() }}" name="_token" >
+                                                                       
+                                                        </form>
+
+                                                        </div>
+                                                
+                                                      </div>
+
+                                                </div>
+
+                   </section>
+
+<!-- Modal for editSettings -->
                 
 </div>
 @endsection

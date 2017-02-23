@@ -186,7 +186,7 @@ class HomeController extends Controller
         $if_exist = DB::table('profiles')->where('user_id',$userId)->count();
         $if_exist_settings = DB::table('settings')->where('user_id',$userId)->count();  
         $userSettings = DB::table('settings')->where('user_id',$userId)->first(); 
-        $userJobs = DB::table('job')->get();   
+        $userJobs = DB::table('job')->orderBy('id', 'desc')->get();  
         $userProfile = DB::table('profiles')->where('user_id',$userId)->first();
         return view('jobs')
                 ->with("userProfile",$userProfile)

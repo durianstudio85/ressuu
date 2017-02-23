@@ -23,15 +23,19 @@
 
                <div class="row">
                 <div class="user">
-                  <img src="../images/user.png">     
+                    <?php if(!empty($adminProfile->profile_pic) AND $adminProfile->profile_pic != " " ){ ?>
+                           <a href="#" data-toggle="modal" data-target="#profilepic" ><img class="img-reponsive profile-pic" src="../profilepic/<?php echo $adminProfile->profile_pic; ?>"></a> 
+                    <?php }else{ ?>
+                           <a href="#" data-toggle="modal" data-target="#profilepic" ><img class="img-responsive profile-pic" src="../profilepic/default_avatar.jpg"></a> 
+                    <?php } ?>    
                 </div>
                  <div class="name-panel">
                    <div class="name-panel">
                    <p class="name">
-                 	Hellow Admin
+                     <?php echo $adminProfile->name; ?>
                    </p>
                    <p class="subname">
-                  Administrator
+                   <?php echo $adminProfile->position; ?>
                     </p>
                  </div>
                  </div>
