@@ -96,3 +96,24 @@ Route::post('/apply/upload', 'HomeController@uploadPicture');
 
 Route::get('auth/facebook', 'Auth\AuthController@redirectToProvider');
 Route::get('auth/facebook/callback', 'Auth\AuthController@handleProviderCallback');
+
+
+
+
+/*admin */
+Route::get('/admin', 'AdminController@index');
+Route::post('/admin/fetchadmin', 'AdminController@fetchadmin');
+Route::get('/admin/home', 'AdminController@adminHome');
+Route::get('/admin/logout', 'AdminController@logoutAdmin');
+
+
+Route::get('/admin/home', 'AdminController@adminHome');
+Route::get('/admin/users', 'AdminController@adminUsers');
+Route::get('/admin/ads', 'AdminController@adminAds');
+Route::get('/admin/jobs', 'AdminController@adminJobs');
+Route::get('/admin/settings', 'AdminController@adminSettings');
+
+
+Route::post('/jobs/addJobs', 'AdminController@addJobs');
+Route::post('/jobs/editJobs', 'AdminController@editJobs');
+Route::get('/jobs/deleteJobs/{id}', 'AdminController@deleteJobs');

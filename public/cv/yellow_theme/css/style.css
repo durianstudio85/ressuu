@@ -368,6 +368,7 @@
 		float:left;
 		font-size:15px;
 		color: #444;
+		margin-top: -1px;
 	}
 	.skills li .rat0, .skills li .rat1, .skills li .rat2, .skills li .rat3, .skills li .rat4, .skills li .rat5, .skills li .rat6, .skills li .rat7 {
 		width:90px;

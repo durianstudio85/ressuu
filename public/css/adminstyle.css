@@ -2453,6 +2453,19 @@ margin-left:100px;
 .mgtop10{
   margin-top:20px;
 }
+/*admin job area */
+.job_input{
+ margin: 15px 0px 6px 0px;
+border-width: 0px 0px 2px 0px;
+border-radius: 0px;
+padding-left: 20px;
+width: 100%;
+color: #5e6d81;
+font-size: 14px;
+}
+
+
+
 
 
 

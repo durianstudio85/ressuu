@@ -650,16 +650,20 @@ function myFunction() {
         <!-- /Container -->
 
 <!--END THEME 2  -->
-                <script>
-                    function myMap() {
-                    var mapProp= {
-                        center:new google.maps.LatLng(7.1911805,125.4552101),
-                        zoom:15,
-                    };
-                    var map=new google.maps.Map(document.getElementById("googleMap"),mapProp);
-                    }
+                 <script>
+                function initMap() {
+                var mapProp= {
+                    center:new google.maps.LatLng(51.508742,-0.120850),
+                    zoom:15,
+                };
+                var map=new google.maps.Map(document.getElementById("googleMap"),mapProp);
+                }
                 </script>
-                <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBu-916DdpKAjTmJNIgngS6HL_kDIKU0aU&callback=myMap"></script>
+              
+
+                <script
+                  src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDLSsi1F0p-McPmdLfygkyEusb9gYhgfNA&callback=initMap">
+                </script>
 
 
 
@@ -1248,15 +1252,21 @@ function myFunction() {
 
 <!--END THEME 2  -->
                 <script>
-                    function myMap() {
-                    var mapProp= {
-                        center:new google.maps.LatLng(7.1911805,125.4552101),
-                        zoom:15,
-                    };
-                    var map=new google.maps.Map(document.getElementById("googleMap"),mapProp);
-                    }
+                function initMap() {
+                var mapProp= {
+                    center:new google.maps.LatLng(51.508742,-0.120850),
+                    zoom:15,
+                };
+                var map=new google.maps.Map(document.getElementById("googleMap"),mapProp);
+                }
                 </script>
-                <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBu-916DdpKAjTmJNIgngS6HL_kDIKU0aU&callback=myMap"></script>
+              
+
+                <script
+                  src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDLSsi1F0p-McPmdLfygkyEusb9gYhgfNA&callback=initMap">
+                </script>
+
+
 
 
 
