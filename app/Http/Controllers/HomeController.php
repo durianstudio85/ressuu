@@ -48,7 +48,10 @@ class HomeController extends Controller
     $userFollow = DB::table('profiles')->orderByRaw("RAND()")->take(3)->get();
     $userFollow2 = DB::table('profiles')->orderByRaw("RAND()")->take(2)->get();        
     $userSettings = DB::table('settings')->where('user_id',$userId)->first(); 
-    
+     $userAds = DB::table('ads')->where([
+                     'area' => 'USERDASHBOARD',
+                     'status' => 'ACTIVE'
+                  ])->first(); 
     
     $if_exist_settings = DB::table('settings')->where('user_id',$userId)->count();            
         return view('home')
@@ -62,6 +65,7 @@ class HomeController extends Controller
                 ->with("userFollow",$userFollow)
                 ->with("userFollow2",$userFollow2)
                 ->with("FollowedUsers",$FollowedUsers)
+                ->with("userAds",$userAds)
        ;
     
       /* return view('home')
@@ -82,6 +86,12 @@ class HomeController extends Controller
     $userProfile = DB::table('profiles')->where('user_id',$userId)->first();
     $if_exist_settings = DB::table('settings')->where('user_id',$userId)->count();
      $userSettings = DB::table('settings')->where('user_id',$userId)->first(); 
+
+       $userAds = DB::table('ads')->where([
+                     'area' => 'USERPROFILE',
+                     'status' => 'ACTIVE'
+                  ])->first();    
+
           return view('profile')
                      ->with("userProfile",$userProfile)
                      ->with("name",$name)
@@ -89,6 +99,7 @@ class HomeController extends Controller
                      ->with("if_exist",$if_exist)
                      ->with("if_exist_settings",$if_exist_settings)
                      ->with("userSettings",$userSettings)
+                     ->with("userAds",$userAds)
           ;
                 
 
@@ -230,6 +241,11 @@ class HomeController extends Controller
          $create_cvlink = "https://ressuu.me/cv/".($cvlink);
          $token = random_string(40);
 
+           $userAds = DB::table('ads')->where([
+                     'area' => 'USERSETTINGS',
+                     'status' => 'ACTIVE'
+                  ])->first(); 
+
         return view('setting')
                 ->with("userProfile",$userProfile)
                 ->with("name",$name)
@@ -240,6 +256,7 @@ class HomeController extends Controller
                   ->with("create_cvlink",$create_cvlink)
                   ->with("cvlink",$cvlink)
                   ->with("token",$token)
+                  ->with("userAds",$userAds)
         ;
 
 

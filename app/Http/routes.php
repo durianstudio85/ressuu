@@ -117,3 +117,18 @@ Route::get('/admin/settings', 'AdminController@adminSettings');
 Route::post('/jobs/addJobs', 'AdminController@addJobs');
 Route::post('/jobs/editJobs', 'AdminController@editJobs');
 Route::get('/jobs/deleteJobs/{id}', 'AdminController@deleteJobs');
+
+
+Route::post('/settings/editSettings', 'AdminController@editSettings');
+
+Route::post('/ads/addAds/dashboard', 'AdminController@adsNewUserDashboard');
+Route::post('/ads/updateAds/dashboard', 'AdminController@adsUpdateUserDashboard');
+
+Route::post('/ads/addAds/profile', 'AdminController@adsNewUserProfile');
+Route::post('/ads/updateAds/profile', 'AdminController@adsUpdateUserProfile');
+
+Route::post('/ads/addAds/settings', 'AdminController@adsNewUserSettings');
+Route::post('/ads/updateAds/settings', 'AdminController@adsUpdateUserSettings');
+
+Route::post('/ads/addAds/adminAds', 'AdminController@adsNewAdmin');
+Route::post('/ads/updateAds/adminAds', 'AdminController@adsUpdateAdmin');

@@ -182,17 +182,23 @@
 
 </sidebar>
 <content class="col-xs-12 col-md-9 ppage">
-<a href="https://duriangraphics.com/"> 
-<section class="col-xs-12 col-md-12 content-header ads-bg">
-  
+<?php  if(empty($userAds)){ ?>
 
-                    <div class="col-xs-12 col-md-12 content-people-wrap ">
-                       
-                    
-                    </div>
+  <a href="#" target="_blank"> 
+    <section class="col-xs-12 col-md-12 content-header ads-bg" style="background:url('../ads/default-ads.png')">
+      <div class="col-xs-12 col-md-12 content-people-wrap "></div>
+    </section>
+  </a>
 
-</section>
-</a>
+<?php }else{ ?> 
+
+  <a href="<?php echo $userAds->link; ?>" target="_blank"> 
+    <section class="col-xs-12 col-md-12 content-header ads-bg" style="background:url('../ads/<?php echo $userAds->photo; ?>')">
+      <div class="col-xs-12 col-md-12 content-people-wrap "> </div>
+    </section>
+  </a>
+
+<?php } ?> 
 
        
                    

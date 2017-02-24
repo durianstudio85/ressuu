@@ -55,17 +55,23 @@
 </sidebar>
 
 <content class="col-md-9"> 
-<a href="https://duriangraphics.com/" target="_blank"> 
-<section class="col-xs-12 col-md-12 content-header ads-bg">
-  
+ <?php  if(empty($AdminDashboard_Ads)){ ?>
 
-                    <div class="col-xs-12 col-md-12 content-people-wrap ">
-                       
-                    
-                    </div>
+  <a href="#" target="_blank"> 
+    <section class="col-xs-12 col-md-12 content-header ads-bg" style="background:url('../ads/default-ads.png')">
+      <div class="col-xs-12 col-md-12 content-people-wrap "></div>
+    </section>
+  </a>
 
-</section>
-</a>
+<?php }else{ ?> 
+
+  <a href="<?php echo $AdminDashboard_Ads->link; ?>" target="_blank"> 
+    <section class="col-xs-12 col-md-12 content-header ads-bg" style="background:url('../ads/<?php echo $AdminDashboard_Ads->photo; ?>')">
+      <div class="col-xs-12 col-md-12 content-people-wrap "> </div>
+    </section>
+  </a>
+
+<?php } ?> 
 <section class="cph-wrapper">
   <div class="col-md-12 content-panel-header">
             
