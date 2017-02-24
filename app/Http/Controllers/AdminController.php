@@ -193,6 +193,22 @@ class AdminController extends Controller
 			          ]);
 
 
+                   $userList = DB::table('users')->orderBy('name', 'desc')->get();
+
+                  foreach ($userList as $users ) {
+                  
+                      DB::table('news_feeds')->insert([
+                      'user_id' => $users->id,
+                      'activity' => "New job opportunity for ".$inputCompany_Jobtitle,
+                      'date'=> $inputDate
+                     ]);
+
+                  }
+
+
+
+
+
 
 
                   Session::flash('success', 'Upload successfully'); 
