@@ -212,7 +212,7 @@
 
 <?php  if($value->category == "Job"){ ?><!-- if -->
 
-<?php  $jobInfo = DB::table('job')->where('job_id',$value->category_id)->first(); ?>    
+<?php  $jobInfo = DB::table('job')->where('id',$value->category_id)->first(); ?>    
   
 <div class="col-xs-12 col-md-12 content-panel-header">
             

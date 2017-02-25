@@ -225,7 +225,7 @@ class AdminController extends Controller
                      $inputDate = date('Y-m-d');
             
 
-                  DB::table('job')->insert([
+                  $getLastId = DB::table('job')->insertGetId([
                             'job_id' => "0",
                             'user_id' => "0",
                             'company_name' => $inputCompany_Name,
@@ -245,20 +245,22 @@ class AdminController extends Controller
                       'date'=> $inputDate
                  ]);
 
+                  
                   $userList = DB::table('users')->orderBy('name', 'desc')->get();
 
                   foreach ($userList as $users ) {
                   
+             
                       DB::table('dashboard_timeline')->insert([
                           'user_id' => $users->id,
                           'category' => "Job",
-                          'category_id' => $inputJob_id,
+                          'category_id' =>  $getLastId,
                           'activity' => "Add New Job about ".$inputCompany_Jobtitle,
                           'date'=> $inputDate
                      ]);
 
-
                   }
+
 
 
 
