@@ -249,11 +249,14 @@ class AdminController extends Controller
 
                   foreach ($userList as $users ) {
                   
-                      DB::table('news_feeds')->insert([
-                      'user_id' => $users->id,
-                      'activity' => "New job opportunity for ".$inputCompany_Jobtitle,
-                      'date'=> $inputDate
+                      DB::table('dashboard_timeline')->insert([
+                          'user_id' => $users->id,
+                          'category' => "Job",
+                          'category_id' => $inputJob_id,
+                          'activity' => "Add New Job about ".$inputCompany_Jobtitle,
+                          'date'=> $inputDate
                      ]);
+
 
                   }
 

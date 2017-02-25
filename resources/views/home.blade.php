@@ -205,13 +205,129 @@
 
 
 <section class="cph-wrapper">
-<?php if ($if_exist == 1) { ?>
+<?php if ($if_exist == 1) { ?><!-- if -->
 
-<?php   foreach ($userFeeds as $value) { ?>
+<?php  foreach ($timeline as $value) { ?><!-- foreach -->
 
-<?php $userConnReq = DB::select('select * from connection_requests where date = :date', ['date' => $value->date]); ?>
 
-  <div class="col-xs-12 col-md-12 content-panel-header">
+<?php  if($value->category == "Job"){ ?><!-- if -->
+
+<?php  $jobInfo = DB::table('job')->where('job_id',$value->category_id)->first(); ?>    
+  
+<div class="col-xs-12 col-md-12 content-panel-header">
+            
+            <div class="col-md-10" >
+                      <div class="content-panel-status col-xs-12 col-md-12">   
+                            <div class="col-sm-2 div">
+                                <img class="img-responsive profile-pic" src="joblogo/<?php echo $jobInfo->company_picture; ?>">
+                            </div>
+                            <div class="col-sm-10 div">
+                                  <h4><?php echo $jobInfo->company_name ?></h4>
+                                  <p><?php echo $value->activity; ?> <a href="" data-toggle="modal" data-target="#newsfeed_{{ $value->id }}"><span>check it here.</span></a></p>
+                                  <div><!--<a href="#">Link</a> | <a href="#">Comment</a>--></div>
+                            </div>       
+                      </div>
+            </div>
+             <div class="col-xs-12 col-md-2 content-panel-lc">      
+                              <p><?php
+                              
+                              if(!empty($value->date)){
+                               
+                                 $value_date = date("Y-m-d", strtotime( $value->date ) );
+                                 $from=date_create(date('Y-m-d'));
+                                 $to=date_create($value_date);
+                                 $diff=date_diff($to,$from);
+                                 $days_diff = $diff->format('%a');
+
+                                 if($days_diff == "0"){
+                                  echo "Just now";
+                                 }else{
+                                  echo $diff->format('%a Days Ago');
+                                 }
+
+
+                              }
+
+                               ?>
+                               </p>
+                                
+            </div>
+
+  </div>
+    
+  <!-- Modal for newsFeed -->
+          <!-- Modal for viewJobs -->
+                                      <section>
+
+                                                 <div class="modal fade" id="newsfeed_{{ $value->id }}" role="dialog">
+                                                  <div class="modal-dialog">
+                                                  
+                                                    <!-- Modal content-->
+                                                    <div class="modal-content">
+
+                                                    <form method="" action="jobs/addJob" class="theme1">
+                                                               <div class="modal-header col-md-12 content-panel-header">
+                                                                    <h3> {{ $jobInfo->company_job }}</h3>
+                                                               </div>
+                                                                        
+                                                               <div class="col-md-12  content-panel">
+                                                                    <div class="col-md-4">
+                                                                              <p>Company Name: </p>
+                                                                    </div>
+                                                                    <div class="col-md-7">
+                                                                              <p>{{ $jobInfo->company_name }}</p>
+                                                                    </div>
+                                                                          
+                                                               </div>      
+
+                                                               <div class="col-md-12  content-panel">
+                                                                    <div class="col-md-4">
+                                                                              <p>Company Address: </p>
+                                                                    </div>
+                                                                    <div class="col-md-7">
+                                                                              <p>{{ $jobInfo->company_address }}</p>
+                                                                    </div>
+                                                                     
+                                                               </div> 
+
+                                                               <div class="col-md-12  content-panel">
+                                                                    <div class="col-md-4">
+                                                                              <p>Company Details: </p>
+                                                                    </div>
+                                                                    <div class="col-md-7">
+                                                                              <p>{{ $jobInfo->company_details }}</p>
+                                                                    </div>
+                                                                                  
+                                                               </div>
+
+                                                               <div class="col-md-12  content-panel">
+                                                                    <div class="col-md-4">
+                                                                              <p>Salary Rate </p>
+                                                                    </div>  
+                                                                    <div class="col-md-7">
+                                                                              <p class="job_salary">{{ $jobInfo->company_rate }}</p>
+                                                                    </div>
+                                                                                  
+                                                               </div>
+
+                                                              <div class="modal-footer">
+                                                                   <button type="" class="btn btn-default" data-dismiss="modal">Close</button> 
+                                                              </div>
+                                                    </form>
+                                                    </div>
+                                            
+                                          </div>
+                                        </div>
+
+                                      </section>
+                  <!-- Modal for viewJobs -->
+ <!-- Modal for newsFeed -->         
+
+
+  
+<?php }else{ ?>
+
+ <div class="col-xs-12 col-md-12 content-panel-header">
             
             <div class="col-md-10" >
                       <div class="content-panel-status col-xs-12 col-md-12">   
@@ -230,7 +346,7 @@
                             </div>
                             <div class="col-sm-10 div">
                                   <h4><?php echo$userProfile->name; ?></h4>
-                                  <p><?php echo $value->activity; ?> <a href="" data-toggle="modal" data-target="#newsfeed_{{ $value->id }}"><span>check it here.</span></a></p>
+                                  <p><?php echo $value->activity; ?> <!--<a href="" data-toggle="modal" data-target="#newsfeed_{{ $value->id }}"><span>check it here.</span></a>--></p>
                                   <div><!--<a href="#">Link</a> | <a href="#">Comment</a>--></div>
                             </div>       
                       </div>
@@ -262,7 +378,7 @@
             </div>
 
   </div>
-            <!-- Modal for newsFeed -->
+<!-- Modal for newsFeed -->
                                       <section>
 
                                                  <div class="modal fade" id="newsfeed_{{ $value->id }}" role="dialog">
@@ -283,7 +399,7 @@
                                                               </div>
 
                                                               <div class="modal-footer">
-                                                                   <button type="submit" class="btn btn-default">Delete</button>   
+                                                                   <button type="submit"  data-dismiss="modal">Close</button>   
                                                               </div>
                                                     </form>
                                                     </div>
@@ -292,9 +408,18 @@
                                         </div>
 
                                       </section>
-            <!-- Modal for newsFeed -->
-<?php } } ?>
+<!-- Modal for newsFeed -->
+
+
+
+<?php } ?><!-- if -->
  
+<?php } ?><!-- foreach -->
+
+<?php } ?><!-- if -->
+ 
+
+
 
 <div class="col-xs-12 col-md-12 content-panel-header">
             

@@ -48,10 +48,14 @@ class HomeController extends Controller
     $userFollow = DB::table('profiles')->orderByRaw("RAND()")->take(3)->get();
     $userFollow2 = DB::table('profiles')->orderByRaw("RAND()")->take(2)->get();        
     $userSettings = DB::table('settings')->where('user_id',$userId)->first(); 
-     $userAds = DB::table('ads')->where([
+    $userAds = DB::table('ads')->where([
                      'area' => 'USERDASHBOARD',
                      'status' => 'ACTIVE'
                   ])->first(); 
+
+     $timeline = DB::table('dashboard_timeline')->where('user_id', $userId)
+                ->orderBy('id', 'desc')
+                ->get();
     
     $if_exist_settings = DB::table('settings')->where('user_id',$userId)->count();            
         return view('home')
@@ -66,6 +70,7 @@ class HomeController extends Controller
                 ->with("userFollow2",$userFollow2)
                 ->with("FollowedUsers",$FollowedUsers)
                 ->with("userAds",$userAds)
+                ->with("timeline",$timeline)
        ;
     
       /* return view('home')
@@ -298,11 +303,14 @@ class HomeController extends Controller
                 'google' => $inputGoogle
                 ));
             
-        DB::table('news_feeds')->insert([
-                'user_id' => $userId,
-                 'activity' => "Update Profile",
-                 'date'=> $inputDate
-          ]);
+         DB::table('dashboard_timeline')->insert([
+                   'user_id' => $userId,
+                   'category' => "Profile",
+                   'category_id' =>$userId,
+                   'activity' => "Update Profile ",
+                   'date'=> $inputDate
+        ]);
+
 
 
 
@@ -362,7 +370,7 @@ class HomeController extends Controller
          $inputDescription = Input::get('description');
          $inputDate = date('Y-m-d');
 
-          DB::table('work_experience')->insert([
+         $getLastID = DB::table('work_experience')->insertGetId([
                  'user_id' => $userId,
                  'company_name' => $inputCompanyname,
                  'job_title'=> $inputJobtitle,
@@ -371,11 +379,13 @@ class HomeController extends Controller
                  'description' => $inputDescription
           ]);
 
-           DB::table('news_feeds')->insert([
-                 'user_id' => $userId,
-                 'activity' => "Add New Experience as ".$inputJobtitle. " in ".$inputCompanyname,
-                 'date'=> $inputDate
-          ]);
+           DB::table('dashboard_timeline')->insert([
+                       'user_id' => $userId,
+                       'category' => "Experience",
+                       'category_id' =>$getLastID,
+                       'activity' => "Add New Experience as ".$inputJobtitle. " in ".$inputCompanyname,
+                       'date'=> $inputDate
+            ]);
 
            return back();
 
@@ -391,7 +401,7 @@ class HomeController extends Controller
          $inputAward = Input::get('award');
           $inputDate = date('Y-m-d');
 
-          DB::table('education')->insert([
+          $getLastID = DB::table('education')->insertGetId([
                  'user_id' => $userId,
                  'school' => $inputSchool,
                  'course'=> $inputCourse,
@@ -400,11 +410,14 @@ class HomeController extends Controller
                  'awards_rec' => $inputAward
           ]);
 
-          DB::table('news_feeds')->insert([
-                 'user_id' => $userId,
-                 'activity' => "Add New Educational Background as ".$inputCourse. " in ".$inputSchool,
-                  'date'=> $inputDate
-          ]);
+
+           DB::table('dashboard_timeline')->insert([
+                       'user_id' => $userId,
+                       'category' => "Education",
+                       'category_id' =>$getLastID,
+                       'activity' => "Add New Educational Background as ".$inputCourse. " in ".$inputSchool,
+                       'date'=> $inputDate
+            ]);
 
            return back();
 
@@ -418,7 +431,7 @@ class HomeController extends Controller
          $inputDescription = Input::get('description');
          $inputDate = date('Y-m-d');
        
-          DB::table('skills')->insert([
+           $getLastID = DB::table('skills')->insertGetId([
                  'skill_cat_id' => 0,
                  'user_id' => $userId,
                  'skillname'=> $inputSkills,
@@ -427,11 +440,14 @@ class HomeController extends Controller
                 
           ]);
 
-          DB::table('news_feeds')->insert([
-                 'user_id' => $userId,
-                 'activity' => "Add New Skills about ". $inputSkills,
-                 'date'=> $inputDate
-          ]);
+
+           DB::table('dashboard_timeline')->insert([
+                       'user_id' => $userId,
+                       'category' => "Skills",
+                       'category_id' =>$getLastID,
+                       'activity' => "Add New Skills about ". $inputSkills,
+                       'date'=> $inputDate
+            ]);
 
            return back();
 
@@ -445,7 +461,7 @@ class HomeController extends Controller
          $inputReceive = Input::get('receive');
          $inputDate = date('Y-m-d');
        
-          DB::table('certification')->insert([
+          $getLastID = DB::table('certification')->insertGetId([
                  'user_id' => $userId,
                  'certificate_title' => $inputTitle,
                  'certificate_company'=> $inputCompany,
@@ -454,11 +470,15 @@ class HomeController extends Controller
                 
           ]);
 
-          DB::table('news_feeds')->insert([
-                 'user_id' => $userId,
-                 'activity' => "Add Certification about ". $inputTitle,
-                 'date'=> $inputDate
-          ]);
+   
+            
+            DB::table('dashboard_timeline')->insert([
+                       'user_id' => $userId,
+                       'category' => "Certification",
+                       'category_id' => $getLastID,
+                       'activity' => "Add Certification about ". $inputTitle,
+                       'date'=> $inputDate
+            ]);
             
            return back();
 
@@ -493,7 +513,7 @@ class HomeController extends Controller
                  $portfolio_Category = DB::table('portfolio_cat')->where('id',$inputCategoryId)->first();
                  $inputDate = date('Y-m-d');
 
-                  DB::table('portfolio')->insert([
+                   $getLastID = DB::table('portfolio')->insertGetId([
                          'user_id' => $userId,
                          'port_title'=> $inputPortTitle,
                          'port_excerpt' => $inputDescription,
@@ -502,11 +522,15 @@ class HomeController extends Controller
                         
                   ]);
 
-                   DB::table('news_feeds')->insert([
-                         'user_id' => $userId,
-                         'activity' => "Add New Portfolio in ". $portfolio_Category->title,
-                         'date'=> $inputDate
-                  ]);
+              
+
+                   DB::table('dashboard_timeline')->insert([
+                       'user_id' => $userId,
+                       'category' => "Portfolio",
+                       'category_id' => $getLastID,
+                        'activity' => "Add New Portfolio in ". $portfolio_Category->title,
+                       'date'=> $inputDate
+                    ]); 
 
               Session::flash('success', 'Upload successfully'); 
               return back();    
@@ -621,11 +645,13 @@ class HomeController extends Controller
                  'description' => $inputDescription
                 ));  
 
-          DB::table('news_feeds')->insert([
-                             'user_id' => $userId,
-                             'activity' => "Updating Experience in ". $inputCompanyname,
-                             'date'=> $inputDate
-         ]);          
+        DB::table('dashboard_timeline')->insert([
+                       'user_id' => $userId,
+                       'category' => "Update Experience",
+                       'category_id' =>$expId,
+                       'activity' => "Updating Experience in ". $inputCompanyname,
+                       'date'=> $inputDate
+        ]);           
 
         return back();
 
@@ -655,11 +681,13 @@ class HomeController extends Controller
                  'awards_rec' => $inputAward
                 ));    
 
-         DB::table('news_feeds')->insert([
-                             'user_id' => $userId,
-                             'activity' => "Updating Education in ". $inputSchool,
-                             'date'=> $inputDate
-         ]);   
+         DB::table('dashboard_timeline')->insert([
+                       'user_id' => $userId,
+                       'category' => "Update Education",
+                       'category_id' =>$expId,
+                       'activity' => "Updating Education in ". $inputSchool,
+                       'date'=> $inputDate
+        ]);    
 
 
         return back();
@@ -685,11 +713,13 @@ class HomeController extends Controller
                  'description'=>$inputDescription
                 ));  
 
-          DB::table('news_feeds')->insert([
-                 'user_id' => $userId,
-                 'activity' => "Update Skills in ". $inputSkills,
-                 'date'=> $inputDate
-          ]);
+          DB::table('dashboard_timeline')->insert([
+                       'user_id' => $userId,
+                       'category' => "Update Skills",
+                       'category_id' =>$skiId,
+                       'activity' => "Update Skills in ". $inputSkills,
+                       'date'=> $inputDate
+        ]); 
 
 
            return back();
@@ -726,11 +756,13 @@ class HomeController extends Controller
                 
           ]);
 
-          DB::table('news_feeds')->insert([
-                'user_id' => $userId,
-                'activity' => "Update Settings ",
-                 'date'=> $inputDate
-          ]);
+        DB::table('dashboard_timeline')->insert([
+                       'user_id' => $userId,
+                       'category' => "Update Settings",
+                       'category_id' =>$userId,
+                       'activity' => "Update Settings",
+                       'date'=> $inputDate
+        ]);
 
          }else{
 
@@ -746,11 +778,13 @@ class HomeController extends Controller
                  ]);     
          }       
 
-            DB::table('news_feeds')->insert([
-                 'user_id' => $userId,
-                 'activity' => "Update Settings ",
-                 'date'=> $inputDate
-         ]);
+          DB::table('dashboard_timeline')->insert([
+                       'user_id' => $userId,
+                       'category' => "Update Settings",
+                       'category_id' =>$userId,
+                       'activity' => "Update Settings",
+                       'date'=> $inputDate
+        ]);
 
            return back();
 
@@ -774,11 +808,13 @@ class HomeController extends Controller
         
         $experience = DB::table('work_experience')->where('id',$expId)->first(); 
 
-        DB::table('news_feeds')->insert([
-                 'user_id' => $userId,
-                 'activity' => "Delete Experience in ".$experience->company_name,
-                 'date'=> $inputDate
-       ]);        
+        DB::table('dashboard_timeline')->insert([
+                       'user_id' => $userId,
+                       'category' => "Delete Experience",
+                       'category_id' =>rand(11111,99999),
+                       'activity' => "Delete Experience in ".$experience->company_name,
+                       'date'=> $inputDate
+        ]);       
 
 
         DB::table('work_experience')
@@ -804,11 +840,13 @@ class HomeController extends Controller
 
 
 
-         DB::table('news_feeds')->insert([
-                 'user_id' => $userId,
-                 'activity' => "Delete Education in ".$education->school,
-                'date'=> $inputDate
-         ]);          
+         DB::table('dashboard_timeline')->insert([
+                       'user_id' => $userId,
+                       'category' => "Delete Education",
+                       'category_id' =>rand(11111,99999),
+                       'activity' => "Delete Education in ".$education->school,
+                       'date'=> $inputDate
+        ]);          
         
 
         return back();
@@ -830,11 +868,14 @@ class HomeController extends Controller
                 ->where('id',$skiId)->delete();
 
 
-        DB::table('news_feeds')->insert([
-                 'user_id' => $userId,
-                 'activity' => "Delete Skills ".$skills->skillname,
-                'date'=> $inputDate
-         ]);                 
+       
+        DB::table('dashboard_timeline')->insert([
+                       'user_id' => $userId,
+                       'category' => "Delete Skills",
+                       'category_id' =>rand(11111,99999),
+                       'activity' => "Delete Skills ".$skills->skillname,
+                       'date'=> $inputDate
+        ]);               
 
 
         return back();
