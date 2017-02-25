@@ -245,7 +245,8 @@ class AdminController extends Controller
                       'date'=> $inputDate
                  ]);
 
-                  
+                 
+
                   $userList = DB::table('users')->orderBy('name', 'desc')->get();
 
                   foreach ($userList as $users ) {
@@ -403,6 +404,19 @@ public function deleteJobs($id){
                  'date'=> $inputDate
          ]);                 
 
+        // $userList = DB::table('users')->orderBy('id', 'desc')->get();
+
+        //          foreach ($userList as $users ) {
+                  
+        //           DB::table('dashboard_timeline')->where([
+        //              'category_id' => $job_id,
+        //           ])->delete();  
+
+        //         }
+
+
+        DB::table('dashboard_timeline')->delete();
+        
 
         return back();
 
