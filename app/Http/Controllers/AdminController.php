@@ -404,18 +404,18 @@ public function deleteJobs($id){
                  'date'=> $inputDate
          ]);                 
 
-        // $userList = DB::table('users')->orderBy('id', 'desc')->get();
+               $userList = DB::table('users')->orderBy('id', 'desc')->get();
 
-        //          foreach ($userList as $users ) {
+                 foreach ($userList as $users ) {
                   
-        //           DB::table('dashboard_timeline')->where([
-        //              'category_id' => $job_id,
-        //           ])->delete();  
+                 DB::table('dashboard_timeline')->where([
+                     'category_id' => $job_id,
+                  ])->delete();  
 
-        //         }
+                 }
 
 
-        DB::table('dashboard_timeline')->delete();
+       // DB::table('dashboard_timeline')->delete();
         
 
         return back();
