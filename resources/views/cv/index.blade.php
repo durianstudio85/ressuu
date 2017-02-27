@@ -401,7 +401,7 @@ function myFunction() {
     <script type="text/javascript" src="../cv/yellow_theme/js/jquery.adipoli.min.js"></script>
     <script type="text/javascript" src="../cv/yellow_theme/js/jquery.fancybox-1.3.4.pack.js"></script>
     <script type="text/javascript" src="../cv/yellow_theme/js/jquery.isotope.min.js"></script>
-    <script type="text/javascript" src="https://maps.google.com/maps/api/js?sensor=false"></script>
+    <!--<script type="text/javascript" src="https://maps.google.com/maps/api/js?sensor=false"></script>-->
     <script type="text/javascript" src="../cv/yellow_theme/js/jquery.gmap.min.js"></script>
     <script type="text/javascript" src="../cv/yellow_theme/js/custom.js"></script>
 
@@ -600,7 +600,15 @@ function myFunction() {
                 
                 <!-- Contact -->
                 <div id="contact">
-                    <div id="googleMap" style="width:100%;height:400px;"></div>
+                    <div id="mapouter">
+                          <div id="gmap_canvas">
+                        <?php $location = "https://maps.google.com/maps?q=".$profiles->address." , &t=&z=14&ie=UTF8&iwloc=&output=embed"; ?>
+                            <iframe width="860" height="400" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="<?php echo $location; ?>" >
+                           </iframe>
+                         </div>
+                         <style>#gmap_canvas{height:400px;width:860px;}#mapouter{overflow:hidden;height:400px;width:860px;}</style>
+                      </div>
+                      <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDj_FG4Hogq9S4wXhl2onS5vPpTQHJKO6g&callback=initMap"></script>   
                     <!-- Contact Info -->
                     <div class="contact-info">
                     <h3 class="main-heading"><span>Contact info</span></h3>
@@ -650,20 +658,7 @@ function myFunction() {
         <!-- /Container -->
 
 <!--END THEME 2  -->
-                 <script>
-                function initMap() {
-                var mapProp= {
-                    center:new google.maps.LatLng(51.508742,-0.120850),
-                    zoom:15,
-                };
-                var map=new google.maps.Map(document.getElementById("googleMap"),mapProp);
-                }
-                </script>
-              
-
-                <script
-                  src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDLSsi1F0p-McPmdLfygkyEusb9gYhgfNA&callback=initMap">
-                </script>
+                
 
 
 
@@ -1002,7 +997,6 @@ function myFunction() {
     <script type="text/javascript" src="../cv/yellow_theme/js/jquery.adipoli.min.js"></script>
     <script type="text/javascript" src="../cv/yellow_theme/js/jquery.fancybox-1.3.4.pack.js"></script>
     <script type="text/javascript" src="../cv/yellow_theme/js/jquery.isotope.min.js"></script>
-    <script type="text/javascript" src="https://maps.google.com/maps/api/js?sensor=false"></script>
     <script type="text/javascript" src="../cv/yellow_theme/js/jquery.gmap.min.js"></script>
     <script type="text/javascript" src="../cv/yellow_theme/js/custom.js"></script>
 
@@ -1201,7 +1195,15 @@ function myFunction() {
                 
                 <!-- Contact -->
                 <div id="contact">
-                    <div id="googleMap" style="width:100%;height:400px;"></div>
+                    <div id="mapouter">
+                          <div id="gmap_canvas">
+                        <?php $location = "https://maps.google.com/maps?q=".$profiles->address." , &t=&z=14&ie=UTF8&iwloc=&output=embed"; ?>
+                            <iframe width="860" height="400" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="<?php echo $location; ?>" >
+                           </iframe>
+                         </div>
+                         <style>#gmap_canvas{height:400px;width:860px;}#mapouter{overflow:hidden;height:400px;width:860px;}</style>
+                      </div>
+                      <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDj_FG4Hogq9S4wXhl2onS5vPpTQHJKO6g&callback=initMap"></script>   
                     <!-- Contact Info -->
                     <div class="contact-info">
                     <h3 class="main-heading"><span>Contact info</span></h3>
@@ -1251,20 +1253,7 @@ function myFunction() {
         <!-- /Container -->
 
 <!--END THEME 2  -->
-                <script>
-                function initMap() {
-                var mapProp= {
-                    center:new google.maps.LatLng(51.508742,-0.120850),
-                    zoom:15,
-                };
-                var map=new google.maps.Map(document.getElementById("googleMap"),mapProp);
-                }
-                </script>
-              
-
-                <script
-                  src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDLSsi1F0p-McPmdLfygkyEusb9gYhgfNA&callback=initMap">
-                </script>
+               
 
 
 
