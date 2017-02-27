@@ -29,7 +29,7 @@ jQuery(document).ready(function(){
 	  updateHash		: false,
 	  transitionIn		:'slideDown',
 	  transitionOut		:'slideUp',
-	  animationSpeed	:600,
+	  animationSpeed	: 600,
 	  tabs				:".tmenu",
 	  tabActiveClass	:'active',
 	});
@@ -57,21 +57,21 @@ jQuery(document).ready(function(){
 		animationOptions	: {
 		duration			: 750,
 		easing				: 'linear'
-	   }
-	});	
+      }
+    });	
 	
 	// Isotope Filter 
 	$filter.find('a').click(function(){
 	  var selector = $(this).attr('data-filter');
 		$container.isotope({ 
-		filter				: selector,
-		animationOptions	: {
-		duration			: 750,
-		easing				: 'linear',
-		queue				: false,
-	   }
-	  });
-	  return false;
+ 	filter				: selector,
+	animationOptions	: {
+	duration			: 750,
+	easing				: 'linear',
+	queue				: false,
+	  }
+    });
+	 return false;
 	});	
 	
 	// Portfolio image animation 
@@ -92,6 +92,8 @@ jQuery(document).ready(function(){
 	/* ---------------------------------------------------------------------- */
 	/*	Fancybox 
 	/* ---------------------------------------------------------------------- */
+
+
 	$container.find('.folio').fancybox({
 		'transitionIn'		:	'elastic',
 		'transitionOut'		:	'elastic',
@@ -100,55 +102,17 @@ jQuery(document).ready(function(){
 		'overlayOpacity'	:   0.6
 	});
 	
+
+
 	/* ---------------------------------------------------------------------- */
 	/*	Contact Form
 	/* ---------------------------------------------------------------------- */
 	
-	// Needed variables
-	var $contactform 	= $('#contactform'),
-		$success		= 'Your message has been sent. Thank you!';
-		
-	$contactform.submit(function(){
-		$.ajax({
-		   type: "POST",
-		   url: "php/contact.php",
-		   data: $(this).serialize(),
-		   success: function(msg)
-		   {
-				if(msg == 'SEND'){
-					response = '<div class="success">'+ $success +'</div>';
-				}
-				else{
-					response = '<div class="error">'+ msg +'</div>';
-				}
-				// Hide any previous response text
-				$(".error,.success").remove();
-				// Show response message
-				$contactform.prepend(response);
-			}
-		 });
-		return false;
-	});	
+	
 	/* ---------------------------------------------------------------------- */
 	/*	Google Maps
 	/* ---------------------------------------------------------------------- */
 	
-	// Needed variables
-	var $map 				= $('#map'),
-		$tabContactClass 	= ('tab-contact'),
-		$address 			= '<?php echo $ontact->address; ?>';
-	
-	$content.bind('easytabs:after', function(evt,tab,panel) {
-		if ( tab.hasClass($tabContactClass) ) {
-			$map.gMap({
-				address: $address,
-				zoom: 16,
-				markers: [
-					{ 'address' : $address }
-				]
-			});
-		}
-  	});
 	
 
 });	

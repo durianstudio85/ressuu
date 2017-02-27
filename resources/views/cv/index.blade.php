@@ -986,7 +986,7 @@ function myFunction() {
 
     <title>Ressu.me | <?php echo $profiles->name; ?></title>
 
-    <link rel="stylesheet" type="text/css" href="../cv/yellow_theme/css/style.css"/>
+     <link rel="stylesheet" type="text/css" href="../cv/yellow_theme/css/style.css"/>
     <link rel="stylesheet" type="text/css" href="../cv/yellow_theme/css/fancybox.css"/>
     <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Open+Sans:400,600,300,800,700,400italic|PT+Serif:400,400italic"/>
     <link rel="shortcut icon" type="image/x-icon" href="/../../images/fav icon.png"> 
@@ -997,6 +997,7 @@ function myFunction() {
     <script type="text/javascript" src="../cv/yellow_theme/js/jquery.adipoli.min.js"></script>
     <script type="text/javascript" src="../cv/yellow_theme/js/jquery.fancybox-1.3.4.pack.js"></script>
     <script type="text/javascript" src="../cv/yellow_theme/js/jquery.isotope.min.js"></script>
+    <!--<script type="text/javascript" src="https://maps.google.com/maps/api/js?sensor=false"></script>-->
     <script type="text/javascript" src="../cv/yellow_theme/js/jquery.gmap.min.js"></script>
     <script type="text/javascript" src="../cv/yellow_theme/js/custom.js"></script>
 
