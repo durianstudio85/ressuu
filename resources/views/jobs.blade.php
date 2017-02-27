@@ -308,16 +308,6 @@
 
                                                                <div class="col-md-12  content-panel">
                                                                     <div class="col-md-4">
-                                                                              <p>Company Details: </p>
-                                                                    </div>
-                                                                    <div class="col-md-7">
-                                                                              <p>{{ $jobs->company_details }}</p>
-                                                                    </div>
-                                                                                  
-                                                               </div>
-
-                                                               <div class="col-md-12  content-panel">
-                                                                    <div class="col-md-4">
                                                                               <p>Salary Rate </p>
                                                                     </div>  
                                                                     <div class="col-md-7">
@@ -325,6 +315,27 @@
                                                                     </div>
                                                                                   
                                                                </div>
+
+                                                               <div class="col-md-12  content-panel">
+                                                                    <div class="col-md-12">
+                                                                              <p>Company Details: </p>
+                                                                    </div>
+                                                                    <div class="col-md-12">
+                                                                              <p>{{ $jobs->company_details }}</p>
+                                                                    </div>
+                                                                                  
+                                                               </div>
+
+                                                               <div class="col-md-12  content-panel">
+                                                                    <div class="col-md-12">
+                                                                              <p>Job Description: </p>
+                                                                    </div>
+                                                                    <div class="col-md-12">
+                                                                              <p>{!! nl2br( $jobs->company_status) !!}</p>
+                                                                    </div>
+                                                                                  
+                                                               </div>
+
 
                                                               <div class="modal-footer">
                                                                    <button type="submit" class="btn btn-default">Confirm</button> 

@@ -292,16 +292,6 @@
 
                                                                <div class="col-md-12  content-panel">
                                                                     <div class="col-md-4">
-                                                                              <p>Company Details: </p>
-                                                                    </div>
-                                                                    <div class="col-md-7">
-                                                                              <p>{{ $jobInfo->company_details }}</p>
-                                                                    </div>
-                                                                                  
-                                                               </div>
-
-                                                               <div class="col-md-12  content-panel">
-                                                                    <div class="col-md-4">
                                                                               <p>Salary Rate </p>
                                                                     </div>  
                                                                     <div class="col-md-7">
@@ -311,10 +301,10 @@
                                                                </div>
 
                                                                 <div class="col-md-12  content-panel">
-                                                                    <div class="col-md-4">
+                                                                    <div class="col-md-12">
                                                                               <p>Company Details: </p>
                                                                     </div>
-                                                                    <div class="col-md-7">
+                                                                    <div class="col-md-12">
                                                                               <p>{{ $jobInfo->company_details }}</p>
                                                                     </div>
                                                                                   
