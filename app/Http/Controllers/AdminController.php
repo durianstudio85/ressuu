@@ -221,7 +221,7 @@ class AdminController extends Controller
                      $inputCompany_Picture  =  $fileName;
                      $inputCompany_Details  =  Input::get('company_details');
                      $inputCompany_Rate  =  Input::get('company_rate');
-                     $inputCompany_Status = "PENDING";
+                     $inputJob_Description = Input::get('job_description');
                      $inputDate = date('Y-m-d');
             
 
@@ -234,7 +234,7 @@ class AdminController extends Controller
                             'company_picture' => $inputCompany_Picture,
                             'company_details' => $inputCompany_Details,
                             'company_rate' => $inputCompany_Rate,
-                            'company_status' => $inputCompany_Status,
+                            'company_status' => $inputJob_Description,
                             'date'=> $inputDate
                     ]);
 
@@ -292,6 +292,7 @@ class AdminController extends Controller
              $inputCompany_Jobtitle  =  Input::get('company_jobtitle');
              $inputCompany_Details  =  Input::get('company_details');
              $inputCompany_Rate  =  Input::get('company_rate');
+              $inputJob_Description = Input::get('job_description');
             $inputDate = date('Y-m-d');
 
 
@@ -304,6 +305,7 @@ class AdminController extends Controller
                             'company_job' => $inputCompany_Jobtitle,
                             'company_details' => $inputCompany_Details,
                             'company_rate' => $inputCompany_Rate,
+                            'company_status' => $inputJob_Description,
                       ));  
 
                   DB::table('admin_news_feeds')->insert([
@@ -343,6 +345,7 @@ class AdminController extends Controller
                      $inputCompany_Picture  =  $fileName;
                      $inputCompany_Details  =  Input::get('company_details');
                      $inputCompany_Rate  =  Input::get('company_rate');
+                     $inputJob_Description = Input::get('job_description');
                      $inputDate = date('Y-m-d');
 
 
@@ -356,6 +359,7 @@ class AdminController extends Controller
                             'company_picture' => $inputCompany_Picture,
                             'company_details' => $inputCompany_Details,
                             'company_rate' => $inputCompany_Rate,
+                             'company_status' => $inputJob_Description,
                       ));  
 
                   DB::table('admin_news_feeds')->insert([

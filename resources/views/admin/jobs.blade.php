@@ -137,20 +137,30 @@
 
                                                                <div class="col-md-12  content-panel">
                                                                     <div class="col-md-4">
-                                                                              <p>Company Details: </p>
-                                                                    </div>
+                                                                              <p>Salary Rate </p>
+                                                                    </div>  
                                                                     <div class="col-md-7">
+                                                                              <p class="job_salary">{{ $jobs->company_rate }}</p>
+                                                                    </div>
+                                                                                  
+                                                               </div>
+
+                                                                <div class="col-md-12  content-panel">
+                                                                    <div class="col-md-12">
+                                                                              <p>About Company:  </p>
+                                                                    </div>
+                                                                    <div class="col-md-12">
                                                                               <p>{{ $jobs->company_details }}</p>
                                                                     </div>
                                                                                   
                                                                </div>
 
                                                                <div class="col-md-12  content-panel">
-                                                                    <div class="col-md-4">
-                                                                              <p>Salary Rate </p>
-                                                                    </div>  
-                                                                    <div class="col-md-7">
-                                                                              <p class="job_salary">{{ $jobs->company_rate }}</p>
+                                                                    <div class="col-md-12">
+                                                                              <p>Job Description</p>
+                                                                    </div>
+                                                                    <div class="col-md-12">
+                                                                              <p>{!! nl2br( $jobs->company_status) !!}</p>
                                                                     </div>
                                                                                   
                                                                </div>
@@ -215,13 +225,21 @@
                                                                                   </div>
                                                                                 </div>
 
-
+                                                                            
                                                                                 <div class="form-group form-group">
                                                                                   <div class="col-md-offset-1 col-md-10">
                                                                                     <textarea class="form-control job_input" name="company_details" rows="5" cols="10">{{ $jobs->company_details }}</textarea>
                                                                                   </div>
                                                                                  
                                                                                 </div>
+
+                                                                                <div class="form-group form-group">
+                                                                                  <div class="col-md-offset-1 col-md-10">
+                                                                                    <textarea  class="form-control job_input"  rows="5" cols="45" name="job_description">{{ $jobs->company_status }}</textarea>  
+                                                                                  </div>
+                                                                                 
+                                                                                </div>
+
 
                                                                                    <div class="form-group form-group">
                                                                                     <div class="col-xs-12 col-md-offset-1 col-sm-10">
@@ -367,12 +385,20 @@
 
                                           <div class="form-group form-group">
 
-                                           <div class="col-xs-12 col-md-offset-1 col-sm-10">
-        
-                                              <textarea  class="form-control"  rows="5" cols="45" name="company_details">Details</textarea>  
+                                            <div class="col-xs-12 col-md-offset-1 col-sm-10">
+                                              <textarea  class="form-control"  rows="5" cols="45" name="company_details">About Company</textarea>  
                                             </div>
                                             
                                           </div>
+
+                                          <div class="form-group form-group">
+
+                                            <div class="col-xs-12 col-md-offset-1 col-sm-10">
+                                              <textarea  class="form-control"  rows="5" cols="45" name="job_description">Job Description</textarea>  
+                                            </div>
+                                            
+                                          </div>
+
 
                                            <div class="form-group form-group">
                                           

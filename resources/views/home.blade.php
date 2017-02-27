@@ -310,6 +310,27 @@
                                                                                   
                                                                </div>
 
+                                                                <div class="col-md-12  content-panel">
+                                                                    <div class="col-md-4">
+                                                                              <p>Company Details: </p>
+                                                                    </div>
+                                                                    <div class="col-md-7">
+                                                                              <p>{{ $jobInfo->company_details }}</p>
+                                                                    </div>
+                                                                                  
+                                                               </div>
+
+
+                                                               <div class="col-md-12  content-panel">
+                                                                    <div class="col-md-12">
+                                                                              <p>Job Description: </p>
+                                                                    </div>
+                                                                    <div class="col-md-12">
+                                                                              <p>{!! nl2br( $jobInfo->company_status) !!}</p>
+                                                                    </div>
+                                                                                  
+                                                               </div>
+
                                                               <div class="modal-footer">
                                                                    <button type="" class="btn btn-default" data-dismiss="modal">Close</button> 
                                                               </div>
