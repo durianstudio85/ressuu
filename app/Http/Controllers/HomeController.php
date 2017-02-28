@@ -58,7 +58,7 @@ class HomeController extends Controller
                 ->get();
     
     $if_exist_settings = DB::table('settings')->where('user_id',$userId)->count(); 
-   
+    $count_job = DB::table('job')->count(); 
 
         return view('home')
                 ->with("userProfile",$userProfile)
@@ -73,6 +73,7 @@ class HomeController extends Controller
                 ->with("FollowedUsers",$FollowedUsers)
                 ->with("userAds",$userAds)
                 ->with("timeline",$timeline)
+                ->with("count_job",$count_job)
                
        ;
     
@@ -99,7 +100,7 @@ class HomeController extends Controller
                      'area' => 'USERPROFILE',
                      'status' => 'ACTIVE'
                   ])->first();   
-     
+    $count_job = DB::table('job')->count(); 
 
           return view('profile')
                      ->with("userProfile",$userProfile)
@@ -109,6 +110,7 @@ class HomeController extends Controller
                      ->with("if_exist_settings",$if_exist_settings)
                      ->with("userSettings",$userSettings)
                      ->with("userAds",$userAds)
+                     ->with("count_job",$count_job)
                    
           ;
                 
@@ -145,7 +147,8 @@ class HomeController extends Controller
                 ->get(); 
                                      
     $userSettings = DB::table('settings')->where('user_id',$userId)->first();     
-         
+     
+    $count_job = DB::table('job')->count();      
 
         return view('resume')
                     ->with("userProfile",$userProfile)
@@ -158,6 +161,7 @@ class HomeController extends Controller
                      ->with("if_exist",$if_exist)
                       ->with("if_exist_settings",$if_exist_settings)
                       ->with("userSettings",$userSettings)
+                      ->with("count_job",$count_job)
                       
         ;
 
@@ -186,6 +190,8 @@ class HomeController extends Controller
     $if_exist_settings = DB::table('settings')->where('user_id',$userId)->count();
     $userSettings = DB::table('settings')->where('user_id',$userId)->first(); 
      
+    $count_job = DB::table('job')->count(); 
+
 
         return view('portfolio')
                  ->with("userProfile",$userProfile)
@@ -197,6 +203,7 @@ class HomeController extends Controller
                  ->with("if_exist",$if_exist)
                   ->with("if_exist_settings",$if_exist_settings)
                    ->with("userSettings",$userSettings)
+                   ->with("count_job",$count_job)
                    
 
         ;
@@ -214,7 +221,7 @@ class HomeController extends Controller
         $userSettings = DB::table('settings')->where('user_id',$userId)->first(); 
         $userJobs = DB::table('job')->orderBy('id', 'desc')->get();  
         $userProfile = DB::table('profiles')->where('user_id',$userId)->first();
-        
+        $count_job = DB::table('job')->count();
 
         return view('jobs')
                 ->with("userProfile",$userProfile)
@@ -224,6 +231,7 @@ class HomeController extends Controller
                  ->with("userJobs",$userJobs)
                   ->with("if_exist_settings",$if_exist_settings)
                   ->with("userSettings",$userSettings)
+                  ->with("count_job",$count_job)
                   
         ;
     }
@@ -263,7 +271,7 @@ class HomeController extends Controller
                      'area' => 'USERSETTINGS',
                      'status' => 'ACTIVE'
                   ])->first(); 
-        
+         $count_job = DB::table('job')->count();
 
         return view('setting')
                 ->with("userProfile",$userProfile)
@@ -276,6 +284,7 @@ class HomeController extends Controller
                   ->with("cvlink",$cvlink)
                   ->with("token",$token)
                   ->with("userAds",$userAds)
+                  ->with("count_job",$count_job)
                 
         ;
 
@@ -954,38 +963,6 @@ class HomeController extends Controller
 
     }
 
-
-
-
-
-
-
-    public function deleteExperience($id){
-
-
-        $userId = Auth::id();
-        $expId = $id;
-        $inputDate = date('Y-m-d');
-        
-        $experience = DB::table('work_experience')->where('id',$expId)->first(); 
-
-        DB::table('dashboard_timeline')->insert([
-                       'user_id' => $userId,
-                       'category' => "Delete Experience",
-                       'category_id' =>rand(11111,99999),
-                       'activity' => "Delete Experience in ".$experience->company_name,
-                       'date'=> $inputDate
-        ]);       
-
-
-        DB::table('work_experience')
-                ->where('id',$expId)->delete();
-
-        
-
-        return back();
-
-    }
 
     public function deleteEducation($id){
 
