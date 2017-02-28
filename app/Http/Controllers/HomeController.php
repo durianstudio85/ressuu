@@ -263,7 +263,7 @@ class HomeController extends Controller
                      'area' => 'USERSETTINGS',
                      'status' => 'ACTIVE'
                   ])->first(); 
-        $count_job = DB::table('job')->count();  
+        
 
         return view('setting')
                 ->with("userProfile",$userProfile)
@@ -276,7 +276,7 @@ class HomeController extends Controller
                   ->with("cvlink",$cvlink)
                   ->with("token",$token)
                   ->with("userAds",$userAds)
-                  ->with("count_job",$count_job)
+                
         ;
 
 
