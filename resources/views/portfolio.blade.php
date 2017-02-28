@@ -176,7 +176,7 @@
                         <a href="{{ url('/profile') }}"><li><span class="glyphicon glyphicon-star">&nbsp;</span>Profile</li></a>
                         <a href="{{ url('/resume') }}"><li><span class="glyphicon glyphicon-flag">&nbsp;</span>Resume</li></a>
                         <a href="{{ url('/portfolio') }}"><li class="menuactive"><span class="glyphicon glyphicon-send">&nbsp;</span>Portfolio</li></a>
-                        <a href="{{ url('/jobs') }}"><li><span class="glyphicon glyphicon-calendar">&nbsp;</span>Jobs</li><span class="jobbagde">6</span></a>    
+                        <a href="{{ url('/jobs') }}"><li><span class="glyphicon glyphicon-calendar">&nbsp;</span>Jobs</li><span class="jobbagde"><?php echo $count_job; ?></span></a>    
                         <a href="{{ url('/setting') }}"><li><span class="glyphicon glyphicon-cog">&nbsp;</span>Settings</li></a>
                         <a href="{{ url('/logout') }}"><li><span class="glyphicon glyphicon-off">&nbsp;</span>Logout</li></a>
                   </ul>
@@ -241,28 +241,121 @@
                                       <div class="modal-dialog">
                                             <!-- Modal content-->
                                               <div class="modal-content">
-                                                    
+                                                     <div class="col-md-12 content-panel-header">
+                                                           <h3>{{ $userPorfolio->port_title }}</h3>
+                                                     </div>
                                                                         
-                                                    <div class="col-xs-12 col-md-12 content-panel-header">
+                                                    <div class="col-xs-12 col-md-12" style="margin:10px 0px;">
 
                                                         <center>
-                                                         <h4>{{ $userPorfolio->port_title }}</h4>
                                                           <?php $fileName = "upload/".$userPorfolio->post_thumbnail;
                                                               if(file_exists($fileName)){  ?>
                                                                        <img src="upload/{{ $userPorfolio->post_thumbnail }}" class="img-responsive">
                                                            <?php }else{ ?>
                                                                         <img src="images/portfolio_images.png" class="img-responsive"> 
                                                            <?php } ?> 
-                                                          <p class="text-center">{{ $userPorfolio->port_excerpt }}</p>   
+                                                          
                                                         </center>
                                                     </div>
+
+                                                     <div class="col-xs-12 col-md-12">
+                                                          <p>Description</p>
+                                                          <p>{{ $userPorfolio->port_excerpt }}</p>      
+
+                                                    </div>
+
+                                                     <div class="modal-footer">
+                                                       <button type="button" data-toggle="modal" data-target="#deleteportfolio_{{ $userPorfolio->id }}" class="btn btn-default" data-dismiss="modal">Delete</button>
+                                                       <button type="button" data-toggle="modal" data-target="#editportfolio_{{ $userPorfolio->id }}" class="btn btn-default" data-dismiss="modal">Update</button> 
+                                                   
+                                                    </div>
                                               </div>
+
                                             
                                        </div>
                                     </div>
 
                           </section>
                   <!-- Modal for All_PorfolioCategory -->
+
+                  <!-- Modal for Update Portfolio -->
+                          <section class="portfolio_modal">
+                                    <div class="modal fade" id="editportfolio_{{ $userPorfolio->id }}" role="dialog">
+                                      <div class="modal-dialog">
+                                            <!-- Modal content-->
+                                             <form method="POST" action="portfolio/updatePortfolio" class="theme1" enctype="multipart/form-data">
+                                              {{ csrf_field() }}  
+                                                  <div class="modal-content">
+                                                          <div class="col-md-12 content-panel-header">
+                                                           <h3>Update Portfolio</h3>
+                                                           </div>
+                                                                                        
+                                                            <input type="hidden" value="{{ $userPorfolio->id }}" name="id">
+
+                                                            <div class="form-group form-group">
+                                                                <div class="col-md-offset-1 col-sm-10">
+                                                                    <input class="form-control job_input" name="port_title" type="text" value="{{ $userPorfolio->port_title }}">
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="form-group form-group">
+                                                                <div class="col-md-offset-1 col-md-10">
+                                                                    <textarea  class="form-control job_input"  rows="5" cols="45" name="port_excerpt">{{ $userPorfolio->port_excerpt }}</textarea>  
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="form-group form-group">
+                                                                <div class="col-xs-12 col-md-offset-1 col-sm-10">
+                                                                    <p>Image</p>
+                                                                </div>
+                                                                <div class="col-xs-12 col-md-offset-1 col-sm-10">
+                                                                    <input class="form-control jobfile" name="image" type="file" placeholder="Logo">
+                                                                </div>
+                                                                                          
+                                                            </div>
+                                                           <input type="hidden" value="{{ csrf_token() }}" name="_token" >
+
+                                                         <div class="modal-footer">
+                                                           <button type="submit" class="btn btn-default">Save</button>
+                                                           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button> 
+                                                       
+                                                        </div>
+                                                  </div>
+                                              </form>
+                                            
+                                       </div>
+                                    </div>
+
+                          </section>
+                  <!-- Modal for Update Portfolio -->
+
+                  <!-- Modal for Delete Portfolio -->
+                                    <div class="modal fade" id="deleteportfolio_{{ $userPorfolio->id }}" role="dialog">
+                                      <div class="modal-dialog">
+                                            <!-- Modal content-->
+                                             <form method="" action="portfolio/deletePortfolio/<?php echo $userPorfolio->id; ?>" class="theme1" enctype="multipart/form-data">
+                                                      <div class="modal-content">
+                                                              <div class="col-md-12 content-panel-header">
+                                                               <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                               <h3>Delete Portfolio</h3>
+                                                     </div>
+                                                      <input type="hidden" value="{{ $userPorfolio->id }}" name="id">                             
+                                                      <div class="col-md-12 content-panel-header">
+                                                            <h3>Are you sure you want to delete your porfolio in {{ $userPorfolio->port_title }}?</h3>
+                                                       </div>
+
+                                                     <div class="modal-footer">
+                                                       <button type="submit" class="btn btn-default">Delete</button>
+                                                       <button type="button" class="btn btn-default" data-dismiss="modal">Close</button> 
+                                                   
+                                                    </div>
+                                              </div>
+                                              </form>
+                                            
+                                       </div>
+                                    </div>
+
+                  <!-- MModal for Delete Portfolio -->
 
 
 
@@ -314,21 +407,35 @@
                                             <!-- Modal content-->
                                               <div class="modal-content">
                                                     
-                                                                        
                                                     <div class="col-md-12 content-panel-header">
+                                                           <h3>{{ $category->port_title }}</h3>
+                                                    </div>
+
+                                                    <div class="col-xs-12 col-md-12" style="margin:10px 0px;">
 
                                                         <center>
-                                                         <h4>{{ $category->port_title }}</h4>
                                                           <?php $fileName = "upload/".$category->post_thumbnail;
-                                                          if(file_exists($fileName)){  ?>
-                                                          <img src="upload/{{ $category->post_thumbnail }}" class="img-responsive">
-                                                            <?php }else{ ?>
-                                                          <img src="images/portfolio_images.png" class="img-responsive"> 
-
-                                                          <?php } ?>
-                                                          <p class="text-center">{{ $category->port_excerpt }}</p>   
+                                                              if(file_exists($fileName)){  ?>
+                                                                       <img src="upload/{{ $category->post_thumbnail }}" class="img-responsive">
+                                                           <?php }else{ ?>
+                                                                        <img src="images/portfolio_images.png" class="img-responsive"> 
+                                                           <?php } ?> 
+                                                          
                                                         </center>
                                                     </div>
+
+                                                     <div class="col-xs-12 col-md-12">
+                                                          <p>Description</p>
+                                                          <p>{{ $category->port_excerpt }}</p>      
+
+                                                    </div>
+                                                                        
+                                                    <div class="modal-footer">
+                                                       <button type="button" data-toggle="modal" data-target="#Catdeleteportfolio_{{ $category->id }}" class="btn btn-default" data-dismiss="modal">Delete</button>
+                                                       <button type="button" data-toggle="modal" data-target="#Cateditportfolio_{{ $category->id }}" class="btn btn-default" data-dismiss="modal">Update</button> 
+                                                   
+                                                    </div>
+
                                               </div>
                                             
                                        </div>
@@ -336,6 +443,86 @@
 
                           </section>
                   <!-- Modal for PorfolioCategory -->
+                      
+                  <!-- Modal for Update Portfolio -->
+                          <section class="portfolio_modal">
+                                    <div class="modal fade" id="Cateditportfolio_{{ $category->id }}" role="dialog">
+                                      <div class="modal-dialog">
+                                            <!-- Modal content-->
+                                             <form method="POST" action="portfolio/updatePortfolio" class="theme1" enctype="multipart/form-data">
+                                              {{ csrf_field() }}  
+                                                  <div class="modal-content">
+                                                          <div class="col-md-12 content-panel-header">
+                                                           <h3>Update Portfolio</h3>
+                                                           </div>
+                                                                                        
+                                                            <input type="hidden" value="{{ $category->id }}" name="id">
+
+                                                            <div class="form-group form-group">
+                                                                <div class="col-md-offset-1 col-sm-10">
+                                                                    <input class="form-control job_input" name="port_title" type="text" value="{{ $category->port_title }}">
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="form-group form-group">
+                                                                <div class="col-md-offset-1 col-md-10">
+                                                                    <textarea  class="form-control job_input"  rows="5" cols="45" name="port_excerpt">{{ $category->port_excerpt }}</textarea>  
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="form-group form-group">
+                                                                <div class="col-xs-12 col-md-offset-1 col-sm-10">
+                                                                    <p>Image</p>
+                                                                </div>
+                                                                <div class="col-xs-12 col-md-offset-1 col-sm-10">
+                                                                    <input class="form-control jobfile" name="logo" type="file" placeholder="Logo">
+                                                                </div>
+                                                                                          
+                                                            </div>
+                                                           <input type="hidden" value="{{ csrf_token() }}" name="_token" >
+
+                                                         <div class="modal-footer">
+                                                           <button type="submit" class="btn btn-default">Save</button>
+                                                           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button> 
+                                                       
+                                                        </div>
+                                                  </div>
+                                              </form>
+                                            
+                                       </div>
+                                    </div>
+
+                          </section>
+                  <!-- Modal for Update Portfolio -->
+
+                  <!-- Modal for Delete Portfolio -->
+                                    <div class="modal fade" id="Catdeleteportfolio_{{ $category->id }}" role="dialog">
+                                      <div class="modal-dialog">
+                                            <!-- Modal content-->
+                                             <form method="" class="theme1" enctype="multipart/form-data" action="portfolio/deletePortfolio/<?php echo $category->id; ?>" >
+                                                      <div class="modal-content">
+                                                              <div class="col-md-12 content-panel-header">
+                                                               <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                               <h3>Delete Portfolio</h3>
+                                                     </div>
+                                                      <input type="hidden" value="{{ $category->id }}" name="id">                             
+                                                      <div class="col-md-12 content-panel-header">
+                                                            <h3>Are you sure you want to delete your porfolio in {{ $category->port_title }}?</h3>
+                                                       </div>
+
+                                                     <div class="modal-footer">
+                                                       <button type="submit" class="btn btn-default">Delete</button>
+                                                       <button type="button" class="btn btn-default" data-dismiss="modal">Close</button> 
+                                                   
+                                                    </div>
+                                              </div>
+                                              </form>
+                                            
+                                       </div>
+                                    </div>
+
+                  <!-- MModal for Delete Portfolio -->
+
 
            <?php } ?>
             

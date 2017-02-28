@@ -57,7 +57,10 @@ class HomeController extends Controller
                 ->orderBy('id', 'desc')
                 ->get();
     
-    $if_exist_settings = DB::table('settings')->where('user_id',$userId)->count();            
+    $if_exist_settings = DB::table('settings')->where('user_id',$userId)->count(); 
+    $count_job = DB::table('job')->count(); 
+
+
         return view('home')
                 ->with("userProfile",$userProfile)
                 ->with("userFeeds",$userFeeds)
@@ -71,6 +74,7 @@ class HomeController extends Controller
                 ->with("FollowedUsers",$FollowedUsers)
                 ->with("userAds",$userAds)
                 ->with("timeline",$timeline)
+                ->with("count_job",$count_job)
        ;
     
       /* return view('home')
@@ -90,12 +94,13 @@ class HomeController extends Controller
     $if_exist = DB::table('profiles')->where('user_id',$userId)->count();
     $userProfile = DB::table('profiles')->where('user_id',$userId)->first();
     $if_exist_settings = DB::table('settings')->where('user_id',$userId)->count();
-     $userSettings = DB::table('settings')->where('user_id',$userId)->first(); 
+    $userSettings = DB::table('settings')->where('user_id',$userId)->first(); 
 
-       $userAds = DB::table('ads')->where([
+    $userAds = DB::table('ads')->where([
                      'area' => 'USERPROFILE',
                      'status' => 'ACTIVE'
-                  ])->first();    
+                  ])->first();   
+    $count_job = DB::table('job')->count();  
 
           return view('profile')
                      ->with("userProfile",$userProfile)
@@ -105,6 +110,7 @@ class HomeController extends Controller
                      ->with("if_exist_settings",$if_exist_settings)
                      ->with("userSettings",$userSettings)
                      ->with("userAds",$userAds)
+                     ->with("count_job",$count_job)
           ;
                 
 
@@ -139,7 +145,8 @@ class HomeController extends Controller
                 ->orderBy('id', 'desc')
                 ->get(); 
                                      
-    $userSettings = DB::table('settings')->where('user_id',$userId)->first();            
+    $userSettings = DB::table('settings')->where('user_id',$userId)->first();     
+    $count_job = DB::table('job')->count();         
 
         return view('resume')
                     ->with("userProfile",$userProfile)
@@ -152,6 +159,7 @@ class HomeController extends Controller
                      ->with("if_exist",$if_exist)
                       ->with("if_exist_settings",$if_exist_settings)
                       ->with("userSettings",$userSettings)
+                      ->with("count_job",$count_job)
         ;
 
 
@@ -177,7 +185,9 @@ class HomeController extends Controller
                 ->get();
     $if_have_portfolio =  DB::table('portfolio')->where('user_id',$userId)->count(); 
     $if_exist_settings = DB::table('settings')->where('user_id',$userId)->count();
-    $userSettings = DB::table('settings')->where('user_id',$userId)->first();            
+    $userSettings = DB::table('settings')->where('user_id',$userId)->first(); 
+    $count_job = DB::table('job')->count();  
+
         return view('portfolio')
                  ->with("userProfile",$userProfile)
                  ->with("userPorfolios",$userPorfolios)
@@ -188,6 +198,7 @@ class HomeController extends Controller
                  ->with("if_exist",$if_exist)
                   ->with("if_exist_settings",$if_exist_settings)
                    ->with("userSettings",$userSettings)
+                   ->with("count_job",$count_job)
 
         ;
 
@@ -204,6 +215,8 @@ class HomeController extends Controller
         $userSettings = DB::table('settings')->where('user_id',$userId)->first(); 
         $userJobs = DB::table('job')->orderBy('id', 'desc')->get();  
         $userProfile = DB::table('profiles')->where('user_id',$userId)->first();
+        $count_job = DB::table('job')->count(); 
+
         return view('jobs')
                 ->with("userProfile",$userProfile)
                  ->with("name",$name)
@@ -212,6 +225,7 @@ class HomeController extends Controller
                  ->with("userJobs",$userJobs)
                   ->with("if_exist_settings",$if_exist_settings)
                   ->with("userSettings",$userSettings)
+                  ->with("count_job",$count_job)
         ;
     }
 
@@ -250,6 +264,7 @@ class HomeController extends Controller
                      'area' => 'USERSETTINGS',
                      'status' => 'ACTIVE'
                   ])->first(); 
+        $count_job = DB::table('job')->count();  
 
         return view('setting')
                 ->with("userProfile",$userProfile)
@@ -262,6 +277,7 @@ class HomeController extends Controller
                   ->with("cvlink",$cvlink)
                   ->with("token",$token)
                   ->with("userAds",$userAds)
+                  ->with("count_job",$count_job)
         ;
 
 
@@ -791,7 +807,153 @@ class HomeController extends Controller
     }
 
 
+    public function updatePortfolio(){
 
+    $port_id = Input::get('id'); 
+    $userId = Auth::id();
+
+        if(empty(Input::file('image'))){
+
+             $inputPort_title =  Input::get('port_title');
+             $inputPort_excerpt  =  Input::get('port_excerpt');
+             $inputDate = date('Y-m-d');
+             
+                DB::table('portfolio')
+                  ->where('id', $port_id)
+                  ->update(array(
+                            'port_title' => $inputPort_title,
+                            'port_excerpt' => $inputPort_excerpt,
+                      ));  
+
+                DB::table('dashboard_timeline')->insert([
+                       'user_id' => $userId,
+                       'category' => "Update Portfolio",
+                       'category_id' =>$port_id,
+                       'activity' => "Update Portfolio in ".$inputPort_title,
+                       'date'=> $inputDate
+                ]);    
+         
+              return back();
+
+        }else{
+
+              // getting all of the post data
+              $file = array('image' => Input::file('image'));
+              // setting up rules
+              $rules = array('image' => 'required',); //mimes:jpeg,bmp,png and for max size max:10000
+              // doing the validation, passing post data, rules and the messages
+              $validator = Validator::make($file, $rules);
+              if ($validator->fails()) {
+                // send back to the page with the input data and errors
+                return Redirect::to('upload')->withInput()->withErrors($validator);
+              }
+              else {
+                // checking file is valid.
+                if (Input::file('image')->isValid()) {
+                  $destinationPath = 'upload'; // upload path
+                  $extension = Input::file('image')->getClientOriginalExtension(); // getting image extension
+                  $fileName = rand(11111,99999).'.'.$extension; // renameing image
+                  Input::file('image')->move($destinationPath, $fileName); // uploading file to given path
+                     // sending back with message
+     
+                     $inputPort_title =  Input::get('port_title');
+                     $inputPort_excerpt  =  Input::get('port_excerpt');
+                     $inputPort_thumbnail  =  $fileName;
+                     $inputDate = date('Y-m-d');
+
+
+                DB::table('portfolio')
+                  ->where('id', $port_id)
+                  ->update(array(
+                            'port_title' => $inputPort_title,
+                            'port_excerpt' => $inputPort_excerpt,
+                            'port_thumbnail' => $inputPort_thumbnail,
+                      ));  
+
+                DB::table('dashboard_timeline')->insert([
+                       'user_id' => $userId,
+                       'category' => "Update Portfolio",
+                       'category_id' =>$port_id,
+                       'activity' => "Update Portfolio in ".$inputPort_title,
+                       'date'=> $inputDate
+                ]);    
+
+
+
+
+                  Session::flash('success', 'Upload successfully'); 
+                  return back();
+                }
+                else {
+                  // sending back with error message.
+                  Session::flash('error', 'uploaded file is not valid');
+                 return back();
+                }
+              }
+
+        }
+
+
+
+    }
+
+
+    public function deletePortfolio($id){
+
+
+        $userId = Auth::id();
+        $portId = $id;
+        $inputDate = date('Y-m-d');
+        
+        $portfolio = DB::table('portfolio')->where('id',$portId)->first(); 
+
+        DB::table('dashboard_timeline')->insert([
+                    'user_id' => $userId,
+                    'category' => "Delete Portfolio",
+                    'category_id' =>rand(11111,99999),
+                    'activity' => "Delete Portfolio in ".$portfolio->port_title,
+                    'date'=> $inputDate
+        ]);
+
+        DB::table('portfolio')
+                ->where('id',$portId)->delete();
+
+        return back();
+
+    }
+
+
+    public function deleteExperience($id){
+
+
+        $userId = Auth::id();
+        $expId = $id;
+        $inputDate = date('Y-m-d');
+        
+        $experience = DB::table('work_experience')->where('id',$expId)->first(); 
+
+       //  DB::table('news_feeds')->insert([
+       //           'user_id' => $userId,
+       //           'activity' => "Delete Experience in ".$experience->company_name,
+       //           'date'=> $inputDate
+       // ]);        
+
+        DB::table('dashboard_timeline')->insert([
+                       'user_id' => $userId,
+                       'category' => "Delete Experience",
+                       'category_id' =>rand(11111,99999),
+                       'activity' => "Delete Experience in ".$experience->company_name,
+                       'date'=> $inputDate
+        ]);
+
+        DB::table('work_experience')
+                ->where('id',$expId)->delete();
+
+        
+
+        return back();
+
+    }
 
 
 

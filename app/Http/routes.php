@@ -38,6 +38,7 @@ Route::get('/resume/updateExperience/{id}', 'HomeController@updateExperience');
 Route::get('/resume/updateEducation/{id}', 'HomeController@updateEducation');
 Route::get('/resume/updateSkill/{id}', 'HomeController@updateSkill');
 Route::post('/setting/updateSettings', 'HomeController@updateSettings');
+Route::post('/portfolio/updatePortfolio', 'HomeController@updatePortfolio'); // portfolio
 
 //add
 Route::get('/profile/insert', 'HomeController@insertProfile');
@@ -61,6 +62,7 @@ Route::get('/resume/deleteExperience/{id}', 'HomeController@deleteExperience');
 Route::get('/resume/deleteEducation/{id}', 'HomeController@deleteEducation');
 Route::get('/resume/deleteSkill/{id}', 'HomeController@deleteSkill');
 Route::get('/resume/deleteCertification/{id}', 'HomeController@deleteCertification');
+Route::get('/portfolio/deletePortfolio/{id}', 'HomeController@deletePortfolio'); // portfolio
 
 
 

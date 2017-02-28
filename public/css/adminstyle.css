@@ -2490,7 +2490,15 @@ border-radius: 0px;
 .float-right{
   float: right;
 }
-
+.get_embed{
+  padding: 5px 19px !important;
+font-size: 12px !important;
+border-radius: 5px;
+border: none;
+background: #ebebeb;
+margin: 10px 0px 0px 27px !important;
+color: #000;
+}
 
 
 

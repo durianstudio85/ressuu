@@ -175,7 +175,7 @@
                         <a href="{{ url('/profile') }}"><li><span class="glyphicon glyphicon-star">&nbsp;</span>Profile</li></a>
                         <a href="{{ url('/resume') }}"><li><span class="glyphicon glyphicon-flag">&nbsp;</span>Resume</li></a>
                         <a href="{{ url('/portfolio') }}"><li><span class="glyphicon glyphicon-send">&nbsp;</span>Portfolio</li></a>
-                        <a href="{{ url('/jobs') }}"><li><span class="glyphicon glyphicon-calendar">&nbsp;</span>Jobs</li><span class="jobbagde">6</span></a>    
+                        <a href="{{ url('/jobs') }}"><li><span class="glyphicon glyphicon-calendar">&nbsp;</span>Jobs</li><span class="jobbagde"><?php echo $count_job; ?></span></a>    
                         <a href="{{ url('/setting') }}"><li class="menuactive"><span class="glyphicon glyphicon-cog">&nbsp;</span>Settings</li></a>
                         <a href="{{ url('/logout') }}"><li><span class="glyphicon glyphicon-off">&nbsp;</span>Logout</li></a>
                   </ul>
@@ -284,13 +284,33 @@
                       <?php if ($if_exist_settings == 0) { ?>
                             <p><code>Not Set</code></p>
                       <?php }else{?>
-                             <p><code>{{$userSettings->preview}}</code></p>   
+                              <button class="get_embed" data-toggle="modal" data-target="#get_embed">Get Code</button>
                       <?php } ?>                   
                                    
                      </div>
                      <div class="col-md-12 line"></div>                
          </div>        
-
+          <!-- Modal for Update_Settings -->
+                              <div class="modal fade" id="get_embed" role="dialog">
+                                  <div class="modal-dialog">
+                                          <div class="modal-content"> 
+                                                 <div class="modal-header">
+                                                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                  <h4 class="modal-title">Your Embeded Cod</h4>
+                                                </div> 
+                                                      <div class="">
+                                                            <div class="col-md-12 col-xs-12">
+                                                              <textarea class="form-control" name="embeded_code" rows="3" cols="10" style="margin-top:10px;overflow:hidden:">&lt;div role="main"&gt; &lt;style&gt;*{margin:0;padding:0;}html,body{height:100%;  width:100%; overflow:hidden;}iframe{float:left; height:100%; width:100%; position: absolute}&lt;/style&gt; &lt;iframe src="<?php echo $create_cvlink; ?>" frameborder="0"&gt; &lt;/iframe&gt;&lt;/div&gt;
+                                                              </textarea>
+                                                            </div>
+                                                      </div>     
+                                                <div class="modal-footer">
+                                                  &nbsp;
+                                                </div>
+                                          </div>                                                     
+                                     </div>
+                               </div>
+                <!-- Modal for Update_Settings -->
           <div class="col-xs-12 col-md-12  content-panel">
                      <div class="col-xs-3 col-md-3">
                         <p class="title">Token Key</p>
