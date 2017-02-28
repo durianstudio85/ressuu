@@ -75,6 +75,7 @@
 		margin-bottom:20px;
 		overflow:hidden;
 	}
+	a{ text-decoration: none; }
 	/* Logo */
 		#logo {
 		float:left;
@@ -358,6 +359,7 @@
 		overflow:hidden;
 		height:100%;
 		margin-left:30px;
+		padding-top: 24px;
 	}
 	.skills li {
 		margin-bottom:15px;
@@ -495,7 +497,7 @@
 	}
 	#portfolio-list li .title {
 		font-size:14px;
-		margin-top:15px;
+		margin-top:0px;
 		font-weight: 400;
 		color: #3A3A3A;
 	}
