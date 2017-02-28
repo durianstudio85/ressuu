@@ -497,14 +497,15 @@
 	}
 	#portfolio-list li .title {
 		font-size:14px;
-		margin-top:0px;
+		margin-top:9px;
 		font-weight: 400;
 		color: #3A3A3A;
 	}
 	#portfolio-list li .categorie {
 		font-size:11px;
-		line-height:25px;
+		line-height:11px;
 		color:#999;
+		margin-top:0px;
 	}
 	/* adipoli */
 		.adipoli-wrapper {
