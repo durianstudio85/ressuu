@@ -55,6 +55,7 @@ class AuthController extends Controller
             'email' => 'required|email|max:255|unique:users',
             'password' => 'required|min:6|confirmed',
             'facebook_id' => 'max:255',
+            'twitter_id' => 'max:255',
         ]);
     }
 
@@ -71,6 +72,7 @@ class AuthController extends Controller
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
             'facebook_id' => $data['facebook_id'],
+            'twitter_id' => $data['twitter_id'],
         ]);
     }
 
@@ -121,10 +123,53 @@ class AuthController extends Controller
                }   
             
          //Auth::guard('admin')->login($user);    
+    }
 
-       
-      
+        /**
+     * Redirect the user to the GitHub authentication page.
+     *
+     * @return Response
+     */
+    public function tredirectToProvider(){
 
+        return Socialite::driver('twitter')->redirect();
+    }
+
+    /**
+     * Obtain the user information from GitHub.
+     *
+     * @return Response
+     */
+    public function thandleProviderCallback(){
+        
+        try {
+            $socialUser = Socialite::driver('twitter')->user();
+
+         } catch (Exception $e) {
+            
+         return redirect('/');
+         }
+
+         $user = User::where("twitter_id",$socialUser->getId())->first();
+
+             if(!$user){
+                 $user = User::create([
+                        'twitter_id' => $socialUser->getId(),
+                        'name' => $socialUser->getName(),
+                        'email' => $socialUser->getEmail(),   
+           
+                ]);
+
+                  auth()->login($user);
+                  return redirect()->to('/home');
+
+               }else{
+
+                 auth()->login($user);
+                  return redirect()->to('/home');
+                
+               }          
+         //Auth::guard('admin')->login($user);    
     }
 
 

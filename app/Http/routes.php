@@ -99,6 +99,9 @@ Route::post('/apply/upload', 'HomeController@uploadPicture');
 Route::get('auth/facebook', 'Auth\AuthController@redirectToProvider');
 Route::get('auth/facebook/callback', 'Auth\AuthController@handleProviderCallback');
 
+Route::get('auth/twitter', 'Auth\AuthController@tredirectToProvider');
+Route::get('auth/twitter/callback', 'Auth\AuthController@thandleProviderCallback');
+
 
 
 

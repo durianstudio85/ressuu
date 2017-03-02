@@ -41,5 +41,11 @@ return [
     'redirect' => 'https://ressuu.me/auth/facebook/callback',
     ],
 
+    'twitter' => [
+    'client_id' => 'Tt0Vq2E0JjTP7m6nSVeIUtLFS',
+    'client_secret' => 'CSw417InX8eDhNGlBOLzGy9hdSp7AbJd1CeaM5ay6Y37XuvNjA',
+    'redirect' => 'https://ressuu.me/auth/twitter/callback',
+    ],
+
 
 ];
