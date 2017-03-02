@@ -229,7 +229,7 @@
 
                                  
                                   <div class="ro$fileNamew">
-                                    {{ $userPorfolio->port_title }}
+                                   {!! $userPorfolio->port_excerpt !!}
                                   </div>
                                 </div>
                         </center>
@@ -260,7 +260,7 @@
 
                                                      <div class="col-xs-12 col-md-12">
                                                           <p>Description</p>
-                                                          <p>{{ $userPorfolio->port_excerpt }}</p>      
+                                                          <p>{!! $userPorfolio->port_excerpt !!}</p>      
 
                                                     </div>
 
@@ -426,7 +426,7 @@
 
                                                      <div class="col-xs-12 col-md-12">
                                                           <p>Description</p>
-                                                          <p>{{ $category->port_excerpt }}</p>      
+                                                          <p>{!! $category->port_excerpt !!}</p>      
 
                                                     </div>
                                                                         
@@ -466,7 +466,7 @@
 
                                                             <div class="form-group form-group">
                                                                 <div class="col-md-offset-1 col-md-10">
-                                                                    <textarea  class="form-control job_input"  rows="5" cols="45" name="port_excerpt">{{ $category->port_excerpt }}</textarea>  
+                                                                    <textarea  class="form-control job_input"  rows="5" cols="45" name="port_excerpt">{!! $category->port_excerpt !!}</textarea>  
                                                                 </div>
                                                             </div>
 
