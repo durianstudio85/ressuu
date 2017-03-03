@@ -28,14 +28,19 @@
               <ul>
                   <li><i class="glyphicon glyphicon-user"></i></li>
                   <li class="dropdown">
-                   <!----> 
-                   <span class="glyphicon glyphicon-comment naviconactive dropdown-toggle" data-toggle="dropdown"><span class="badge">4</span></span>
-                      <ul class="dropdown-menu drop-message">
-                        <li><a href="#">Message 1</a></li>
-                        <li><a href="#">Message 2</a></li>
-                        <li><a href="#">Message 3</a></li>
-                         <li><a href="#">Message 3</a></li>
-                      </ul>
+                  <!----> 
+                    <?php if($no_message == 0){ ?>
+                       <span class="glyphicon glyphicon-comment dropdown-toggle"></span>                         
+                    <?php }else { ?> 
+                        <span class="glyphicon glyphicon-comment naviconactive dropdown-toggle" data-toggle="dropdown"><span class="badge">
+                      <?php  echo $no_message;?></span></span>
+                        <ul class="dropdown-menu drop-message">
+                        <?php foreach ($list_message as $message_value) { ?>
+                            <li><a href="" data-toggle="modal" data-target="#checkmessage_{{ $message_value->id }}"><span>Message from {{ $message_value->name }}</span></a></li>
+                        <?php } ?>
+                       </ul>
+                    <?php } ?>
+                    <!---->
                   </li>
                    <!---->
                   <li><i class="glyphicon glyphicon-briefcase"></i></li>
@@ -470,6 +475,54 @@
 
 </content> 
 
-                
+        <?php foreach ($list_message as $message_value) { ?>
+ <!-- Modal -->
+         <!-- Modal for viewJobs -->
+                      <section>
+                                 <div class="modal fade" id="checkmessage_{{ $message_value->id }}" role="dialog">
+                                  <div class="modal-dialog">
+                                  
+                                    <!-- Modal content-->
+                                    <div class="modal-content">
+
+                                    <form method="" action="jobs/addJob" class="theme1">
+                                               <div class="modal-header col-md-12 content-panel-header">
+                                                    <h3>Message From {{ $message_value->name }}</h3>
+                                               </div>
+                                                        
+                                               <div class="col-md-12  content-panel">
+                                                    <div class="col-md-12">
+                                                              <p>Name:&nbsp; {{ $message_value->name }} </p>
+                                                    </div>
+                                               </div>      
+
+                                               <div class="col-md-12  content-panel">
+                                                    <div class="col-md-12">
+                                                              <p>Email:&nbsp; {{ $message_value->email }} </p>
+                                                    </div>                                                    
+                                               </div> 
+                                               <div class="col-md-12  content-panel">
+                                                    <div class="col-md-12">
+                                                              <p>Message </p>
+                                                    </div>
+                                                    <div class="col-md-12">
+                                                              <p>{{ $message_value->message }}</p>
+                                                    </div>
+                                                                  
+                                               </div>
+
+                                              <div class="modal-footer">
+                                                   <button type="" class="btn btn-default" data-dismiss="modal">Close</button> 
+                                              </div>
+                                    </form>
+                                    </div>
+                            
+                          </div>
+                        </div>
+                      </section>
+  <!-- Modal for viewJobs -->
+<!-- Modal -->                      
+<?php } ?>
+        
 </div>
 @endsection

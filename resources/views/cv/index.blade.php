@@ -342,7 +342,9 @@ function myFunction() {
     <section class="hidden-section contact-section">                                
        <section class="contact">                                    
           <h3 class="contact-head">Let's talk <span class="plane"><img src="clean_modern/images/plane.png" alt="" /></span></h3>
-          <form action="scripts/contact.php" method="post" id="contact-form" class="clearfix">
+          <form action="message/send" method="post" id="contact-form" class="clearfix">
+           {{ csrf_field() }} 
+           <input type="hidden" name="id" class="input" value="<?php echo $profiles->user_id; ?>">
               <div class="left">
                  <p><input type="text" name="name" id="name" class="required" value="Full Name" /></p>
                  <p><input type="text" name="email" id="email" class="required email" value="Email Address" /></p>
@@ -354,6 +356,7 @@ function myFunction() {
                  <p id="loading"><img src="images/loading.gif" alt="Sending..." /></p>
                  <input type="submit" id="submit" value="Submit" />
               </div>
+               <input type="hidden" value="{{ csrf_token() }}" name="_token" >
            </form>                                        
         </section>                                
      </section>                     
@@ -625,19 +628,22 @@ function myFunction() {
                     <div class="contact-form">
                         <h3 class="main-heading"><span>Let's keep in touch</span></h3>
                         <div id="contact-status"></div>
-                        <form action="" id="contactform">
+                         <form action="message/send" id="contactform" method="POST">
+                         {{ csrf_field() }}  
+                                <input type="hidden" name="id" class="input" value="<?php echo $profiles->user_id; ?>">
                             <p>
                                 <label for="name">Your Name</label>
-                                <input type="text" name="name" class="input" >
+                                <input type="text" name="name" class="input" style="height:30px;width:95%;" >
                             </p>
                             <p>
                                 <label for="email">Your Email</label>
-                                <input type="text" name="email" class="input">
+                                <input type="text" name="email" class="input" style="height:30px;width:95%;">
                             </p>
                             <p>
                                 <label for="message">Your Message</label>
                                 <textarea name="message" cols="88" rows="6" class="textarea" ></textarea>
                             </p>
+                            <input type="hidden" value="{{ csrf_token() }}" name="_token" >
                             <input type="submit" name="submit" value="Send your message" class="button">
                         </form>
                     </div>
@@ -938,7 +944,9 @@ function myFunction() {
     <section class="hidden-section contact-section">                                
        <section class="contact">                                    
           <h3 class="contact-head">Let's talk <span class="plane"><img src="clean_modern/images/plane.png" alt="" /></span></h3>
-          <form action="scripts/contact.php" method="post" id="contact-form" class="clearfix">
+          <form action="message/send" method="POST" id="contact-form" class="clearfix">
+          {{ csrf_field() }}
+           <input type="hidden" name="id" class="input" value="<?php echo $profiles->user_id; ?>">
               <div class="left">
                  <p><input type="text" name="name" id="name" class="required" value="Full Name" /></p>
                  <p><input type="text" name="email" id="email" class="required email" value="Email Address" /></p>
@@ -950,6 +958,7 @@ function myFunction() {
                  <p id="loading"><img src="images/loading.gif" alt="Sending..." /></p>
                  <input type="submit" id="submit" value="Submit" />
               </div>
+               <input type="hidden" value="{{ csrf_token() }}" name="_token" >
            </form>                                        
         </section>                                
      </section>                     
@@ -1221,19 +1230,22 @@ function myFunction() {
                     <div class="contact-form">
                         <h3 class="main-heading"><span>Let's keep in touch</span></h3>
                         <div id="contact-status"></div>
-                        <form action="" id="contactform">
+                        <form action="message/send" id="contactform" method="POST">
+                         {{ csrf_field() }}
+                         <input type="hidden" name="id" class="input" value="<?php echo $profiles->user_id; ?>">
                             <p>
                                 <label for="name">Your Name</label>
-                                <input type="text" name="name" class="input" >
+                                <input type="text" name="name" class="input" style="height:30px;width:95%;" >
                             </p>
                             <p>
                                 <label for="email">Your Email</label>
-                                <input type="text" name="email" class="input">
+                                <input type="text" name="email" class="input" style="height:30px;width:95%;">
                             </p>
                             <p>
                                 <label for="message">Your Message</label>
                                 <textarea name="message" cols="88" rows="6" class="textarea" ></textarea>
                             </p>
+                            <input type="hidden" value="{{ csrf_token() }}" name="_token" >
                             <input type="submit" name="submit" value="Send your message" class="button">
                         </form>
                     </div>

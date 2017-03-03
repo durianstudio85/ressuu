@@ -58,7 +58,16 @@ class HomeController extends Controller
                 ->get();
     
     $if_exist_settings = DB::table('settings')->where('user_id',$userId)->count(); 
-    $count_job = DB::table('job')->count(); 
+    $count_job = DB::table('job')->count();
+
+    $no_message = DB::table('message')->where([
+                     'user_id' => $userId,
+                     'status' => 'PENDING'
+                  ])->count(); 
+    $list_message = DB::table('message')->where([
+                     'user_id' => $userId,
+                     'status' => 'PENDING'
+                  ])->get(); 
 
         return view('home')
                 ->with("userProfile",$userProfile)
@@ -102,6 +111,16 @@ class HomeController extends Controller
                   ])->first();   
     $count_job = DB::table('job')->count(); 
 
+    $no_message = DB::table('message')->where([
+                     'user_id' => $userId,
+                     'status' => 'PENDING'
+                  ])->count(); 
+    
+    $list_message = DB::table('message')->where([
+                     'user_id' => $userId,
+                     'status' => 'PENDING'
+                  ])->get();
+
           return view('profile')
                      ->with("userProfile",$userProfile)
                      ->with("name",$name)
@@ -111,6 +130,8 @@ class HomeController extends Controller
                      ->with("userSettings",$userSettings)
                      ->with("userAds",$userAds)
                      ->with("count_job",$count_job)
+                     ->with("no_message",$no_message)
+                     ->with("list_message",$list_message)
                    
           ;
                 
@@ -148,7 +169,16 @@ class HomeController extends Controller
                                      
     $userSettings = DB::table('settings')->where('user_id',$userId)->first();     
      
-    $count_job = DB::table('job')->count();      
+    $count_job = DB::table('job')->count();
+
+    $no_message = DB::table('message')->where([
+                     'user_id' => $userId,
+                     'status' => 'PENDING'
+                  ])->count(); 
+    $list_message = DB::table('message')->where([
+                     'user_id' => $userId,
+                     'status' => 'PENDING'
+                  ])->get();      
 
         return view('resume')
                     ->with("userProfile",$userProfile)
@@ -162,6 +192,8 @@ class HomeController extends Controller
                       ->with("if_exist_settings",$if_exist_settings)
                       ->with("userSettings",$userSettings)
                       ->with("count_job",$count_job)
+                      ->with("no_message",$no_message)
+                    ->with("list_message",$list_message)
                       
         ;
 
@@ -192,6 +224,14 @@ class HomeController extends Controller
      
     $count_job = DB::table('job')->count(); 
 
+    $no_message = DB::table('message')->where([
+                     'user_id' => $userId,
+                     'status' => 'PENDING'
+                  ])->count(); 
+    $list_message = DB::table('message')->where([
+                     'user_id' => $userId,
+                     'status' => 'PENDING'
+                  ])->get();
 
         return view('portfolio')
                  ->with("userProfile",$userProfile)
@@ -204,6 +244,8 @@ class HomeController extends Controller
                   ->with("if_exist_settings",$if_exist_settings)
                    ->with("userSettings",$userSettings)
                    ->with("count_job",$count_job)
+                   ->with("no_message",$no_message)
+                 ->with("list_message",$list_message)
                    
 
         ;
@@ -223,6 +265,15 @@ class HomeController extends Controller
         $userProfile = DB::table('profiles')->where('user_id',$userId)->first();
         $count_job = DB::table('job')->count();
 
+        $no_message = DB::table('message')->where([
+                     'user_id' => $userId,
+                     'status' => 'PENDING'
+                  ])->count(); 
+        $list_message = DB::table('message')->where([
+                     'user_id' => $userId,
+                     'status' => 'PENDING'
+                  ])->get(); 
+
         return view('jobs')
                 ->with("userProfile",$userProfile)
                  ->with("name",$name)
@@ -232,6 +283,8 @@ class HomeController extends Controller
                   ->with("if_exist_settings",$if_exist_settings)
                   ->with("userSettings",$userSettings)
                   ->with("count_job",$count_job)
+                  ->with("no_message",$no_message)
+                ->with("list_message",$list_message)
                   
         ;
     }
@@ -273,6 +326,15 @@ class HomeController extends Controller
                   ])->first(); 
          $count_job = DB::table('job')->count();
 
+          $no_message = DB::table('message')->where([
+                     'user_id' => $userId,
+                     'status' => 'PENDING'
+                  ])->count(); 
+        $list_message = DB::table('message')->where([
+                     'user_id' => $userId,
+                     'status' => 'PENDING'
+                  ])->get();
+
         return view('setting')
                 ->with("userProfile",$userProfile)
                 ->with("name",$name)
@@ -285,6 +347,8 @@ class HomeController extends Controller
                   ->with("token",$token)
                   ->with("userAds",$userAds)
                   ->with("count_job",$count_job)
+                  ->with("no_message",$no_message)
+                  ->with("list_message",$list_message)
                 
         ;
 
@@ -1020,34 +1084,34 @@ class HomeController extends Controller
 
     }
 
-    
+    public function messageSend(){
 
+        $userId = Input::get('id');
+        $inputName = Input::get('name');
+        $inputEmail = Input::get('email');
+        $inputMessage = Input::get('message');
+        $inputDate = date('Y-m-d');
 
+        $getLastID = DB::table('message')->insertGetId([
+                    'user_id' => $userId,
+                    'name'    => $inputName,
+                    'email'   => $inputEmail,
+                    'message' => $inputMessage,
+                    'date'    => $inputDate,
+                    'status'  => "PENDING"
+        ]);
 
+        DB::table('dashboard_timeline')->insert([
+                       'user_id'     => $userId,
+                       'category'    => "Send Message",
+                       'category_id' => $getLastID,
+                       'activity'    => "New Message from  ".$inputName,
+                       'date'        => $inputDate
+        ]);   
 
-    public function getFacebooklogin($auth = NULL){
-
-            if($auth == 'auth')
-            {
-
-                 try{
-                    Hybrid_Endpoint::process();
-                 }
-                 catch(Exception $e)
-                 {
-                    return Redirect::to('fbauth');
-                 }
-                 return;
-            }
-
-            $oauth = new Hybrid_Auth(app_path(). '/config/fb_auth.php');
-            $provider = $oauth->authenticate('Facebook');
-            $profile = $provider->getUserProfile();
-            return var_dump($profile). '<a href="logout">Log Out</a>';
-
+        return back();
 
     }
-
 
 
 
