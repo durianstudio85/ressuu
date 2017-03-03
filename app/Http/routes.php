@@ -138,5 +138,8 @@ Route::post('/ads/updateAds/settings', 'AdminController@adsUpdateUserSettings');
 Route::post('/ads/addAds/adminAds', 'AdminController@adsNewAdmin');
 Route::post('/ads/updateAds/adminAds', 'AdminController@adsUpdateAdmin');
 
+
 /* message */
-Route::post('message/send', 'HomeController@messageSend');
+Route::post('message/send', 'MessageController@messageSend');
+
+Route::post('message/sendtoClient', 'MessageController@messageSendtoClient');
