@@ -83,6 +83,8 @@ class HomeController extends Controller
                 ->with("userAds",$userAds)
                 ->with("timeline",$timeline)
                 ->with("count_job",$count_job)
+                ->with("no_message",$no_message)
+                ->with("list_message",$list_message)
                
        ;
     
