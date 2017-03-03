@@ -571,18 +571,31 @@
 
 <!-- Modal -->   
 
-
-
-
-
-
-
 <?php } ?>
 <?php
 if (Schema::hasTable('message')) {
+     echo "<script>console.log('Message Table Found');</script>";
+}
+if (Schema::hasColumn('message', 'user_id')) {
+     echo "<script>console.log('Message Table has user_id Column');</script>";
+}
 
-  echo "<script>console.log('Message Table Found');</script>";
+if (Schema::hasColumn('message', 'name')) {
+     echo "<script>console.log('Message Table has name Column');</script>";
+}
 
+if (Schema::hasColumn('message', 'email')) {
+     echo "<script>console.log('Message Table has Email Column');</script>";
+}
+
+if (Schema::hasColumn('message', 'message')) {
+     echo "<script>console.log('Message Table has message Column');</script>";
+}
+if (Schema::hasColumn('message', 'date')) {
+     echo "<script>console.log('Message Table has date Column');</script>";
+}
+if (Schema::hasColumn('message', 'status')) {
+     echo "<script>console.log('Message Table has status Column');</script>";
 }
 ?>
 </div>
