@@ -578,6 +578,12 @@
 
 
 <?php } ?>
-   
+<?php
+if (Schema::hasTable('message')) {
+
+  echo "<script>console.log('Message Table Found');</script>";
+
+}
+?>
 </div>
 @endsection
