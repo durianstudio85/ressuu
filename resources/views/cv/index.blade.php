@@ -342,7 +342,7 @@ function myFunction() {
     <section class="hidden-section contact-section">                                
        <section class="contact">                                    
           <h3 class="contact-head">Let's talk <span class="plane"><img src="clean_modern/images/plane.png" alt="" /></span></h3>
-          <form action="message/send" method="post" id="contact-form" class="clearfix">
+          <form action="/message/send" method="post" id="contact-form" class="clearfix">
            {{ csrf_field() }} 
            <input type="hidden" name="id" class="input" value="<?php echo $profiles->user_id; ?>">
               <div class="left">
@@ -628,7 +628,7 @@ function myFunction() {
                     <div class="contact-form">
                         <h3 class="main-heading"><span>Let's keep in touch</span></h3>
                         <div id="contact-status"></div>
-                         <form action="message/send" id="contactform" method="POST">
+                         <form action="/message/send" id="contactform" method="POST">
                          {{ csrf_field() }}  
                                 <input type="hidden" name="id" class="input" value="<?php echo $profiles->user_id; ?>">
                             <p>
@@ -944,7 +944,7 @@ function myFunction() {
     <section class="hidden-section contact-section">                                
        <section class="contact">                                    
           <h3 class="contact-head">Let's talk <span class="plane"><img src="clean_modern/images/plane.png" alt="" /></span></h3>
-          <form action="message/send" method="POST" id="contact-form" class="clearfix">
+          <form action="/message/send" method="POST" id="contact-form" class="clearfix">
           {{ csrf_field() }}
            <input type="hidden" name="id" class="input" value="<?php echo $profiles->user_id; ?>">
               <div class="left">

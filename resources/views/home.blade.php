@@ -513,7 +513,7 @@
 
                                       <div class="modal-footer">
                                          <div class="btn-group">
-                                             <button type="" class="btn btn-default" data-dismiss="modal" data-toggle="modal" data-target="#replymessage_{{ $message_value->id }}">Replay</button>  
+                                             <button type="" class="btn btn-default" data-dismiss="modal" data-toggle="modal" data-target="#replymessage_{{ $message_value->id }}">Reply</button>  
                                              <button type="" class="btn btn-default" data-dismiss="modal">Delete</button>
                                              <button type="" class="btn btn-default" data-dismiss="modal">Close</button> 
                                          </div>
