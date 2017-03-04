@@ -1230,7 +1230,7 @@ function myFunction() {
                     <div class="contact-form">
                         <h3 class="main-heading"><span>Let's keep in touch</span></h3>
                         <div id="contact-status"></div>
-                        <form action="message/send" id="contactform" method="POST">
+                        <form action="/message/send" id="contactform" method="POST">
                          {{ csrf_field() }}
                          <input type="hidden" name="id" class="input" value="<?php echo $profiles->user_id; ?>">
                             <p>
