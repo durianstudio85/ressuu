@@ -1248,6 +1248,7 @@ function myFunction() {
                             <input type="hidden" value="{{ csrf_token() }}" name="_token" >
                             <input type="submit" name="submit" value="Send your message" class="button">
                         </form>
+                        
                     </div>
                     <!-- /Contact Form -->
                 </div>

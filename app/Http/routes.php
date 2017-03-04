@@ -140,6 +140,7 @@ Route::post('/ads/updateAds/adminAds', 'AdminController@adsUpdateAdmin');
 
 
 /* message */
-Route::post('message/send', 'EmailController@messageSend');
+Route::post('/message/send', 'EmailController@messageSend');
 
-Route::post('message/sendtoClient', 'EmailController@messageSendtoClient');
+
+Route::post('/message/sendtoClient', 'EmailController@messageSendtoClient');
