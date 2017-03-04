@@ -533,7 +533,7 @@
                             <!-- Modal content-->
                             <div class="modal-content">
 
-                            <form method="POST" action="message/sendtoClient" class="theme1">
+                            <form method="POST" action="/message/sendtoClient" class="theme1">
                                       {{ csrf_field() }}  
                                        <div class="modal-header col-md-12 content-panel-header">
                                             <h3>Replay message of {{ $message_value->name }}</h3>
