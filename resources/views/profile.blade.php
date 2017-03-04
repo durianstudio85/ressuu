@@ -686,7 +686,140 @@
   <!-- Modal for viewJobs -->
 <!-- Modal -->                      
 <?php } ?>
-         
+
+<?php foreach ($list_message as $message_value) { ?>
+<!-- Modal -->
+ <!-- Modal for viewMessage -->
+              <section>
+                         <div class="modal fade" id="checkmessage_{{ $message_value->id }}" role="dialog">
+                          <div class="modal-dialog">
+                          
+                            <!-- Modal content-->
+                            <div class="modal-content">
+
+                            <form method="" action="jobs/addJob" class="theme1">
+                                       <div class="modal-header col-md-12 content-panel-header">
+                                            <h3>Message From {{ $message_value->name }}</h3>
+                                       </div>
+                                                
+                                       <div class="col-md-12  content-panel">
+                                            <div class="col-md-12">
+                                                      <p>Name:&nbsp; {{ $message_value->name }} </p>
+                                            </div>
+                                       </div>      
+
+                                       <div class="col-md-12  content-panel">
+                                            <div class="col-md-12">
+                                                      <p>Email:&nbsp; {{ $message_value->email }} </p>
+                                            </div>                                                    
+                                       </div> 
+                                       <div class="col-md-12  content-panel">
+                                            <div class="col-md-12">
+                                                      <p>Message </p>
+                                            </div>
+                                            <div class="col-md-12">
+                                                      <p>{{ $message_value->message }}</p>
+                                            </div>
+                                                          
+                                       </div>
+
+                                      <div class="modal-footer">
+                                         <div class="btn-group">
+                                             <button type="" class="btn btn-default" data-dismiss="modal" data-toggle="modal" data-target="#replymessage_{{ $message_value->id }}">Replay</button>  
+                                             <button type="" class="btn btn-default" data-dismiss="modal" data-toggle="modal" data-target="#deletemessage_{{ $message_value->id }}">Delete</button>
+                                             <button type="" class="btn btn-default" data-dismiss="modal">Close</button> 
+                                         </div>
+                                      </div>
+                            </form>
+                            </div>
+                  </div>
+                </div>
+              </section>
+<!-- Modal for viewMessage -->
+
+<!-- Modal for viewMessage -->
+              <section>
+                         <div class="modal fade" id="replymessage_{{ $message_value->id }}" role="dialog">
+                          <div class="modal-dialog">
+                          
+                            <!-- Modal content-->
+                            <div class="modal-content">
+
+                            <form method="POST" action="/message/sendtoClient" class="theme1">
+                                      {{ csrf_field() }}  
+                                       <div class="modal-header col-md-12 content-panel-header">
+                                            <h3>Replay message of {{ $message_value->name }}</h3>
+                                       </div>
+                                          <input class="form-control" name="id" type="hidden" value="<?php echo $message_value->id; ?>">
+                                          <input class="form-control" name="client_email" type="hidden" value="<?php echo $message_value->email; ?>">
+                                        <div class="form-group form-group">
+                                          <div class="col-md-offset-1 col-sm-10">
+                                            <input class="form-control" name="sender_subject" type="text" placeholder="Subject">
+                                          </div>
+                                        </div>    
+
+                                         <div class="form-group form-group">
+                                            <div class="col-md-offset-1 col-md-10">
+                                              <textarea class="form-control" name="sender_message" rows="5" cols="10">Message</textarea>
+                                            </div>
+                                           
+                                          </div>
+                                     <input type="hidden" value="{{ csrf_token() }}" name="_token" >
+
+                                      <div class="modal-footer">
+                                         <div class="btn-group">
+                                             <button type="submit" class="btn btn-default">Send</button>  
+                                             <button type="" class="btn btn-default" data-dismiss="modal">Close</button> 
+                                         </div>
+                                      </div>
+                            </form>
+                            </div>
+                    
+                  </div>
+                </div>
+              </section>
+<!-- Modal for viewMessage -->
+
+<!-- Modal for viewMessage -->
+              <section>
+                         <div class="modal fade" id="deletemessage_{{ $message_value->id }}" role="dialog">
+                          <div class="modal-dialog">
+                          
+                            <!-- Modal content-->
+                            <div class="modal-content">
+
+                            <form method="POST" action="/message/delete" class="theme1">
+                                      {{ csrf_field() }}  
+                                       <div class="modal-header col-md-12 content-panel-header">
+                                            <h3>Delete message of {{ $message_value->name }}</h3>
+                                       </div>
+                                          <input class="form-control" name="id" type="hidden" value="<?php echo $message_value->id; ?>">
+                                          <input class="form-control" name="client_email" type="hidden" value="<?php echo $message_value->email; ?>">
+                                          
+                                          <div class="col-md-12 content-panel-header">
+                                             <h3>Are you sure you want to delete this message?</h3>
+                                          </div> 
+
+                                     <input type="hidden" value="{{ csrf_token() }}" name="_token" >
+
+                                      <div class="modal-footer">
+                                         <div class="btn-group">
+                                             <button type="submit" class="btn btn-default">Delete</button>  
+                                             <button type="" class="btn btn-default" data-dismiss="modal">Close</button> 
+                                         </div>
+                                      </div>
+                            </form>
+                            </div>
+                    
+                  </div>
+                </div>
+              </section>
+<!-- Modal for viewMessage -->
+
+<!-- Modal -->      
+
+<?php } ?> 
+
 </div>
 
 

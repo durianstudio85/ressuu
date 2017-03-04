@@ -1,1 +1,10 @@
-<h1>Hellow this is a sample message</h1>
+<html>
+<head></head>
+<body style="color: black">
+<p><?php echo $message_value; ?></p>
+
+
+
+
+</body>
+</html>

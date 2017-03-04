@@ -513,8 +513,8 @@
 
                                       <div class="modal-footer">
                                          <div class="btn-group">
-                                             <button type="" class="btn btn-default" data-dismiss="modal" data-toggle="modal" data-target="#replymessage_{{ $message_value->id }}">Reply</button>  
-                                             <button type="" class="btn btn-default" data-dismiss="modal">Delete</button>
+                                             <button type="" class="btn btn-default" data-dismiss="modal" data-toggle="modal" data-target="#replymessage_{{ $message_value->id }}">Replay</button>  
+                                             <button type="" class="btn btn-default" data-dismiss="modal" data-toggle="modal" data-target="#deletemessage_{{ $message_value->id }}">Delete</button>
                                              <button type="" class="btn btn-default" data-dismiss="modal">Close</button> 
                                          </div>
                                       </div>
@@ -538,8 +538,8 @@
                                        <div class="modal-header col-md-12 content-panel-header">
                                             <h3>Replay message of {{ $message_value->name }}</h3>
                                        </div>
-                                          <input class="form-control" name="id" type="hidden" value="<?php echo $message_value->user_id; ?>">
-                                          
+                                          <input class="form-control" name="id" type="hidden" value="<?php echo $message_value->id; ?>">
+                                          <input class="form-control" name="client_email" type="hidden" value="<?php echo $message_value->email; ?>">
                                         <div class="form-group form-group">
                                           <div class="col-md-offset-1 col-sm-10">
                                             <input class="form-control" name="sender_subject" type="text" placeholder="Subject">
@@ -568,35 +568,45 @@
               </section>
 <!-- Modal for viewMessage -->
 
+<!-- Modal for viewMessage -->
+              <section>
+                         <div class="modal fade" id="deletemessage_{{ $message_value->id }}" role="dialog">
+                          <div class="modal-dialog">
+                          
+                            <!-- Modal content-->
+                            <div class="modal-content">
 
-<!-- Modal -->   
+                            <form method="POST" action="/message/delete" class="theme1">
+                                      {{ csrf_field() }}  
+                                       <div class="modal-header col-md-12 content-panel-header">
+                                            <h3>Delete message of {{ $message_value->name }}</h3>
+                                       </div>
+                                          <input class="form-control" name="id" type="hidden" value="<?php echo $message_value->id; ?>">
+                                          <input class="form-control" name="client_email" type="hidden" value="<?php echo $message_value->email; ?>">
+                                          
+                                          <div class="col-md-12 content-panel-header">
+                                             <h3>Are you sure you want to delete this message?</h3>
+                                          </div> 
+
+                                     <input type="hidden" value="{{ csrf_token() }}" name="_token" >
+
+                                      <div class="modal-footer">
+                                         <div class="btn-group">
+                                             <button type="submit" class="btn btn-default">Delete</button>  
+                                             <button type="" class="btn btn-default" data-dismiss="modal">Close</button> 
+                                         </div>
+                                      </div>
+                            </form>
+                            </div>
+                    
+                  </div>
+                </div>
+              </section>
+<!-- Modal for viewMessage -->
+
+<!-- Modal -->      
 
 <?php } ?>
-<?php
-if (Schema::hasTable('message')) {
-     echo "<script>console.log('Message Table Found');</script>";
-}
-if (Schema::hasColumn('message', 'user_id')) {
-     echo "<script>console.log('Message Table has user_id Column');</script>";
-}
 
-if (Schema::hasColumn('message', 'name')) {
-     echo "<script>console.log('Message Table has name Column');</script>";
-}
-
-if (Schema::hasColumn('message', 'email')) {
-     echo "<script>console.log('Message Table has Email Column');</script>";
-}
-
-if (Schema::hasColumn('message', 'message')) {
-     echo "<script>console.log('Message Table has message Column');</script>";
-}
-if (Schema::hasColumn('message', 'date')) {
-     echo "<script>console.log('Message Table has date Column');</script>";
-}
-if (Schema::hasColumn('message', 'status')) {
-     echo "<script>console.log('Message Table has status Column');</script>";
-}
-?>
 </div>
 @endsection

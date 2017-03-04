@@ -16,7 +16,7 @@ return [
     |
     */
 
-    'driver' => "mail",
+    'driver' => "mailgun",
 
     /*
     |--------------------------------------------------------------------------
@@ -29,7 +29,7 @@ return [
     |
     */
 
-    'host' => "smtp.mandrillapp.com",
+    'host' => "smtp.mailgun.org",
 
     /*
     |--------------------------------------------------------------------------
@@ -68,8 +68,8 @@ return [
     |
     */
 
-    'encryption' => env('MAIL_ENCRYPTION', 'ssl'),
-
+    //'encryption' => env('MAIL_ENCRYPTION', 'ssl'),
+    'encryption' => 'tls',
     /*
     |--------------------------------------------------------------------------
     | SMTP Server Username
@@ -108,5 +108,8 @@ return [
     */
 
     'sendmail' => '/usr/sbin/sendmail -bs',
+
+
+    'pretend' => true,
 
 ];
