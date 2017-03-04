@@ -10,6 +10,7 @@ use Input;
 use DB;
 use Mail;
 use App\User;
+use Request;
 
 class MessageController extends Controller
 {
@@ -46,6 +47,10 @@ class MessageController extends Controller
     public function messageSendtoClient(){
 
         $userId = Input::get('id');
+        $email_subject = "Thank you for getting!";
+
+        $admin_email = "Hellow World";
+        $email_from = "Test USer";
         // $inputEmail = Input::get('email');
         // $inputMessage = Input::get('message');
         // $inputDate = date('Y-m-d');
@@ -67,19 +72,26 @@ class MessageController extends Controller
         //                'date'        => $inputDate
         // ]);   
 
-        $user = User::findOrFail($userId);
+        
 
 
-        Mail::send('email.sendtoClient',['user' => $user], function ($message) {
-		    $message->from('us@example.com', 'Laravel');
+        //     Mail::send('email.sendtoClient',['user' => $user], function ($message) {
+        //     $message->from('us@example.com', 'Laravel');
 
-		    $message->to('ocojcastro@gmail.com')->subject('Your Reminder!');
-		});
+        //     $message->to('ocojcastro@gmail.com')->subject('Your Reminder!');
+        // });
+        $headers = 'From: '.$email_from."\r\n".
+ 
+        'Reply-To: '.$email_from."\r\n" .
+         
+        'X-Mailer: PHP/' . phpversion();
 
+        @mail("ocojcastro@gmail.com", $email_subject, $admin_email, $headers);  
 
         return back();
-
     }
+
+   
 
     
 
