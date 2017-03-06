@@ -239,7 +239,7 @@
             <div class="col-md-9" >
                       <div class="content-panel-status col-xs-12 col-md-12">   
                             <div class="col-sm-2 div">
-                                   <img class="img-responsive profile-pic" src="images/messenger_icon.png">
+                                   <img class="img-responsive" src="images/messenger_icon.png">
                             </div>
                             <div class="col-sm-10 div">
                                   <h4>
