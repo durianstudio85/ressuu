@@ -30,7 +30,7 @@ Route::get('/jobs', 'HomeController@jobs');
 Route::get('/setting', 'HomeController@setting');
 Route::get('/portfolio', 'HomeController@portfolio');
 Route::get('/resume', 'HomeController@resume');
-
+Route::get('/message', 'MessageController@message');
 
 //edit/update
 Route::get('/profile/edit', 'HomeController@edit');

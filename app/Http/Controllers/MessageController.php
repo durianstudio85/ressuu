@@ -15,6 +15,77 @@ use App\Http\Controllers\Controller;
 class MessageController extends Controller
 {
     
+
+    public function message()
+    {
+
+    $userId = Auth::id();
+    $name = Auth::user()->name;
+    $if_exist = DB::table('profiles')->where('user_id',$userId)->count();
+    $userProfile = DB::table('profiles')->where('user_id',$userId)->first();
+    $userFeeds = DB::table('news_feeds')
+                ->where('user_id', $userId)
+                ->orderBy('date', 'desc')
+                ->get();            
+
+    //$userFeeds = DB::select('select * from news_feeds where user_id = :id', ['id' => $userId]);   
+    $usersFile = DB::table('users')
+                ->where('id', $userId)
+                ->get();
+    //$FollowedUsers = DB::table('users_follow')->where('user_id',$userId)->count();            
+    // $userFollow = DB::table('profiles')->orderByRaw("RAND()")->take(3)->get();
+    // $userFollow2 = DB::table('profiles')->orderByRaw("RAND()")->take(2)->get();        
+    $userSettings = DB::table('settings')->where('user_id',$userId)->first(); 
+    $userAds = DB::table('ads')->where([
+                     'area' => 'USERDASHBOARD',
+                     'status' => 'ACTIVE'
+                  ])->first();   
+    
+    $timeline = DB::table('dashboard_timeline')->where('user_id', $userId)
+                ->orderBy('id', 'desc')
+                ->get();
+    $count_job = DB::table('job')->count();          
+
+    
+    $if_exist_settings = DB::table('settings')->where('user_id',$userId)->count();  
+
+    $no_message = DB::table('message')->where([
+                     'user_id' => $userId,
+                     'status' => 'PENDING'
+                  ])->count(); 
+    
+    $list_message = DB::table('message')->where([
+                     'user_id' => $userId,
+                     'status' => 'PENDING'
+                  ])->get(); 
+
+
+
+        return view('message')
+                ->with("userProfile",$userProfile)
+                ->with("userFeeds",$userFeeds)
+                ->with("usersFile",$usersFile)
+                ->with("name",$name)
+                ->with("if_exist",$if_exist)
+                ->with("if_exist_settings",$if_exist_settings)
+                ->with("userSettings",$userSettings)
+                // ->with("userFollow",$userFollow)
+                // ->with("userFollow2",$userFollow2)
+                // ->with("FollowedUsers",$FollowedUsers)
+                ->with("userAds",$userAds)
+                ->with("timeline",$timeline)
+                ->with("count_job",$count_job)
+                ->with("no_message",$no_message)
+                ->with("list_message",$list_message)
+
+
+       ;
+   
+
+    }
+
+
+    
     public function messageSend(){
 
         $userId = Input::get('id');

@@ -174,28 +174,25 @@
 
 
              <nav class="row sidebar-menus">
-                  <ul>
-                        <a href="{{ url('/home') }}"><li  class="menuactive"><span class="glyphicon glyphicon-inbox">&nbsp;</span>Dashboard</li></a>
-
-                         <?php if ($if_exist_settings == 1) { ?>
-
-                             <a href="https://ressuu.me/cv/<?php echo $userSettings->permalink; ?>" target="_blank" ><li><span class="glyphicon glyphicon-list-alt">&nbsp;</span>My CV</li></a>
-                             
-                         <?php } ?> 
-                        <!----> 
-                        <?php if($no_message == 0){ ?>
-                          <a href="{{ url('/message') }}"><li class=""><span class="glyphicon glyphicon-envelope">&nbsp;</span>Message</li></a>                           
-                        <?php }else { ?> 
-                          <a href="{{ url('/message') }}"><li class=""><span class="glyphicon glyphicon-envelope">&nbsp;</span>Message</li><span class="jobbagde"><?php echo $no_message;?></a>   
-                        <?php } ?>
-                        <!---->
-                        <a href="{{ url('/profile') }}"><li><span class="glyphicon glyphicon-star">&nbsp;</span>Profile</li></a>
-                        <a href="{{ url('/resume') }}"><li><span class="glyphicon glyphicon-flag">&nbsp;</span>Resume</li></a>
-                        <a href="{{ url('/portfolio') }}"><li><span class="glyphicon glyphicon-send">&nbsp;</span>Portfolio</li></a>
-                        <a href="{{ url('/jobs') }}"><li><span class="glyphicon glyphicon-calendar">&nbsp;</span>Jobs</li><span class="jobbagde"><?php echo $count_job; ?></span></a>    
-                        <a href="{{ url('/setting') }}"><li><span class="glyphicon glyphicon-cog">&nbsp;</span>Settings</li></a>
-                        <a href="{{ url('/logout') }}"><li><span class="glyphicon glyphicon-off">&nbsp;</span>Logout</li></a>
-                  </ul>
+                <ul>
+                <a href="{{ url('/home') }}"><li><span class="glyphicon glyphicon-inbox">&nbsp;</span>Dashboard</li></a>
+                 <?php if ($if_exist_settings == 1) { ?>
+                  <a href="https://ressuu.me/cv/<?php echo $userSettings->permalink; ?>" target="_blank" ><li><span class="glyphicon glyphicon-list-alt">&nbsp;</span>My CV</li></a> 
+                 <?php } ?> 
+                 <!----> 
+                <?php if($no_message == 0){ ?>
+                  <a href="{{ url('/message') }}"><li class="menuactive"><span class="glyphicon glyphicon-envelope">&nbsp;</span>Message</li></a>                           
+                <?php }else { ?> 
+                  <a href="{{ url('/message') }}"><li class="menuactive"><span class="glyphicon glyphicon-envelope">&nbsp;</span>Message</li><span class="jobbagde"><?php echo $no_message;?></a>   
+                <?php } ?>
+                 <!---->
+                <a href="{{ url('/profile') }}"><li><span class="glyphicon glyphicon-star">&nbsp;</span>Profile</li></a>
+                <a href="{{ url('/resume') }}"><li><span class="glyphicon glyphicon-flag">&nbsp;</span>Resume</li></a>
+                <a href="{{ url('/portfolio') }}"><li><span class="glyphicon glyphicon-send">&nbsp;</span>Portfolio</li></a>
+                <a href="{{ url('/jobs') }}"><li><span class="glyphicon glyphicon-calendar">&nbsp;</span>Jobs</li><span class="jobbagde"><?php echo $count_job; ?></span></a>    
+                <a href="{{ url('/setting') }}"><li><span class="glyphicon glyphicon-cog">&nbsp;</span>Settings</li></a>
+                <a href="{{ url('/logout') }}"><li><span class="glyphicon glyphicon-off">&nbsp;</span>Logout</li></a>
+                </ul>
               </nav>
 
 </sidebar>
@@ -229,168 +226,31 @@
 
 <?php  foreach ($timeline as $value) { ?><!-- foreach -->
 
-<?php  if($value->category == "Job"){ ?><!-- if -->
+<?php if($value->category == "Send Message"){ ?> 
 
-<?php  $jobInfo = DB::table('job')->where('id',$value->category_id)->first(); ?>    
-  
-<div class="col-xs-12 col-md-12 content-panel-header">
-            
-            <div class="col-md-10" >
-                      <div class="content-panel-status col-xs-12 col-md-12">   
-                            <div class="col-sm-2 div">
-                                <img class="img-responsive profile-pic" src="joblogo/<?php echo $jobInfo->company_picture; ?>">
-                            </div>
-                            <div class="col-sm-10 div">
-                                  <h4><?php echo $jobInfo->company_name ?></h4>
-                                  <p><?php echo $value->activity; ?> <a href="" data-toggle="modal" data-target="#newsfeed_{{ $value->id }}"><span>check it here.</span></a></p>
-                                  <div><!--<a href="#">Link</a> | <a href="#">Comment</a>--></div>
-                            </div>       
-                      </div>
-            </div>
-             <div class="col-xs-12 col-md-2 content-panel-lc"> 
+<?php  $if_message_exist = DB::table('message')->where('id',$value->category_id)->count(); ?>   
 
-                              <p><?php
-                              
-                              if(!empty($value->date)){
-                               
-                                 $value_date = date("Y-m-d", strtotime( $value->date ) );
-                                 $from=date_create(date('Y-m-d'));
-                                 $to=date_create($value_date);
-                                 $diff=date_diff($to,$from);
-                                 $days_diff = $diff->format('%a');
+<?php  if($if_message_exist != 0){ ?>
 
-                                 if($days_diff == "0"){
-                                  echo "Just now";
-                                 }else{
-                                  echo $diff->format('%a Days Ago');
-                                 }
-
-
-                              }
-
-                               ?>
-                               </p>
-                                
-            </div>
-
-  </div>
-    
-  <!-- Modal for newsFeed -->
-          <!-- Modal for viewJobs -->
-                                      <section>
-
-                                                 <div class="modal fade" id="newsfeed_{{ $value->id }}" role="dialog">
-                                                  <div class="modal-dialog">
-                                                  
-                                                    <!-- Modal content-->
-                                                    <div class="modal-content">
-
-                                                    <form method="" action="jobs/addJob" class="theme1">
-                                                               <div class="modal-header col-md-12 content-panel-header">
-                                                                    <h3> {{ $jobInfo->company_job }}</h3>
-                                                               </div>
-                                                                        
-                                                               <div class="col-md-12  content-panel">
-                                                                    <div class="col-md-4">
-                                                                              <p>Company Name: </p>
-                                                                    </div>
-                                                                    <div class="col-md-7">
-                                                                              <p>{{ $jobInfo->company_name }}</p>
-                                                                    </div>
-                                                                          
-                                                               </div>      
-
-                                                               <div class="col-md-12  content-panel">
-                                                                    <div class="col-md-4">
-                                                                              <p>Company Address: </p>
-                                                                    </div>
-                                                                    <div class="col-md-7">
-                                                                              <p>{{ $jobInfo->company_address }}</p>
-                                                                    </div>
-                                                                     
-                                                               </div> 
-
-                                                               <div class="col-md-12  content-panel">
-                                                                    <div class="col-md-4">
-                                                                              <p>Salary Rate </p>
-                                                                    </div>  
-                                                                    <div class="col-md-7">
-                                                                              <p class="job_salary">{{ $jobInfo->company_rate }}</p>
-                                                                    </div>
-                                                                                  
-                                                               </div>
-
-                                                               <div class="col-md-12  content-panel">
-                                                                    <div class="col-md-12">
-                                                                              <p>About Company: </p>
-                                                                    </div>
-                                                                    <div class="col-md-12">
-                                                                              <p>{{ $jobInfo->company_details }}</p>
-                                                                    </div>
-                                                                                  
-                                                               </div>
-
-                                                               <div class="col-md-12  content-panel">
-                                                                    <div class="col-md-12">
-                                                                              <p>Job Description: </p>
-                                                                    </div>
-                                                                    <div class="col-md-12">
-                                                                              <p>{!! nl2br( $jobInfo->company_status) !!}</p>
-                                                                    </div>
-                                                                                  
-                                                               </div>
-
-                                                              <div class="modal-footer">
-                                                                   <button type="" class="btn btn-default" data-dismiss="modal">Close</button> 
-                                                              </div>
-                                                    </form>
-                                                    </div>
-                                            
-                                          </div>
-                                        </div>
-
-                                      </section>
-                  <!-- Modal for viewJobs -->
- <!-- Modal for newsFeed -->         
-<?php }if($value->category == "Send Message"){ ?> 
-
-
-<?php  $messageInfo = DB::table('message')->where('id',$value->category_id)->count(); ?>   
-
+<?php  $messageInfo = DB::table('message')->where('id',$value->category_id)->first(); ?>   
 
  <div class="col-xs-12 col-md-12 content-panel-header">
             
-            <div class="col-md-10" >
+            <div class="col-md-9" >
                       <div class="content-panel-status col-xs-12 col-md-12">   
                             <div class="col-sm-2 div">
-                                <?php if ($if_exist == 1) { ?>
-      
-                                <?php if(!empty($userProfile->profile_picture)  AND $userProfile->profile_picture != " " ){ ?>
-                                  
                                    <img class="img-responsive profile-pic" src="images/messenger_icon.png">
-                                <?php  }else{ ?>
-                                  <img class="img-responsive profile-pic" src="profilepic/default_avatar.jpg">
-                                <?php } ?>
-
-                                <?php }else{ ?>
-                                  <img class="img-responsive profile-pic" src="profilepic/default_avatar.jpg" >
-                              <?php } ?> 
                             </div>
                             <div class="col-sm-10 div">
                                   <h4>
-                                    <?php if ($messageInfo == 0) { ?>
-                                         <?php echo$userProfile->name; ?>
-                                    <?php } else { ?>  
-                                         <?php echo$userProfile->name; ?>
-                                    <?php } ?>
-                                        
+                                    <?php echo $messageInfo->name; ?>  
                                   </h4>
-                                  <p><?php echo $value->activity; ?> <!--<a href="" data-toggle="modal" data-target="#newsfeed_{{ $value->id }}"><span>check it here.</span></a>--></p>
-                                  <div><!--<a href="#">Link</a> | <a href="#">Comment</a>--></div>
+                                  <p>New message from <?php echo $messageInfo->email; ?></p>
+                                  <div></div>
                             </div>       
                       </div>
             </div>
-             <div class="col-xs-12 col-md-2 content-panel-lc">      
+             <div class="col-xs-12 col-md-3 content-panel-lc"> 
                               <p><?php
                               
                               if(!empty($value->date)){
@@ -412,67 +272,144 @@
 
                                ?>
                                </p>
+                        <div class="btn-group btn-group-xs" role="group" aria-label="...">
+                             <button data-toggle="modal" data-target="#Mreplay_{{ $messageInfo->id }}" type="button" class="btn btn-success">REPLY</button>
+                             <button data-toggle="modal" data-target="#Mdelete_{{ $messageInfo->id }}" type="button" class="btn btn-success">DELETE</button>
+                             <button data-toggle="modal" data-target="#Mview_{{ $messageInfo->id }}" type="button" class="btn btn-success">VIEW</button>          
+                        </div> 
                                 
             </div>
 
-  </div>
+ </div>
 
-<?php }else{ ?>
+ <!-- Modal -->
+ <!-- Modal for viewMessage -->
+              <section>
+                         <div class="modal fade" id="Mview_{{ $messageInfo->id }}" role="dialog">
+                          <div class="modal-dialog">
+                          
+                            <!-- Modal content-->
+                            <div class="modal-content">
 
- <div class="col-xs-12 col-md-12 content-panel-header">
-            
-            <div class="col-md-10" >
-                      <div class="content-panel-status col-xs-12 col-md-12">   
-                            <div class="col-sm-2 div">
-                                <?php if ($if_exist == 1) { ?>
-      
-                                <?php if(!empty($userProfile->profile_picture)  AND $userProfile->profile_picture != " " ){ ?>
-                                  
-                                   <img class="img-reponsive profile-pic" src="profilepic/<?php echo $userProfile->profile_picture; ?>">
-                                <?php  }else{ ?>
-                                  <img class="img-responsive profile-pic" src="profilepic/default_avatar.jpg">
-                                <?php } ?>
+                            <form method="" action="jobs/addJob" class="theme1">
+                                       <div class="modal-header col-md-12 content-panel-header">
+                                            <h3>Message From {{ $messageInfo->name }}</h3>
+                                       </div>
+                                                
+                                       <div class="col-md-12  content-panel">
+                                            <div class="col-md-12">
+                                                      <p>Name:&nbsp; {{ $messageInfo->name }} </p>
+                                            </div>
+                                       </div>      
 
-                                <?php }else{ ?>
-                                  <img class="img-responsive profile-pic" src="profilepic/default_avatar.jpg" >
-                              <?php } ?> 
+                                       <div class="col-md-12  content-panel">
+                                            <div class="col-md-12">
+                                                      <p>Email:&nbsp; {{ $messageInfo->email }} </p>
+                                            </div>                                                    
+                                       </div> 
+                                       <div class="col-md-12  content-panel">
+                                            <div class="col-md-12">
+                                                      <p>Message </p>
+                                            </div>
+                                            <div class="col-md-12">
+                                                      <p>{{ $messageInfo->message }}</p>
+                                            </div>
+                                                          
+                                       </div>
+
+                                      <div class="modal-footer">
+                                         <div class="btn-group">
+                                             <button type="" class="btn btn-default" data-dismiss="modal">Close</button> 
+                                         </div>
+                                      </div>
+                            </form>
                             </div>
-                            <div class="col-sm-10 div">
-                                  <h4><?php echo$userProfile->name; ?></h4>
-                                  <p><?php echo $value->activity; ?> <!--<a href="" data-toggle="modal" data-target="#newsfeed_{{ $value->id }}"><span>check it here.</span></a>--></p>
-                                  <div><!--<a href="#">Link</a> | <a href="#">Comment</a>--></div>
-                            </div>       
-                      </div>
-            </div>
-             <div class="col-xs-12 col-md-2 content-panel-lc">      
-                              <p><?php
-                              
-                              if(!empty($value->date)){
-                               
-                                 $value_date = date("Y-m-d", strtotime( $value->date ) );
-                                 $from=date_create(date('Y-m-d'));
-                                 $to=date_create($value_date);
-                                 $diff=date_diff($to,$from);
-                                 $days_diff = $diff->format('%a');
+                  </div>
+                </div>
+              </section>
+<!-- Modal for viewMessage -->
 
-                                 if($days_diff == "0"){
-                                  echo "Just now";
-                                 }else{
-                                  echo $diff->format('%a Days Ago');
-                                 }
+<!-- Modal for replayMessage -->
+              <section>
+                         <div class="modal fade" id="Mreplay_{{ $messageInfo->id }}" role="dialog">
+                          <div class="modal-dialog">
+                          
+                            <!-- Modal content-->
+                            <div class="modal-content">
 
+                            <form method="POST" action="/message/sendtoClient" class="theme1">
+                                      {{ csrf_field() }}  
+                                       <div class="modal-header col-md-12 content-panel-header">
+                                            <h3>Replay message of {{ $messageInfo->name }}</h3>
+                                       </div>
+                                          <input class="form-control" name="id" type="hidden" value="<?php echo $messageInfo->id; ?>">
+                                          <input class="form-control" name="client_email" type="hidden" value="<?php echo $messageInfo->email; ?>">
+                                        <div class="form-group form-group">
+                                          <div class="col-md-offset-1 col-sm-10">
+                                            <input class="form-control" name="sender_subject" type="text" placeholder="Subject">
+                                          </div>
+                                        </div>    
 
-                              }
+                                         <div class="form-group form-group">
+                                            <div class="col-md-offset-1 col-md-10">
+                                              <textarea class="form-control" name="sender_message" rows="5" cols="10">Message</textarea>
+                                            </div>
+                                           
+                                          </div>
+                                     <input type="hidden" value="{{ csrf_token() }}" name="_token" >
 
-                               ?>
-                               </p>
-                                
-            </div>
+                                      <div class="modal-footer">
+                                         <div class="btn-group">
+                                             <button type="submit" class="btn btn-default">Send</button>  
+                                             <button type="" class="btn btn-default" data-dismiss="modal">Close</button> 
+                                         </div>
+                                      </div>
+                            </form>
+                            </div>
+                    
+                  </div>
+                </div>
+              </section>
+<!-- Modal for replayMessage -->
 
-  </div>
+<!-- Modal for deleteMessage -->
+              <section>
+                         <div class="modal fade" id="Mdelete_{{ $messageInfo->id }}" role="dialog">
+                          <div class="modal-dialog">
+                          
+                            <!-- Modal content-->
+                            <div class="modal-content">
 
+                            <form method="POST" action="/message/delete" class="theme1">
+                                      {{ csrf_field() }}  
+                                       <div class="modal-header col-md-12 content-panel-header">
+                                            <h3>Delete message of {{ $messageInfo->name }}</h3>
+                                       </div>
+                                          <input class="form-control" name="id" type="hidden" value="<?php echo $messageInfo->id; ?>">
+                                          <input class="form-control" name="client_email" type="hidden" value="<?php echo $messageInfo->email; ?>">
+                                          
+                                          <div class="col-md-12 content-panel-header">
+                                             <h3>Are you sure you want to delete this message?</h3>
+                                          </div> 
 
+                                     <input type="hidden" value="{{ csrf_token() }}" name="_token" >
 
+                                      <div class="modal-footer">
+                                         <div class="btn-group">
+                                             <button type="submit" class="btn btn-default">Delete</button>  
+                                             <button type="" class="btn btn-default" data-dismiss="modal">Close</button> 
+                                         </div>
+                                      </div>
+                            </form>
+                            </div>
+                    
+                  </div>
+                </div>
+              </section>
+<!-- Modal for deleteMessage -->
+
+<!-- Modal -->   
+<?php } ?>
 
 <?php } ?><!-- if -->
  
@@ -480,124 +417,12 @@
 
 <?php } ?><!-- if -->
  
-
-
-<div class="col-xs-12 col-md-12 content-panel-header">
-            
-            <div class="col-md-10" >
-                      <div class="content-panel-status col-xs-12 col-md-12">   
-                            <div class="col-sm-2 div">
-                                <?php if ($if_exist == 1) { ?>
-      
-                                <?php if(!empty($userProfile->profile_picture)  AND $userProfile->profile_picture != " " ){ ?>
-                                  <img class="img-reponsive profile-pic" src="profilepic/<?php echo $userProfile->profile_picture; ?>">
-                                <?php  }else{ ?>
-                                  <img class="img-responsive profile-pic" src="profilepic/default_avatar.jpg">
-                                <?php } ?>
-
-                                <?php }else{ ?>
-                                  <img class="img-responsive profile-pic" src="profilepic/default_avatar.jpg" >
-                              <?php } ?> 
-                            </div>
-                            <div class="col-sm-10 div">
-                                  <h4><?php echo$name; ?></h4>
-                                  <p>Created New Account <a><span></span></a></p>
-                                  <div><!--<a href="#">Link</a> | <a href="#">Comment</a>--></div>
-                            </div>       
-                      </div>
-            </div>
-             <div class="col-xs-12 col-md-2 content-panel-lc">      
-                              <p></p>
-                              <!--<img src="images/like.png"><span>12</span>
-                              <img src="images/comment.jpg"><span>12</span>  -->         
-            </div>
-
-  </div>
-
-
-
 </section>  
 
 </content> 
-<!-- Modal for newsFeed -->
-         <section>
-
-              <div class="modal fade" id="message" role="dialog">
-                  <div class="modal-dialog">
-                                                  
-                   <!-- Modal content-->
-                   <div class="modal-content">
-
-                              <form method="" action="jobs/addJob" class="theme1">
-                                       <div class="modal-header col-md-12 content-panel-header">
-                                            <h3>Message</h3>
-                                       </div>
-                                                
-                                       <div class="col-md-12  content-panel">
-                                            <div class="col-md-4">
-                                                  <p>Company Name: </p>
-                                            </div>
-                                            <div class="col-md-7">
-                                                  <p></p>
-                                            </div>
-                                                  
-                                       </div>      
-
-                                       <div class="col-md-12  content-panel">
-                                            <div class="col-md-4">
-                                                      <p>Company Address: </p>
-                                            </div>
-                                            <div class="col-md-7">
-                                                      <p></p>
-                                            </div>
-                                             
-                                       </div> 
-
-                                       <div class="col-md-12  content-panel">
-                                            <div class="col-md-4">
-                                                      <p>Salary Rate </p>
-                                            </div>  
-                                            <div class="col-md-7">
-                                                      <p class="job_salary"></p>
-                                            </div>
-                                                          
-                                       </div>
-
-                                       <div class="col-md-12  content-panel">
-                                            <div class="col-md-12">
-                                                      <p>About Company: </p>
-                                            </div>
-                                            <div class="col-md-12">
-                                                      <p></p>
-                                            </div>
-                                                          
-                                       </div>
-
-                                       <div class="col-md-12  content-panel">
-                                            <div class="col-md-12">
-                                                      <p>Job Description: </p>
-                                            </div>
-                                            <div class="col-md-12">
-                                                      <p></p>
-                                            </div>
-                                                          
-                                       </div>
-
-                                      <div class="modal-footer">
-                                           <button type="" class="btn btn-default" data-dismiss="modal">Close</button> 
-                                      </div>
-                            </form>
-                  </div>
-                      
-                 </div>
-              </div>
-
-          </section>
-<!-- Modal for newsFeed -->
-
-
-                       
+              
 <?php foreach ($list_message as $message_value) { ?>
+
  <!-- Modal -->
  <!-- Modal for viewMessage -->
               <section>
@@ -647,7 +472,7 @@
               </section>
 <!-- Modal for viewMessage -->
 
-<!-- Modal for viewMessage -->
+<!-- Modal for replayMessage -->
               <section>
                          <div class="modal fade" id="replymessage_{{ $message_value->id }}" role="dialog">
                           <div class="modal-dialog">
@@ -688,9 +513,9 @@
                   </div>
                 </div>
               </section>
-<!-- Modal for viewMessage -->
+<!-- Modal for replayMessage -->
 
-<!-- Modal for viewMessage -->
+<!-- Modal for deleteMessage -->
               <section>
                          <div class="modal fade" id="deletemessage_{{ $message_value->id }}" role="dialog">
                           <div class="modal-dialog">
@@ -724,11 +549,9 @@
                   </div>
                 </div>
               </section>
-<!-- Modal for viewMessage -->
+<!-- Modal for deleteMessage -->
 
 <!-- Modal -->   
-
-
 
 <?php } ?>
              
