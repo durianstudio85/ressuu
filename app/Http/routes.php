@@ -123,6 +123,8 @@ Route::post('/jobs/addJobs', 'AdminController@addJobs');
 Route::post('/jobs/editJobs', 'AdminController@editJobs');
 Route::get('/jobs/deleteJobs/{id}', 'AdminController@deleteJobs');
 
+Route::post('/jobs/applyJobs', 'HomeController@applyJobs');
+Route::post('/jobs/deleteJobNotification', 'HomeController@deleteJobNotification');
 
 Route::post('/settings/editSettings', 'AdminController@editSettings');
 

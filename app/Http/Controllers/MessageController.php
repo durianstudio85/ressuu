@@ -59,6 +59,20 @@ class MessageController extends Controller
                      'status' => 'PENDING'
                   ])->get(); 
 
+    $list_job = DB::table('job')->get();
+
+    $job_notification =  DB::table('user_notification')->where([
+                     'user_id' => $userId,
+                     'category' => 'Job',
+                     'status' => 'PENDING'
+                  ])->count();
+
+    $job_list_notification = DB::table('user_notification')->where([
+                     'user_id' => $userId,
+                     'category' => 'Job',
+                     'status' => 'PENDING'
+                  ])->get();
+
 
 
         return view('message')
@@ -77,8 +91,9 @@ class MessageController extends Controller
                 ->with("count_job",$count_job)
                 ->with("no_message",$no_message)
                 ->with("list_message",$list_message)
-
-
+                ->with("list_job",$list_job)
+                ->with("job_notification",$job_notification)
+                ->with("job_list_notification",$job_list_notification)
        ;
    
 

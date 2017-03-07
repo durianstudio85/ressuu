@@ -58,7 +58,6 @@ class HomeController extends Controller
                 ->get();
     
     $if_exist_settings = DB::table('settings')->where('user_id',$userId)->count(); 
-    $count_job = DB::table('job')->count();
 
     $no_message = DB::table('message')->where([
                      'user_id' => $userId,
@@ -66,6 +65,22 @@ class HomeController extends Controller
                   ])->count(); 
     $list_message = DB::table('message')->where([
                      'user_id' => $userId,
+                     'status' => 'PENDING'
+                  ])->get(); 
+
+    $count_job = DB::table('job')->count();
+
+    $list_job = DB::table('job')->get();
+
+    $job_notification =  DB::table('user_notification')->where([
+                     'user_id' => $userId,
+                     'category' => 'Job',
+                     'status' => 'PENDING'
+                  ])->count();
+
+    $job_list_notification = DB::table('user_notification')->where([
+                     'user_id' => $userId,
+                     'category' => 'Job',
                      'status' => 'PENDING'
                   ])->get(); 
 
@@ -85,6 +100,9 @@ class HomeController extends Controller
                 ->with("count_job",$count_job)
                 ->with("no_message",$no_message)
                 ->with("list_message",$list_message)
+                ->with("list_job",$list_job)
+                ->with("job_notification",$job_notification)
+                ->with("job_list_notification",$job_list_notification)
                
        ;
     
@@ -123,6 +141,20 @@ class HomeController extends Controller
                      'status' => 'PENDING'
                   ])->get();
 
+    $list_job = DB::table('job')->get();
+
+    $job_notification =  DB::table('user_notification')->where([
+                     'user_id' => $userId,
+                     'category' => 'Job',
+                     'status' => 'PENDING'
+                  ])->count();
+
+    $job_list_notification = DB::table('user_notification')->where([
+                     'user_id' => $userId,
+                     'category' => 'Job',
+                     'status' => 'PENDING'
+                  ])->get(); 
+
           return view('profile')
                      ->with("userProfile",$userProfile)
                      ->with("name",$name)
@@ -134,6 +166,9 @@ class HomeController extends Controller
                      ->with("count_job",$count_job)
                      ->with("no_message",$no_message)
                      ->with("list_message",$list_message)
+                     ->with("list_job",$list_job)
+                     ->with("job_notification",$job_notification)
+                     ->with("job_list_notification",$job_list_notification)
                    
           ;
                 
@@ -180,7 +215,22 @@ class HomeController extends Controller
     $list_message = DB::table('message')->where([
                      'user_id' => $userId,
                      'status' => 'PENDING'
-                  ])->get();      
+                  ])->get(); 
+
+    $list_job = DB::table('job')->get();
+
+
+    $job_notification =  DB::table('user_notification')->where([
+                     'user_id' => $userId,
+                     'category' => 'Job',
+                     'status' => 'PENDING'
+                  ])->count();
+
+    $job_list_notification = DB::table('user_notification')->where([
+                     'user_id' => $userId,
+                     'category' => 'Job',
+                     'status' => 'PENDING'
+                  ])->get();                   
 
         return view('resume')
                     ->with("userProfile",$userProfile)
@@ -196,6 +246,9 @@ class HomeController extends Controller
                       ->with("count_job",$count_job)
                       ->with("no_message",$no_message)
                     ->with("list_message",$list_message)
+                    ->with("list_job",$list_job)
+                    ->with("job_notification",$job_notification)
+                    ->with("job_list_notification",$job_list_notification)
                       
         ;
 
@@ -235,6 +288,20 @@ class HomeController extends Controller
                      'status' => 'PENDING'
                   ])->get();
 
+     $list_job = DB::table('job')->get();
+
+    $job_notification =  DB::table('user_notification')->where([
+                     'user_id' => $userId,
+                     'category' => 'Job',
+                     'status' => 'PENDING'
+                  ])->count();
+
+    $job_list_notification = DB::table('user_notification')->where([
+                     'user_id' => $userId,
+                     'category' => 'Job',
+                     'status' => 'PENDING'
+                  ])->get();
+
         return view('portfolio')
                  ->with("userProfile",$userProfile)
                  ->with("userPorfolios",$userPorfolios)
@@ -248,6 +315,9 @@ class HomeController extends Controller
                    ->with("count_job",$count_job)
                    ->with("no_message",$no_message)
                  ->with("list_message",$list_message)
+                  ->with("list_job",$list_job)
+                 ->with("job_notification",$job_notification)
+                ->with("job_list_notification",$job_list_notification)
                    
 
         ;
@@ -276,6 +346,20 @@ class HomeController extends Controller
                      'status' => 'PENDING'
                   ])->get(); 
 
+         $list_job = DB::table('job')->get();
+
+        $job_notification =  DB::table('user_notification')->where([
+                     'user_id' => $userId,
+                     'category' => 'Job',
+                     'status' => 'PENDING'
+                  ])->count();
+
+        $job_list_notification = DB::table('user_notification')->where([
+                     'user_id' => $userId,
+                     'category' => 'Job',
+                     'status' => 'PENDING'
+                  ])->get();
+
         return view('jobs')
                 ->with("userProfile",$userProfile)
                  ->with("name",$name)
@@ -287,6 +371,9 @@ class HomeController extends Controller
                   ->with("count_job",$count_job)
                   ->with("no_message",$no_message)
                 ->with("list_message",$list_message)
+                ->with("list_job",$list_job)
+                ->with("job_notification",$job_notification)
+                ->with("job_list_notification",$job_list_notification)
                   
         ;
     }
@@ -337,6 +424,21 @@ class HomeController extends Controller
                      'status' => 'PENDING'
                   ])->get();
 
+        $list_job = DB::table('job')->get();
+
+        $job_notification =  DB::table('user_notification')->where([
+                     'user_id' => $userId,
+                     'category' => 'Job',
+                     'status' => 'PENDING'
+                  ])->count();
+
+        $job_list_notification = DB::table('user_notification')->where([
+                     'user_id' => $userId,
+                     'category' => 'Job',
+                     'status' => 'PENDING'
+                  ])->get();
+
+
         return view('setting')
                 ->with("userProfile",$userProfile)
                 ->with("name",$name)
@@ -351,6 +453,9 @@ class HomeController extends Controller
                   ->with("count_job",$count_job)
                   ->with("no_message",$no_message)
                   ->with("list_message",$list_message)
+                  ->with("list_job",$list_job)
+                  ->with("job_notification",$job_notification)
+                  ->with("job_list_notification",$job_list_notification)
                 
         ;
 
@@ -1115,7 +1220,50 @@ class HomeController extends Controller
 
     }
 
+      public function applyJobs(){
 
+        $userId = Auth::id();
+        $job_id =  Input::get('job_id');
+        $inputDate = date('Y-m-d');
+        
+        $jobInfo = DB::table('job')->where('id',$job_id)->first(); 
+
+        $applicantId = DB::table('applicant')->insertGetId([
+                       'user_id' => $userId,
+                       'job_id' => $job_id,
+                       'date'=> $inputDate,
+                       'status'=> "PENDING"
+        ]);
+                
+        DB::table('dashboard_timeline')->insert([
+                       'user_id' => $userId,
+                       'category' => "Apply Jobs",
+                       'category_id' => $applicantId,
+                       'activity' => "Applying for ".$jobInfo->company_job." in ".$jobInfo->company_name,
+                       'date'=> $inputDate
+        ]);
+
+        return back();
+
+    }
+
+
+     public function deleteJobNotification(){
+
+        $id = Input::get('id');
+        $status = "Delete";
+
+        DB::table('user_notification')
+                  ->where('id', $id)
+                  ->update(array(
+                        'status' => $status
+                    ));
+
+        return back();
+
+    }
+
+    
 
 
 

@@ -43,7 +43,22 @@
                     <?php } ?>
                   </li>
                    <!---->
-                  <li><i class="glyphicon glyphicon-briefcase"></i></li>
+                   <li class="dropdown">
+                   <!----> 
+                    <?php if($job_notification == 0){ ?>
+                       <span class="glyphicon glyphicon-briefcase dropdown-toggle"></span>                         
+                    <?php }else { ?> 
+                        <span class="glyphicon glyphicon-briefcase naviconactive dropdown-toggle" data-toggle="dropdown"><span class="badge">
+                    <?php  echo $job_notification;?></span></span>
+                        <ul class="dropdown-menu drop-message">
+                        <?php foreach ($job_list_notification as $job_value) { ?>
+                          <?php  $jobInfo = DB::table('job')->where('id',$job_value->category_id)->first();    ?>
+                            <li><a href="" data-toggle="modal" data-target="#checkjobnotification_{{ $job_value->category_id }}"><span>New Jobs for <?php echo $jobInfo->company_name; ?></span></a></li>
+                        <?php } ?>
+                       </ul>
+                    <?php } ?>
+                    <!---->
+                  </li>
               </ul>
         </nav>
           <div class="col-md-6 col-sm-12 ">
@@ -206,10 +221,12 @@
                       <img src="images/cancel.png"  class="cancel-button">
                     </div>
 
-                    <div class="col-xs-12 col-md-12">
+                       <div class="col-xs-12 col-md-12">
+                          <?php  $your_application = DB::table('applicant')->where('user_id',Auth::id())->count(); ?>
                         <div class="col-xs-4 col-md-4 content-header-tabs">                        
                            <div class="jobs">
-                             <h4>1,890</h4>
+                           <?php $available_job =  $count_job - $your_application ; ?>
+                             <h4><?php echo $available_job; ?></h4>
                              <p>Jobs Available</p>
                              <button class="view">View</button>
                            </div>
@@ -217,7 +234,7 @@
                         </div>
                         <div class="col-xs-4 col-md-4 content-header-tabs">
                         <div class="jobs">
-                             <h4>250</h4>
+                             <h4>0</h4>
                              <p>In your location</p>
                              <button class="views">View</button>
                            </div>                        
@@ -226,7 +243,8 @@
                         </div>
                         <div class="col-xs-4 col-md-4 content-header-tabs">   
                         <div class="jobs">
-                             <h4>16</h4>
+                           
+                             <h4><?php echo $your_application; ?></h4>
                              <p>Your Application</p>
                              <button class="views">View</button>
                           </div>                     
@@ -554,6 +572,92 @@
 
 <?php } ?>         
 
+<?php foreach ($job_list_notification as $job_value) { ?>
+
+
+<?php $jobInfo = DB::table('job')->where('id',$job_value->category_id)->first();    ?>
+
+<!-- Modal for viewMessage -->
+  <section>
+             <div class="modal fade" id="checkjobnotification_{{ $jobInfo->id }}" role="dialog">
+              <div class="modal-dialog">
+              
+                <!-- Modal content--> 
+                <div class="modal-content">
+
+                <form method="POST" action="/jobs/deleteJobNotification" class="theme1">
+                  {{ csrf_field() }}  
+                           <input type="hidden" name="id" value="<?php echo $job_value->id; ?>" >
+
+                           <div class="modal-header col-md-12 content-panel-header">
+                                <h3> {{ $jobInfo->company_job }}</h3>
+                           </div>
+                                    
+                           <div class="col-md-12  content-panel">
+                                <div class="col-md-4">
+                                          <p>Company Name: </p>
+                                </div>
+                                <div class="col-md-7">
+                                          <p>{{ $jobInfo->company_name }}</p>
+                                </div>
+                                      
+                           </div>      
+
+                           <div class="col-md-12  content-panel">
+                                <div class="col-md-4">
+                                          <p>Company Address: </p>
+                                </div>
+                                <div class="col-md-7">
+                                          <p>{{ $jobInfo->company_address }}</p>
+                                </div>
+                                 
+                           </div> 
+
+                           <div class="col-md-12  content-panel">
+                                <div class="col-md-4">
+                                          <p>Salary Rate </p>
+                                </div>  
+                                <div class="col-md-7">
+                                          <p class="job_salary">{{ $jobInfo->company_rate }}</p>
+                                </div>
+                                              
+                           </div>
+
+                           <div class="col-md-12  content-panel">
+                                <div class="col-md-12">
+                                          <p>About Company: </p>
+                                </div>
+                                <div class="col-md-12">
+                                          <p>{{ $jobInfo->company_details }}</p>
+                                </div>
+                                              
+                           </div>
+
+                           <div class="col-md-12  content-panel">
+                                <div class="col-md-12">
+                                          <p>Job Description: </p>
+                                </div>
+                                <div class="col-md-12">
+                                          <p>{!! nl2br( $jobInfo->company_status) !!}</p>
+                                </div>
+                                              
+                           </div>
+                           <input type="hidden" value="{{ csrf_token() }}" name="_token" >
+                          <div class="modal-footer">
+                               <button type="submit" class="btn btn-default">Delete</button>
+                               <button type="" class="btn btn-default" data-dismiss="modal">Close</button> 
+                          </div>
+
+                </form>
+
+                </div>
+      </div>
+    </div>
+  </section>
+<!-- Modal for viewMessage -->
+  
+                           
+<?php } ?>   
 
 </div>
 @endsection

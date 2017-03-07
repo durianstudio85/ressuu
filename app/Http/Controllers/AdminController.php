@@ -260,6 +260,16 @@ class AdminController extends Controller
                           'date'=> $inputDate
                      ]);
 
+                     DB::table('user_notification')->insert([
+                          'user_id' => $users->id,
+                          'category' => "Job",
+                          'category_id' => $getLastId,
+                          'status' => "PENDING",
+                          'date'=> $inputDate
+                     ]); 
+
+
+
                   }
 
 
