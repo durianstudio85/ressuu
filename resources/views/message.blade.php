@@ -53,7 +53,7 @@
                         <ul class="dropdown-menu drop-message">
                         <?php foreach ($job_list_notification as $job_value) { ?>
                           <?php  $jobInfo = DB::table('job')->where('id',$job_value->category_id)->first();    ?>
-                            <li><a href="" data-toggle="modal" data-target="#checkjobnotification_{{ $job_value->category_id }}"><span>New Jobs for <?php echo $jobInfo->company_name; ?></span></a></li>
+                            <li><a href="" data-toggle="modal" data-target="#checkjobnotification_{{ $job_value->category_id }}"><span>New job post from <?php echo $jobInfo->company_name; ?></span></a></li>
                         <?php } ?>
                        </ul>
                     <?php } ?>
