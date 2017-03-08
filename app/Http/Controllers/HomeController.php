@@ -360,6 +360,8 @@ class HomeController extends Controller
                      'status' => 'PENDING'
                   ])->get();
 
+        $job_application = DB::table('applicant')->where('user_id',$userId)->get();
+
         return view('jobs')
                 ->with("userProfile",$userProfile)
                  ->with("name",$name)
@@ -374,6 +376,7 @@ class HomeController extends Controller
                 ->with("list_job",$list_job)
                 ->with("job_notification",$job_notification)
                 ->with("job_list_notification",$job_list_notification)
+                 ->with("job_application",$job_application)
                   
         ;
     }

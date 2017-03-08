@@ -58,7 +58,7 @@
                        </ul>
                     <?php } ?>
                     <!---->
-                  </li>
+                  </li> 
               </ul>
         </nav>
           <div class="col-md-6 col-sm-12 ">
@@ -193,7 +193,7 @@
                              <a href="https://ressuu.me/cv/<?php echo $userSettings->permalink; ?>" target="_blank" ><li><span class="glyphicon glyphicon-list-alt">&nbsp;</span>My CV</li></a>
                              
                          <?php } ?>
-                         <!----> 
+                        <!----> 
                         <?php if($no_message == 0){ ?>
                           <a href="{{ url('/message') }}"><li class=""><span class="glyphicon glyphicon-envelope">&nbsp;</span>Message</li></a>                           
                         <?php }else { ?> 
@@ -203,7 +203,7 @@
                         <a href="{{ url('/profile') }}"><li><span class="glyphicon glyphicon-star">&nbsp;</span>Profile</li></a>
                         <a href="{{ url('/resume') }}"><li><span class="glyphicon glyphicon-flag">&nbsp;</span>Resume</li></a>
                         <a href="{{ url('/portfolio') }}"><li><span class="glyphicon glyphicon-send">&nbsp;</span>Portfolio</li></a>
-                        <a href="{{ url('/jobs') }}"><li   class="menuactive"><span class="glyphicon glyphicon-calendar">&nbsp;</span>Jobs</li><span class="jobbagde"><?php echo $count_job; ?></span></a>    
+                        <a href="{{ url('/jobs') }}"><li   class="menuactive"><span class="glyphicon glyphicon-calendar">&nbsp;</span>Jobs</li></a>    
                         <a href="{{ url('/setting') }}"><li><span class="glyphicon glyphicon-cog">&nbsp;</span>Settings</li></a>
                         <a href="{{ url('/logout') }}"><li><span class="glyphicon glyphicon-off">&nbsp;</span>Logout</li></a>
                   </ul>
@@ -221,14 +221,14 @@
                       <img src="images/cancel.png"  class="cancel-button">
                     </div>
 
-                       <div class="col-xs-12 col-md-12">
+                    <div class="col-xs-12 col-md-12">
                           <?php  $your_application = DB::table('applicant')->where('user_id',Auth::id())->count(); ?>
                         <div class="col-xs-4 col-md-4 content-header-tabs">                        
                            <div class="jobs">
                            <?php $available_job =  $count_job - $your_application ; ?>
                              <h4><?php echo $available_job; ?></h4>
                              <p>Jobs Available</p>
-                             <button class="view">View</button>
+                             <button class="view" data-toggle="modal" data-target="#viewAvailable">View</button>
                            </div>
 
                         </div>
@@ -246,7 +246,7 @@
                            
                              <h4><?php echo $your_application; ?></h4>
                              <p>Your Application</p>
-                             <button class="views">View</button>
+                             <button class="views" data-toggle="modal" data-target="#viewApplication" >View</button>
                           </div>                     
                            
 
@@ -274,7 +274,7 @@
             </div>
              <div class="col-xs-4 col-md-2 apply">      
                         <p>
-                            <?php
+                          <?php
                               
                               if(!empty($jobs->date)){
                                
@@ -293,151 +293,94 @@
 
                               }
 
-                               ?> 
-
+                               ?>
                         </p>
                         <?php  $if_apply = DB::table('applicant')->where(['user_id' => Auth::id(),'job_id'=>$jobs->id])->count(); ?>
                         <?php if($if_apply == 0){ ?>
                            <button data-toggle="modal" data-target="#jobs_{{ $jobs->id }}">Apply</button> 
                         <?php }else{ ?> 
                            <button data-toggle="">Applied</button>
-                        <?php } ?>          
+                        <?php } ?>
+                       
+                                  
             </div>
 
           </div>
 
-            <!-- Modal for deleteSkills -->
-                 <section>
+            <!-- Modal for apply Job -->
+                                      <section>
 
-                             <div class="modal fade" id="jobs_{{ $jobs->id }}" role="dialog">
-                              <div class="modal-dialog">
-                              
-                                <!-- Modal content-->
-                                <div class="modal-content">
+                                                 <div class="modal fade" id="jobs_{{ $jobs->id }}" role="dialog">
+                                                  <div class="modal-dialog">
+                                                  
+                                                    <!-- Modal content-->
+                                                    <div class="modal-content">
 
-                                <form method="POST" action="/jobs/applyJobs" class="theme1">
-                                         {{ csrf_field() }}  
-                                           <input type="hidden" name="job_id" value="<?php echo $jobs->id; ?>">
+                                                    <form method="POST" action="/jobs/applyJobs" class="theme1">
+                                                             {{ csrf_field() }}  
+                                                               <input type="hidden" name="job_id" value="<?php echo $jobs->id; ?>">
 
-                                           <div class="modal-header col-md-12 content-panel-header">
-                                                <h3>Applying for {{ $jobs->company_job }}</h3>
-                                           </div>
-                                                    
-                                           <div class="col-md-12  content-panel">
-                                                <div class="col-md-4">
-                                                          <p>Company Name: </p>
-                                                </div>
-                                                <div class="col-md-7">
-                                                          <p>{{ $jobs->company_name }}</p>
-                                                </div>
-                                                      
-                                           </div>      
+                                                               <div class="modal-header col-md-12 content-panel-header">
+                                                                    <h3>Applying for {{ $jobs->company_job }}</h3>
+                                                               </div>
+                                                                        
+                                                               <div class="col-md-12  content-panel">
+                                                                    <div class="col-md-4">
+                                                                              <p>Company Name: </p>
+                                                                    </div>
+                                                                    <div class="col-md-7">
+                                                                              <p>{{ $jobs->company_name }}</p>
+                                                                    </div>
+                                                                          
+                                                               </div>      
 
-                                           <div class="col-md-12  content-panel">
-                                                <div class="col-md-4">
-                                                          <p>Company Address: </p>
-                                                </div>
-                                                <div class="col-md-7">
-                                                          <p>{{ $jobs->company_address }}</p>
-                                                </div>
-                                                 
-                                           </div> 
+                                                               <div class="col-md-12  content-panel">
+                                                                    <div class="col-md-4">
+                                                                              <p>Company Address: </p>
+                                                                    </div>
+                                                                    <div class="col-md-7">
+                                                                              <p>{{ $jobs->company_address }}</p>
+                                                                    </div>
+                                                                     
+                                                               </div> 
 
-                                           <div class="col-md-12  content-panel">
-                                                <div class="col-md-4">
-                                                          <p>Company Details: </p>
-                                                </div>
-                                                <div class="col-md-7">
-                                                          <p>{{ $jobs->company_details }}</p>
-                                                </div>
-                                                              
-                                           </div>
+                                                               <div class="col-md-12  content-panel">
+                                                                    <div class="col-md-4">
+                                                                              <p>Company Details: </p>
+                                                                    </div>
+                                                                    <div class="col-md-7">
+                                                                              <p>{{ $jobs->company_details }}</p>
+                                                                    </div>
+                                                                                  
+                                                               </div>
 
-                                           <div class="col-md-12  content-panel">
-                                                <div class="col-md-4">
-                                                          <p>Salary Rate </p>
-                                                </div>  
-                                                <div class="col-md-7">
-                                                          <p class="job_salary">{{ $jobs->company_rate }}</p>
-                                                </div>
-                                                              
-                                           </div>
-                                             <input type="hidden" value="{{ csrf_token() }}" name="_token" >
-                                          <div class="modal-footer">
-                                               <button type="submit" class="btn btn-default">Confirm</button> 
+                                                               <div class="col-md-12  content-panel">
+                                                                    <div class="col-md-4">
+                                                                              <p>Salary Rate </p>
+                                                                    </div>  
+                                                                    <div class="col-md-7">
+                                                                              <p class="job_salary">{{ $jobs->company_rate }}</p>
+                                                                    </div>
+                                                                                  
+                                                               </div>
+                                                                 <input type="hidden" value="{{ csrf_token() }}" name="_token" >
+                                                              <div class="modal-footer">
+                                                                   <button type="submit" class="btn btn-default">Confirm</button> 
+                                                              </div>
+                                                    </form>
+                                                    </div>
+                                            
                                           </div>
-                                </form>
-                                </div>
-                        
-                      </div>
-                    </div>
+                                        </div>
 
-                  </section>
-                  <!-- Modal for deleteSkills -->
+                                      </section>
+                  <!-- Modal for apply Job -->
 
 
-<?php } ?>
-
- 
-
-
- 
-          
-         
-                     
-</section>  
-</content>
- <?php foreach ($list_message as $message_value) { ?>
- <!-- Modal -->
-         <!-- Modal for viewJobs -->
-                      <section>
-                                 <div class="modal fade" id="checkmessage_{{ $message_value->id }}" role="dialog">
-                                  <div class="modal-dialog">
-                                  
-                                    <!-- Modal content-->
-                                    <div class="modal-content">
-
-                                    <form method="" action="jobs/addJob" class="theme1">
-                                               <div class="modal-header col-md-12 content-panel-header">
-                                                    <h3>Message From {{ $message_value->name }}</h3>
-                                               </div>
-                                                        
-                                               <div class="col-md-12  content-panel">
-                                                    <div class="col-md-12">
-                                                              <p>Name:&nbsp; {{ $message_value->name }} </p>
-                                                    </div>
-                                               </div>      
-
-                                               <div class="col-md-12  content-panel">
-                                                    <div class="col-md-12">
-                                                              <p>Email:&nbsp; {{ $message_value->email }} </p>
-                                                    </div>                                                    
-                                               </div> 
-                                               <div class="col-md-12  content-panel">
-                                                    <div class="col-md-12">
-                                                              <p>Message </p>
-                                                    </div>
-                                                    <div class="col-md-12">
-                                                              <p>{{ $message_value->message }}</p>
-                                                    </div>
-                                                                  
-                                               </div>
-
-                                              <div class="modal-footer">
-                                                   <button type="" class="btn btn-default" data-dismiss="modal">Close</button> 
-                                              </div>
-                                    </form>
-                                    </div>
-                            
-                          </div>
-                        </div>
-                      </section>
-  <!-- Modal for viewJobs -->
-<!-- Modal -->                      
 <?php } ?>
 
 <?php foreach ($list_message as $message_value) { ?>
-<!-- Modal -->
+ <!-- Modal -->
  <!-- Modal for viewMessage -->
               <section>
                          <div class="modal fade" id="checkmessage_{{ $message_value->id }}" role="dialog">
@@ -565,9 +508,12 @@
               </section>
 <!-- Modal for viewMessage -->
 
-<!-- Modal -->      
+<!-- Modal -->   
 
-<?php } ?>         
+
+
+<?php } ?>
+
 
 <?php foreach ($job_list_notification as $job_value) { ?>
 
@@ -656,5 +602,104 @@
                            
 <?php } ?>   
 
-</div>
+<!-- Modal for viewApplication-->
+<section>
+
+           <div class="modal fade" id="viewApplication" role="dialog">
+            <div class="modal-dialog">
+            
+              <!-- Modal content-->
+              <div class="modal-content">
+
+              <form method="POST" action="/jobs/applyJobs" class="theme1">
+                       {{ csrf_field() }}  
+                         <input type="hidden" name="job_id" value="<?php echo $jobs->id; ?>">
+
+                         <div class="modal-header col-md-12 content-panel-header">
+                              <h3>Your Application</h3>
+                         </div>  
+                              <div class="col-md-12 ">
+                                  <div class="col-md-2"></div>
+                                  <div class="col-md-4"><h4>Company Name</h4></div>
+                                  <div class="col-md-3"><h4>Company Job</h4></div>
+                                  <div class="col-md-3"><h4></h4></div>
+                              </div>
+                             <?php foreach ($job_application as $value) { ?>
+                                <?php $jobInfo = DB::table('job')->where('id',$value->job_id)->first(); ?>
+                                  <div class="col-md-12" style="margin:0px 0px 10px 0px;">
+                                    <div class="col-md-2"><img src="joblogo/{{ $jobInfo->company_picture }}" class="img-responsive"></div>
+                                    <div class="col-md-4"><h5>{{ $jobInfo->company_name }}</h5></div>
+                                    <div class="col-md-3"><h5>{{ $jobInfo->company_job }}</h5></div>
+                                    <div class="col-md-3"><h5></h5></div>
+                                  </div>
+                             <?php  } ?>
+
+                           <input type="hidden" value="{{ csrf_token() }}" name="_token" >
+                        <div class="modal-footer">
+                             <button class="btn btn-default" data-dismiss="modal">Close</button> 
+                        </div>
+              </form>
+              </div>
+      
+    </div>
+  </div>
+
+</section>
+<!-- Modal for viewApplication -->
+
+<!-- Modal for viewApplication-->
+<section>
+
+           <div class="modal fade" id="viewAvailable" role="dialog">
+            <div class="modal-dialog">
+            
+              <!-- Modal content-->
+              <div class="modal-content">
+
+              <form method="POST" action="/jobs/applyJobs" class="theme1">
+                       {{ csrf_field() }}  
+                         <input type="hidden" name="job_id" value="<?php echo $jobs->id; ?>">
+
+                         <div class="modal-header col-md-12 content-panel-header">
+                              <h3>Available Jobs </h3>
+                         </div>  
+                              <div class="col-md-12 ">
+                                  <div class="col-md-2"></div>
+                                  <div class="col-md-4"><h4>Company Name</h4></div>
+                                  <div class="col-md-3"><h4>Company Job</h4></div>
+                                  <div class="col-md-3"><h4></h4></div>
+                              </div>
+                             <?php foreach ($userJobs as $value) { ?>
+                                <?php $available_job = DB::table('applicant')->where(['user_id' =>Auth::id() ,'job_id' => $value->id])->count(); ?>
+
+                                  <?php if($available_job == 0){ ?> 
+                                      <div class="col-md-12" style="margin:0px 0px 10px 0px;">
+                                        <div class="col-md-2"><img src="joblogo/{{ $value->company_picture }}" class="img-responsive"></div>
+                                        <div class="col-md-4"><h5>{{ $value->company_name }}</h5></div>
+                                        <div class="col-md-3"><h5>{{ $value->company_job }}</h5></div>
+                                        <div class="col-md-3"><h5></h5></div>
+                                      </div>
+                                  <?php } ?>
+                             <?php  } ?>
+
+                           <input type="hidden" value="{{ csrf_token() }}" name="_token" >
+                        <div class="modal-footer">
+                             <button class="btn btn-default" data-dismiss="modal">Close</button> 
+                        </div>
+              </form>
+              </div>
+      
+    </div>
+  </div>
+
+</section>
+<!-- Modal for viewApplication -->
+
+
+
+
+
+
+
+
 @endsection

@@ -322,51 +322,104 @@
   <!-- Modal for deleteSkills -->
   <section class="delexperience_modal">
 
-                           <div class="modal fade" id="viewApplicant{{ $jobs->id }}" role="dialog">
-                            <div class="modal-dialog">
-                            
-                              <!-- Modal content-->
-                            <div class="modal-content">
+                         <div class="modal fade" id="viewApplicant{{ $jobs->id }}" role="dialog">
+                          <div class="modal-dialog modal-md">
+                          
+                            <!-- Modal content-->
+                          <div class="modal-content">
 
-                              <form method="" action="" class="theme1"  enctype="multipart/form-data">
+                            <form method="" action="" class="theme1"  enctype="multipart/form-data">
 
-                                  {{ csrf_field() }}  
+                                {{ csrf_field() }}  
 
-                                           <div class="modal-header">
-                                            
-                                            <h4>Applicant</h4>
-                                          </div>
-                                                    
-                                          <div class="col-md-12 content-panel-header">
-                                          <?php 
-                                              $applicant = DB::table('applicant')
-                                                          ->where('job_id', $jobs->id)
-                                                          ->orderBy('id', 'desc')
-                                                          ->get();
-                                          ?>
-                                          <?php foreach ($applicant as $value) { ?>
-                                            <?php $userprofile = DB::table('profiles')->where('user_id', $value->user_id)->first();  ?>
-                                            <h4><?php echo $userprofile->name; ?></h4>
+                                  <div class="modal-header"><h4>Applicant</h4></div>
+                                                  
                                        
-                                          <?php } ?>
-                                          
-                                          </div>
+                                <div class="modal-body">
+                                  <div class="row" style="padding:10px 0px 10px 0px;">
+                                      <div class="col-xs-1">#</div>
+                                      <div class="col-xs-2"></div>
+                                      <div class="col-xs-3">NAME</div>
+                                      <div class="col-xs-3">POSITION</div>
+                                      <div class="col-xs-3">CVLINK</div>
+                                  </div>
 
-                                          <div class="modal-footer">
-                                                
-                                               <button  data-dismiss="modal" class="btn btn-default">Close</button>   
-                                          </div>
+                                  
+                                 
+                                            <?php $n=0; ?>
+                                            <?php $applicant = DB::table('applicant')->where('job_id', $jobs->id)->orderBy('id', 'desc')->get(); ?>
 
-                                  <input type="hidden" value="{{ csrf_token() }}" name="_token" >  
+                                              <?php foreach ($applicant as $value) { ?>
+                                              <?php $n++; ?>
+                                              <?php $if_exist = DB::table('profiles')->where('user_id', $value->user_id)->count();  ?>
 
-                              </form>
+                                              <?php if($if_exist == 0){ ?> 
 
-                            </div>
-                      
-                    </div>
+                                              <?php $user = DB::table('users')->where('id', $value->user_id)->first();  ?>
+                                              <?php $settings = DB::table('settings')->where('user_id', $value->user_id)->count();  ?>
+                                              <div class="row">
+                                                  <div class="col-xs-1"><?php echo$n; ?></div>
+                                                  <div class="col-xs-2">
+                                                       <img class="img-responsive" style="width:50px;height:50px;border-radius:50px;" src="../profilepic/default_avatar.jpg"> 
+                                                  </div>
+                                                  <div class="col-xs-3"><p><?php echo $userprofile->name; ?></p></div>
+
+                                                  <div class="col-xs-3">Not Set</div>
+                                                  <?php if($settings == 0){ ?> 
+                                                    <div class="col-xs-3">Not Set</div>
+                                                  <?php }else{ ?> 
+                                                     <div class="col-xs-3"><a target="_blank" href="<?php echo "https://ressuu.me/cv/".$settings->permalink; ?>">Link</a></div>
+                                                  <?php } ?>
+                                               </div>
+
+                                              <?php }else{ ?> 
+
+                                              <?php $userprofile = DB::table('profiles')->where('user_id', $value->user_id)->first();  ?>
+                                              <?php $settings = DB::table('settings')->where('user_id', $value->user_id)->first();  ?>
+                                              <div class="row">
+                                                  <div class="col-xs-1"><?php echo$n; ?></div>
+                                                  <div class="col-xs-2">
+                                                    <?php if(!empty($userprofile->profile_picture ) AND $userprofile->profile_picture != " " ){ ?>
+                                                      <img class="img-responsive" style="width:50px;height:50px;border-radius:50px;" src="../profilepic/<?php echo $userprofile->profile_picture; ?>">
+                                                    <?php  }else{ ?>
+                                                       <img class="img-responsive" style="width:50px;height:50px;border-radius:50px;" src="../profilepic/default_avatar.jpg"> 
+                                                    <?php } ?>
+                                                  </div>
+                                                  <div class="col-xs-3">
+                                                   <?php if(!empty($userprofile->name) AND $userprofile->name != " " ){ ?>
+                                                      <?php echo $userprofile->name; ?>
+                                                      <?php  }else{ ?>
+                                                      <p>Not Set</p>
+                                                    <?php } ?>
+                                                  </div>
+                                                  <div class="col-xs-3"><?php echo $userprofile->position; ?></div>
+                                                  <div class="col-xs-3"><a target="_blank" href="<?php echo "https://ressuu.me/cv/".$settings->permalink; ?>">Link</a></div>
+                                               </div>
+                                             <?php } ?>
+
+                                              <?php } ?>
+                                              
+                                      
+
+                                      </div>       
+
+
+
+                                        
+
+                                    <div class="modal-footer"><button  data-dismiss="modal" class="btn btn-default">Close</button></div>
+
+                                <input type="hidden" value="{{ csrf_token() }}" name="_token" >  
+
+                            </form>
+
+                          </div>
+
+                    
                   </div>
+                </div>
 
-  </section>
+</section>
   <!-- Modal for delteJobs -->
 
 
