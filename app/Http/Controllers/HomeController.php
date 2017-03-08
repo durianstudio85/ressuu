@@ -1266,6 +1266,81 @@ class HomeController extends Controller
 
     }
 
+    public function users()
+    {
+    $userId = Auth::id();
+    $name = Auth::user()->name;
+    $if_exist = DB::table('profiles')->where('user_id',$userId)->count();
+    $userProfile = DB::table('profiles')->where('user_id',$userId)->first();
+
+                 
+    $userSettings = DB::table('settings')->where('user_id',$userId)->first(); 
+
+    $userAds = DB::table('ads')->where([
+                     'area' => 'USERDASHBOARD',
+                     'status' => 'ACTIVE'
+                  ])->first();   
+    
+  
+   
+    $if_exist_settings = DB::table('settings')->where('user_id',$userId)->count();  
+
+    $no_message = DB::table('message')->where([
+                     'user_id' => $userId,
+                     'status' => 'PENDING'
+                  ])->count(); 
+
+    $list_message = DB::table('message')->where([
+                     'user_id' => $userId,
+                     'status' => 'PENDING'
+                  ])->get(); 
+
+    $count_job = DB::table('job')->count();          
+
+    $list_job = DB::table('job')->get();
+
+    $job_notification =  DB::table('user_notification')->where([
+                     'user_id' => $userId,
+                     'category' => 'Job',
+                     'status' => 'PENDING'
+                  ])->count();
+
+    $job_list_notification = DB::table('user_notification')->where([
+                     'user_id' => $userId,
+                     'category' => 'Job',
+                     'status' => 'PENDING'
+                  ])->get();  
+
+    $user_list =  DB::table('users')->get(); 
+
+
+        return view('users')
+                ->with("userProfile",$userProfile)
+                ->with("name",$name)
+                ->with("if_exist",$if_exist)
+                ->with("if_exist_settings",$if_exist_settings)
+                ->with("userSettings",$userSettings)
+                ->with("userAds",$userAds)
+                ->with("count_job",$count_job)
+                ->with("no_message",$no_message)
+                ->with("list_message",$list_message)
+                ->with("list_job",$list_job)
+                ->with("job_notification",$job_notification)
+                ->with("job_list_notification",$job_list_notification)
+                ->with("user_list",$user_list)
+
+
+       ;
+
+    }
+
+
+
+
+
+
+
+
     
 
 

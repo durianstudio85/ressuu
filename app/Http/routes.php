@@ -31,6 +31,7 @@ Route::get('/setting', 'HomeController@setting');
 Route::get('/portfolio', 'HomeController@portfolio');
 Route::get('/resume', 'HomeController@resume');
 Route::get('/message', 'MessageController@message');
+Route::get('/users', 'HomeController@users');
 
 //edit/update
 Route::get('/profile/edit', 'HomeController@edit');
@@ -147,3 +148,7 @@ Route::post('/message/send', 'MessageController@messageSend');
 Route::post('/message/sendtoClient', 'MessageController@messageSendtoClient');
 
 Route::post('/message/delete', 'MessageController@messageDelete');
+
+
+
+Route::get('/follow/users/{id}', 'HomeController@follow_users');
