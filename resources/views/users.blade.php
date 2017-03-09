@@ -277,7 +277,7 @@
 
                    <div class="col-xs-12 col-md-12 content-panel-header">
                       <div class="col-xs-12 col-md-2 img">
-                          <?php if($if_profile_exist == 0 or empty($profile_info->profile_picture) ){ ?>
+                          <?php if($if_profile_exist == 0 or empty($profile_info->profile_picture) or $profile_info->profile_picture == " " ){ ?>
                             <img src="profilepic/default_avatar.jpg" class="img-responsive"> 
                           <?php }else{ ?>
                             <img class="img-responsive" src="profilepic/<?php echo $profile_info->profile_picture; ?>" > 
@@ -647,7 +647,7 @@
 <?php } ?>        
 
 
-         
+
             
 </div>
 @endsection
