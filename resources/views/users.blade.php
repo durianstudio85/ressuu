@@ -26,7 +26,29 @@
         <!-- <div id="navbar" class=""> -->
         <nav class="col-md-3 col-sm-12 navicon">
               <ul>
-                  <li><i class="glyphicon glyphicon-user"></i></li>
+                   <li class="dropdown">
+                   <!----> 
+                    <?php if($user_notification == 0){ ?>
+                       <span class="glyphicon glyphicon-user dropdown-toggle"></span>                         
+                    <?php }else { ?> 
+                        <span class="glyphicon glyphicon-user naviconactive dropdown-toggle" data-toggle="dropdown"><span class="badge">
+                    <?php  echo $user_notification;?></span></span>
+                        <ul class="dropdown-menu drop-message">
+                        <?php foreach ($user_list_notification as $user_value) { ?>
+                            <?php $checkProfile = DB::table('profiles')->where('user_id',$user_value->user_id)->count(); ?> 
+                            <?php $profileInfo = DB::table('profiles')->where('user_id',$user_value->user_id)->first(); ?>
+                            <?php $userInfo = DB::table('users')->where('id',$user_value->user_id)->first(); ?>
+                            <?php if($checkProfile == 0){ ?> 
+                              <li><a href="" data-toggle="modal" data-target="#checkusernotification_{{ $user_value->id }}"><span><?php echo $userInfo->name; ?> followed you</span></a></li>
+                            <?php }else{ ?> 
+                              <li><a href="" data-toggle="modal" data-target="#checkusernotification_{{ $user_value->id }}"><span><?php echo $profileInfo->name; ?> followed you</span></a></li>
+                            <?php } ?>
+                            
+                        <?php } ?>
+                       </ul>
+                    <?php } ?>
+                    <!---->
+                  </li>
                   <li class="dropdown">
                    <!----> 
                     <?php if($no_message == 0){ ?>
@@ -241,45 +263,55 @@
 
 <section class="cph-wrapper">
        <?php foreach ($user_list as $user_info) { ?>
-
+        <?php $userId = Auth::id(); ?>
        <?php  $if_profile_exist = DB::table('profiles')->where('user_id',$user_info->id)->count(); ?>
        <?php  $profile_info = DB::table('profiles')->where('user_id',$user_info->id)->first(); ?>
        <?php  $setting_info = DB::table('settings')->where('user_id',$user_info->id)->first(); ?>
 
-       <div class="col-xs-12 col-md-12 content-panel-header">
-          <div class="col-xs-12 col-md-2 img">
-             <?php if($if_profile_exist == 0 OR empty($profile_info->profile_picture) OR $profile_info->profile_picture == " " ){ ?>
-                <img src="profilepic/default_avatar.jpg" class="img-responsive"> 
-              <?php }else{ ?>
-                <img class="img-responsive" src="profilepic/<?php echo $profile_info->profile_picture; ?>" > 
-              <?php } ?>  
-          </div>
-          <div class="col-xs-8 col-md-8 content-panel-jobs">
-               <?php if($if_profile_exist == 0){ ?>
-                <h4><?php  echo $user_info->name; ?></h4>
-              <?php }else{ ?>
-                <h4><?php echo $profile_info->name; ?></h4>
-              <?php } ?> 
-              
-              <?php if($if_profile_exist == 0 or empty($profile_info->position)){ ?>
-                  <p>Not Set</p>
-              <?php }else{ ?>
-                 <p><?php echo $profile_info->position; ?></p>
-              <?php } ?>  
-         </div>
-         <div class="col-xs-4 col-md-2"> 
-          <p>&nbsp;</p><br><br>
-              <div class="btn-group btn-group-xs" role="group" aria-label="...">
-                <?php if(empty($setting_info->permalink)){ ?> 
-                  <a href="#" data-toggle="modal" type="button" class="btn btn-info">CV Link</a>
-                <?php }else{ ?> 
-                  <a  target="_target" href="https://ressuu.me/cv/<?php echo $setting_info->permalink;  ?>" data-toggle="modal" type="button" class="btn btn-info">CV Link </a>
-                <?php } ?>
-                 <a href="/follow/users/{{ $user_info->id }}" data-toggle="modal" type="button" class="btn btn-primary">Follow</a>
-              </div>       
-         </div>
-      </div>
-      
+
+         <?php if($user_info->id != $userId){ ?> 
+
+           <?php  $checkifFollowed = DB::table('connection_requests')->where(['from_user_id' => $userId,'to_user_id'=>$user_info->id])->count(); ?>
+
+               <?php if($checkifFollowed == 0){ ?> 
+
+                   <div class="col-xs-12 col-md-12 content-panel-header">
+                      <div class="col-xs-12 col-md-2 img">
+                          <?php if($if_profile_exist == 0 or empty($profile_info->profile_picture) ){ ?>
+                            <img src="profilepic/default_avatar.jpg" class="img-responsive"> 
+                          <?php }else{ ?>
+                            <img class="img-responsive" src="profilepic/<?php echo $profile_info->profile_picture; ?>" > 
+                          <?php } ?>  
+                      </div>
+                      <div class="col-xs-8 col-md-8 content-panel-jobs">
+                           <?php if($if_profile_exist == 0){ ?>
+                            <h4><?php  echo $user_info->name; ?></h4>
+                          <?php }else{ ?>
+                            <h4><?php echo $profile_info->name; ?></h4>
+                          <?php } ?> 
+                          
+                          <?php if($if_profile_exist == 0 or empty($profile_info->position)){ ?>
+                              <p>Not Set</p>
+                          <?php }else{ ?>
+                             <p><?php echo $profile_info->position; ?></p>
+                          <?php } ?>  
+                     </div>
+                     <div class="col-xs-4 col-md-2"> 
+                      <p>&nbsp;</p><br><br>
+                          <div class="btn-group btn-group-xs" role="group" aria-label="...">
+                            <?php if(empty($setting_info->permalink)){ ?> 
+                              <a href="#" data-toggle="modal" type="button" class="btn btn-info">CV Link</a>
+                            <?php }else{ ?> 
+                              <a  target="_target" href="https://ressuu.me/cv/<?php echo $setting_info->permalink;  ?>" data-toggle="modal" type="button" class="btn btn-info">CV Link </a>
+                            <?php } ?>
+                             <a href="/follow/users/{{ $user_info->id }}" data-toggle="modal" type="button" class="btn btn-primary">Follow</a>
+                          </div>       
+                     </div>
+                  </div>
+
+              <?php } ?>
+
+        <?php } ?>
 
       <?php } ?>  
 
@@ -517,7 +549,105 @@
 <!-- Modal for viewMessage -->
   
                            
-<?php } ?>             
+<?php } ?>    
+
+<?php foreach ($user_list_notification as $user_value) { ?>
+
+
+<?php $profileInfo = DB::table('profiles')->where('user_id',$user_value->user_id)->first(); ?>
+<?php $userInfo = DB::table('users')->where('id',$user_value->user_id)->first(); ?>
+<?php $settingInfo = DB::table('settings')->where('user_id',$user_value->user_id)->first(); ?>
+
+<?php $checkprofile = DB::table('profiles')->where('user_id',$user_value->user_id)->count(); ?>
+
+
+<!-- Modal for viewMessage -->
+  <section>
+             <div class="modal fade" id="checkusernotification_{{ $user_value->id }}" role="dialog">
+              <div class="modal-dialog">
+              
+                <!-- Modal content--> 
+                <div class="modal-content">
+
+                <form method="POST" action="/follow/deleteUserNotification" class="theme1">
+                  {{ csrf_field() }}  
+                           <input type="hidden" name="id" value="<?php echo $user_value->id; ?>" >
+                           <div class="modal-header col-md-12 content-panel-header">
+                            <h3>User Information</h3>      
+                           </div>        
+
+                           <div class="col-md-12 content-panel"><div class="col-md-12">&nbsp;</div></div>
+                           <div class="content-panel">
+                               <div class="col-md-4">
+                                 <?php if($checkprofile == 0){ ?>
+                                        <img src="profilepic/default_avatar.jpg" class="img-responsive" style="border-radius:85px;">
+                                <?php }else{ ?> 
+                                     <?php if(!empty($profileInfo->profile_picture) AND $profileInfo->profile_picture != " " ){ ?>
+                                         <img src="profilepic/default_avatar.jpg" class="img-responsive" style="border-radius:85px;">
+                                      <?php  }else{ ?>
+                                          <img src="profilepic/{{ $profileInfo->profile_picture }}" class="img-responsive" style="border-radius:85px;">  
+                                      <?php } ?>
+                                      
+                                <?php } ?>  
+                               </div> 
+                               <div class="col-md-8">
+                                <!-- Name -->
+                                <?php if($checkprofile == 0){ ?>
+                                       <h2>{{ $userInfo->name }}</h2>
+                                <?php }else{ ?> 
+                                       <h2>{{ $profileInfo->name }}</h2>
+                                <?php }?> 
+
+                                <!-- Position -->
+                                <?php if($checkprofile == 0){ ?>
+                                       <h5><i>Not Set</i></h5>
+                                <?php }else{ ?> 
+                                       <h5><i>Position:&nbsp;&nbsp;{{ $profileInfo->position }}</i></h5>
+                                <?php }?> 
+
+                                <!-- Email -->
+                                <?php if($checkprofile == 0){ ?>
+                                       <h5><i>Not Set</i></h5>
+                                <?php }else{ ?> 
+                                      <h5><i>Email:&nbsp;&nbsp;{{ $profileInfo->email }}</i></h5>
+                                <?php }?>
+
+                                <!-- Bio -->
+                                <?php if($checkprofile == 0){ ?>
+                                       <p><i>Not Set</i></p>
+                                <?php }else{ ?> 
+                                      <p><i>{{ $profileInfo->bio }}</i></p>
+                                <?php }?> 
+
+                                <!-- Cv Link -->
+                                <?php if($checkprofile == 0){ ?>
+                                      <h5><i>CV Link:&nbsp;&nbsp; Not Set</i></h5>
+                                <?php }else{ ?> 
+                                      <h5><i>CV Link:&nbsp;&nbsp;<a href="#">https://ressuu.me/cv/{{ $settingInfo->permalink }}</a></i></h5>
+                                <?php }?>
+                               </div> 
+
+
+                           </div>
+
+                          <div class="modal-footer">
+                               <button type="submit" class="btn btn-default">Delete</button>
+                               <button type="" class="btn btn-default" data-dismiss="modal">Close</button> 
+                          </div>
+
+                </form>
+
+                </div>
+      </div>
+    </div>
+  </section>
+<!-- Modal for viewMessage -->
+  
+                           
+<?php } ?>        
+
+
+         
             
 </div>
 @endsection

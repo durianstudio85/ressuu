@@ -152,3 +152,4 @@ Route::post('/message/delete', 'MessageController@messageDelete');
 
 
 Route::get('/follow/users/{id}', 'HomeController@follow_users');
+Route::post('/follow/deleteUserNotification', 'HomeController@deleteUserNotification');
