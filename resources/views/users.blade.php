@@ -623,7 +623,7 @@
                                 <?php if($checkprofile == 0){ ?>
                                       <h5><i>CV Link:&nbsp;&nbsp; Not Set</i></h5>
                                 <?php }else{ ?> 
-                                      <h5><i>CV Link:&nbsp;&nbsp;<a href="#">https://ressuu.me/cv/{{ $settingInfo->permalink }}</a></i></h5>
+                                      <h5><i>CV Link:&nbsp;&nbsp;<a href="https://ressuu.me/cv/{{ $settingInfo->permalink }}">https://ressuu.me/cv/{{ $settingInfo->permalink }}</a></i></h5>
                                 <?php }?>
                                </div> 
 

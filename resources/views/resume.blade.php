@@ -1404,7 +1404,7 @@
                                  <?php if($checkprofile == 0){ ?>
                                         <img src="profilepic/default_avatar.jpg" class="img-responsive" style="border-radius:85px;">
                                 <?php }else{ ?> 
-                                     <?php if(!empty($profileInfo->profile_picture) AND $profileInfo->profile_picture != " " ){ ?>
+                                     <?php if(empty($profileInfo->profile_picture) OR $profileInfo->profile_picture != " " ){ ?>
                                          <img src="profilepic/default_avatar.jpg" class="img-responsive" style="border-radius:85px;">
                                       <?php  }else{ ?>
                                           <img src="profilepic/{{ $profileInfo->profile_picture }}" class="img-responsive" style="border-radius:85px;">  
@@ -1445,7 +1445,7 @@
                                 <?php if($checkprofile == 0){ ?>
                                       <h5><i>CV Link:&nbsp;&nbsp; Not Set</i></h5>
                                 <?php }else{ ?> 
-                                      <h5><i>CV Link:&nbsp;&nbsp;<a href="#">https://ressuu.me/cv/{{ $settingInfo->permalink }}</a></i></h5>
+                                      <h5><i>CV Link:&nbsp;&nbsp;<a href="https://ressuu.me/cv/{{ $settingInfo->permalink }}">https://ressuu.me/cv/{{ $settingInfo->permalink }}</a></i></h5>
                                 <?php }?>
                                </div> 
 
