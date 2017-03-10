@@ -228,7 +228,7 @@
                         <?php } ?>
                         <!---->
                         <a href="{{ url('/connection') }}"><li><span class="glyphicon glyphicon-globe">&nbsp;</span>Connnection</li></a>
-                        <a href="{{ url('/cvlist') }}"><li><span class="glyphicon glyphicon-folder-open">&nbsp;</span>Browse CV</li></a>
+                        <a href="{{ url('/cvlist') }}"><li  class="menuactive"><span class="glyphicon glyphicon-folder-open">&nbsp;</span>Browse CV</li></a>
                         <a href="{{ url('/profile') }}"><li><span class="glyphicon glyphicon-star">&nbsp;</span>Profile</li></a>
                         <a href="{{ url('/resume') }}"><li><span class="glyphicon glyphicon-flag">&nbsp;</span>Resume</li></a>
                         <a href="{{ url('/portfolio') }}"><li><span class="glyphicon glyphicon-send">&nbsp;</span>Portfolio</li></a>
