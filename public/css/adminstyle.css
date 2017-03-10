@@ -2499,7 +2499,14 @@ background: #ebebeb;
 margin: 10px 0px 0px 27px !important;
 color: #000;
 }
-
+.connection-nav{
+  margin: 0px 0px 0px 0px !important;
+  width: 825px !important;
+  height: 58px;
+}
+.connection-nav ul{
+  margin-top:0px;
+}
 
 
 
