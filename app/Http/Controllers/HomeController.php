@@ -1541,6 +1541,322 @@ class HomeController extends Controller
 
     }
 
+     public function cvlist()
+    {
+    $userId = Auth::id();
+    $name = Auth::user()->name;
+    $if_exist = DB::table('profiles')->where('user_id',$userId)->count();
+    $userProfile = DB::table('profiles')->where('user_id',$userId)->first();
+
+                 
+    $userSettings = DB::table('settings')->where('user_id',$userId)->first(); 
+
+    $userAds = DB::table('ads')->where([
+                     'area' => 'USERDASHBOARD',
+                     'status' => 'ACTIVE'
+                  ])->first();   
+    
+  
+   
+    $if_exist_settings = DB::table('settings')->where('user_id',$userId)->count();  
+
+    $no_message = DB::table('message')->where([
+                     'user_id' => $userId,
+                     'status' => 'PENDING'
+                  ])->count(); 
+
+    $list_message = DB::table('message')->where([
+                     'user_id' => $userId,
+                     'status' => 'PENDING'
+                  ])->get(); 
+
+    $count_job = DB::table('job')->count();          
+
+    $list_job = DB::table('job')->get();
+
+    $job_notification =  DB::table('user_notification')->where([
+                     'user_id' => $userId,
+                     'category' => 'Job',
+                     'status' => 'PENDING'
+                  ])->count();
+
+    $job_list_notification = DB::table('user_notification')->where([
+                     'user_id' => $userId,
+                     'category' => 'Job',
+                     'status' => 'PENDING'
+                  ])->get();  
+
+    $user_notification = DB::table('user_notification')->where([
+                     'category_id' => $userId,
+                     'category' => 'Followed',
+                     'status' => 'PENDING'
+                  ])->count();
+
+    $user_list_notification = DB::table('user_notification')->where([
+                     'category_id' => $userId,
+                     'category' => 'Followed',
+                     'status' => 'PENDING'
+                  ])->get();
+
+    $user_list =  DB::table('users')->get(); 
+
+
+        return view('cvlist')
+                ->with("userProfile",$userProfile)
+                ->with("name",$name)
+                ->with("if_exist",$if_exist)
+                ->with("if_exist_settings",$if_exist_settings)
+                ->with("userSettings",$userSettings)
+                ->with("userAds",$userAds)
+                ->with("count_job",$count_job)
+                ->with("no_message",$no_message)
+                ->with("list_message",$list_message)
+                ->with("list_job",$list_job)
+                ->with("job_notification",$job_notification)
+                ->with("job_list_notification",$job_list_notification)
+                ->with("user_list",$user_list)
+                ->with("user_notification",$user_notification)
+                ->with("user_list_notification",$user_list_notification)
+        ;
+
+    }
+     
+
+    public function connection()
+    {
+    $userId = Auth::id();
+    $name = Auth::user()->name;
+    $if_exist = DB::table('profiles')->where('user_id',$userId)->count();
+    $userProfile = DB::table('profiles')->where('user_id',$userId)->first();
+
+                 
+    $userSettings = DB::table('settings')->where('user_id',$userId)->first(); 
+
+    $userAds = DB::table('ads')->where([
+                     'area' => 'USERDASHBOARD',
+                     'status' => 'ACTIVE'
+                  ])->first();   
+    
+  
+   
+    $if_exist_settings = DB::table('settings')->where('user_id',$userId)->count();  
+
+    $no_message = DB::table('message')->where([
+                     'user_id' => $userId,
+                     'status' => 'PENDING'
+                  ])->count(); 
+
+    $list_message = DB::table('message')->where([
+                     'user_id' => $userId,
+                     'status' => 'PENDING'
+                  ])->get(); 
+
+    $count_job = DB::table('job')->count();          
+
+    $list_job = DB::table('job')->get();
+
+    $job_notification =  DB::table('user_notification')->where([
+                     'user_id' => $userId,
+                     'category' => 'Job',
+                     'status' => 'PENDING'
+                  ])->count();
+
+    $job_list_notification = DB::table('user_notification')->where([
+                     'user_id' => $userId,
+                     'category' => 'Job',
+                     'status' => 'PENDING'
+                  ])->get();  
+
+    $user_notification = DB::table('user_notification')->where([
+                     'category_id' => $userId,
+                     'category' => 'Followed',
+                     'status' => 'PENDING'
+                  ])->count();
+
+    $user_list_notification = DB::table('user_notification')->where([
+                     'category_id' => $userId,
+                     'category' => 'Followed',
+                     'status' => 'PENDING'
+                  ])->get();
+
+    $user_list =  DB::table('users')->get(); 
+
+    $get_invitation = DB::table('connection_requests')->where(['to_user_id' => $userId, 'status'=>'ACCEPT'])->get();
+
+    $get_follower = DB::table('connection_requests')->where(['to_user_id' => $userId, 'status'=>'PENDING'])->get();
+
+
+        return view('connection')
+                ->with("userProfile",$userProfile)
+                ->with("name",$name)
+                ->with("if_exist",$if_exist)
+                ->with("if_exist_settings",$if_exist_settings)
+                ->with("userSettings",$userSettings)
+                ->with("userAds",$userAds)
+                ->with("count_job",$count_job)
+                ->with("no_message",$no_message)
+                ->with("list_message",$list_message)
+                ->with("list_job",$list_job)
+                ->with("job_notification",$job_notification)
+                ->with("job_list_notification",$job_list_notification)
+                ->with("user_list",$user_list)
+                ->with("user_notification",$user_notification)
+                ->with("user_list_notification",$user_list_notification)
+                ->with("get_invitation",$get_invitation)
+                ->with("get_follower",$get_follower)
+
+        ;
+
+    }
+
+    public function follow_users($id){
+
+         $userId = Auth::id();
+         $followed_id = $id;
+         $inputDate = date('Y-m-d');
+
+         $if_exist = DB::table('profiles')->where('user_id',$followed_id)->count(); 
+
+         if($if_exist == 0){
+
+                 $userInfo = DB::table('users')->where('id',$followed_id)->first(); 
+
+                 DB::table('user_notification')->insert([
+                          'user_id' => $userId,
+                          'category' => "Followed",
+                          'category_id' => $followed_id,
+                          'status' => "PENDING",
+                          'date'=> $inputDate
+                 ]);
+
+
+                 $connect = DB::table('connection_requests')->insertGetId([
+                          'to_user_id' => $followed_id,
+                          'from_user_id' => $userId,
+                          'date'=> $inputDate,
+                          'status' => "PENDING"
+                 ]);
+
+
+                 DB::table('dashboard_timeline')->insert([
+                           'user_id' => $userId,
+                           'category' => "Followed",
+                           'category_id' =>$connect,
+                           'activity' => "Followed ".$userInfo->name,
+                           'date'=> $inputDate
+                ]);
+
+
+         }else{
+
+                $profileInfo = DB::table('profiles')->where('user_id',$followed_id)->first(); 
+
+                DB::table('user_notification')->insert([
+                          'user_id' => $userId,
+                          'category' => "Followed",
+                          'category_id' => $followed_id,
+                          'status' => "PENDING",
+                          'date'=> $inputDate
+                 ]);
+
+                 $connect = DB::table('connection_requests')->insertGetId([
+                          'to_user_id' => $followed_id,
+                          'from_user_id' => $userId,
+                          'date'=> $inputDate,
+                          'status' => "PENDING"
+                 ]);
+
+
+                DB::table('dashboard_timeline')->insert([
+                           'user_id' => $userId,
+                           'category' => "Followed",
+                           'category_id' => $connect,
+                           'activity' => "Followed ".$profileInfo->name,
+                           'date'=> $inputDate
+                ]);
+
+
+
+
+         }
+
+        
+        return back();
+
+
+    }
+
+    public function deleteUserNotification(){
+
+        $id = Input::get('id');
+        $status = "Delete";
+
+        DB::table('user_notification')
+                  ->where('id', $id)
+                  ->update(array(
+                        'status' => $status
+                    ));
+
+        return back();
+
+    }
+
+
+     public function acceptFollower($id){
+
+        //$id = Auth::id();
+        $getConnectionId = $id;
+        $status = "ACCEPT";
+        $inputDate = date('Y-m-d');
+
+
+        DB::table('connection_requests')
+                      ->where('id', $getConnectionId)
+                      ->update(array(
+                            'status' => $status
+                        ));
+
+       return back();
+
+    }
+
+    public function declineFollower($id){
+
+        $getFollowerId = $id;
+        $status = "DECLINE";
+
+        DB::table('connection_requests')
+                  ->where('id', $getFollowerId)
+                  ->update(array(
+                        'status' => $status
+                    ));
+
+       return back();
+
+    }
+
+
+
+    public function removeFollower($id){
+
+        $getFollowerId = $id;
+
+        DB::table('connection_requests')
+                ->where('id',$getFollowerId)->delete();          
+
+
+
+       return back();
+
+    }
+
+
+
+
+
+    
+
+
 
 
 

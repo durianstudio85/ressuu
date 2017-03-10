@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('title')
-   | Dashboard
+   | Users
 @endsection
 
 @section('body-class')
@@ -26,7 +26,7 @@
         <!-- <div id="navbar" class=""> -->
         <nav class="col-md-3 col-sm-12 navicon">
               <ul>
-                   <li class="dropdown">
+                  <li class="dropdown">
                    <!----> 
                     <?php if($user_notification == 0){ ?>
                        <span class="glyphicon glyphicon-user dropdown-toggle"></span>                         
@@ -64,7 +64,6 @@
                     <?php } ?>
                     <!---->
                   </li>
-                   
                   <li class="dropdown">
                    <!----> 
                     <?php if($job_notification == 0){ ?>
@@ -80,8 +79,7 @@
                        </ul>
                     <?php } ?>
                     <!---->
-                  </li>
-
+                  </li>  
               </ul>
         </nav>
     
@@ -213,13 +211,11 @@
 
              <nav class="row sidebar-menus">
                   <ul>
-                        <a href="{{ url('/home') }}"><li  class="menuactive"><span class="glyphicon glyphicon-inbox">&nbsp;</span>Dashboard</li></a>
+                        <a href="{{ url('/home') }}"><li><span class="glyphicon glyphicon-inbox">&nbsp;</span>Dashboard</li></a>
 
-                         <?php if ($if_exist_settings == 1) { ?>
-
-                             <a href="https://ressuu.me/cv/<?php echo $userSettings->permalink; ?>" target="_blank" ><li><span class="glyphicon glyphicon-list-alt">&nbsp;</span>My CV</li></a>
-                             
-                         <?php } ?> 
+                        <?php if ($if_exist_settings == 1) { ?>
+                        <a href="https://ressuu.me/cv/<?php echo $userSettings->permalink; ?>" target="_blank" ><li><span class="glyphicon glyphicon-list-alt">&nbsp;</span>My CV</li></a>  
+                        <?php } ?> 
                         <!----> 
                         <?php if($no_message == 0){ ?>
                           <a href="{{ url('/message') }}"><li class=""><span class="glyphicon glyphicon-envelope">&nbsp;</span>Message</li></a>                           
@@ -228,7 +224,7 @@
                         <?php } ?>
                         <!---->
                         <a href="{{ url('/connection') }}"><li><span class="glyphicon glyphicon-globe">&nbsp;</span>Connnection</li></a>
-                        <a href="{{ url('/cvlist') }}"><li><span class="glyphicon glyphicon-folder-open">&nbsp;</span>Browse CV</li></a>
+                        <a href="{{ url('/cvlist') }}"><li  class="menuactive"><span class="glyphicon glyphicon-folder-open">&nbsp;</span>Browse CV</li></a>
                         <a href="{{ url('/profile') }}"><li><span class="glyphicon glyphicon-star">&nbsp;</span>Profile</li></a>
                         <a href="{{ url('/resume') }}"><li><span class="glyphicon glyphicon-flag">&nbsp;</span>Resume</li></a>
                         <a href="{{ url('/portfolio') }}"><li><span class="glyphicon glyphicon-send">&nbsp;</span>Portfolio</li></a>
@@ -265,377 +261,73 @@
 
 
 <section class="cph-wrapper">
-<?php if ($if_exist == 1) { ?><!-- if -->
+       <?php foreach ($user_list as $user_info) { ?>
+        <?php $userId = Auth::id(); ?>
+       <?php  $if_profile_exist = DB::table('profiles')->where('user_id',$user_info->id)->count(); ?>
+       <?php  $profile_info = DB::table('profiles')->where('user_id',$user_info->id)->first(); ?>
+       <?php  $setting_info = DB::table('settings')->where('user_id',$user_info->id)->first(); ?>
 
-<?php  foreach ($timeline as $value) { ?><!-- foreach -->
 
-<?php  if($value->category == "Job"){ ?><!-- if -->
+         <?php if($user_info->id != $userId){ ?> 
 
-<?php  $jobInfo = DB::table('job')->where('id',$value->category_id)->first(); ?>    
-  
-<div class="col-xs-12 col-md-12 content-panel-header">
-            
-            <div class="col-md-10" >
-                      <div class="content-panel-status col-xs-12 col-md-12">   
-                            <div class="col-sm-2 div">
-                                <img class="img-responsive profile-pic" src="joblogo/<?php echo $jobInfo->company_picture; ?>">
-                            </div>
-                            <div class="col-sm-10 div">
-                                  <h4><?php echo $jobInfo->company_name ?></h4>
-                                  <p><?php echo $value->activity; ?> <a href="" data-toggle="modal" data-target="#newsfeed_{{ $value->id }}"><span>check it here.</span></a></p>
-                                  <div><!--<a href="#">Link</a> | <a href="#">Comment</a>--></div>
-                            </div>       
+           <?php  $checkCV = DB::table('settings')->where('user_id',$user_info->id)->count(); ?>
+
+               <?php if($checkCV == 1){ ?> 
+
+                   <div class="col-xs-12 col-md-12 content-panel-header">
+                      <div class="col-xs-12 col-md-2 img">
+                          <?php if($if_profile_exist == 0 or empty($profile_info->profile_picture) or $profile_info->profile_picture == " " ){ ?>
+                            <img src="profilepic/default_avatar.jpg" class="img-responsive"> 
+                          <?php }else{ ?>
+                            <img class="img-responsive" src="profilepic/<?php echo $profile_info->profile_picture; ?>" > 
+                          <?php } ?>  
                       </div>
-            </div>
-             <div class="col-xs-12 col-md-2 content-panel-lc"> 
+                      <div class="col-xs-8 col-md-8 content-panel-jobs">
+                           <?php if($if_profile_exist == 0){ ?>
+                            <h4><?php  echo $user_info->name; ?></h4>
+                          <?php }else{ ?>
+                            <h4><?php echo $profile_info->name; ?></h4>
+                          <?php } ?> 
+                          
+                          <?php if($if_profile_exist == 0 or empty($profile_info->position)){ ?>
+                              <p>Not Set</p>
+                          <?php }else{ ?>
+                             <p><?php echo $profile_info->position; ?></p>
+                          <?php } ?>  
+                     </div>
+                     <div class="col-xs-4 col-md-2"> 
+                      <p>&nbsp;</p><br><br>
+                          <div class="btn-group btn-group-xs" role="group" aria-label="...">
+                            <?php if(empty($setting_info->permalink)){ ?> 
+                              <a href="#" data-toggle="modal" type="button" class="btn btn-info">CV Link</a>
+                            <?php }else{ ?> 
+                              <a  target="_target" href="https://ressuu.me/cv/<?php echo $setting_info->permalink;  ?>" data-toggle="modal" type="button" class="btn btn-info">CV Link </a>
+                            <?php } ?>
+                          </div>       
+                     </div>
+                  </div>
 
-                              <p><?php
-                              
-                              if(!empty($value->date)){
-                               
-                                 $value_date = date("Y-m-d", strtotime( $value->date ) );
-                                 $from=date_create(date('Y-m-d'));
-                                 $to=date_create($value_date);
-                                 $diff=date_diff($to,$from);
-                                 $days_diff = $diff->format('%a');
+              <?php } ?>
 
-                                 if($days_diff == "0"){
-                                  echo "Just now";
-                                 }else{
-                                  echo $diff->format('%a Days Ago');
-                                 }
+        <?php } ?>
 
-
-                              }
-
-                               ?>
-                               </p>
-                                
-            </div>
-
-  </div>
-    
-  <!-- Modal for newsFeed -->
-          <!-- Modal for viewJobs -->
-                                      <section>
-
-                                                 <div class="modal fade" id="newsfeed_{{ $value->id }}" role="dialog">
-                                                  <div class="modal-dialog">
-                                                  
-                                                    <!-- Modal content-->
-                                                    <div class="modal-content">
-
-                                                    <form method="" action="jobs/addJob" class="theme1">
-                                                               <div class="modal-header col-md-12 content-panel-header">
-                                                                    <h3> {{ $jobInfo->company_job }}</h3>
-                                                               </div>
-                                                                        
-                                                               <div class="col-md-12  content-panel">
-                                                                    <div class="col-md-4">
-                                                                              <p>Company Name: </p>
-                                                                    </div>
-                                                                    <div class="col-md-7">
-                                                                              <p>{{ $jobInfo->company_name }}</p>
-                                                                    </div>
-                                                                          
-                                                               </div>      
-
-                                                               <div class="col-md-12  content-panel">
-                                                                    <div class="col-md-4">
-                                                                              <p>Company Address: </p>
-                                                                    </div>
-                                                                    <div class="col-md-7">
-                                                                              <p>{{ $jobInfo->company_address }}</p>
-                                                                    </div>
-                                                                     
-                                                               </div> 
-
-                                                               <div class="col-md-12  content-panel">
-                                                                    <div class="col-md-4">
-                                                                              <p>Salary Rate </p>
-                                                                    </div>  
-                                                                    <div class="col-md-7">
-                                                                              <p class="job_salary">{{ $jobInfo->company_rate }}</p>
-                                                                    </div>
-                                                                                  
-                                                               </div>
-
-                                                               <div class="col-md-12  content-panel">
-                                                                    <div class="col-md-12">
-                                                                              <p>About Company: </p>
-                                                                    </div>
-                                                                    <div class="col-md-12">
-                                                                              <p>{{ $jobInfo->company_details }}</p>
-                                                                    </div>
-                                                                                  
-                                                               </div>
-
-                                                               <div class="col-md-12  content-panel">
-                                                                    <div class="col-md-12">
-                                                                              <p>Job Description: </p>
-                                                                    </div>
-                                                                    <div class="col-md-12">
-                                                                              <p>{!! nl2br( $jobInfo->company_status) !!}</p>
-                                                                    </div>
-                                                                                  
-                                                               </div>
-
-                                                              <div class="modal-footer">
-                                                                   <button type="" class="btn btn-default" data-dismiss="modal">Close</button> 
-                                                              </div>
-                                                    </form>
-                                                    </div>
-                                            
-                                          </div>
-                                        </div>
-
-                                      </section>
-                  <!-- Modal for viewJobs -->
- <!-- Modal for newsFeed -->         
-<?php }if($value->category == "Send Message"){ ?> 
-
-
-<?php  $messageInfo = DB::table('message')->where('id',$value->category_id)->count(); ?>   
-
-
- <div class="col-xs-12 col-md-12 content-panel-header">
-            
-            <div class="col-md-10" >
-                      <div class="content-panel-status col-xs-12 col-md-12">   
-                            <div class="col-sm-2 div">
-                                <?php if ($if_exist == 1) { ?>
-      
-                                <?php if(!empty($userProfile->profile_picture)  AND $userProfile->profile_picture != " " ){ ?>
-                                  
-                                   <img class="img-responsive profile-pic" src="images/messenger_icon.png">
-                                <?php  }else{ ?>
-                                  <img class="img-responsive profile-pic" src="profilepic/default_avatar.jpg">
-                                <?php } ?>
-
-                                <?php }else{ ?>
-                                  <img class="img-responsive profile-pic" src="profilepic/default_avatar.jpg" >
-                              <?php } ?> 
-                            </div>
-                            <div class="col-sm-10 div">
-                                  <h4>
-                                    <?php if ($messageInfo == 0) { ?>
-                                         <?php echo$userProfile->name; ?>
-                                    <?php } else { ?>  
-                                         <?php echo$userProfile->name; ?>
-                                    <?php } ?>
-                                        
-                                  </h4>
-                                  <p><?php echo $value->activity; ?> <!--<a href="" data-toggle="modal" data-target="#newsfeed_{{ $value->id }}"><span>check it here.</span></a>--></p>
-                                  <div><!--<a href="#">Link</a> | <a href="#">Comment</a>--></div>
-                            </div>       
-                      </div>
-            </div>
-             <div class="col-xs-12 col-md-2 content-panel-lc">      
-                              <p><?php
-                              
-                              if(!empty($value->date)){
-                               
-                                 $value_date = date("Y-m-d", strtotime( $value->date ) );
-                                 $from=date_create(date('Y-m-d'));
-                                 $to=date_create($value_date);
-                                 $diff=date_diff($to,$from);
-                                 $days_diff = $diff->format('%a');
-
-                                 if($days_diff == "0"){
-                                  echo "Just now";
-                                 }else{
-                                  echo $diff->format('%a Days Ago');
-                                 }
-
-
-                              }
-
-                               ?>
-                               </p>
-                                
-            </div>
-
-  </div>
-
-<?php }if($value->category != "Send Message" AND $value->category != "Job" ){ ?>
- <div class="col-xs-12 col-md-12 content-panel-header">
-            
-            <div class="col-md-10" >
-                      <div class="content-panel-status col-xs-12 col-md-12">   
-                            <div class="col-sm-2 div">
-                                <?php if ($if_exist == 1) { ?>
-      
-                                <?php if(!empty($userProfile->profile_picture)  AND $userProfile->profile_picture != " " ){ ?>
-                                  
-                                   <img class="img-reponsive profile-pic" src="profilepic/<?php echo $userProfile->profile_picture; ?>">
-                                <?php  }else{ ?>
-                                  <img class="img-responsive profile-pic" src="profilepic/default_avatar.jpg">
-                                <?php } ?>
-
-                                <?php }else{ ?>
-                                  <img class="img-responsive profile-pic" src="profilepic/default_avatar.jpg" >
-                              <?php } ?> 
-                            </div>
-                            <div class="col-sm-10 div">
-                                  <h4><?php echo$userProfile->name; ?></h4>
-                                  <p><?php echo $value->activity; ?> <!--<a href="" data-toggle="modal" data-target="#newsfeed_{{ $value->id }}"><span>check it here.</span></a>--></p>
-                                  <div><!--<a href="#">Link</a> | <a href="#">Comment</a>--></div>
-                            </div>       
-                      </div>
-            </div>
-             <div class="col-xs-12 col-md-2 content-panel-lc">      
-                              <p><?php
-                              
-                              if(!empty($value->date)){
-                               
-                                 $value_date = date("Y-m-d", strtotime( $value->date ) );
-                                 $from=date_create(date('Y-m-d'));
-                                 $to=date_create($value_date);
-                                 $diff=date_diff($to,$from);
-                                 $days_diff = $diff->format('%a');
-
-                                 if($days_diff == "0"){
-                                  echo "Just now";
-                                 }else{
-                                  echo $diff->format('%a Days Ago');
-                                 }
-
-
-                              }
-
-                               ?>
-                               </p>
-                                
-            </div>
-
-  </div>
-
-
-
-
-<?php } ?><!-- if -->
- 
-<?php } ?><!-- foreach -->
-
-<?php } ?><!-- if -->
- 
-
-
-<div class="col-xs-12 col-md-12 content-panel-header">
-            
-            <div class="col-md-10" >
-                      <div class="content-panel-status col-xs-12 col-md-12">   
-                            <div class="col-sm-2 div">
-                                <?php if ($if_exist == 1) { ?>
-      
-                                <?php if(!empty($userProfile->profile_picture)  AND $userProfile->profile_picture != " " ){ ?>
-                                  <img class="img-reponsive profile-pic" src="profilepic/<?php echo $userProfile->profile_picture; ?>">
-                                <?php  }else{ ?>
-                                  <img class="img-responsive profile-pic" src="profilepic/default_avatar.jpg">
-                                <?php } ?>
-
-                                <?php }else{ ?>
-                                  <img class="img-responsive profile-pic" src="profilepic/default_avatar.jpg" >
-                              <?php } ?> 
-                            </div>
-                            <div class="col-sm-10 div">
-                                  <h4><?php echo$name; ?></h4>
-                                  <p>Created New Account <a><span></span></a></p>
-                                  <div><!--<a href="#">Link</a> | <a href="#">Comment</a>--></div>
-                            </div>       
-                      </div>
-            </div>
-             <div class="col-xs-12 col-md-2 content-panel-lc">      
-                              <p></p>
-                              <!--<img src="images/like.png"><span>12</span>
-                              <img src="images/comment.jpg"><span>12</span>  -->         
-            </div>
-
-  </div>
-
-
+      <?php } ?>  
 
 </section>  
 
-</content> 
-<!-- Modal for newsFeed -->
-         <section>
-
-              <div class="modal fade" id="message" role="dialog">
-                  <div class="modal-dialog">
-                                                  
-                   <!-- Modal content-->
-                   <div class="modal-content">
-
-                              <form method="" action="jobs/addJob" class="theme1">
-                                       <div class="modal-header col-md-12 content-panel-header">
-                                            <h3>Message</h3>
-                                       </div>
-                                                
-                                       <div class="col-md-12  content-panel">
-                                            <div class="col-md-4">
-                                                  <p>Company Name: </p>
-                                            </div>
-                                            <div class="col-md-7">
-                                                  <p></p>
-                                            </div>
-                                                  
-                                       </div>      
-
-                                       <div class="col-md-12  content-panel">
-                                            <div class="col-md-4">
-                                                      <p>Company Address: </p>
-                                            </div>
-                                            <div class="col-md-7">
-                                                      <p></p>
-                                            </div>
-                                             
-                                       </div> 
-
-                                       <div class="col-md-12  content-panel">
-                                            <div class="col-md-4">
-                                                      <p>Salary Rate </p>
-                                            </div>  
-                                            <div class="col-md-7">
-                                                      <p class="job_salary"></p>
-                                            </div>
-                                                          
-                                       </div>
-
-                                       <div class="col-md-12  content-panel">
-                                            <div class="col-md-12">
-                                                      <p>About Company: </p>
-                                            </div>
-                                            <div class="col-md-12">
-                                                      <p></p>
-                                            </div>
-                                                          
-                                       </div>
-
-                                       <div class="col-md-12  content-panel">
-                                            <div class="col-md-12">
-                                                      <p>Job Description: </p>
-                                            </div>
-                                            <div class="col-md-12">
-                                                      <p></p>
-                                            </div>
-                                                          
-                                       </div>
-
-                                      <div class="modal-footer">
-                                           <button type="" class="btn btn-default" data-dismiss="modal">Close</button> 
-                                      </div>
-                            </form>
-                  </div>
-                      
-                 </div>
-              </div>
-
-          </section>
-<!-- Modal for newsFeed -->
 
 
-                       
+
+
+
+
+
+
+
+
+
+
+</content>        
 <?php foreach ($list_message as $message_value) { ?>
  <!-- Modal -->
  <!-- Modal for viewMessage -->
@@ -766,11 +458,9 @@
 <!-- Modal for viewMessage -->
 
 <!-- Modal -->   
-
-
-
 <?php } ?>
-             
+
+
 
 <?php foreach ($job_list_notification as $job_value) { ?>
 
@@ -857,9 +547,11 @@
 <!-- Modal for viewMessage -->
   
                            
-<?php } ?>         
+<?php } ?> 
+
 
 <?php foreach ($user_list_notification as $user_value) { ?>
+
 
 <?php $profileInfo = DB::table('profiles')->where('user_id',$user_value->user_id)->first(); ?>
 <?php $userInfo = DB::table('users')->where('id',$user_value->user_id)->first(); ?>
@@ -889,7 +581,7 @@
                                  <?php if($checkprofile == 0){ ?>
                                         <img src="profilepic/default_avatar.jpg" class="img-responsive" style="border-radius:85px;">
                                 <?php }else{ ?> 
-                                     <?php if(empty($profileInfo->profile_picture) OR $profileInfo->profile_picture == " " ){ ?>
+                                     <?php if(empty($profileInfo->profile_picture) or $profileInfo->profile_picture == " " ){ ?>
                                          <img src="profilepic/default_avatar.jpg" class="img-responsive" style="border-radius:85px;">
                                       <?php  }else{ ?>
                                           <img src="profilepic/{{ $profileInfo->profile_picture }}" class="img-responsive" style="border-radius:85px;">  
@@ -930,7 +622,7 @@
                                 <?php if($checkprofile == 0){ ?>
                                       <h5><i>CV Link:&nbsp;&nbsp; Not Set</i></h5>
                                 <?php }else{ ?> 
-                                      <h5><i>CV Link:&nbsp;&nbsp;<a href="https://ressuu.me/cv/{{ $settingInfo->permalink }}">https://ressuu.me/cv/{{ $settingInfo->permalink }}</a></i></h5>
+                                      <h5><i>CV Link:&nbsp;&nbsp;<a href="#">https://ressuu.me/cv/{{ $settingInfo->permalink }}</a></i></h5>
                                 <?php }?>
                                </div> 
 
@@ -951,7 +643,9 @@
 <!-- Modal for viewMessage -->
   
                            
-<?php } ?>                    
-                
+<?php } ?>                         
+           
+
+
 </div>
 @endsection
