@@ -12,6 +12,7 @@ use Validator;
 use Redirect;
 use Session;
 use Hybrid_Auth;
+
 class HomeController extends Controller
 {
     /**
@@ -38,8 +39,9 @@ class HomeController extends Controller
     $userProfile = DB::table('profiles')->where('user_id',$userId)->first();
     $userFeeds = DB::table('news_feeds')
                 ->where('user_id', $userId)
-                ->orderBy('id', 'desc')
-                ->get();
+                ->orderBy('date', 'desc')
+                ->get();            
+
     //$userFeeds = DB::select('select * from news_feeds where user_id = :id', ['id' => $userId]);   
     $usersFile = DB::table('users')
                 ->where('id', $userId)
@@ -51,24 +53,25 @@ class HomeController extends Controller
     $userAds = DB::table('ads')->where([
                      'area' => 'USERDASHBOARD',
                      'status' => 'ACTIVE'
-                  ])->first(); 
-
-     $timeline = DB::table('dashboard_timeline')->where('user_id', $userId)
+                  ])->first();   
+    
+    $timeline = DB::table('dashboard_timeline')->where('user_id', $userId)
                 ->orderBy('id', 'desc')
                 ->get();
-    
-    $if_exist_settings = DB::table('settings')->where('user_id',$userId)->count(); 
+   
+    $if_exist_settings = DB::table('settings')->where('user_id',$userId)->count();  
 
     $no_message = DB::table('message')->where([
                      'user_id' => $userId,
                      'status' => 'PENDING'
                   ])->count(); 
+
     $list_message = DB::table('message')->where([
                      'user_id' => $userId,
                      'status' => 'PENDING'
                   ])->get(); 
 
-    $count_job = DB::table('job')->count();
+    $count_job = DB::table('job')->count();          
 
     $list_job = DB::table('job')->get();
 
@@ -97,6 +100,8 @@ class HomeController extends Controller
                   ])->get();
 
     $user_list =  DB::table('users')->get();
+      
+
 
 
         return view('home')
@@ -121,15 +126,10 @@ class HomeController extends Controller
                 ->with("user_list",$user_list)
                 ->with("user_notification",$user_notification)
                 ->with("user_list_notification",$user_list_notification)
-               
-       ;
-    
-      /* return view('home')
-                ->with("name",$name)
-                ->with("if_exist",$if_exist)
-       ;
-    */
 
+
+       ;
+   
 
     }
     public function profile()
@@ -142,23 +142,23 @@ class HomeController extends Controller
     $userProfile = DB::table('profiles')->where('user_id',$userId)->first();
     $if_exist_settings = DB::table('settings')->where('user_id',$userId)->count();
     $userSettings = DB::table('settings')->where('user_id',$userId)->first(); 
+    $count_job = DB::table('job')->count();   
 
     $userAds = DB::table('ads')->where([
                      'area' => 'USERPROFILE',
                      'status' => 'ACTIVE'
-                  ])->first();   
-    $count_job = DB::table('job')->count(); 
+                  ])->first(); 
 
     $no_message = DB::table('message')->where([
                      'user_id' => $userId,
                      'status' => 'PENDING'
                   ])->count(); 
-    
+
     $list_message = DB::table('message')->where([
                      'user_id' => $userId,
                      'status' => 'PENDING'
                   ])->get();
-
+    
     $list_job = DB::table('job')->get();
 
     $job_notification =  DB::table('user_notification')->where([
@@ -171,7 +171,7 @@ class HomeController extends Controller
                      'user_id' => $userId,
                      'category' => 'Job',
                      'status' => 'PENDING'
-                  ])->get(); 
+                  ])->get();  
 
     $user_notification = DB::table('user_notification')->where([
                      'category_id' => $userId,
@@ -185,7 +185,9 @@ class HomeController extends Controller
                      'status' => 'PENDING'
                   ])->get();
 
-    $user_list =  DB::table('users')->get();
+    $user_list =  DB::table('users')->get(); 
+
+
 
           return view('profile')
                      ->with("userProfile",$userProfile)
@@ -204,7 +206,6 @@ class HomeController extends Controller
                      ->with("user_list",$user_list)
                      ->with("user_notification",$user_notification)
                      ->with("user_list_notification",$user_list_notification)
-                   
           ;
                 
 
@@ -213,6 +214,7 @@ class HomeController extends Controller
 
     public function resume()
     {
+
     $userId = Auth::id();
     $name = Auth::user()->name;
     $email = Auth::user()->email;
@@ -239,9 +241,9 @@ class HomeController extends Controller
                 ->orderBy('id', 'desc')
                 ->get(); 
                                      
-    $userSettings = DB::table('settings')->where('user_id',$userId)->first();     
-     
-    $count_job = DB::table('job')->count();
+    $userSettings = DB::table('settings')->where('user_id',$userId)->first(); 
+    
+    $count_job = DB::table('job')->count(); 
 
     $no_message = DB::table('message')->where([
                      'user_id' => $userId,
@@ -250,7 +252,7 @@ class HomeController extends Controller
     $list_message = DB::table('message')->where([
                      'user_id' => $userId,
                      'status' => 'PENDING'
-                  ])->get(); 
+                  ])->get();
 
     $list_job = DB::table('job')->get();
 
@@ -265,7 +267,7 @@ class HomeController extends Controller
                      'user_id' => $userId,
                      'category' => 'Job',
                      'status' => 'PENDING'
-                  ])->get();
+                  ])->get();  
 
     $user_notification = DB::table('user_notification')->where([
                      'category_id' => $userId,
@@ -279,21 +281,22 @@ class HomeController extends Controller
                      'status' => 'PENDING'
                   ])->get();
 
-    $user_list =  DB::table('users')->get();                                 
+    $user_list =  DB::table('users')->get();
+
 
         return view('resume')
                     ->with("userProfile",$userProfile)
                     ->with("userResume_Experience",$userResume_Experience)
                     ->with("userResume_Education",$userResume_Education)
                     ->with("userResume_Skills",$userResume_Skills)
-                     ->with("userResume_Certification",$userResume_Certification)
+                    ->with("userResume_Certification",$userResume_Certification)
                     ->with("name",$name)
-                     ->with("email",$email)
-                     ->with("if_exist",$if_exist)
-                      ->with("if_exist_settings",$if_exist_settings)
-                      ->with("userSettings",$userSettings)
-                      ->with("count_job",$count_job)
-                      ->with("no_message",$no_message)
+                    ->with("email",$email)
+                    ->with("if_exist",$if_exist)
+                    ->with("if_exist_settings",$if_exist_settings)
+                    ->with("userSettings",$userSettings)
+                    ->with("count_job",$count_job)
+                    ->with("no_message",$no_message)
                     ->with("list_message",$list_message)
                     ->with("list_job",$list_job)
                     ->with("job_notification",$job_notification)
@@ -301,7 +304,6 @@ class HomeController extends Controller
                     ->with("user_list",$user_list)
                     ->with("user_notification",$user_notification)
                     ->with("user_list_notification",$user_list_notification)
-                      
         ;
 
 
@@ -327,9 +329,8 @@ class HomeController extends Controller
                 ->get();
     $if_have_portfolio =  DB::table('portfolio')->where('user_id',$userId)->count(); 
     $if_exist_settings = DB::table('settings')->where('user_id',$userId)->count();
-    $userSettings = DB::table('settings')->where('user_id',$userId)->first(); 
-     
-    $count_job = DB::table('job')->count(); 
+    $userSettings = DB::table('settings')->where('user_id',$userId)->first();
+    $count_job = DB::table('job')->count();  
 
     $no_message = DB::table('message')->where([
                      'user_id' => $userId,
@@ -338,9 +339,8 @@ class HomeController extends Controller
     $list_message = DB::table('message')->where([
                      'user_id' => $userId,
                      'status' => 'PENDING'
-                  ])->get();
-
-     $list_job = DB::table('job')->get();
+                  ])->get(); 
+    $list_job = DB::table('job')->get();
 
     $job_notification =  DB::table('user_notification')->where([
                      'user_id' => $userId,
@@ -376,18 +376,17 @@ class HomeController extends Controller
                  ->with("name",$name)
                  ->with("email",$email)
                  ->with("if_exist",$if_exist)
-                  ->with("if_exist_settings",$if_exist_settings)
-                   ->with("userSettings",$userSettings)
-                   ->with("count_job",$count_job)
-                   ->with("no_message",$no_message)
+                 ->with("if_exist_settings",$if_exist_settings)
+                 ->with("userSettings",$userSettings)
+                 ->with("count_job",$count_job)
+                 ->with("no_message",$no_message)
                  ->with("list_message",$list_message)
-                  ->with("list_job",$list_job)
+                 ->with("list_job",$list_job)
                  ->with("job_notification",$job_notification)
                 ->with("job_list_notification",$job_list_notification)
-                 ->with("user_list",$user_list)
+                ->with("user_list",$user_list)
                 ->with("user_notification",$user_notification)
                 ->with("user_list_notification",$user_list_notification)
-                   
 
         ;
 
@@ -402,20 +401,22 @@ class HomeController extends Controller
         $if_exist = DB::table('profiles')->where('user_id',$userId)->count();
         $if_exist_settings = DB::table('settings')->where('user_id',$userId)->count();  
         $userSettings = DB::table('settings')->where('user_id',$userId)->first(); 
-        $userJobs = DB::table('job')->orderBy('id', 'desc')->get();  
+        $userJobs = DB::table('job')->orderBy('id', 'desc')->get();   
         $userProfile = DB::table('profiles')->where('user_id',$userId)->first();
+
         $count_job = DB::table('job')->count();
 
         $no_message = DB::table('message')->where([
                      'user_id' => $userId,
                      'status' => 'PENDING'
                   ])->count(); 
+
         $list_message = DB::table('message')->where([
                      'user_id' => $userId,
                      'status' => 'PENDING'
                   ])->get(); 
 
-         $list_job = DB::table('job')->get();
+        $list_job = DB::table('job')->get();
 
         $job_notification =  DB::table('user_notification')->where([
                      'user_id' => $userId,
@@ -429,7 +430,7 @@ class HomeController extends Controller
                      'status' => 'PENDING'
                   ])->get();
 
-        $job_application = DB::table('applicant')->where('user_id',$userId)->get();
+         $job_application = DB::table('applicant')->where('user_id',$userId)->get(); 
 
         $user_notification = DB::table('user_notification')->where([
                      'category_id' => $userId,
@@ -447,24 +448,24 @@ class HomeController extends Controller
 
         return view('jobs')
                 ->with("userProfile",$userProfile)
-                 ->with("name",$name)
-                 ->with("email",$email)
-                 ->with("if_exist",$if_exist)
-                 ->with("userJobs",$userJobs)
-                  ->with("if_exist_settings",$if_exist_settings)
-                  ->with("userSettings",$userSettings)
-                  ->with("count_job",$count_job)
-                  ->with("no_message",$no_message)
+                ->with("name",$name)
+                ->with("email",$email)
+                ->with("if_exist",$if_exist)
+                ->with("userJobs",$userJobs)
+                ->with("if_exist_settings",$if_exist_settings)
+                ->with("userSettings",$userSettings)
+                ->with("count_job",$count_job)
+                ->with("no_message",$no_message)
                 ->with("list_message",$list_message)
                 ->with("list_job",$list_job)
                 ->with("job_notification",$job_notification)
                 ->with("job_list_notification",$job_list_notification)
-                 ->with("job_application",$job_application)
-                 ->with("user_list",$user_list)
+                ->with("job_application",$job_application)
+                ->with("user_list",$user_list)
                 ->with("user_notification",$user_notification)
                 ->with("user_list_notification",$user_list_notification)
-                  
         ;
+
     }
 
     public function setting()
@@ -497,22 +498,21 @@ class HomeController extends Controller
         // $create_cvlink = "http://localhost:8000/cv/".($cvlink);
          $create_cvlink = "https://ressuu.me/cv/".($cvlink);
          $token = random_string(40);
-
            $userAds = DB::table('ads')->where([
                      'area' => 'USERSETTINGS',
                      'status' => 'ACTIVE'
                   ])->first(); 
-         $count_job = DB::table('job')->count();
-
-          $no_message = DB::table('message')->where([
+        $count_job = DB::table('job')->count();
+        
+        $no_message = DB::table('message')->where([
                      'user_id' => $userId,
                      'status' => 'PENDING'
                   ])->count(); 
         $list_message = DB::table('message')->where([
                      'user_id' => $userId,
                      'status' => 'PENDING'
-                  ])->get();
-
+                  ])->get(); 
+        
         $list_job = DB::table('job')->get();
 
         $job_notification =  DB::table('user_notification')->where([
@@ -541,7 +541,6 @@ class HomeController extends Controller
 
         $user_list =  DB::table('users')->get();
 
-
         return view('setting')
                 ->with("userProfile",$userProfile)
                 ->with("name",$name)
@@ -559,10 +558,9 @@ class HomeController extends Controller
                   ->with("list_job",$list_job)
                   ->with("job_notification",$job_notification)
                   ->with("job_list_notification",$job_list_notification)
-                   ->with("user_list",$user_list)
+                  ->with("user_list",$user_list)
                 ->with("user_notification",$user_notification)
                 ->with("user_list_notification",$user_list_notification)
-                
         ;
 
 
@@ -604,7 +602,13 @@ class HomeController extends Controller
                 'google' => $inputGoogle
                 ));
             
-         DB::table('dashboard_timeline')->insert([
+        // DB::table('news_feeds')->insert([
+        //         'user_id' => $userId,
+        //          'activity' => "Update Profile",
+        //          'date'=> $inputDate
+        //   ]);
+
+        DB::table('dashboard_timeline')->insert([
                    'user_id' => $userId,
                    'category' => "Profile",
                    'category_id' =>$userId,
@@ -613,15 +617,13 @@ class HomeController extends Controller
         ]);
 
 
-
-
         return back();
 
     }
 
     public function insertProfile(){
     
-         $userId = Auth::id();
+        $userId = Auth::id();
         $inputName =        Input::get('name');
         $inputJobtitle =    Input::get('jobtitle');
         $inputBday =        Input::get('bday');
@@ -634,6 +636,7 @@ class HomeController extends Controller
         $inputLinked =      Input::get('linkedin');
         $inputTwitter =     Input::get('twitter');
         $inputGoogle =      Input::get('google');
+
 
         DB::table('profiles')->insert([
                 'user_id'=> $userId,
@@ -650,7 +653,7 @@ class HomeController extends Controller
                 'linkedin' => $inputLinked,
                 'twitter' => $inputTwitter,
                 'google' => $inputGoogle,
-                'is_logged_in' => 0
+                'is_logged_in' => ' '
           ]);
 
 
@@ -680,14 +683,16 @@ class HomeController extends Controller
                  'description' => $inputDescription
           ]);
 
-           DB::table('dashboard_timeline')->insert([
+   
+
+            DB::table('dashboard_timeline')->insert([
                        'user_id' => $userId,
                        'category' => "Experience",
                        'category_id' =>$getLastID,
                        'activity' => "Add New Experience as ".$inputJobtitle. " in ".$inputCompanyname,
                        'date'=> $inputDate
             ]);
-
+         
            return back();
 
     }
@@ -700,9 +705,9 @@ class HomeController extends Controller
          $inputStartdate = Input::get('start_date');
          $inputEnddate = Input::get('end_date');
          $inputAward = Input::get('award');
-          $inputDate = date('Y-m-d');
+         $inputDate = date('Y-m-d');
 
-          $getLastID = DB::table('education')->insertGetId([
+         $getLastID = DB::table('education')->insertGetId([
                  'user_id' => $userId,
                  'school' => $inputSchool,
                  'course'=> $inputCourse,
@@ -732,7 +737,7 @@ class HomeController extends Controller
          $inputDescription = Input::get('description');
          $inputDate = date('Y-m-d');
        
-           $getLastID = DB::table('skills')->insertGetId([
+        $getLastID = DB::table('skills')->insertGetId([
                  'skill_cat_id' => 0,
                  'user_id' => $userId,
                  'skillname'=> $inputSkills,
@@ -762,7 +767,7 @@ class HomeController extends Controller
          $inputReceive = Input::get('receive');
          $inputDate = date('Y-m-d');
        
-          $getLastID = DB::table('certification')->insertGetId([
+         $getLastID = DB::table('certification')->insertGetId([
                  'user_id' => $userId,
                  'certificate_title' => $inputTitle,
                  'certificate_company'=> $inputCompany,
@@ -780,7 +785,7 @@ class HomeController extends Controller
                        'activity' => "Add Certification about ". $inputTitle,
                        'date'=> $inputDate
             ]);
-            
+
            return back();
 
     }
@@ -814,7 +819,7 @@ class HomeController extends Controller
                  $portfolio_Category = DB::table('portfolio_cat')->where('id',$inputCategoryId)->first();
                  $inputDate = date('Y-m-d');
 
-                   $getLastID = DB::table('portfolio')->insertGetId([
+                 $getLastID = DB::table('portfolio')->insertGetId([
                          'user_id' => $userId,
                          'port_title'=> $inputPortTitle,
                          'port_excerpt' => $inputDescription,
@@ -832,6 +837,9 @@ class HomeController extends Controller
                         'activity' => "Add New Portfolio in ". $portfolio_Category->title,
                        'date'=> $inputDate
                     ]); 
+
+
+
 
               Session::flash('success', 'Upload successfully'); 
               return back();    
@@ -893,12 +901,15 @@ class HomeController extends Controller
                              'profile_picture' => $inputThumbnail 
                             ));    
 
-                       DB::table('news_feeds')->insert([
-                             'user_id' => $userId,
-                             'activity' => "Update Profile Picture ",
-                             'date'=> $inputDate
-                      ]);
+                 
 
+                        DB::table('dashboard_timeline')->insert([
+                       'user_id' => $userId,
+                       'category' => "Profile Picture",
+                       'category_id' =>$userId,
+                        'activity' => "Update Profile Picture ",
+                       'date'=> $inputDate
+                     ]);  
 
 
                   Session::flash('success', 'Upload successfully'); 
@@ -935,7 +946,7 @@ class HomeController extends Controller
         $inputDate = date('Y-m-d');
 
 
-         DB::table('work_experience')
+        DB::table('work_experience')
             ->where('id', $expId)
             ->update(array(
                  'user_id' => $userId,
@@ -944,7 +955,9 @@ class HomeController extends Controller
                  'start_date' => $inputStartdate,
                  'end_date'=>$inputEnddate,
                  'description' => $inputDescription
-                ));  
+        ));  
+
+    
 
         DB::table('dashboard_timeline')->insert([
                        'user_id' => $userId,
@@ -952,7 +965,7 @@ class HomeController extends Controller
                        'category_id' =>$expId,
                        'activity' => "Updating Experience in ". $inputCompanyname,
                        'date'=> $inputDate
-        ]);           
+        ]);      
 
         return back();
 
@@ -968,10 +981,10 @@ class HomeController extends Controller
         $inputStartdate = Input::get('update_start_date');
         $inputEnddate = Input::get('update_end_date');
         $inputAward = Input::get('update_award');
-         $inputDate = date('Y-m-d');
+        $inputDate = date('Y-m-d');
 
 
-         DB::table('education')
+        DB::table('education')
             ->where('id', $expId)
             ->update(array(
                  'user_id' => $userId,
@@ -980,16 +993,16 @@ class HomeController extends Controller
                  'date_start' => $inputStartdate,
                  'date_end'=>$inputEnddate,
                  'awards_rec' => $inputAward
-                ));    
+        ));    
 
-         DB::table('dashboard_timeline')->insert([
+
+        DB::table('dashboard_timeline')->insert([
                        'user_id' => $userId,
                        'category' => "Update Education",
                        'category_id' =>$expId,
                        'activity' => "Updating Education in ". $inputSchool,
                        'date'=> $inputDate
-        ]);    
-
+        ]);   
 
         return back();
 
@@ -1014,13 +1027,15 @@ class HomeController extends Controller
                  'description'=>$inputDescription
                 ));  
 
-          DB::table('dashboard_timeline')->insert([
+       
+
+        DB::table('dashboard_timeline')->insert([
                        'user_id' => $userId,
                        'category' => "Update Skills",
                        'category_id' =>$skiId,
                        'activity' => "Update Skills in ". $inputSkills,
                        'date'=> $inputDate
-        ]); 
+        ]);  
 
 
            return back();
@@ -1038,7 +1053,7 @@ class HomeController extends Controller
          $inputKey = Input::get('token_key');
          $inputUsername = Input::get('username');
          $inputPreview = Input::get('embeded_code');
-           $inputDate = date('Y-m-d');
+         $inputDate = date('Y-m-d');
         
 
          $if_exist_settings = DB::table('settings')->where('user_id',$userId)->count(); 
@@ -1057,6 +1072,7 @@ class HomeController extends Controller
                 
           ]);
 
+        
         DB::table('dashboard_timeline')->insert([
                        'user_id' => $userId,
                        'category' => "Update Settings",
@@ -1064,6 +1080,11 @@ class HomeController extends Controller
                        'activity' => "Update Settings",
                        'date'=> $inputDate
         ]);
+
+
+
+
+
 
          }else{
 
@@ -1079,7 +1100,7 @@ class HomeController extends Controller
                  ]);     
          }       
 
-          DB::table('dashboard_timeline')->insert([
+           DB::table('dashboard_timeline')->insert([
                        'user_id' => $userId,
                        'category' => "Update Settings",
                        'category_id' =>$userId,
@@ -1087,10 +1108,10 @@ class HomeController extends Controller
                        'date'=> $inputDate
         ]);
 
+
            return back();
 
     }
-
 
     public function updatePortfolio(){
 
@@ -1141,7 +1162,7 @@ class HomeController extends Controller
                   Input::file('image')->move($destinationPath, $fileName); // uploading file to given path
                      // sending back with message
      
-                     $inputPort_title =  Input::get('port_title');
+                        
                      $inputPort_excerpt  =  Input::get('port_excerpt');
                      $inputPort_thumbnail  =  $fileName;
                      $inputDate = date('Y-m-d');
@@ -1240,7 +1261,6 @@ class HomeController extends Controller
 
     }
 
-
     public function deleteEducation($id){
 
 
@@ -1252,17 +1272,16 @@ class HomeController extends Controller
         
         DB::table('education')
                 ->where('id',$eduId)->delete();
-
-
-
-         DB::table('dashboard_timeline')->insert([
+        
+        
+        DB::table('dashboard_timeline')->insert([
                        'user_id' => $userId,
                        'category' => "Delete Education",
                        'category_id' =>rand(11111,99999),
                        'activity' => "Delete Education in ".$education->school,
                        'date'=> $inputDate
-        ]);          
-        
+        ]);
+
 
         return back();
 
@@ -1278,55 +1297,23 @@ class HomeController extends Controller
 
         $skills = DB::table('skills')->where('id',$skiId)->first(); 
 
-
         DB::table('skills')
                 ->where('id',$skiId)->delete();
-
-
-       
+         
         DB::table('dashboard_timeline')->insert([
                        'user_id' => $userId,
                        'category' => "Delete Skills",
                        'category_id' =>rand(11111,99999),
                        'activity' => "Delete Skills ".$skills->skillname,
                        'date'=> $inputDate
-        ]);               
-
-
-        return back();
-
-    }
-
-    public function messageSend(){
-
-        $userId = Input::get('id');
-        $inputName = Input::get('name');
-        $inputEmail = Input::get('email');
-        $inputMessage = Input::get('message');
-        $inputDate = date('Y-m-d');
-
-        $getLastID = DB::table('message')->insertGetId([
-                    'user_id' => $userId,
-                    'name'    => $inputName,
-                    'email'   => $inputEmail,
-                    'message' => $inputMessage,
-                    'date'    => $inputDate,
-                    'status'  => "PENDING"
         ]);
 
-        DB::table('dashboard_timeline')->insert([
-                       'user_id'     => $userId,
-                       'category'    => "Send Message",
-                       'category_id' => $getLastID,
-                       'activity'    => "New Message from  ".$inputName,
-                       'date'        => $inputDate
-        ]);   
-
         return back();
 
     }
 
-      public function applyJobs(){
+     
+     public function applyJobs(){
 
         $userId = Auth::id();
         $job_id =  Input::get('job_id');
@@ -1369,104 +1356,7 @@ class HomeController extends Controller
 
     }
 
-    public function users()
-    {
-    $userId = Auth::id();
-    $name = Auth::user()->name;
-    $if_exist = DB::table('profiles')->where('user_id',$userId)->count();
-    $userProfile = DB::table('profiles')->where('user_id',$userId)->first();
-
-                 
-    $userSettings = DB::table('settings')->where('user_id',$userId)->first(); 
-
-    $userAds = DB::table('ads')->where([
-                     'area' => 'USERDASHBOARD',
-                     'status' => 'ACTIVE'
-                  ])->first();   
-    
-  
-   
-    $if_exist_settings = DB::table('settings')->where('user_id',$userId)->count();  
-
-    $no_message = DB::table('message')->where([
-                     'user_id' => $userId,
-                     'status' => 'PENDING'
-                  ])->count(); 
-
-    $list_message = DB::table('message')->where([
-                     'user_id' => $userId,
-                     'status' => 'PENDING'
-                  ])->get(); 
-
-    $count_job = DB::table('job')->count();          
-
-    $list_job = DB::table('job')->get();
-
-    $job_notification =  DB::table('user_notification')->where([
-                     'user_id' => $userId,
-                     'category' => 'Job',
-                     'status' => 'PENDING'
-                  ])->count();
-
-    $job_list_notification = DB::table('user_notification')->where([
-                     'user_id' => $userId,
-                     'category' => 'Job',
-                     'status' => 'PENDING'
-                  ])->get();  
-
-    $user_notification = DB::table('user_notification')->where([
-                     'category_id' => $userId,
-                     'category' => 'Followed',
-                     'status' => 'PENDING'
-                  ])->count();
-
-    $user_list_notification = DB::table('user_notification')->where([
-                     'category_id' => $userId,
-                     'category' => 'Followed',
-                     'status' => 'PENDING'
-                  ])->get();
-
-    $user_list =  DB::table('users')->get(); 
-
-
-        return view('users')
-                ->with("userProfile",$userProfile)
-                ->with("name",$name)
-                ->with("if_exist",$if_exist)
-                ->with("if_exist_settings",$if_exist_settings)
-                ->with("userSettings",$userSettings)
-                ->with("userAds",$userAds)
-                ->with("count_job",$count_job)
-                ->with("no_message",$no_message)
-                ->with("list_message",$list_message)
-                ->with("list_job",$list_job)
-                ->with("job_notification",$job_notification)
-                ->with("job_list_notification",$job_list_notification)
-                ->with("user_list",$user_list)
-                ->with("user_notification",$user_notification)
-                ->with("user_list_notification",$user_list_notification)
-        ;
-
-    }
-
-   
-
-    public function deleteUserNotification(){
-
-        $id = Input::get('id');
-        $status = "Delete";
-
-        DB::table('user_notification')
-                  ->where('id', $id)
-                  ->update(array(
-                        'status' => $status
-                    ));
-
-        return back();
-
-    }
-
-     public function cvlist()
+    public function cvlist()
     {
     $userId = Auth::id();
     $name = Auth::user()->name;
@@ -1779,7 +1669,33 @@ class HomeController extends Controller
 
 
 
-    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
