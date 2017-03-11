@@ -26,7 +26,7 @@
         <!-- <div id="navbar" class=""> -->
         <nav class="col-md-3 col-sm-12 navicon">
               <ul>
-                   <li class="dropdown">
+                  <li class="dropdown">
                    <!----> 
                     <?php if($user_notification == 0){ ?>
                        <span class="glyphicon glyphicon-user dropdown-toggle"></span>                         
@@ -64,8 +64,7 @@
                     <?php } ?>
                     <!---->
                   </li>
-                   
-                  <li class="dropdown">
+                   <li class="dropdown">
                    <!----> 
                     <?php if($job_notification == 0){ ?>
                        <span class="glyphicon glyphicon-briefcase dropdown-toggle"></span>                         
@@ -80,8 +79,7 @@
                        </ul>
                     <?php } ?>
                     <!---->
-                  </li>
-
+                  </li>  
               </ul>
         </nav>
     
@@ -456,8 +454,141 @@
             </div>
 
   </div>
+<?php }if($value->category == "Accept Follower"){ ?> 
 
-<?php }if($value->category != "Send Message" AND $value->category != "Job" ){ ?>
+<?php  $connetion_info = DB::table('connection_requests')->where('id',$value->category_id)->first(); ?>
+
+<?php  $followed_info = DB::table('profiles')->where('user_id',$connetion_info->from_user_id)->first(); ?>
+<?php  $followed_user_info = DB::table('users')->where('id',$connetion_info->from_user_id)->first(); ?>
+<?php  $check_followed = DB::table('profiles')->where('user_id',$connetion_info->from_user_id)->count(); ?>   
+
+ <div class="col-xs-12 col-md-12 content-panel-header">
+            
+            <div class="col-md-10" >
+                      <div class="content-panel-status col-xs-12 col-md-12">   
+                            <div class="col-sm-2 div">
+                              <?php if($check_followed == 0){ ?>
+                                        <img src="profilepic/default_avatar.jpg" class="img-responsive" style="border-radius:85px;">
+                                <?php }else{ ?> 
+                                     <?php if(empty($followed_info->profile_picture) or $followed_info->profile_picture == " " ){ ?>
+                                         <img src="profilepic/default_avatar.jpg" class="img-responsive" style="border-radius:85px;">
+                                      <?php  }else{ ?>
+                                          <img src="profilepic/{{ $followed_info->profile_picture }}" class="img-responsive" style="border-radius:85px;">  
+                                      <?php } ?>
+                                      
+                                <?php } ?> 
+                            </div>
+                            <div class="col-sm-10 div">
+                                  <h4>
+                                    <?php if ($check_followed == 0) { ?>
+                                         <?php echo$followed_user_info->name; ?>
+                                    <?php } else { ?>  
+                                         <?php echo$followed_info->name; ?>
+                                    <?php } ?>
+                                        
+                                  </h4>
+                                  <p><?php echo $value->activity; ?> <!--<a href="" data-toggle="modal" data-target="#newsfeed_{{ $value->id }}"><span>check it here.</span></a>--></p>
+                                  <div><!--<a href="#">Link</a> | <a href="#">Comment</a>--></div>
+                            </div>       
+                      </div>
+            </div>
+             <div class="col-xs-12 col-md-2 content-panel-lc">      
+                              <p><?php
+                              
+                              if(!empty($value->date)){
+                               
+                                 $value_date = date("Y-m-d", strtotime( $value->date ) );
+                                 $from=date_create(date('Y-m-d'));
+                                 $to=date_create($value_date);
+                                 $diff=date_diff($to,$from);
+                                 $days_diff = $diff->format('%a');
+
+                                 if($days_diff == "0"){
+                                  echo "Just now";
+                                 }else{
+                                  echo $diff->format('%a Days Ago');
+                                 }
+
+
+                              }
+
+                               ?>
+                               </p>
+                                
+            </div>
+
+  </div>
+
+
+<?php }if($value->category == "Accept Invitation"){ ?> 
+
+
+<?php  $connetion_info = DB::table('connection_requests')->where('id',$value->category_id)->first(); ?>
+
+<?php  $followed_info = DB::table('profiles')->where('user_id',$connetion_info->to_user_id)->first(); ?>
+<?php  $followed_user_info = DB::table('users')->where('id',$connetion_info->to_user_id)->first(); ?>
+<?php  $check_followed = DB::table('profiles')->where('user_id',$connetion_info->to_user_id)->count(); ?>   
+
+ <div class="col-xs-12 col-md-12 content-panel-header">
+            
+            <div class="col-md-10" >
+                      <div class="content-panel-status col-xs-12 col-md-12">   
+                            <div class="col-sm-2 div">
+                                 <?php if($check_followed == 0){ ?>
+                                        <img src="profilepic/default_avatar.jpg" class="img-responsive" style="border-radius:85px;">
+                                <?php }else{ ?> 
+                                     <?php if(empty($followed_info->profile_picture) or $followed_info->profile_picture == " " ){ ?>
+                                         <img src="profilepic/default_avatar.jpg" class="img-responsive" style="border-radius:85px;">
+                                      <?php  }else{ ?>
+                                          <img src="profilepic/{{ $followed_info->profile_picture }}" class="img-responsive" style="border-radius:85px;">  
+                                      <?php } ?>
+                                      
+                                <?php } ?> 
+
+                            </div>
+                            <div class="col-sm-10 div">
+                                  <h4>
+                                    <?php if ($check_followed == 0) { ?>
+                                         <?php echo$followed_user_info->name; ?>
+                                    <?php } else { ?>  
+                                         <?php echo$followed_info->name; ?>
+                                    <?php } ?>
+                                        
+                                  </h4>
+                                  <p><?php echo $value->activity; ?> <!--<a href="" data-toggle="modal" data-target="#newsfeed_{{ $value->id }}"><span>check it here.</span></a>--></p>
+                                  <div><!--<a href="#">Link</a> | <a href="#">Comment</a>--></div>
+                            </div>       
+                      </div>
+            </div>
+             <div class="col-xs-12 col-md-2 content-panel-lc">      
+                              <p><?php
+                              
+                              if(!empty($value->date)){
+                               
+                                 $value_date = date("Y-m-d", strtotime( $value->date ) );
+                                 $from=date_create(date('Y-m-d'));
+                                 $to=date_create($value_date);
+                                 $diff=date_diff($to,$from);
+                                 $days_diff = $diff->format('%a');
+
+                                 if($days_diff == "0"){
+                                  echo "Just now";
+                                 }else{
+                                  echo $diff->format('%a Days Ago');
+                                 }
+
+
+                              }
+
+                               ?>
+                               </p>
+                                
+            </div>
+
+  </div>
+
+<?php }if($value->category != "Send Message" AND $value->category != "Job" AND $value->category != "Accept Invitation" AND $value->category != "Accept Follower" ){ ?>
+
  <div class="col-xs-12 col-md-12 content-panel-header">
             
             <div class="col-md-10" >
@@ -551,91 +682,13 @@
                               <img src="images/comment.jpg"><span>12</span>  -->         
             </div>
 
-  </div>
+</div>
 
 
 
 </section>  
 
-</content> 
-<!-- Modal for newsFeed -->
-         <section>
-
-              <div class="modal fade" id="message" role="dialog">
-                  <div class="modal-dialog">
-                                                  
-                   <!-- Modal content-->
-                   <div class="modal-content">
-
-                              <form method="" action="jobs/addJob" class="theme1">
-                                       <div class="modal-header col-md-12 content-panel-header">
-                                            <h3>Message</h3>
-                                       </div>
-                                                
-                                       <div class="col-md-12  content-panel">
-                                            <div class="col-md-4">
-                                                  <p>Company Name: </p>
-                                            </div>
-                                            <div class="col-md-7">
-                                                  <p></p>
-                                            </div>
-                                                  
-                                       </div>      
-
-                                       <div class="col-md-12  content-panel">
-                                            <div class="col-md-4">
-                                                      <p>Company Address: </p>
-                                            </div>
-                                            <div class="col-md-7">
-                                                      <p></p>
-                                            </div>
-                                             
-                                       </div> 
-
-                                       <div class="col-md-12  content-panel">
-                                            <div class="col-md-4">
-                                                      <p>Salary Rate </p>
-                                            </div>  
-                                            <div class="col-md-7">
-                                                      <p class="job_salary"></p>
-                                            </div>
-                                                          
-                                       </div>
-
-                                       <div class="col-md-12  content-panel">
-                                            <div class="col-md-12">
-                                                      <p>About Company: </p>
-                                            </div>
-                                            <div class="col-md-12">
-                                                      <p></p>
-                                            </div>
-                                                          
-                                       </div>
-
-                                       <div class="col-md-12  content-panel">
-                                            <div class="col-md-12">
-                                                      <p>Job Description: </p>
-                                            </div>
-                                            <div class="col-md-12">
-                                                      <p></p>
-                                            </div>
-                                                          
-                                       </div>
-
-                                      <div class="modal-footer">
-                                           <button type="" class="btn btn-default" data-dismiss="modal">Close</button> 
-                                      </div>
-                            </form>
-                  </div>
-                      
-                 </div>
-              </div>
-
-          </section>
-<!-- Modal for newsFeed -->
-
-
-                       
+</content>        
 <?php foreach ($list_message as $message_value) { ?>
  <!-- Modal -->
  <!-- Modal for viewMessage -->
@@ -766,11 +819,9 @@
 <!-- Modal for viewMessage -->
 
 <!-- Modal -->   
-
-
-
 <?php } ?>
-             
+
+
 
 <?php foreach ($job_list_notification as $job_value) { ?>
 
@@ -857,9 +908,11 @@
 <!-- Modal for viewMessage -->
   
                            
-<?php } ?>         
+<?php } ?>             
+  
 
 <?php foreach ($user_list_notification as $user_value) { ?>
+
 
 <?php $profileInfo = DB::table('profiles')->where('user_id',$user_value->user_id)->first(); ?>
 <?php $userInfo = DB::table('users')->where('id',$user_value->user_id)->first(); ?>
@@ -867,6 +920,7 @@
 
 <?php $checkprofile = DB::table('profiles')->where('user_id',$user_value->user_id)->count(); ?>
 
+<?php $checksettings = DB::table('settings')->where('user_id',$user_value->user_id)->count(); ?>
 
 <!-- Modal for viewMessage -->
   <section>
@@ -887,14 +941,13 @@
                            <div class="content-panel">
                                <div class="col-md-4">
                                  <?php if($checkprofile == 0){ ?>
-                                        <img src="profilepic/default_avatar.jpg" class="img-responsive" style="border-radius:85px;">
+                                      <img src="profilepic/default_avatar.jpg" class="img-responsive" style="border-radius:85px;">
                                 <?php }else{ ?> 
-                                     <?php if(empty($profileInfo->profile_picture) OR $profileInfo->profile_picture == " " ){ ?>
+                                      <?php if(empty($profile_info->profile_picture) or $profile_info->profile_picture == " " ){ ?>
                                          <img src="profilepic/default_avatar.jpg" class="img-responsive" style="border-radius:85px;">
                                       <?php  }else{ ?>
                                           <img src="profilepic/{{ $profileInfo->profile_picture }}" class="img-responsive" style="border-radius:85px;">  
                                       <?php } ?>
-                                      
                                 <?php } ?>  
                                </div> 
                                <div class="col-md-8">
@@ -927,10 +980,10 @@
                                 <?php }?> 
 
                                 <!-- Cv Link -->
-                                <?php if($checkprofile == 0){ ?>
+                                <?php if($checksettings == 0){ ?>
                                       <h5><i>CV Link:&nbsp;&nbsp; Not Set</i></h5>
                                 <?php }else{ ?> 
-                                      <h5><i>CV Link:&nbsp;&nbsp;<a href="https://ressuu.me/cv/{{ $settingInfo->permalink }}">https://ressuu.me/cv/{{ $settingInfo->permalink }}</a></i></h5>
+                                      <h5><i>CV Link:&nbsp;&nbsp;<a href="#">https://ressuu.me/cv/{{ $settingInfo->permalink }}</a></i></h5>
                                 <?php }?>
                                </div> 
 
@@ -951,7 +1004,7 @@
 <!-- Modal for viewMessage -->
   
                            
-<?php } ?>                    
-                
+<?php } ?>  
+
 </div>
 @endsection

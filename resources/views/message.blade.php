@@ -26,7 +26,7 @@
         <!-- <div id="navbar" class=""> -->
         <nav class="col-md-3 col-sm-12 navicon">
               <ul>
-                   <li class="dropdown">
+                  <li class="dropdown">
                    <!----> 
                     <?php if($user_notification == 0){ ?>
                        <span class="glyphicon glyphicon-user dropdown-toggle"></span>                         
@@ -80,7 +80,7 @@
                        </ul>
                     <?php } ?>
                     <!---->
-                  </li>
+                  </li> 
               </ul>
         </nav>
     
@@ -225,6 +225,7 @@
                  <!---->
                 <a href="{{ url('/connection') }}"><li><span class="glyphicon glyphicon-globe">&nbsp;</span>Connnection</li></a>
                 <a href="{{ url('/cvlist') }}"><li><span class="glyphicon glyphicon-folder-open">&nbsp;</span>Browse CV</li></a>
+                <a href="{{ url('/users') }}"><li><span class="glyphicon glyphicon-user">&nbsp;</span>Users</li></a>
                 <a href="{{ url('/profile') }}"><li><span class="glyphicon glyphicon-star">&nbsp;</span>Profile</li></a>
                 <a href="{{ url('/resume') }}"><li><span class="glyphicon glyphicon-flag">&nbsp;</span>Resume</li></a>
                 <a href="{{ url('/portfolio') }}"><li><span class="glyphicon glyphicon-send">&nbsp;</span>Portfolio</li></a>
@@ -278,7 +279,7 @@
             <div class="col-md-9" >
                       <div class="content-panel-status col-xs-12 col-md-12">   
                             <div class="col-sm-2 div">
-                                   <img class="img-responsive" src="images/messenger_icon.png">
+                                   <img class="img-responsive profile-pic" src="images/messenger_icon.png">
                             </div>
                             <div class="col-sm-10 div">
                                   <h4>
@@ -448,6 +449,15 @@
 <!-- Modal for deleteMessage -->
 
 <!-- Modal -->   
+
+
+
+
+
+
+
+
+
 <?php } ?>
 
 <?php } ?><!-- if -->
@@ -593,7 +603,8 @@
 <!-- Modal -->   
 
 <?php } ?>
-             
+
+
 <?php foreach ($job_list_notification as $job_value) { ?>
 
 
@@ -677,9 +688,9 @@
     </div>
   </section>
 <!-- Modal for viewMessage -->
-                             
-<?php } ?>               
- 
+  
+                           
+<?php } ?>            
 
 <?php foreach ($user_list_notification as $user_value) { ?>
 
@@ -689,6 +700,8 @@
 <?php $settingInfo = DB::table('settings')->where('user_id',$user_value->user_id)->first(); ?>
 
 <?php $checkprofile = DB::table('profiles')->where('user_id',$user_value->user_id)->count(); ?>
+
+<?php $checksettings = DB::table('settings')->where('user_id',$user_value->user_id)->count(); ?>
 
 
 <!-- Modal for viewMessage -->
@@ -712,7 +725,7 @@
                                  <?php if($checkprofile == 0){ ?>
                                         <img src="profilepic/default_avatar.jpg" class="img-responsive" style="border-radius:85px;">
                                 <?php }else{ ?> 
-                                     <?php if(empty($profileInfo->profile_picture) OR $profileInfo->profile_picture == " " ){ ?>
+                                     <?php if(empty($profile_info->profile_picture) or $profile_info->profile_picture == " " ){ ?>
                                          <img src="profilepic/default_avatar.jpg" class="img-responsive" style="border-radius:85px;">
                                       <?php  }else{ ?>
                                           <img src="profilepic/{{ $profileInfo->profile_picture }}" class="img-responsive" style="border-radius:85px;">  
@@ -750,10 +763,10 @@
                                 <?php }?> 
 
                                 <!-- Cv Link -->
-                                <?php if($checkprofile == 0){ ?>
+                                <?php if($checksettings == 0){ ?>
                                       <h5><i>CV Link:&nbsp;&nbsp; Not Set</i></h5>
                                 <?php }else{ ?> 
-                                      <h5><i>CV Link:&nbsp;&nbsp;<a href="https://ressuu.me/cv/{{ $settingInfo->permalink }}">https://ressuu.me/cv/{{ $settingInfo->permalink }}</a></i></h5>
+                                      <h5><i>CV Link:&nbsp;&nbsp;<a href="#">https://ressuu.me/cv/{{ $settingInfo->permalink }}</a></i></h5>
                                 <?php }?>
                                </div> 
 
@@ -774,7 +787,7 @@
 <!-- Modal for viewMessage -->
   
                            
-<?php } ?>         
-
+<?php } ?>              
+                
 </div>
 @endsection

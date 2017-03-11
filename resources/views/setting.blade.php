@@ -28,7 +28,7 @@
         <!-- <div id="navbar" class=""> -->
         <nav class="col-md-3 col-sm-12 navicon">
               <ul>
-                   <li class="dropdown">
+                  <li class="dropdown">
                    <!----> 
                     <?php if($user_notification == 0){ ?>
                        <span class="glyphicon glyphicon-user dropdown-toggle"></span>                         
@@ -81,7 +81,7 @@
                        </ul>
                     <?php } ?>
                     <!---->
-                  </li>
+                  </li> 
               </ul>
         </nav>
           <div class="col-md-6 col-sm-12 ">
@@ -207,9 +207,11 @@
                   <ul>
                         <a href="{{ url('/home') }}"><li><span class="glyphicon glyphicon-inbox">&nbsp;</span>Dashboard</li></a>
                          <?php if ($if_exist_settings == 1) { ?>
-                             <a href="https://ressuu.me/cv/<?php echo $userSettings->permalink; ?>" target="_blank" ><li><span class="glyphicon glyphicon-list-alt">&nbsp;</span>My CV</li></a> 
+
+                             <a href="https://ressuu.me/cv/<?php echo $userSettings->permalink; ?>" target="_blank" ><li><span class="glyphicon glyphicon-list-alt">&nbsp;</span>My CV</li></a>
+                             
                          <?php } ?> 
-                          <!----> 
+                        <!----> 
                         <?php if($no_message == 0){ ?>
                           <a href="{{ url('/message') }}"><li class=""><span class="glyphicon glyphicon-envelope">&nbsp;</span>Message</li></a>                           
                         <?php }else { ?> 
@@ -217,7 +219,7 @@
                         <?php } ?>
                         <!---->
                         <a href="{{ url('/connection') }}"><li><span class="glyphicon glyphicon-globe">&nbsp;</span>Connnection</li></a>
-                        <a href="{{ url('/cvlist') }}"><li><span class="glyphicon glyphicon-folder-open">&nbsp;</span>Browse CV</li></a> 
+                        <a href="{{ url('/cvlist') }}"><li><span class="glyphicon glyphicon-folder-open">&nbsp;</span>Browse CV</li></a>
                         <a href="{{ url('/profile') }}"><li><span class="glyphicon glyphicon-star">&nbsp;</span>Profile</li></a>
                         <a href="{{ url('/resume') }}"><li><span class="glyphicon glyphicon-flag">&nbsp;</span>Resume</li></a>
                         <a href="{{ url('/portfolio') }}"><li><span class="glyphicon glyphicon-send">&nbsp;</span>Portfolio</li></a>
@@ -229,7 +231,7 @@
 
 </sidebar>
 <content class="col-md-9 spage">
-<?php  if(empty($userAds)){ ?>
+ <?php  if(empty($userAds)){ ?>
 
   <a href="#" target="_blank"> 
     <section class="col-xs-12 col-md-12 content-header ads-bg" style="background:url('../ads/default-ads.png')">
@@ -246,6 +248,8 @@
   </a>
 
 <?php } ?> 
+
+
 
          
 <section>
@@ -330,13 +334,15 @@
                       <?php if ($if_exist_settings == 0) { ?>
                             <p><code>Not Set</code></p>
                       <?php }else{?>
-                              <button class="get_embed" data-toggle="modal" data-target="#get_embed">Get Code</button>
+                         <button class="get_embed" data-toggle="modal" data-target="#get_embed">Get Code</button>
+                  
+
                       <?php } ?>                   
                                    
                      </div>
                      <div class="col-md-12 line"></div>                
          </div>        
-          <!-- Modal for Update_Settings -->
+                 <!-- Modal for Update_Settings -->
                               <div class="modal fade" id="get_embed" role="dialog">
                                   <div class="modal-dialog">
                                           <div class="modal-content"> 
@@ -476,10 +482,10 @@
                                             <div class="form-group form-group">
                                               <div class="col-md-offset-1 col-md-10">
                                               <?php if ($if_exist_settings == 0) { ?>
-                                               <textarea class="form-control" name="embeded_code" rows="5" cols="10">&lt;iframe src="<?php echo $create_cvlink; ?>" width="100%" scrolling="yes" style="border:0"&gt; &lt;/iframe&gt;
+                                               <textarea class="form-control" name="embeded_code" rows="5" cols="10">&lt;div role="main"&gt; &lt;style&gt;*{margin:0;padding:0;}html,body{height:100%;  width:100%; overflow:hidden;}iframe{float:left; height:100%; width:100%; position: absolute}&lt;/style&gt; &lt;iframe src="<?php echo $create_cvlink; ?>" frameborder="0"&gt; &lt;/iframe&gt;&lt;/div&gt;
                                                </textarea>
                                               <?php }else{?>
-                                               <textarea class="form-control" name="embeded_code" rows="5" cols="10">&lt;iframe src="<?php echo $create_cvlink; ?>" width="100%" scrolling="yes" style="border:0"&gt; &lt;/iframe&gt;
+                                               <textarea class="form-control" name="embeded_code" rows="5" cols="10">&lt;div role="main"&gt; &lt;style&gt;*{margin:0;padding:0;}html,body{height:100%;  width:100%; overflow:hidden;}iframe{float:left; height:100%; width:100%; position: absolute}&lt;/style&gt; &lt;iframe src="<?php echo $create_cvlink; ?>" frameborder="0"&gt; &lt;/iframe&gt;&lt;/div&gt;
                                                </textarea>
                                               <?php } ?>
                                                
@@ -530,56 +536,9 @@
 
                
 </content>
-  <?php foreach ($list_message as $message_value) { ?>
+    
+<?php foreach ($list_message as $message_value) { ?>
  <!-- Modal -->
-         <!-- Modal for viewJobs -->
-                      <section>
-                                 <div class="modal fade" id="checkmessage_{{ $message_value->id }}" role="dialog">
-                                  <div class="modal-dialog">
-                                  
-                                    <!-- Modal content-->
-                                    <div class="modal-content">
-
-                                    <form method="" action="jobs/addJob" class="theme1">
-                                               <div class="modal-header col-md-12 content-panel-header">
-                                                    <h3>Message From {{ $message_value->name }}</h3>
-                                               </div>
-                                                        
-                                               <div class="col-md-12  content-panel">
-                                                    <div class="col-md-12">
-                                                              <p>Name:&nbsp; {{ $message_value->name }} </p>
-                                                    </div>
-                                               </div>      
-
-                                               <div class="col-md-12  content-panel">
-                                                    <div class="col-md-12">
-                                                              <p>Email:&nbsp; {{ $message_value->email }} </p>
-                                                    </div>                                                    
-                                               </div> 
-                                               <div class="col-md-12  content-panel">
-                                                    <div class="col-md-12">
-                                                              <p>Message </p>
-                                                    </div>
-                                                    <div class="col-md-12">
-                                                              <p>{{ $message_value->message }}</p>
-                                                    </div>
-                                                                  
-                                               </div>
-
-                                              <div class="modal-footer">
-                                                   <button type="" class="btn btn-default" data-dismiss="modal">Close</button> 
-                                              </div>
-                                    </form>
-                                    </div>
-                            
-                          </div>
-                        </div>
-                      </section>
-  <!-- Modal for viewJobs -->
-<!-- Modal -->                      
-<?php } ?>
- <?php foreach ($list_message as $message_value) { ?>
-<!-- Modal -->
  <!-- Modal for viewMessage -->
               <section>
                          <div class="modal fade" id="checkmessage_{{ $message_value->id }}" role="dialog">
@@ -707,10 +666,13 @@
               </section>
 <!-- Modal for viewMessage -->
 
-<!-- Modal -->      
+<!-- Modal -->   
+
+
 
 <?php } ?>
 
+ 
 <?php foreach ($job_list_notification as $job_value) { ?>
 
 
@@ -807,6 +769,8 @@
 
 <?php $checkprofile = DB::table('profiles')->where('user_id',$user_value->user_id)->count(); ?>
 
+<?php $checksettings = DB::table('settings')->where('user_id',$user_value->user_id)->count(); ?>
+
 
 <!-- Modal for viewMessage -->
   <section>
@@ -829,7 +793,7 @@
                                  <?php if($checkprofile == 0){ ?>
                                         <img src="profilepic/default_avatar.jpg" class="img-responsive" style="border-radius:85px;">
                                 <?php }else{ ?> 
-                                     <?php if(empty($profileInfo->profile_picture) OR $profileInfo->profile_picture == " " ){ ?>
+                                     <?php if(empty($profile_info->profile_picture) or $profile_info->profile_picture == " " ){ ?>
                                          <img src="profilepic/default_avatar.jpg" class="img-responsive" style="border-radius:85px;">
                                       <?php  }else{ ?>
                                           <img src="profilepic/{{ $profileInfo->profile_picture }}" class="img-responsive" style="border-radius:85px;">  
@@ -867,10 +831,10 @@
                                 <?php }?> 
 
                                 <!-- Cv Link -->
-                                <?php if($checkprofile == 0){ ?>
+                                <?php if($checksettings == 0){ ?>
                                       <h5><i>CV Link:&nbsp;&nbsp; Not Set</i></h5>
                                 <?php }else{ ?> 
-                                      <h5><i>CV Link:&nbsp;&nbsp;<a href="https://ressuu.me/cv/{{ $settingInfo->permalink }}">https://ressuu.me/cv/{{ $settingInfo->permalink }}</a></i></h5>
+                                      <h5><i>CV Link:&nbsp;&nbsp;<a href="#">https://ressuu.me/cv/{{ $settingInfo->permalink }}</a></i></h5>
                                 <?php }?>
                                </div> 
 
@@ -891,7 +855,8 @@
 <!-- Modal for viewMessage -->
   
                            
-<?php } ?>        
-           
+<?php } ?>     
+
+              
 </div>
 @endsection

@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('title')
-   | Users
+   | Browse CV
 @endsection
 
 @section('body-class')
@@ -559,6 +559,8 @@
 
 <?php $checkprofile = DB::table('profiles')->where('user_id',$user_value->user_id)->count(); ?>
 
+<?php $checksettings = DB::table('settings')->where('user_id',$user_value->user_id)->count(); ?>
+
 
 <!-- Modal for viewMessage -->
   <section>
@@ -619,7 +621,7 @@
                                 <?php }?> 
 
                                 <!-- Cv Link -->
-                                <?php if($checkprofile == 0){ ?>
+                                <?php if($checksettings == 0){ ?>
                                       <h5><i>CV Link:&nbsp;&nbsp; Not Set</i></h5>
                                 <?php }else{ ?> 
                                       <h5><i>CV Link:&nbsp;&nbsp;<a href="#">https://ressuu.me/cv/{{ $settingInfo->permalink }}</a></i></h5>

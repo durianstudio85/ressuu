@@ -34,6 +34,8 @@ Route::get('/message', 'MessageController@message');
 Route::get('/connection', 'HomeController@connection');
 Route::get('/cvlist', 'HomeController@cvlist');
 
+
+
 //edit/update
 Route::get('/profile/edit', 'HomeController@edit');
 Route::get('/resume/updateExperience/{id}', 'HomeController@updateExperience');
@@ -77,20 +79,6 @@ Route::get('/previewcv/{themename}/{id}', 'CvController@previewcv');
 
 Route::post('/apply/upload', 'HomeController@uploadPicture');
 
-//image upload
-//Route::get('/portfolio/addPortfolio', function() {
-//  return View::make('pages.upload');
-//});
-//Route::post('apply/upload', 'ApplyController@upload');
-
-
-
-// Route::get('/fbauth/{auth?}', 'HomeController@getFacebooklogin');
-// Route::get('/redirect', 'SocialAuthController@redirect');
-// Route::get('/callback', 'SocialAuthController@callback');
-
-
-
 
 
 
@@ -101,8 +89,11 @@ Route::post('/apply/upload', 'HomeController@uploadPicture');
 Route::get('auth/facebook', 'Auth\AuthController@redirectToProvider');
 Route::get('auth/facebook/callback', 'Auth\AuthController@handleProviderCallback');
 
+
 Route::get('auth/twitter', 'Auth\AuthController@tredirectToProvider');
 Route::get('auth/twitter/callback', 'Auth\AuthController@thandleProviderCallback');
+
+
 
 
 
@@ -143,6 +134,7 @@ Route::post('/ads/addAds/adminAds', 'AdminController@adsNewAdmin');
 Route::post('/ads/updateAds/adminAds', 'AdminController@adsUpdateAdmin');
 
 
+
 /* message */
 Route::post('/message/send', 'MessageController@messageSend');
 
@@ -151,10 +143,16 @@ Route::post('/message/sendtoClient', 'MessageController@messageSendtoClient');
 Route::post('/message/delete', 'MessageController@messageDelete');
 
 
+/* users */
 
 Route::get('/follow/users/{id}', 'HomeController@follow_users');
 Route::post('/follow/deleteUserNotification', 'HomeController@deleteUserNotification');
 
+
 Route::get('/follow/accept/{id}', 'HomeController@acceptFollower');
 Route::get('/follow/remove/{id}', 'HomeController@removeFollower');
 Route::get('/follow/decline/{id}', 'HomeController@declineFollower');
+Route::get('/unfollow/users/{id}', 'HomeController@unFollowUsers');
+
+
+

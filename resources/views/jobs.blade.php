@@ -27,7 +27,7 @@
         <!-- <div id="navbar" class=""> -->
         <nav class="col-md-3 col-sm-12 navicon">
               <ul>
-                   <li class="dropdown">
+                  <li class="dropdown">
                    <!----> 
                     <?php if($user_notification == 0){ ?>
                        <span class="glyphicon glyphicon-user dropdown-toggle"></span>                         
@@ -728,6 +728,7 @@
 <?php $settingInfo = DB::table('settings')->where('user_id',$user_value->user_id)->first(); ?>
 
 <?php $checkprofile = DB::table('profiles')->where('user_id',$user_value->user_id)->count(); ?>
+<?php $checksettings = DB::table('settings')->where('user_id',$user_value->user_id)->count(); ?>
 
 
 <!-- Modal for viewMessage -->
@@ -751,7 +752,7 @@
                                  <?php if($checkprofile == 0){ ?>
                                         <img src="profilepic/default_avatar.jpg" class="img-responsive" style="border-radius:85px;">
                                 <?php }else{ ?> 
-                                     <?php if(empty($profileInfo->profile_picture) OR $profileInfo->profile_picture == " " ){ ?>
+                                     <?php if(empty($profile_info->profile_picture) or $profile_info->profile_picture == " " ){ ?>
                                          <img src="profilepic/default_avatar.jpg" class="img-responsive" style="border-radius:85px;">
                                       <?php  }else{ ?>
                                           <img src="profilepic/{{ $profileInfo->profile_picture }}" class="img-responsive" style="border-radius:85px;">  
@@ -789,10 +790,10 @@
                                 <?php }?> 
 
                                 <!-- Cv Link -->
-                                <?php if($checkprofile == 0){ ?>
+                                <?php if($checksettings == 0){ ?>
                                       <h5><i>CV Link:&nbsp;&nbsp; Not Set</i></h5>
                                 <?php }else{ ?> 
-                                      <h5><i>CV Link:&nbsp;&nbsp;<a href="https://ressuu.me/cv/{{ $settingInfo->permalink }}">https://ressuu.me/cv/{{ $settingInfo->permalink }}</a></i></h5>
+                                      <h5><i>CV Link:&nbsp;&nbsp;<a href="#">https://ressuu.me/cv/{{ $settingInfo->permalink }}</a></i></h5>
                                 <?php }?>
                                </div> 
 
@@ -813,7 +814,7 @@
 <!-- Modal for viewMessage -->
   
                            
-<?php } ?>        
+<?php } ?>  
 
 
 

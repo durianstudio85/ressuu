@@ -28,7 +28,7 @@
         <!-- <div id="navbar" class=""> -->
         <nav class="col-md-3 col-sm-12 navicon">
               <ul>
-                   <li class="dropdown">
+                  <li class="dropdown">
                    <!----> 
                     <?php if($user_notification == 0){ ?>
                        <span class="glyphicon glyphicon-user dropdown-toggle"></span>                         
@@ -52,8 +52,8 @@
                     <!---->
                   </li>
                   <li class="dropdown">
-                    <!----> 
-                   <?php if($no_message == 0){ ?>
+                   <!----> 
+                  <?php if($no_message == 0){ ?>
                        <span class="glyphicon glyphicon-comment dropdown-toggle"></span>                         
                     <?php }else { ?> 
                         <span class="glyphicon glyphicon-comment naviconactive dropdown-toggle" data-toggle="dropdown"><span class="badge">
@@ -66,8 +66,8 @@
                     <?php } ?>
                   </li>
                    <!---->
-                   <li class="dropdown">
-                   <!----> 
+                  <li class="dropdown">
+                  <!----> 
                     <?php if($job_notification == 0){ ?>
                        <span class="glyphicon glyphicon-briefcase dropdown-toggle"></span>                         
                     <?php }else { ?> 
@@ -81,7 +81,7 @@
                        </ul>
                     <?php } ?>
                     <!---->
-                  </li>
+                  </li> 
               </ul>
         </nav>
           <div class="col-md-6 col-sm-12 ">
@@ -213,8 +213,8 @@
 
                              <a href="https://ressuu.me/cv/<?php echo $userSettings->permalink; ?>" target="_blank" ><li><span class="glyphicon glyphicon-list-alt">&nbsp;</span>My CV</li></a>
                              
-                         <?php } ?>
-                           <!----> 
+                         <?php } ?> 
+                              <!----> 
                         <?php if($no_message == 0){ ?>
                           <a href="{{ url('/message') }}"><li class=""><span class="glyphicon glyphicon-envelope">&nbsp;</span>Message</li></a>                           
                         <?php }else { ?> 
@@ -222,7 +222,7 @@
                         <?php } ?>
                         <!---->
                         <a href="{{ url('/connection') }}"><li><span class="glyphicon glyphicon-globe">&nbsp;</span>Connnection</li></a>
-                        <a href="{{ url('/cvlist') }}"><li><span class="glyphicon glyphicon-folder-open">&nbsp;</span>Browse CV</li></a>  
+                        <a href="{{ url('/cvlist') }}"><li><span class="glyphicon glyphicon-folder-open">&nbsp;</span>Browse CV</li></a>
                         <a href="{{ url('/profile') }}"><li><span class="glyphicon glyphicon-star">&nbsp;</span>Profile</li></a>
                         <a href="{{ url('/resume') }}"><li><span class="glyphicon glyphicon-flag">&nbsp;</span>Resume</li></a>
                         <a href="{{ url('/portfolio') }}"><li class="menuactive"><span class="glyphicon glyphicon-send">&nbsp;</span>Portfolio</li></a>
@@ -279,7 +279,7 @@
 
                                  
                                   <div class="ro$fileNamew">
-                                   {!! $userPorfolio->port_excerpt !!}
+                                    {{ $userPorfolio->port_title }}
                                   </div>
                                 </div>
                         </center>
@@ -409,6 +409,7 @@
 
 
 
+
                @endforeach 
         </section>
         <!-- All -->
@@ -476,7 +477,7 @@
 
                                                      <div class="col-xs-12 col-md-12">
                                                           <p>Description</p>
-                                                          <p>{!! $category->port_excerpt !!}</p>      
+                                                          <p>{{ $category->port_excerpt }}</p>      
 
                                                     </div>
                                                                         
@@ -516,7 +517,7 @@
 
                                                             <div class="form-group form-group">
                                                                 <div class="col-md-offset-1 col-md-10">
-                                                                    <textarea  class="form-control job_input"  rows="5" cols="45" name="port_excerpt">{!! $category->port_excerpt !!}</textarea>  
+                                                                    <textarea  class="form-control job_input"  rows="5" cols="45" name="port_excerpt">{{ $category->port_excerpt }}</textarea>  
                                                                 </div>
                                                             </div>
 
@@ -572,6 +573,7 @@
                                     </div>
 
                   <!-- MModal for Delete Portfolio -->
+
 
 
            <?php } ?>
@@ -635,8 +637,7 @@
                                               </div>
                                                 
                                             </div>
-                                         
-
+                                           
                                             <div class="form-group form-group">
                                               <div class="col-md-offset-1 col-md-10">
                                                 <textarea class="form-control" name="description" rows="5" cols="10">Portfolio Description</textarea>
@@ -664,57 +665,9 @@
 
 
 </content>
+
 <?php foreach ($list_message as $message_value) { ?>
  <!-- Modal -->
-         <!-- Modal for viewJobs -->
-                      <section>
-                                 <div class="modal fade" id="checkmessage_{{ $message_value->id }}" role="dialog">
-                                  <div class="modal-dialog">
-                                  
-                                    <!-- Modal content-->
-                                    <div class="modal-content">
-
-                                    <form method="" action="jobs/addJob" class="theme1">
-                                               <div class="modal-header col-md-12 content-panel-header">
-                                                    <h3>Message From {{ $message_value->name }}</h3>
-                                               </div>
-                                                        
-                                               <div class="col-md-12  content-panel">
-                                                    <div class="col-md-12">
-                                                              <p>Name:&nbsp; {{ $message_value->name }} </p>
-                                                    </div>
-                                               </div>      
-
-                                               <div class="col-md-12  content-panel">
-                                                    <div class="col-md-12">
-                                                              <p>Email:&nbsp; {{ $message_value->email }} </p>
-                                                    </div>                                                    
-                                               </div> 
-                                               <div class="col-md-12  content-panel">
-                                                    <div class="col-md-12">
-                                                              <p>Message </p>
-                                                    </div>
-                                                    <div class="col-md-12">
-                                                              <p>{{ $message_value->message }}</p>
-                                                    </div>
-                                                                  
-                                               </div>
-
-                                              <div class="modal-footer">
-                                                   <button type="" class="btn btn-default" data-dismiss="modal">Close</button> 
-                                              </div>
-                                    </form>
-                                    </div>
-                            
-                          </div>
-                        </div>
-                      </section>
-  <!-- Modal for viewJobs -->
-<!-- Modal -->                      
-<?php } ?>
-
-<?php foreach ($list_message as $message_value) { ?>
-<!-- Modal -->
  <!-- Modal for viewMessage -->
               <section>
                          <div class="modal fade" id="checkmessage_{{ $message_value->id }}" role="dialog">
@@ -842,29 +795,27 @@
               </section>
 <!-- Modal for viewMessage -->
 
-<!-- Modal -->      
+<!-- Modal -->   
+
+
 
 <?php } ?>
+    
 
-<?php foreach ($job_list_notification as $job_value) { ?>
 
+<?php foreach ($list_job as $job_value) { ?>
 
-<?php $jobInfo = DB::table('job')->where('id',$job_value->category_id)->first();    ?>
-
-<!-- Modal for viewMessage -->
+ <!-- Modal for viewMessage -->
   <section>
-             <div class="modal fade" id="checkjobnotification_{{ $jobInfo->id }}" role="dialog">
+             <div class="modal fade" id="checkjob_{{ $job_value->id }}" role="dialog">
               <div class="modal-dialog">
               
                 <!-- Modal content--> 
                 <div class="modal-content">
 
-                <form method="POST" action="/jobs/deleteJobNotification" class="theme1">
-                  {{ csrf_field() }}  
-                           <input type="hidden" name="id" value="<?php echo $job_value->id; ?>" >
-
+                <form method="" action="jobs/addJob" class="theme1">
                            <div class="modal-header col-md-12 content-panel-header">
-                                <h3> {{ $jobInfo->company_job }}</h3>
+                                <h3> {{ $job_value->company_job }}</h3>
                            </div>
                                     
                            <div class="col-md-12  content-panel">
@@ -872,7 +823,7 @@
                                           <p>Company Name: </p>
                                 </div>
                                 <div class="col-md-7">
-                                          <p>{{ $jobInfo->company_name }}</p>
+                                          <p>{{ $job_value->company_name }}</p>
                                 </div>
                                       
                            </div>      
@@ -882,7 +833,7 @@
                                           <p>Company Address: </p>
                                 </div>
                                 <div class="col-md-7">
-                                          <p>{{ $jobInfo->company_address }}</p>
+                                          <p>{{ $job_value->company_address }}</p>
                                 </div>
                                  
                            </div> 
@@ -892,7 +843,7 @@
                                           <p>Salary Rate </p>
                                 </div>  
                                 <div class="col-md-7">
-                                          <p class="job_salary">{{ $jobInfo->company_rate }}</p>
+                                          <p class="job_salary">{{ $job_value->company_rate }}</p>
                                 </div>
                                               
                            </div>
@@ -902,7 +853,7 @@
                                           <p>About Company: </p>
                                 </div>
                                 <div class="col-md-12">
-                                          <p>{{ $jobInfo->company_details }}</p>
+                                          <p>{{ $job_value->company_details }}</p>
                                 </div>
                                               
                            </div>
@@ -912,16 +863,14 @@
                                           <p>Job Description: </p>
                                 </div>
                                 <div class="col-md-12">
-                                          <p>{!! nl2br( $jobInfo->company_status) !!}</p>
+                                          <p>{!! nl2br( $job_value->company_status) !!}</p>
                                 </div>
                                               
                            </div>
-                           <input type="hidden" value="{{ csrf_token() }}" name="_token" >
+
                           <div class="modal-footer">
-                               <button type="submit" class="btn btn-default">Delete</button>
                                <button type="" class="btn btn-default" data-dismiss="modal">Close</button> 
                           </div>
-
                 </form>
 
                 </div>
@@ -929,9 +878,8 @@
     </div>
   </section>
 <!-- Modal for viewMessage -->
-  
-                           
-<?php } ?>   
+
+<?php } ?> 
 
 <?php foreach ($user_list_notification as $user_value) { ?>
 
@@ -942,6 +890,8 @@
 
 <?php $checkprofile = DB::table('profiles')->where('user_id',$user_value->user_id)->count(); ?>
 
+
+<?php $checksettings = DB::table('settings')->where('user_id',$user_value->user_id)->count(); ?>
 
 <!-- Modal for viewMessage -->
   <section>
@@ -964,7 +914,7 @@
                                  <?php if($checkprofile == 0){ ?>
                                         <img src="profilepic/default_avatar.jpg" class="img-responsive" style="border-radius:85px;">
                                 <?php }else{ ?> 
-                                     <?php if(empty($profileInfo->profile_picture) OR $profileInfo->profile_picture == " " ){ ?>
+                                      <?php if(empty($profile_info->profile_picture) or $profile_info->profile_picture == " " ){ ?>
                                          <img src="profilepic/default_avatar.jpg" class="img-responsive" style="border-radius:85px;">
                                       <?php  }else{ ?>
                                           <img src="profilepic/{{ $profileInfo->profile_picture }}" class="img-responsive" style="border-radius:85px;">  
@@ -1002,10 +952,10 @@
                                 <?php }?> 
 
                                 <!-- Cv Link -->
-                                <?php if($checkprofile == 0){ ?>
+                                <?php if($checksettings == 0){ ?>
                                       <h5><i>CV Link:&nbsp;&nbsp; Not Set</i></h5>
                                 <?php }else{ ?> 
-                                      <h5><i>CV Link:&nbsp;&nbsp;<a href="https://ressuu.me/cv/{{ $settingInfo->permalink }}">https://ressuu.me/cv/{{ $settingInfo->permalink }}</a></i></h5>
+                                      <h5><i>CV Link:&nbsp;&nbsp;<a href="#">https://ressuu.me/cv/{{ $settingInfo->permalink }}</a></i></h5>
                                 <?php }?>
                                </div> 
 
@@ -1026,8 +976,7 @@
 <!-- Modal for viewMessage -->
   
                            
-<?php } ?>        
-
-              
+<?php } ?>    
+        
 </div>
 @endsection

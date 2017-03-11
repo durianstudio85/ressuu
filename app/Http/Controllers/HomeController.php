@@ -1553,13 +1553,13 @@ class HomeController extends Controller
                  ]);
 
 
-                 DB::table('dashboard_timeline')->insert([
-                           'user_id' => $userId,
-                           'category' => "Followed",
-                           'category_id' =>$connect,
-                           'activity' => "Followed ".$userInfo->name,
-                           'date'=> $inputDate
-                ]);
+                //  DB::table('dashboard_timeline')->insert([
+                //            'user_id' => $userId,
+                //            'category' => "Followed",
+                //            'category_id' =>$connect,
+                //            'activity' => "Followed ".$userInfo->name,
+                //            'date'=> $inputDate
+                // ]);
 
 
          }else{
@@ -1582,13 +1582,13 @@ class HomeController extends Controller
                  ]);
 
 
-                DB::table('dashboard_timeline')->insert([
-                           'user_id' => $userId,
-                           'category' => "Followed",
-                           'category_id' => $connect,
-                           'activity' => "Followed ".$profileInfo->name,
-                           'date'=> $inputDate
-                ]);
+                // DB::table('dashboard_timeline')->insert([
+                //            'user_id' => $userId,
+                //            'category' => "Followed",
+                //            'category_id' => $connect,
+                //            'activity' => "Followed ".$profileInfo->name,
+                //            'date'=> $inputDate
+                // ]);
 
 
 
@@ -1624,14 +1624,72 @@ class HomeController extends Controller
         $status = "ACCEPT";
         $inputDate = date('Y-m-d');
 
+        $your_id = Auth::id();
 
-        DB::table('connection_requests')
-                      ->where('id', $getConnectionId)
-                      ->update(array(
-                            'status' => $status
-                        ));
+        $your_user_info = DB::table('users')->where('id',$your_id)->first();
+        $your_profile_info = DB::table('profiles')->where('user_id',$your_id)->first();
+        $check_your_profiles =  DB::table('profiles')->where('user_id',$your_id)->count();
+
+        $getConnectionInfo = DB::table('connection_requests')->where('id',$getConnectionId)->first(); 
+
+        $follower_id = $getConnectionInfo->from_user_id;
+        $follower_profile =  DB::table('profiles')->where('user_id',$follower_id)->first();
+        $follower_users =  DB::table('users')->where('id',$follower_id)->first();
+        $check_follower_profiles =  DB::table('profiles')->where('user_id',$follower_id)->count();
+
+
+
+        if($check_follower_profiles = 0){
+            $follower_name = $follower_users->name;
+        }else{
+            $follower_name = $follower_profile->name;
+        }
+
+
+        if($check_your_profiles == 0){
+            $your_name = $your_user_info->name;
+        }else{
+            $your_name = $your_profile_info->name;
+        }
+        
+
+
+
+        //notify you
+        DB::table('dashboard_timeline')->insert([
+                           'user_id' => $your_id,
+                           'category' => "Accept Follower",
+                           'category_id' => $getConnectionId,
+                           'activity' => $follower_name." is now your follower.",
+                           'date'=> $inputDate
+                ]);
+
+
+        //notify follower
+        DB::table('dashboard_timeline')->insert([
+                           'user_id' => $follower_id,
+                           'category' => "Accept Invitation",
+                           'category_id' => $getConnectionId,
+                           'activity' =>  $your_name." accept your request.",
+                           'date'=> $inputDate
+        ]);
+
+
+
+
+
+         DB::table('connection_requests')
+                       ->where('id', $getConnectionId)
+                     ->update(array(
+                           'status' => $status
+                       ));
+
+
+
+
 
        return back();
+
 
     }
 
@@ -1655,16 +1713,23 @@ class HomeController extends Controller
     public function removeFollower($id){
 
         $getFollowerId = $id;
+        $status = "DELETE_FOLLOWER";
+
+       // DB::table('connection_requests')
+       //         ->where('id',$getFollowerId)->delete();    
 
         DB::table('connection_requests')
-                ->where('id',$getFollowerId)->delete();          
-
+                  ->where('id', $getFollowerId)
+                  ->update(array(
+                        'status' => $status
+                    ));        
 
 
        return back();
 
     }
 
+  
 
 
 

@@ -1,7 +1,7 @@
-@extends('layouts.app')
+  @extends('layouts.app')
 
 @section('title')
-   | Users
+   | Connection
 @endsection
 
 @section('body-class')
@@ -259,10 +259,10 @@
 
      <nav class="col-xs-12 content-nav-menu connection-nav" role="tablist">
           <ul role="presentation">
-            <li><a href="#tab1" role="tab" data-toggle="tab">User List</a></li>
+            <li class="active"><a href="#tab1" role="tab" data-toggle="tab">User List</a></li>
             <li><a href="#tab2" role="tab" data-toggle="tab">Followed</a></li>
             <li><a href="#tab3" role="tab" data-toggle="tab">Followers</a></li>
-            <li class="active" ><a href="#tab4" role="tab" data-toggle="tab">Invitation</a></li>
+            <li><a href="#tab4" role="tab" data-toggle="tab">Invitation</a></li>
           </ul>
      </nav>
 
@@ -274,7 +274,7 @@
 
 <section class="cph-wrapper tab-content">
 
-  <section role="tabpanel" class="tab-pane fade in" id="tab1">
+  <section role="tabpanel" class="tab-pane fade in active" id="tab1">
 
        <?php foreach ($user_list as $user_info) { ?>
         <?php $userId = Auth::id(); ?>
@@ -285,7 +285,8 @@
 
          <?php if($user_info->id != $userId){ ?> 
 
-           <?php  $checkifFollowed = DB::table('connection_requests')->where(['from_user_id' =>$user_info->id,'to_user_id'=>$userId])->count(); ?>
+           <?php  $checkifFollowed = DB::table('connection_requests')->where(['from_user_id' =>$userId,'to_user_id'=>$user_info->id])->count(); ?>
+
 
                <?php if($checkifFollowed == 0){ ?> 
 
@@ -338,7 +339,7 @@
 
          <?php if($user_info->id != $userId){ ?> 
 
-           <?php  $checkifFollowed = DB::table('connection_requests')->where(['from_user_id' => $userId,'to_user_id'=>$user_info->id])->count(); ?>
+           <?php  $checkifFollowed = DB::table('connection_requests')->where(['from_user_id' => $userId,'to_user_id'=>$user_info->id,'status'=>'ACCEPT'])->count(); ?>
 
                <?php if($checkifFollowed == 1){ ?> 
 
@@ -366,7 +367,7 @@
                      <div class="col-xs-4 col-md-2"> 
                       <p>&nbsp;</p><br><br>
                           <div class="btn-group btn-group-xs" role="group" aria-label="...">
-                             <a href="/follow/users/{{ $user_info->id }}" data-toggle="modal" type="button" class="btn btn-primary">Unfollow</a>
+                             <a href="/unfollow/users/{{ $user_info->id }}" data-toggle="modal" type="button" class="btn btn-primary">Unfollow</a>
                           </div>       
                      </div>
                   </div>
@@ -430,7 +431,7 @@
     </section>  
 
 
-    <section role="tabpanel" class="tab-pane fade in active" id="tab4">
+    <section role="tabpanel" class="tab-pane fade in" id="tab4">
 
        <?php foreach ($get_follower as $user_info) { ?>
        <?php $userId = Auth::id(); ?>
@@ -732,7 +733,7 @@
 
 <?php $checkprofile = DB::table('profiles')->where('user_id',$user_value->user_id)->count(); ?>
 
-
+<?php $checksettings = DB::table('settings')->where('user_id',$user_value->user_id)->count(); ?>
 <!-- Modal for viewMessage -->
   <section>
              <div class="modal fade" id="checkusernotification_{{ $user_value->id }}" role="dialog">
@@ -792,7 +793,7 @@
                                 <?php }?> 
 
                                 <!-- Cv Link -->
-                                <?php if($checkprofile == 0){ ?>
+                                <?php if($checksettings == 0){ ?>
                                       <h5><i>CV Link:&nbsp;&nbsp; Not Set</i></h5>
                                 <?php }else{ ?> 
                                       <h5><i>CV Link:&nbsp;&nbsp;<a href="#">https://ressuu.me/cv/{{ $settingInfo->permalink }}</a></i></h5>
