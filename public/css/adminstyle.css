@@ -2507,6 +2507,20 @@ color: #000;
 .connection-nav ul{
   margin-top:0px;
 }
+.right-navigation{
+  margin-left: 70px;
+}
+.right-navigation ul a{
+  text-transform: none;
+  color: #ffffff;
+}
+.readJobNoti{
+  margin-top: 10px;
+  background: #ebebeb;
+  border: none;
+  color: #000;
+}
+
 
 
 

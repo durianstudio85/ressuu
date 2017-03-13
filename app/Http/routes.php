@@ -117,7 +117,9 @@ Route::post('/jobs/editJobs', 'AdminController@editJobs');
 Route::get('/jobs/deleteJobs/{id}', 'AdminController@deleteJobs');
 
 Route::post('/jobs/applyJobs', 'HomeController@applyJobs');
-Route::post('/jobs/deleteJobNotification', 'HomeController@deleteJobNotification');
+Route::post('/jobs/applyJobsinNotificaton', 'HomeController@applyJobsinNotificaton');
+
+Route::get('/jobs/deleteJobNotification/{id}', 'HomeController@deleteJobNotification');
 
 Route::post('/settings/editSettings', 'AdminController@editSettings');
 
@@ -153,6 +155,9 @@ Route::get('/follow/accept/{id}', 'HomeController@acceptFollower');
 Route::get('/follow/remove/{id}', 'HomeController@removeFollower');
 Route::get('/follow/decline/{id}', 'HomeController@declineFollower');
 Route::get('/unfollow/users/{id}', 'HomeController@unFollowUsers');
+
+
+Route::get('/like/users/{id}', 'HomeController@likeUsersCV');
 
 
 

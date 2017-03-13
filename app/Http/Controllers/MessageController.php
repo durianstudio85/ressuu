@@ -87,6 +87,21 @@ class MessageController extends Controller
 
     $user_list =  DB::table('users')->get();
 
+     $count_connection = DB::table('connection_requests')->where([
+                     'to_user_id' => $userId,
+                     'status' => 'ACCEPT'
+                  ])->count();
+
+    $count_like = DB::table('like_view')->where([
+                         'to_user_id' => $userId,
+                         'status' => 'LIKE'
+                      ])->count();
+
+    $count_view = DB::table('like_view')->where([
+                         'to_user_id' => $userId,
+                         'status' => 'VIEW'
+                      ])->count();
+
 
         return view('message')
                 ->with("userProfile",$userProfile)
@@ -107,6 +122,9 @@ class MessageController extends Controller
                 ->with("user_list",$user_list)
                 ->with("user_notification",$user_notification)
                 ->with("user_list_notification",$user_list_notification)
+                ->with("count_connection",$count_connection)
+                ->with("count_like",$count_like)
+                ->with("count_view",$count_view)
        ;
    
 

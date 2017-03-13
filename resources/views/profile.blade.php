@@ -84,12 +84,18 @@
                   </li> 
               </ul>
         </nav>
-          <div class="col-md-6 col-sm-12 ">
-               <div class="inner-addon left-addon">
+         <div class="col-md-4 col-sm-12">
+            <div class="inner-addon left-addon">
                 <span class="glyphicon glyphicon-search"></span>
-                <input class="form-control input-lg searchbox " type="text" placeholder="Search">
-                </div>
+                <input class="form-control input-md searchbox" type="text" placeholder="Search">
+            </div>
         </div>
+        <nav class="col-md-2 col-sm-12 navicon right-navigation" style="">
+            <ul>
+                <a href="{{ url('/setting') }}"><li><span class="glyphicon glyphicon-cog"></span></li></a> 
+                <a href="{{ url('/logout') }}"><li><span class="glyphicon glyphicon-off"></span></li></a>   
+            </ul>
+        </nav>
          <div class="row hiddenmenu ">
               <ul>
                   <li><a href="{{ url('/home') }}">Dashboard</a></li>
@@ -189,45 +195,43 @@
                  </div>
               </div>
 
-              <div class="row panel-status">
-                        <div class="col-sm-4 col-md-4 panel-status-1">
+               <div class="row panel-status">
+                        <div class="col-md-4 col-sm-4 panel-status-1">
                             <img src="images/heart.png"> 
-                            <p>2,718</p>
-                        </div>
-                        <div class="col-sm-4 col-md-4 panel-status-2">
+                            <p><?php echo $count_like; ?></p>  
+                        </div>                                     
+                        <div class="col-md-4 col-sm-4 panel-status-2">
                             <img src="images/users.png">
-                            <p>5,718</p>  
+                            <p><?php echo $count_connection; ?></p>  
                         </div>
-                        <div class="col-sm-4 col-md-4 panel-status-3">
+                        <div class="col-md-4 col-sm-4 panel-status-3">
                             <img src="images/eye.png">
-                            <p>6,718</p>  
+                            <p><?php echo $count_view; ?></p>  
                         </div>
               </div>
               <nav class="row sidebar-menus">
-                  <ul>
-                        <a href="{{ url('/home') }}"><li><span class="glyphicon glyphicon-inbox">&nbsp;</span>Dashboard</li></a>
-                        
-                         <?php if ($if_exist_settings == 1) { ?>
+                <ul>
+                  <a href="{{ url('/home') }}"><li><span class="glyphicon glyphicon-inbox">&nbsp;</span>Dashboard</li></a>
+                  
+                   <?php if ($if_exist_settings == 1) { ?>
 
-                             <a href="https://ressuu.me/cv/<?php echo $userSettings->permalink; ?>" target="_blank" ><li><span class="glyphicon glyphicon-list-alt">&nbsp;</span>My CV</li></a>
-                             
-                         <?php } ?>
-                        <!----> 
-                        <?php if($no_message == 0){ ?>
-                          <a href="{{ url('/message') }}"><li class=""><span class="glyphicon glyphicon-envelope">&nbsp;</span>Message</li></a>                           
-                        <?php }else { ?> 
-                          <a href="{{ url('/message') }}"><li class=""><span class="glyphicon glyphicon-envelope">&nbsp;</span>Message</li><span class="jobbagde"><?php echo $no_message;?></a>   
-                        <?php } ?>
-                        <!---->
-                        <a href="{{ url('/connection') }}"><li><span class="glyphicon glyphicon-globe">&nbsp;</span>Connnection</li></a>
-                        <a href="{{ url('/cvlist') }}"><li><span class="glyphicon glyphicon-folder-open">&nbsp;</span>Browse CV</li></a>
-                        <a href="{{ url('/profile') }}"><li class="menuactive"><span class="glyphicon glyphicon-star">&nbsp;</span>Profile</li></a>
-                        <a href="{{ url('/resume') }}"><li><span class="glyphicon glyphicon-flag">&nbsp;</span>Resume</li></a>
-                        <a href="{{ url('/portfolio') }}"><li><span class="glyphicon glyphicon-send">&nbsp;</span>Portfolio</li></a>
-                        <a href="{{ url('/jobs') }}"><li><span class="glyphicon glyphicon-calendar">&nbsp;</span>Jobs</li><span class="jobbagde"><?php echo $count_job; ?></span></a>    
-                        <a href="{{ url('/setting') }}"><li><span class="glyphicon glyphicon-cog">&nbsp;</span>Settings</li></a>
-                        <a href="{{ url('/logout') }}"><li><span class="glyphicon glyphicon-off">&nbsp;</span>Logout</li></a>
-                  </ul>
+                       <a href="https://ressuu.me/cv/<?php echo $userSettings->permalink; ?>" target="_blank" ><li><span class="glyphicon glyphicon-list-alt">&nbsp;</span>My CV</li></a>
+                       
+                   <?php } ?>
+                  <!----> 
+                  <?php if($no_message == 0){ ?>
+                    <a href="{{ url('/message') }}"><li class=""><span class="glyphicon glyphicon-envelope">&nbsp;</span>Message</li></a>                           
+                  <?php }else { ?> 
+                    <a href="{{ url('/message') }}"><li class=""><span class="glyphicon glyphicon-envelope">&nbsp;</span>Message</li><span class="jobbagde"><?php echo $no_message;?></a>   
+                  <?php } ?>
+                  <!---->
+                  <a href="{{ url('/connection') }}"><li><span class="glyphicon glyphicon-globe">&nbsp;</span>Connnection</li></a>
+                  <a href="{{ url('/profile') }}"><li class="menuactive"><span class="glyphicon glyphicon-star">&nbsp;</span>Profile</li></a>
+                  <a href="{{ url('/resume') }}"><li><span class="glyphicon glyphicon-flag">&nbsp;</span>Resume</li></a>
+                  <a href="{{ url('/portfolio') }}"><li><span class="glyphicon glyphicon-send">&nbsp;</span>Portfolio</li></a>
+                  <a href="{{ url('/jobs') }}"><li><span class="glyphicon glyphicon-calendar">&nbsp;</span>Jobs</li><span class="jobbagde"><?php echo $count_job; ?></span></a>    
+                      
+                </ul>
               </nav>
 
 </sidebar>
@@ -826,7 +830,7 @@
 
 <?php $jobInfo = DB::table('job')->where('id',$job_value->category_id)->first();    ?>
 
-<!-- Modal for viewMessage -->
+<!-- Modal for JobNotification -->
   <section>
              <div class="modal fade" id="checkjobnotification_{{ $jobInfo->id }}" role="dialog">
               <div class="modal-dialog">
@@ -834,10 +838,7 @@
                 <!-- Modal content--> 
                 <div class="modal-content">
 
-                <form method="POST" action="/jobs/deleteJobNotification" class="theme1">
-                  {{ csrf_field() }}  
-                           <input type="hidden" name="id" value="<?php echo $job_value->id; ?>" >
-
+                <form method="" action="" class="theme1">
                            <div class="modal-header col-md-12 content-panel-header">
                                 <h3> {{ $jobInfo->company_job }}</h3>
                            </div>
@@ -891,10 +892,10 @@
                                 </div>
                                               
                            </div>
-                           <input type="hidden" value="{{ csrf_token() }}" name="_token" >
+
                           <div class="modal-footer">
-                               <button type="submit" class="btn btn-default">Delete</button>
-                               <button type="" class="btn btn-default" data-dismiss="modal">Close</button> 
+                              <button  class="btn btn-default" data-dismiss="modal" data-toggle="modal" data-target="#jobs_{{ $jobInfo->id }}">Apply</button> 
+                              <a class="btn btn-default readJobNoti" data-dismiss="modal" href="/jobs/deleteJobNotification/<?php echo $job_value->id; ?>">Read</a>
                           </div>
 
                 </form>
@@ -903,7 +904,45 @@
       </div>
     </div>
   </section>
-<!-- Modal for viewMessage -->
+<!-- Modal for JobNotification -->
+  
+<!-- Modal for apply Job -->
+  <section>
+
+             <div class="modal fade" id="jobs_{{ $jobInfo->id }}" role="dialog">
+              <div class="modal-dialog">
+              
+                <!-- Modal content-->
+                <div class="modal-content">
+
+                <form method="POST" action="/jobs/applyJobsinNotificaton" class="theme1">
+                         {{ csrf_field() }}  
+                            <input type="hidden" name="job_id" value="<?php echo $jobInfo->id; ?>" >
+                            <input type="hidden" name="notification_id" value="<?php echo $job_value->id; ?>">
+
+                           <div class="modal-header col-md-12 content-panel-header">
+                                <h3>Applying for {{ $jobInfo->company_job }}</h3>
+                           </div>
+                                    
+                           <div class="col-md-12  content-panel">
+                                <div class="col-md-12">
+                                    <h4>Do you want to apply as {{ $jobInfo->company_job }} in {{ $jobInfo->company_name }}? </h4>
+                                </div>
+                                
+                           </div>      
+                          
+                             <input type="hidden" value="{{ csrf_token() }}" name="_token" >
+                          <div class="modal-footer">
+                               <button type="submit" class="btn btn-default">Confirm</button> 
+                          </div>
+                </form>
+                </div>
+        
+      </div>
+    </div>
+
+  </section>
+<!-- Modal for apply Job -->
   
                            
 <?php } ?>  

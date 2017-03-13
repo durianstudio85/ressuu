@@ -101,7 +101,20 @@ class HomeController extends Controller
 
     $user_list =  DB::table('users')->get();
       
+    $count_connection = DB::table('connection_requests')->where([
+                     'to_user_id' => $userId,
+                     'status' => 'ACCEPT'
+                  ])->count();
 
+    $count_like = DB::table('like_view')->where([
+                     'to_user_id' => $userId,
+                     'status' => 'LIKE'
+                  ])->count();
+
+    $count_view = DB::table('like_view')->where([
+                     'to_user_id' => $userId,
+                     'status' => 'VIEW'
+                  ])->count();
 
 
         return view('home')
@@ -126,6 +139,9 @@ class HomeController extends Controller
                 ->with("user_list",$user_list)
                 ->with("user_notification",$user_notification)
                 ->with("user_list_notification",$user_list_notification)
+                ->with("count_connection",$count_connection)
+                ->with("count_like",$count_like)
+                ->with("count_view",$count_view)
 
 
        ;
@@ -187,6 +203,21 @@ class HomeController extends Controller
 
     $user_list =  DB::table('users')->get(); 
 
+    $count_connection = DB::table('connection_requests')->where([
+                     'to_user_id' => $userId,
+                     'status' => 'ACCEPT'
+                  ])->count();
+
+    $count_like = DB::table('like_view')->where([
+                     'to_user_id' => $userId,
+                     'status' => 'LIKE'
+                  ])->count();
+
+    $count_view = DB::table('like_view')->where([
+                     'to_user_id' => $userId,
+                     'status' => 'VIEW'
+                  ])->count();
+
 
 
           return view('profile')
@@ -206,6 +237,9 @@ class HomeController extends Controller
                      ->with("user_list",$user_list)
                      ->with("user_notification",$user_notification)
                      ->with("user_list_notification",$user_list_notification)
+                     ->with("count_connection",$count_connection)
+                     ->with("count_like",$count_like)
+                     ->with("count_view",$count_view)
           ;
                 
 
@@ -283,6 +317,21 @@ class HomeController extends Controller
 
     $user_list =  DB::table('users')->get();
 
+    $count_connection = DB::table('connection_requests')->where([
+                     'to_user_id' => $userId,
+                     'status' => 'ACCEPT'
+                  ])->count();
+
+    $count_like = DB::table('like_view')->where([
+                     'to_user_id' => $userId,
+                     'status' => 'LIKE'
+                  ])->count();
+
+    $count_view = DB::table('like_view')->where([
+                     'to_user_id' => $userId,
+                     'status' => 'VIEW'
+                  ])->count();
+
 
         return view('resume')
                     ->with("userProfile",$userProfile)
@@ -304,6 +353,9 @@ class HomeController extends Controller
                     ->with("user_list",$user_list)
                     ->with("user_notification",$user_notification)
                     ->with("user_list_notification",$user_list_notification)
+                    ->with("count_connection",$count_connection)
+                    ->with("count_like",$count_like)
+                    ->with("count_view",$count_view)
         ;
 
 
@@ -368,6 +420,21 @@ class HomeController extends Controller
 
     $user_list =  DB::table('users')->get();
 
+    $count_connection = DB::table('connection_requests')->where([
+                     'to_user_id' => $userId,
+                     'status' => 'ACCEPT'
+                  ])->count();
+
+    $count_like = DB::table('like_view')->where([
+                     'to_user_id' => $userId,
+                     'status' => 'LIKE'
+                  ])->count();
+
+    $count_view = DB::table('like_view')->where([
+                     'to_user_id' => $userId,
+                     'status' => 'VIEW'
+                  ])->count();
+
         return view('portfolio')
                  ->with("userProfile",$userProfile)
                  ->with("userPorfolios",$userPorfolios)
@@ -387,6 +454,9 @@ class HomeController extends Controller
                 ->with("user_list",$user_list)
                 ->with("user_notification",$user_notification)
                 ->with("user_list_notification",$user_list_notification)
+                ->with("count_connection",$count_connection)
+                ->with("count_like",$count_like)
+                ->with("count_view",$count_view)
 
         ;
 
@@ -446,6 +516,21 @@ class HomeController extends Controller
 
         $user_list =  DB::table('users')->get();
 
+        $count_connection = DB::table('connection_requests')->where([
+                     'to_user_id' => $userId,
+                     'status' => 'ACCEPT'
+                  ])->count();
+
+        $count_like = DB::table('like_view')->where([
+                         'to_user_id' => $userId,
+                         'status' => 'LIKE'
+                      ])->count();
+
+        $count_view = DB::table('like_view')->where([
+                         'to_user_id' => $userId,
+                         'status' => 'VIEW'
+                      ])->count();
+
         return view('jobs')
                 ->with("userProfile",$userProfile)
                 ->with("name",$name)
@@ -464,6 +549,9 @@ class HomeController extends Controller
                 ->with("user_list",$user_list)
                 ->with("user_notification",$user_notification)
                 ->with("user_list_notification",$user_list_notification)
+                ->with("count_connection",$count_connection)
+                ->with("count_like",$count_like)
+                ->with("count_view",$count_view)
         ;
 
     }
@@ -541,6 +629,21 @@ class HomeController extends Controller
 
         $user_list =  DB::table('users')->get();
 
+        $count_connection = DB::table('connection_requests')->where([
+                     'to_user_id' => $userId,
+                     'status' => 'ACCEPT'
+                  ])->count();
+
+        $count_like = DB::table('like_view')->where([
+                         'to_user_id' => $userId,
+                         'status' => 'LIKE'
+                      ])->count();
+
+        $count_view = DB::table('like_view')->where([
+                         'to_user_id' => $userId,
+                         'status' => 'VIEW'
+                      ])->count();
+
         return view('setting')
                 ->with("userProfile",$userProfile)
                 ->with("name",$name)
@@ -561,6 +664,9 @@ class HomeController extends Controller
                   ->with("user_list",$user_list)
                 ->with("user_notification",$user_notification)
                 ->with("user_list_notification",$user_list_notification)
+                ->with("count_connection",$count_connection)
+                ->with("count_like",$count_like)
+                ->with("count_view",$count_view)
         ;
 
 
@@ -1341,7 +1447,42 @@ class HomeController extends Controller
     }
 
 
-     public function deleteJobNotification(){
+    public function applyJobsinNotificaton(){
+
+        $userId = Auth::id();
+        $job_id =  Input::get('job_id');
+        $inputDate = date('Y-m-d');
+        $notificaton_id = Input::get('notification_id');
+        
+        $jobInfo = DB::table('job')->where('id',$job_id)->first(); 
+
+        $applicantId = DB::table('applicant')->insertGetId([
+                       'user_id' => $userId,
+                       'job_id' => $job_id,
+                       'date'=> $inputDate,
+                       'status'=> "PENDING"
+        ]);
+                
+        DB::table('dashboard_timeline')->insert([
+                       'user_id' => $userId,
+                       'category' => "Apply Jobs",
+                       'category_id' => $applicantId,
+                       'activity' => "Applying for ".$jobInfo->company_job." in ".$jobInfo->company_name,
+                       'date'=> $inputDate
+        ]);
+
+        DB::table('user_notification')
+                  ->where('id', $notificaton_id)
+                  ->update(array(
+                        'status' => "Delete"
+                    ));
+
+        return back();
+
+    }
+
+
+     public function deleteJobNotification($id){
 
         $id = Input::get('id');
         $status = "Delete";
@@ -1415,6 +1556,21 @@ class HomeController extends Controller
 
     $user_list =  DB::table('users')->get(); 
 
+    $count_connection = DB::table('connection_requests')->where([
+                     'to_user_id' => $userId,
+                     'status' => 'ACCEPT'
+                  ])->count();
+
+    $count_like = DB::table('like_view')->where([
+                     'to_user_id' => $userId,
+                     'status' => 'LIKE'
+                  ])->count();
+
+    $count_view = DB::table('like_view')->where([
+                     'to_user_id' => $userId,
+                     'status' => 'VIEW'
+                  ])->count();
+
 
         return view('cvlist')
                 ->with("userProfile",$userProfile)
@@ -1432,6 +1588,9 @@ class HomeController extends Controller
                 ->with("user_list",$user_list)
                 ->with("user_notification",$user_notification)
                 ->with("user_list_notification",$user_list_notification)
+                ->with("count_connection",$count_connection)
+                ->with("count_like",$count_like)
+                ->with("count_view",$count_view)
         ;
 
     }
@@ -1500,6 +1659,22 @@ class HomeController extends Controller
 
     $get_follower = DB::table('connection_requests')->where(['to_user_id' => $userId, 'status'=>'PENDING'])->get();
 
+    $count_connection = DB::table('connection_requests')->where([
+                     'to_user_id' => $userId,
+                     'status' => 'ACCEPT'
+                  ])->count();
+
+    $count_like = DB::table('like_view')->where([
+                     'to_user_id' => $userId,
+                     'status' => 'LIKE'
+                  ])->count();
+
+    $count_view = DB::table('like_view')->where([
+                     'to_user_id' => $userId,
+                     'status' => 'VIEW'
+                  ])->count();
+
+
 
         return view('connection')
                 ->with("userProfile",$userProfile)
@@ -1519,6 +1694,9 @@ class HomeController extends Controller
                 ->with("user_list_notification",$user_list_notification)
                 ->with("get_invitation",$get_invitation)
                 ->with("get_follower",$get_follower)
+                ->with("count_connection",$count_connection)
+                ->with("count_like",$count_like)
+                ->with("count_view",$count_view)
 
         ;
 
@@ -1729,7 +1907,58 @@ class HomeController extends Controller
 
     }
 
-  
+      public function likeUsersCV($id){
+
+        $getUserId = $id;
+        $your_id = Auth::id();
+        $category = "LIKE CV";
+        $status = "LIKE";
+        $inputDate = date('Y-m-d');
+
+        $check_your_profile = DB::table('profiles')->where('user_id',$your_id)->count();
+        $your_profile =  DB::table('profiles')->where('user_id',$your_id)->first();
+
+
+        if($check_your_profile == 0){
+            $your_name = Auth::name();
+        }else{
+            $your_name = $your_profile->name;
+        }
+
+
+
+        $getLikeId = DB::table('like_view')->insertGetId([
+                           'to_user_id' => $your_id,
+                           'from_user_id' => $getUserId,
+                           'category_id' => $getUserId,
+                           'category' =>  $category,
+                           'status' =>  $status,
+                           'date'=> $inputDate
+                ]);
+
+        DB::table('dashboard_timeline')->insert([
+                           'user_id' => $getUserId,
+                           'category' => "Like CV",
+                           'category_id' => $getLikeId,
+                           'activity' =>  $your_name." like your CV.",
+                           'date'=> $inputDate
+        ]);
+
+       return back();
+
+    }
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
