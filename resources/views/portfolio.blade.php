@@ -239,20 +239,58 @@
 </sidebar>
 
  <content class="col-md-9 popage">
+
+ <?php if($cover_exists == 0){ ?>
+
+       <a href="#" data-toggle="modal" data-target="#coverphoto" > 
+          <section class="col-xs-12 col-md-12 content-header ads-bg" style="background:url('../cover_photo/default_cover.png')">
+            <div class="col-xs-12 col-md-12 content-people-wrap "></div>
+          </section>
+       </a>
+
+ <?php }else{ ?> 
+
+        <a href="#" data-toggle="modal" data-target="#coverphoto"> 
+          <section class="col-xs-12 col-md-12 content-header ads-bg" style="background:url('../cover_photo/{{ $get_cover_photo->cover_photo_name  }}');background-size:100% 100%;">
+            <div class="col-xs-12 col-md-12 content-people-wrap "></div>
+          </section>
+       </a> 
  
- <section class="col-xs-12 col-md-12 content-header portfolio">
+ <?php } ?>
 
-     <div class="col-xs-10 col-md-10">
-          <h3>Portfolio</h3> 
-          <p class="">Subheading here</p>    
+<!-- Modal for Cover Photo -->
+<section class="profilepic">
+
+  <div class="modal fade" id="coverphoto" role="dialog">
+      <div class="modal-dialog modal-sm">
+
+          <div class="modal-content">
+
+          <form method="POST" action="/portfolio/updateCoverPhoto/" enctype="multipart/form-data" files="true">
+                {{ csrf_field() }}
+                 <div class="modal-header">
+                    <h5>Update Cover Photo</h5>
+                  </div>                            
+                  <div class="col-md-12 content-panel-header cover_wrap">
+                    <div class="form-group form-group">
+                      <div class="col-md-offset-1 col-sm-10">
+                          <input class="form-control" name="image" type="file" id="icondemo">
+                      </div>   
+                   </div>
+                  </div>
+                  <input type="hidden" value="{{ csrf_token() }}" name="_token" >
+                <div class="modal-footer">
+                     <button type="submit" class="btn btn-default">Save</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>    
+                </div>
+          </form>
+          </div>
+                    
       </div>
-                  
-     <div  class="tabmenu col-xs-2 col-md-2">
-        <a href="#"><img  src="images/menu.png" class="nav-menu"></a>
-     </div>
+   </div>
 
- </section>
-
+</section>
+<!-- Modal for Cover Photo -->  
 
 <section  class="col-xs-12 col-md-12 content-portfolio"> 
     <nav class="col-xs-12 col-md-12">
@@ -877,7 +915,7 @@
 
                           <div class="modal-footer">
                               <button  class="btn btn-default" data-dismiss="modal" data-toggle="modal" data-target="#jobs_{{ $jobInfo->id }}">Apply</button> 
-                              <a class="btn btn-default readJobNoti" data-dismiss="modal" href="/jobs/deleteJobNotification/<?php echo $job_value->id; ?>">Read</a>
+                              <a class="btn btn-default readJobNoti" href="/jobs/deleteJobNotification/<?php echo $job_value->id; ?>">Read</a>
                           </div>
 
                 </form>

@@ -610,7 +610,7 @@
 
                           <div class="modal-footer">
                               <button  class="btn btn-default" data-dismiss="modal" data-toggle="modal" data-target="#jobs_{{ $jobInfo->id }}">Apply</button> 
-                              <a class="btn btn-default readJobNoti" data-dismiss="modal" href="/jobs/deleteJobNotification/<?php echo $job_value->id; ?>">Read</a>
+                              <a class="btn btn-default readJobNoti" href="/jobs/deleteJobNotification/<?php echo $job_value->id; ?>">Read</a>
                           </div>
 
                 </form>

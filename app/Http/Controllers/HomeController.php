@@ -435,6 +435,17 @@ class HomeController extends Controller
                      'status' => 'VIEW'
                   ])->count();
 
+    $cover_exists = DB::table('cover_photo')->where([
+                     'user_id' => $userId,
+                     'status' => 'ACTIVE'
+                  ])->count();
+
+    $get_cover_photo = DB::table('cover_photo')->where([
+                     'user_id' => $userId,
+                     'status' => 'ACTIVE'
+                  ])->first();                  
+
+
         return view('portfolio')
                  ->with("userProfile",$userProfile)
                  ->with("userPorfolios",$userPorfolios)
@@ -450,13 +461,15 @@ class HomeController extends Controller
                  ->with("list_message",$list_message)
                  ->with("list_job",$list_job)
                  ->with("job_notification",$job_notification)
-                ->with("job_list_notification",$job_list_notification)
-                ->with("user_list",$user_list)
-                ->with("user_notification",$user_notification)
-                ->with("user_list_notification",$user_list_notification)
-                ->with("count_connection",$count_connection)
-                ->with("count_like",$count_like)
-                ->with("count_view",$count_view)
+                 ->with("job_list_notification",$job_list_notification)
+                 ->with("user_list",$user_list)
+                 ->with("user_notification",$user_notification)
+                 ->with("user_list_notification",$user_list_notification)
+                 ->with("count_connection",$count_connection)
+                 ->with("count_like",$count_like)
+                 ->with("count_view",$count_view)
+                 ->with("cover_exists",$cover_exists)
+                 ->with("get_cover_photo",$get_cover_photo)
 
         ;
 
@@ -1484,11 +1497,11 @@ class HomeController extends Controller
 
      public function deleteJobNotification($id){
 
-        $id = Input::get('id');
+        $get_id = $id;
         $status = "Delete";
 
         DB::table('user_notification')
-                  ->where('id', $id)
+                  ->where('id', $get_id)
                   ->update(array(
                         'status' => $status
                     ));
@@ -1928,8 +1941,8 @@ class HomeController extends Controller
 
 
         $getLikeId = DB::table('like_view')->insertGetId([
-                           'to_user_id' => $your_id,
-                           'from_user_id' => $getUserId,
+                           'to_user_id' => $getUserId,
+                           'from_user_id' => $your_id,
                            'category_id' => $getUserId,
                            'category' =>  $category,
                            'status' =>  $status,
@@ -1948,6 +1961,134 @@ class HomeController extends Controller
 
     }
 
+
+     public function viewUsersCV($id){
+
+        $getUserId = $id;
+        $your_id = Auth::id();
+        $category = "VIEW CV";
+        $status = "VIEW";
+        $inputDate = date('Y-m-d');
+
+        $check_your_profile = DB::table('profiles')->where('user_id',$your_id)->count();
+        $your_profile =  DB::table('profiles')->where('user_id',$your_id)->first();
+
+        $user_cv = DB::table('settings')->where('user_id',$getUserId)->first();
+        $cv_link = "https://ressuu.me/cv/".$user_cv->permalink;
+
+
+        if($check_your_profile == 0){
+            $your_name = Auth::name();
+        }else{
+            $your_name = $your_profile->name;
+        }
+
+        DB::table('like_view')->insert([
+                           'to_user_id' => $getUserId,
+                           'from_user_id' => $your_id,
+                           'category_id' => $getUserId,
+                           'category' =>  $category,
+                           'status' =>  $status,
+                           'date'=> $inputDate
+                ]);
+
+        return redirect()->to($cv_link);
+
+       //return back();
+
+    }
+
+
+
+
+
+
+
+
+
+
+
+    public function updateCoverPhoto(){
+
+        // getting all of the post data
+              $file = array('image' => Input::file('image'));
+              // setting up rules
+              $rules = array('image' => 'required',); //mimes:jpeg,bmp,png and for max size max:10000
+              // doing the validation, passing post data, rules and the messages
+              $validator = Validator::make($file, $rules);
+              if ($validator->fails()) {
+                // send back to the page with the input data and errors
+                return Redirect::to('upload')->withInput()->withErrors($validator);
+              }
+              else {
+                // checking file is valid.
+                if (Input::file('image')->isValid()) {
+                  $destinationPath = 'cover_photo'; // upload path
+                  $extension = Input::file('image')->getClientOriginalExtension(); // getting image extension
+                  $fileName = rand(11111,99999).'.'.$extension; // renameing image
+                  Input::file('image')->move($destinationPath, $fileName); // uploading file to given path
+                  // sending back with message
+
+                    $userId = Auth::id();
+                    $inputDate = date('Y-m-d');
+                    $inputCoverPhoto = $fileName;
+
+                    $cover_exists = DB::table('cover_photo')->where(['user_id' => $userId,'status' => 'ACTIVE'])->count();
+
+                    $get_cover_photo = DB::table('cover_photo')->where(['user_id' => $userId,'status' => 'ACTIVE'])->first();    
+
+
+                    if($cover_exists == 0){
+
+                     $getCoverID = DB::table('cover_photo')->insertGetId([
+                               'user_id' => $userId,
+                               'cover_photo_name' => $inputCoverPhoto,
+                               'cover_photo_category' =>"FIRST COVER PHOTO",
+                               'status' => "ACTIVE",
+                               'date'=> $inputDate
+                     ]);  
+
+                     DB::table('dashboard_timeline')->insert([
+                               'user_id' => $userId,
+                               'category' => "Cover Photo",
+                               'category_id' =>$getCoverID,
+                               'activity' => "Update Cover Photo",
+                               'date'=> $inputDate
+                     ]);  
+
+
+                    }else{
+
+                    DB::table('cover_photo')
+                              ->where('user_id',$userId)
+                              ->update(array(
+                                    'cover_photo_name' => $inputCoverPhoto,
+                                ));       
+
+                    DB::table('dashboard_timeline')->insert([
+                               'user_id' => $userId,
+                               'category' => "Cover Photo",
+                               'category_id' =>$get_cover_photo->id,
+                               'activity' => "Update Cover Photo",
+                               'date'=> $inputDate
+                     ]);    
+
+
+
+                    }
+
+                        
+                  Session::flash('success', 'Upload successfully'); 
+                  return back();
+                }
+                else {
+                  // sending back with error message.
+                  Session::flash('error', 'uploaded file is not valid');
+                 return back();
+                }
+              }
+
+    }
 
 
 

@@ -278,7 +278,7 @@
        <?php  $if_profile_exist = DB::table('profiles')->where('user_id',$user_info->id)->count(); ?>
        <?php  $profile_info = DB::table('profiles')->where('user_id',$user_info->id)->first(); ?>
        <?php  $setting_info = DB::table('settings')->where('user_id',$user_info->id)->first(); ?>
-       <?php  $check_if_like = DB::table('like_view')->where(['to_user_id'=>$userId,'from_user_id'=>$user_info->id,'status'=>'LIKE'])->count(); ?>
+       <?php  $check_if_like = DB::table('like_view')->where(['to_user_id'=>$user_info->id,'from_user_id'=>$userId,'status'=>'LIKE'])->count(); ?>
        <?php  //$cv_status = $settings_info->status; ?>
 
 
@@ -322,13 +322,11 @@
                             <?php }else{ ?> 
                                 <a data-toggle="modal" type="button" class="btn btn-info">Followed</a>
                             <?php } ?>
-                
-
 
                             <?php if(empty($setting_info->permalink)){ ?> 
                              
                             <?php }else{ ?> 
-                              <a  target="_target" href="https://ressuu.me/cv/<?php echo $setting_info->permalink;  ?>" data-toggle="modal" type="button" class="btn btn-primary">CV Link</a>
+                              <a  target="_target" href="/view/users/<?php echo $user_info->id; ?>" type="button" class="btn btn-primary">CV Link</a>
                                <?php if($check_if_like == 0){?>
                                      <a href="/like/users/<?php echo $user_info->id; ?>" data-toggle="modal" type="button" class="btn btn-info">Like</a>
                                 <?php }else{ ?> 
@@ -735,7 +733,7 @@
 
                           <div class="modal-footer">
                               <button  class="btn btn-default" data-dismiss="modal" data-toggle="modal" data-target="#jobs_{{ $jobInfo->id }}">Apply</button> 
-                              <a class="btn btn-default readJobNoti" data-dismiss="modal" href="/jobs/deleteJobNotification/<?php echo $job_value->id; ?>">Read</a>
+                              <a class="btn btn-default readJobNoti" href="/jobs/deleteJobNotification/<?php echo $job_value->id; ?>">Read</a>
                           </div>
 
                 </form>

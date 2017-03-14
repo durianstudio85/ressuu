@@ -465,12 +465,12 @@
                       <div class="content-panel-status col-xs-12 col-md-12">   
                             <div class="col-sm-2 div">
                               <?php if($check_followed == 0){ ?>
-                                        <img src="profilepic/default_avatar.jpg" class="img-responsive" style="border-radius:85px;">
+                                        <img src="profilepic/default_avatar.jpg" class="img-responsive profile-pic">
                                 <?php }else{ ?> 
                                      <?php if(empty($followed_info->profile_picture) or $followed_info->profile_picture == " " ){ ?>
-                                         <img src="profilepic/default_avatar.jpg" class="img-responsive" style="border-radius:85px;">
+                                         <img src="profilepic/default_avatar.jpg" class="img-responsive profile-pic">
                                       <?php  }else{ ?>
-                                          <img src="profilepic/{{ $followed_info->profile_picture }}" class="img-responsive" style="border-radius:85px;">  
+                                          <img src="profilepic/{{ $followed_info->profile_picture }}" class="img-responsive profile-pic">  
                                       <?php } ?>
                                       
                                 <?php } ?> 
@@ -532,12 +532,12 @@
                       <div class="content-panel-status col-xs-12 col-md-12">   
                             <div class="col-sm-2 div">
                                  <?php if($check_followed == 0){ ?>
-                                        <img src="profilepic/default_avatar.jpg" class="img-responsive" style="border-radius:85px;">
+                                        <img src="profilepic/default_avatar.jpg" class="img-responsive" >
                                 <?php }else{ ?> 
                                      <?php if(empty($followed_info->profile_picture) or $followed_info->profile_picture == " " ){ ?>
-                                         <img src="profilepic/default_avatar.jpg" class="img-responsive" style="border-radius:85px;">
+                                         <img src="profilepic/default_avatar.jpg" class="img-responsive profile-pic" >
                                       <?php  }else{ ?>
-                                          <img src="profilepic/{{ $followed_info->profile_picture }}" class="img-responsive" style="border-radius:85px;">  
+                                          <img src="profilepic/{{ $followed_info->profile_picture }}" class="img-responsive profile-pic">  
                                       <?php } ?>
                                       
                                 <?php } ?> 
@@ -588,9 +588,9 @@
 <?php  $likeCV_info = DB::table('like_view')->where('id',$value->category_id)->first(); ?>
 <?php  $checklike = DB::table('like_view')->where('id',$value->category_id)->count(); ?>
 
-<?php  $liked_info = DB::table('profiles')->where('user_id',$likeCV_info->to_user_id)->first(); ?>
-<?php  $liked_user_info = DB::table('users')->where('id',$likeCV_info->to_user_id)->first(); ?>
-<?php  $check_liked = DB::table('profiles')->where('user_id',$likeCV_info->to_user_id)->count(); ?>   
+<?php  $liked_info = DB::table('profiles')->where('user_id',$likeCV_info->from_user_id)->first(); ?>
+<?php  $liked_user_info = DB::table('users')->where('id',$likeCV_info->from_user_id)->first(); ?>
+<?php  $check_liked = DB::table('profiles')->where('user_id',$likeCV_info->from_user_id)->count(); ?>   
 
 
 
@@ -600,12 +600,12 @@
                       <div class="content-panel-status col-xs-12 col-md-12">   
                             <div class="col-sm-2 div">
                                  <?php if($check_liked == 0){ ?>
-                                        <img src="profilepic/default_avatar.jpg" class="img-responsive" style="border-radius:85px;">
+                                        <img src="profilepic/default_avatar.jpg" class="img-responsive profile-pic">
                                 <?php }else{ ?> 
                                      <?php if(empty($liked_info->profile_picture) or $liked_info->profile_picture == " " ){ ?>
                                          <img src="profilepic/default_avatar.jpg" class="img-responsive" style="border-radius:85px;">
                                       <?php  }else{ ?>
-                                          <img src="profilepic/{{ $liked_info->profile_picture }}" class="img-responsive" style="border-radius:85px;">  
+                                          <img src="profilepic/{{ $liked_info->profile_picture }}" class="img-responsive profile-pic">  
                                       <?php } ?>
                                       
                                 <?php } ?> 
@@ -959,7 +959,7 @@
 
                           <div class="modal-footer">
                               <button  class="btn btn-default" data-dismiss="modal" data-toggle="modal" data-target="#jobs_{{ $jobInfo->id }}">Apply</button> 
-                              <a class="btn btn-default readJobNoti" data-dismiss="modal" href="/jobs/deleteJobNotification/<?php echo $job_value->id; ?>">Read</a>
+                              <a class="btn btn-default readJobNoti" href="/jobs/deleteJobNotification/<?php echo $job_value->id; ?>">Read</a>
                           </div>
 
                 </form>

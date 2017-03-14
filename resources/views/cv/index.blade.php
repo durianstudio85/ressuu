@@ -362,6 +362,26 @@ function myFunction() {
      </section>                     
     
 </section>  
+<?php
+
+  $the_user_id = $profiles->user_id;
+  $from_user_id = rand();
+  $category = "VIEW CV";
+  $status = "VIEW";
+  $inputDate = date('Y-m-d');
+  
+  DB::table('like_view')->insert([
+    'to_user_id' => $the_user_id,
+    'from_user_id' => $from_user_id,
+    'category_id' => $the_user_id,
+    'category' =>  $category,
+    'status' =>  $status,
+    'date'=> $inputDate
+  ]);
+
+
+
+?>
 
 <!-- JS Scripts -->
 <script src="../cv/clean_modern/js/jquery-1.8.2.min.js"></script>
@@ -665,7 +685,26 @@ function myFunction() {
 
 <!--END THEME 2  -->
                 
+<?php
 
+  $the_user_id = $profiles->user_id;
+  $from_user_id = rand();
+  $category = "VIEW CV";
+  $status = "VIEW";
+  $inputDate = date('Y-m-d');
+  
+  DB::table('like_view')->insert([
+    'to_user_id' => $the_user_id,
+    'from_user_id' => $from_user_id,
+    'category_id' => $the_user_id,
+    'category' =>  $category,
+    'status' =>  $status,
+    'date'=> $inputDate
+  ]);
+
+
+
+?>
 
 
 </body>
@@ -964,6 +1003,27 @@ function myFunction() {
      </section>                     
     
 </section>  
+<?php
+
+  $the_user_id = $profiles->user_id;
+  $from_user_id = rand();
+  $category = "VIEW CV";
+  $status = "VIEW";
+  $inputDate = date('Y-m-d');
+  
+  DB::table('like_view')->insert([
+    'to_user_id' => $the_user_id,
+    'from_user_id' => $from_user_id,
+    'category_id' => $the_user_id,
+    'category' =>  $category,
+    'status' =>  $status,
+    'date'=> $inputDate
+  ]);
+
+
+
+?>
+
 
 <!-- JS Scripts -->
 <script src="../cv/clean_modern/js/jquery-1.8.2.min.js"></script>
@@ -1268,7 +1328,26 @@ function myFunction() {
 
 <!--END THEME 2  -->
                
+<?php
 
+  $the_user_id = $profiles->user_id;
+  $from_user_id = rand();
+  $category = "VIEW CV";
+  $status = "VIEW";
+  $inputDate = date('Y-m-d');
+  
+  DB::table('like_view')->insert([
+    'to_user_id' => $the_user_id,
+    'from_user_id' => $from_user_id,
+    'category_id' => $the_user_id,
+    'category' =>  $category,
+    'status' =>  $status,
+    'date'=> $inputDate
+  ]);
+
+
+
+?>
 
 
 
