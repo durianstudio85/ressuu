@@ -813,7 +813,7 @@
                   <section>
                               <div class="col-md-12 content-panel">
                                       <div class="content-experience">
-                                          <center><button data-toggle="modal" data-target="#myModal4">Add Education</button></center>
+                                          <center><button data-toggle="modal" data-target="#myModal4">Add Certification</button></center>
                                       </div>
                               </div>   
                   </section>

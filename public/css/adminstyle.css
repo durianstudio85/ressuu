@@ -129,10 +129,10 @@ body{
 .searchbox{
   height: 37px;
   border-radius: 20px;
-  margin-top:20px;
+  margin-top:17px;
   float: left;
-  margin-top:px;
   margin-left:60px;
+  width:430px;
 }
 
 /*header*/
@@ -210,7 +210,7 @@ sidebar{
 }
 .panel-status p{
   font-size: 11px;
-  margin-left:15px;
+  margin-left:27px;
   margin-top: 5px;
 }
 .panel-status-1{
@@ -342,7 +342,7 @@ sidebar{
   padding-bottom: 55px;
 }
 .ads-bg{
-  background-image: url('../images/dg.jpg');
+  background-image: url('../ads/default-ads.png');
   height: 266px;
 }
 .content-header h3{
@@ -732,12 +732,12 @@ sidebar{
     }
     .theme1 .input-file{
 
-      margin:15px 0px 0px 0px;
+      margin:0px 0px 0px 0px;
       border-width:0px 0px 2px 0px;
       border-radius: 0px;
       padding-left: 20px;
       width: 100%;
-      height:100px !important; 
+      height:50px !important; 
       color: #5e6d81;
       font-size:15px;
 
@@ -1060,7 +1060,7 @@ margin-left:100px;
 }
 
 /* align icon */
-.left-addon .glyphicon  { left:  0px;}
+.left-addon .glyphicon  { left:  25px;}
 .right-addon .glyphicon { right: 0px;}
 
 /* add padding  */
@@ -2453,16 +2453,18 @@ margin-left:100px;
 .mgtop10{
   margin-top:20px;
 }
+
 /*admin job area */
 .job_input{
- margin: 15px 0px 6px 0px;
-border-width: 0px 0px 2px 0px;
-border-radius: 0px;
-padding-left: 20px;
-width: 100%;
-color: #5e6d81;
-font-size: 14px;
+  margin: 15px 0px 6px 0px;
+  border-width: 0px 0px 2px 0px;
+  border-radius: 0px;
+  padding-left: 20px;
+  width: 100%;
+  color: #5e6d81;
+  font-size: 14px;
 }
+
 .setting-admin-pic{
   height: 150px;
   width: 150px;
@@ -2520,9 +2522,4 @@ color: #000;
   border: none;
   color: #000;
 }
-
-
-
-
-
 
