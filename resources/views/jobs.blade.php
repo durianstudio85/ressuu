@@ -250,7 +250,12 @@
                           <?php  $your_application = DB::table('applicant')->where('user_id',Auth::id())->count(); ?>
                         <div class="col-xs-4 col-md-4 content-header-tabs">                        
                            <div class="jobs">
-                           <?php $available_job =  $count_job - $your_application ; ?>
+                             <?php $available_job =  $count_job - $your_application ; ?>
+                            <?php if($available_job < 0){ ?>
+                                  <?php $available_job = 0; ?>
+                            <?php }else{ ?>
+                                   <?php $available_job = $available_job; ?>
+                            <?php } ?>
                              <h4><?php echo $available_job; ?></h4>
                              <p>Jobs Available</p>
                              <button class="view" data-toggle="modal" data-target="#viewAvailable">View</button>
