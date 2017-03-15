@@ -116,6 +116,11 @@ class HomeController extends Controller
                      'status' => 'VIEW'
                   ])->count();
 
+    $follow_list =  DB::table('users')->get();
+
+    $check_followed_user = DB::table('connection_requests')->where([
+                 'from_user_id'=>$userId,'status'=>"ACCEPT"
+                 ])->count(); 
 
         return view('home')
                 ->with("userProfile",$userProfile)
@@ -142,6 +147,8 @@ class HomeController extends Controller
                 ->with("count_connection",$count_connection)
                 ->with("count_like",$count_like)
                 ->with("count_view",$count_view)
+                ->with("follow_list",$follow_list)
+                ->with("check_followed_user",$check_followed_user)
 
 
        ;
@@ -1455,6 +1462,13 @@ class HomeController extends Controller
                        'date'=> $inputDate
         ]);
 
+
+         DB::table('user_notification')
+                  ->where(['user_id'=>$userId,'category'=>"Job",'category_id'=>$job_id])
+                  ->update(array(
+                        'status' => "Delete"
+                    ));
+
         return back();
 
     }
@@ -1466,29 +1480,47 @@ class HomeController extends Controller
         $job_id =  Input::get('job_id');
         $inputDate = date('Y-m-d');
         $notificaton_id = Input::get('notification_id');
-        
+
         $jobInfo = DB::table('job')->where('id',$job_id)->first(); 
 
-        $applicantId = DB::table('applicant')->insertGetId([
+
+        $alreay_apply = DB::table('applicant')->where(['job_id'=>$job_id,'user_id'=>$userId])->count();
+
+        if($alreay_apply == 0){
+
+            $applicantId = DB::table('applicant')->insertGetId([
                        'user_id' => $userId,
                        'job_id' => $job_id,
                        'date'=> $inputDate,
                        'status'=> "PENDING"
-        ]);
+             ]);
                 
-        DB::table('dashboard_timeline')->insert([
-                       'user_id' => $userId,
-                       'category' => "Apply Jobs",
-                       'category_id' => $applicantId,
-                       'activity' => "Applying for ".$jobInfo->company_job." in ".$jobInfo->company_name,
-                       'date'=> $inputDate
-        ]);
+            DB::table('dashboard_timeline')->insert([
+                           'user_id' => $userId,
+                           'category' => "Apply Jobs",
+                           'category_id' => $applicantId,
+                           'activity' => "Applying for ".$jobInfo->company_job." in ".$jobInfo->company_name,
+                           'date'=> $inputDate
+            ]);
 
-        DB::table('user_notification')
+            DB::table('user_notification')
                   ->where('id', $notificaton_id)
                   ->update(array(
                         'status' => "Delete"
                     ));
+
+        }else{
+
+             DB::table('user_notification')
+                  ->where('id', $notificaton_id)
+                  ->update(array(
+                        'status' => "Delete"
+                    ));
+
+        } 
+
+
+        
 
         return back();
 

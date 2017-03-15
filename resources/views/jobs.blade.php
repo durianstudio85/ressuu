@@ -250,7 +250,7 @@
                           <?php  $your_application = DB::table('applicant')->where('user_id',Auth::id())->count(); ?>
                         <div class="col-xs-4 col-md-4 content-header-tabs">                        
                            <div class="jobs">
-                             <?php $available_job =  $count_job - $your_application ; ?>
+                            <?php $available_job =  $count_job - $your_application ; ?>
                             <?php if($available_job < 0){ ?>
                                   <?php $available_job = 0; ?>
                             <?php }else{ ?>
@@ -614,7 +614,7 @@
                            </div>
 
                           <div class="modal-footer">
-                              <button  class="btn btn-default" data-dismiss="modal" data-toggle="modal" data-target="#jobs_{{ $jobInfo->id }}">Apply</button> 
+                              <button  class="btn btn-default" data-dismiss="modal" data-toggle="modal" data-target="#jobsnoti_{{ $jobInfo->id }}">Apply</button> 
                               <a class="btn btn-default readJobNoti" href="/jobs/deleteJobNotification/<?php echo $job_value->id; ?>">Read</a>
                           </div>
 
@@ -629,7 +629,7 @@
 <!-- Modal for apply Job -->
   <section>
 
-             <div class="modal fade" id="jobs_{{ $jobInfo->id }}" role="dialog">
+             <div class="modal fade" id="jobsnoti_{{ $jobInfo->id }}" role="dialog">
               <div class="modal-dialog">
               
                 <!-- Modal content-->
@@ -641,6 +641,7 @@
                             <input type="hidden" name="notification_id" value="<?php echo $job_value->id; ?>">
 
                            <div class="modal-header col-md-12 content-panel-header">
+                         
                                 <h3>Applying for {{ $jobInfo->company_job }}</h3>
                            </div>
                                     

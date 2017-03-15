@@ -28,8 +28,8 @@ class AdminController extends Controller
   public function adminHome(){
 
 
-     $adminProfile = DB::table('admin_users')->where('id',session('id'))->first();  
-     $admin_newsfeed = DB::table('admin_news_feeds')
+    $adminProfile = DB::table('admin_users')->where('id',session('id'))->first(); 
+    $admin_newsfeed = DB::table('admin_news_feeds')
                 ->where('user_id', session('id'))
                 ->orderBy('id', 'desc')
                 ->get();
@@ -116,6 +116,8 @@ class AdminController extends Controller
                      'area' => 'ADMIN',
                      'status' => 'ACTIVE'
                   ])->first();                 
+
+
 
              return view('admin.jobs')
                 ->with("jobList",$jobList)
@@ -213,7 +215,7 @@ class AdminController extends Controller
                   $fileName = rand(11111,99999).'.'.$extension; // renameing image
                   Input::file('logo')->move($destinationPath, $fileName); // uploading file to given path
                      // sending back with message
-                     $inputJob_id = "0";
+                     $inputJob_id = rand(11111,99999);
                      $inputUser_id = "0";
                      $inputCompany_Name =  Input::get('company_name');
                      $inputCompany_Address  =  Input::get('company_address');
@@ -225,8 +227,8 @@ class AdminController extends Controller
                      $inputDate = date('Y-m-d');
             
 
-                  $getLastId = DB::table('job')->insertGetId([
-                            'job_id' => "0",
+                 $getLastId = DB::table('job')->insertGetId([
+                            'job_id' => $inputJob_id,
                             'user_id' => "0",
                             'company_name' => $inputCompany_Name,
                             'company_address' => $inputCompany_Address,
@@ -245,14 +247,13 @@ class AdminController extends Controller
                       'date'=> $inputDate
                  ]);
 
-                 
 
                   $userList = DB::table('users')->orderBy('name', 'desc')->get();
 
                   foreach ($userList as $users ) {
                   
              
-                      DB::table('dashboard_timeline')->insert([
+                     DB::table('dashboard_timeline')->insert([
                           'user_id' => $users->id,
                           'category' => "Job",
                           'category_id' =>  $getLastId,
@@ -266,12 +267,9 @@ class AdminController extends Controller
                           'category_id' => $getLastId,
                           'status' => "PENDING",
                           'date'=> $inputDate
-                     ]); 
-
-
+                     ]);
 
                   }
-
 
 
 
@@ -302,8 +300,8 @@ class AdminController extends Controller
              $inputCompany_Jobtitle  =  Input::get('company_jobtitle');
              $inputCompany_Details  =  Input::get('company_details');
              $inputCompany_Rate  =  Input::get('company_rate');
-              $inputJob_Description = Input::get('job_description');
-            $inputDate = date('Y-m-d');
+             $inputJob_Description = Input::get('job_description');
+             $inputDate = date('Y-m-d');
 
 
 
@@ -324,6 +322,9 @@ class AdminController extends Controller
                       'date'=> $inputDate
                 ]);
 
+                  
+
+                  
               //Session::flash('success', 'Upload successfully'); 
               return back();
 
@@ -355,7 +356,6 @@ class AdminController extends Controller
                      $inputCompany_Picture  =  $fileName;
                      $inputCompany_Details  =  Input::get('company_details');
                      $inputCompany_Rate  =  Input::get('company_rate');
-                     $inputJob_Description = Input::get('job_description');
                      $inputDate = date('Y-m-d');
 
 
@@ -369,7 +369,6 @@ class AdminController extends Controller
                             'company_picture' => $inputCompany_Picture,
                             'company_details' => $inputCompany_Details,
                             'company_rate' => $inputCompany_Rate,
-                             'company_status' => $inputJob_Description,
                       ));  
 
                   DB::table('admin_news_feeds')->insert([
@@ -408,8 +407,9 @@ public function deleteJobs($id){
         $jobs = DB::table('job')->where('id',$job_id)->first(); 
 
 
-        DB::table('job')
-                ->where('id',$job_id)->delete();
+
+        // DB::table('job')
+        //         ->where('id',$job_id)->delete();
 
 
         DB::table('admin_news_feeds')->insert([
@@ -418,19 +418,18 @@ public function deleteJobs($id){
                  'date'=> $inputDate
          ]);                 
 
-               $userList = DB::table('users')->orderBy('id', 'desc')->get();
+        // $userList = DB::table('users')->orderBy('id', 'desc')->get();
 
-                 foreach ($userList as $users ) {
+        //          foreach ($userList as $users ) {
                   
-                 DB::table('dashboard_timeline')->where([
-                     'category_id' => $job_id,
-                  ])->delete();  
+        //           DB::table('dashboard_timeline')->where([
+        //              'category_id' => $job_id,
+        //           ])->delete();  
 
-                 }
+        //         }
 
 
-       // DB::table('dashboard_timeline')->delete();
-        
+        //DB::table('dashboard_timeline')->delete();
 
         return back();
 
@@ -1212,24 +1211,6 @@ public function deleteJobs($id){
 
 
   }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

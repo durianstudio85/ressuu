@@ -237,23 +237,122 @@
  
 <content class="col-sm-12 col-md-9 hpage"> 
 
- <?php  if(empty($userAds)){ ?>
+ <?php // if(empty($userAds)){ ?>
 
-  <a href="#" target="_blank"> 
+  <!-- <a href="#" target="_blank"> 
     <section class="col-xs-12 col-md-12 content-header ads-bg" style="background:url('../ads/default-ads.png')">
       <div class="col-xs-12 col-md-12 content-people-wrap "></div>
     </section>
-  </a>
+  </a> -->
 
-<?php }else{ ?> 
+<?php //}else{ ?> 
 
-  <a href="<?php echo $userAds->link; ?>" target="_blank"> 
-    <section class="col-xs-12 col-md-12 content-header ads-bg" style="background:url('../ads/<?php echo $userAds->photo; ?>')">
+  <!-- <a href="<?php //echo $userAds->link; ?>" target="_blank"> 
+    <section class="col-xs-12 col-md-12 content-header ads-bg" style="background:url('../ads/<?php //echo $userAds->photo; ?>')">
       <div class="col-xs-12 col-md-12 content-people-wrap "> </div>
     </section>
-  </a>
+  </a> -->
 
-<?php } ?> 
+<?php //} ?> 
+
+<section class="col-md-12 content-header">
+  
+    <div class="col-md-12">
+      <h3>People You May Know</h3>     
+    </div>
+
+    <div class="col-md-12">
+    
+    <?php if(!empty($check_followed_user)){ ?> 
+    <?php 
+        $followed_user = DB::table('connection_requests')->where(['from_user_id'=>Auth::id(),'status'=>"ACCEPT"])->take(1)->first();
+        $check_followed_profile = DB::table('profiles')->where('user_id',$followed_user->to_user_id)->first();
+     ?>   
+          <?php //if($check_followed_profile == 0){ ?>
+
+                <div class="col-md-4 content-profile-people"> 
+                        <div class="col-md-5 people-img">
+                            <img class="profile-pic" src="profilepic/{{ $check_followed_profile->profile_picture }}"> 
+                        </div>
+                        <div class="col-md-7 people-status">
+                             <p class="people-name">{{ $check_followed_profile->name }}</p>
+                             <p class="people-subname">{{ $check_followed_profile->position }}</p>
+                            
+                              <button class="following">Followed</button>
+                      
+                        </div>                          
+                  </div>
+
+          <?php //} ?>      
+            
+    <?php } ?>        
+      
+    <?php foreach ($follow_list as $value) { ?>
+
+    <?php if($value->id != Auth::id() ){ ?>
+
+
+   
+    <?php $check_follow_user = DB::table('users')->where('id',$value->id)->first(); ?>  
+    <?php $follow_profile_exists = DB::table('profiles')->where('user_id',$value->id)->count(); ?>
+    <?php $check_follow_profile = DB::table('profiles')->where('user_id',$value->id)->first(); ?>
+
+    <?php $checkifFollowed = DB::table('connection_requests')->where(['from_user_id' =>Auth::id(),'to_user_id'=>$value->id])->count(); ?>
+
+      <?php if($checkifFollowed == 0){ ?>
+
+              <div class="col-md-4 content-profile-people"> 
+                    <div class="col-md-5 people-img">
+                        <?php if($follow_profile_exists == 0 or empty($check_follow_profile->profile_picture) or $check_follow_profile->profile_picture == " " ){ ?>
+                              <img class="profile-pic" src="profilepic/default_avatar.jpg"> 
+                        <?php }else{ ?>
+                          <?php echo $check_follow_profile->profile_picture; ?>
+                              <img class="profile-pic" src="profilepic/<?php echo $check_follow_profile->profile_picture; ?>"> 
+                        <?php } ?>
+                        
+                    </div>
+                    <div class="col-md-7 people-status">
+                    <?php if($follow_profile_exists == 0){ ?>
+                        <p class="people-name">{{ $value->name }}</p>
+                    <?php }else{ ?>
+                        <p class="people-name">{{ $check_follow_profile->name }}</p> 
+                    <?php } ?>
+                         
+                    <?php if($follow_profile_exists == 0){ ?>
+                        <p class="people-subname">Web Master</p>
+                    <?php }else{ ?>
+                         <p class="people-subname">{{ $check_follow_profile->position }}</p> 
+                    <?php } ?>
+                         
+                        <form method="GET" action="" class="" enctype="multipart/form-data" files="true">
+                          {{ csrf_field() }}     
+                              <input type="hidden" value="" name="id">
+                              <input type="hidden" value="{{ csrf_token() }}" name="_token" >
+                              <?php if($checkifFollowed == 0){ ?>
+                                  <button class="follow">Follow</button>
+                              <?php }else{ ?>
+                                  <button class="following">Followed</button>
+                              <?php } ?>
+                             
+                        </form>     
+                    </div>                          
+              </div>
+
+      <?php } ?>
+
+        
+
+
+     <?php } ?>   
+    
+    <?php } ?>
+
+    </div>
+
+</section>
+
+
+
 
 
 

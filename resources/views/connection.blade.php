@@ -274,7 +274,7 @@
   <section role="tabpanel" class="tab-pane fade in active" id="tab1">
   <!---public list -->
        <?php foreach ($user_list as $user_info) { ?>
-        <?php $userId = Auth::id(); ?>
+       <?php $userId = Auth::id(); ?>
        <?php  $if_profile_exist = DB::table('profiles')->where('user_id',$user_info->id)->count(); ?>
        <?php  $profile_info = DB::table('profiles')->where('user_id',$user_info->id)->first(); ?>
        <?php  $setting_info = DB::table('settings')->where('user_id',$user_info->id)->first(); ?>
