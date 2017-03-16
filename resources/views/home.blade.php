@@ -439,7 +439,7 @@
             <div class="col-md-10" >
                       <div class="content-panel-status col-xs-12 col-md-12">   
                             <div class="col-sm-2 div">
-                                <img class="img-responsive job-logo" src="joblogo/<?php echo $jobInfo->company_picture; ?>">
+                                <img class="img-responsive job-logo" src="images/jobicon.png">
                             </div>
                             <div class="col-sm-10 div">
                                   <h4><?php echo $jobInfo->company_name ?></h4>
