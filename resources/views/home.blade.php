@@ -266,13 +266,18 @@
     <?php if(!empty($check_followed_user)){ ?> 
     <?php 
         $followed_user = DB::table('connection_requests')->where(['from_user_id'=>Auth::id(),'status'=>"ACCEPT"])->take(1)->first();
+        $followed_profile_exists = DB::table('profiles')->where('user_id',$followed_user->to_user_id)->count(); 
         $check_followed_profile = DB::table('profiles')->where('user_id',$followed_user->to_user_id)->first();
      ?>   
           <?php //if($check_followed_profile == 0){ ?>
 
                 <div class="col-md-4 content-profile-people"> 
                         <div class="col-md-5 people-img">
-                            <img class="profile-pic" src="profilepic/{{ $check_followed_profile->profile_picture }}"> 
+                         <?php if($followed_profile_exists == 0 or empty($check_followed_profile->profile_picture) or $check_followed_profile->profile_picture == " " ){ ?>
+                                    <img class="profile-pic" src="profilepic/default_avatar.jpg"> 
+                              <?php }else{ ?>
+                                    <img class="profile-pic" src="profilepic/<?php echo $check_followed_profile->profile_picture; ?>"> 
+                          <?php } ?>
                         </div>
                         <div class="col-md-7 people-status">
                              <p class="people-name">{{ $check_followed_profile->name }}</p>
