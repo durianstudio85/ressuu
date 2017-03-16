@@ -119,7 +119,7 @@ class HomeController extends Controller
 
     $follow_list =  DB::table('users')->take(3)->get();
 
-    $follow_list2 = DB::table('users')->take(2)->get();
+    $follow_list2 = DB::table('users')->take(3)->get();
 
 
     //$follow_list =  DB::table('users')->take(2)->get();
