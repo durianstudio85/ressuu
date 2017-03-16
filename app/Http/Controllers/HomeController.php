@@ -12,6 +12,7 @@ use Validator;
 use Redirect;
 use Session;
 use Hybrid_Auth;
+use Mail;
 
 class HomeController extends Controller
 {
@@ -116,7 +117,12 @@ class HomeController extends Controller
                      'status' => 'VIEW'
                   ])->count();
 
-    $follow_list =  DB::table('users')->get();
+    $follow_list =  DB::table('users')->take(3)->get();
+
+    $follow_list2 = DB::table('users')->take(2)->get();
+
+
+    //$follow_list =  DB::table('users')->take(2)->get();
 
     $check_followed_user = DB::table('connection_requests')->where([
                  'from_user_id'=>$userId,'status'=>"ACCEPT"
@@ -148,6 +154,7 @@ class HomeController extends Controller
                 ->with("count_like",$count_like)
                 ->with("count_view",$count_view)
                 ->with("follow_list",$follow_list)
+                ->with("follow_list2",$follow_list2)
                 ->with("check_followed_user",$check_followed_user)
 
 
@@ -496,6 +503,7 @@ class HomeController extends Controller
 
         $count_job = DB::table('job')->count();
 
+
         $no_message = DB::table('message')->where([
                      'user_id' => $userId,
                      'status' => 'PENDING'
@@ -520,7 +528,7 @@ class HomeController extends Controller
                      'status' => 'PENDING'
                   ])->get();
 
-         $job_application = DB::table('applicant')->where('user_id',$userId)->get(); 
+        $job_application = DB::table('applicant')->where('user_id',$userId)->get(); 
 
         $user_notification = DB::table('user_notification')->where([
                      'category_id' => $userId,
@@ -551,6 +559,8 @@ class HomeController extends Controller
                          'status' => 'VIEW'
                       ])->count();
 
+        $count_delete_job = DB::table('job')->where('status',"DELETE")->count();
+
         return view('jobs')
                 ->with("userProfile",$userProfile)
                 ->with("name",$name)
@@ -572,6 +582,7 @@ class HomeController extends Controller
                 ->with("count_connection",$count_connection)
                 ->with("count_like",$count_like)
                 ->with("count_view",$count_view)
+                ->with("count_delete_job",$count_delete_job)
         ;
 
     }
@@ -1445,6 +1456,18 @@ class HomeController extends Controller
         $job_id =  Input::get('job_id');
         $inputDate = date('Y-m-d');
         
+        $profile_exist = DB::table('profiles')->where('user_id',$userId)->count(); 
+        $profiles = DB::table('profiles')->where('user_id',$userId)->first(); 
+        $users = DB::table('users')->where('id',$userId)->first(); 
+
+
+        if($profile_exist == 0){
+            $your_name = $users->name;
+        }else{
+            $your_name = $profiles->name;
+        }
+
+
         $jobInfo = DB::table('job')->where('id',$job_id)->first(); 
 
         $applicantId = DB::table('applicant')->insertGetId([
@@ -1468,6 +1491,29 @@ class HomeController extends Controller
                   ->update(array(
                         'status' => "Delete"
                     ));
+
+
+        $subject_value = "Ressu.Me Job Application";
+        $message_value = "Thank you for applying in ".$jobInfo->company_name." as ".$jobInfo->company_job;
+        
+        $name = "Ressu.me";
+        $email = "ressumejob@gmail.com";
+        $client_email = $profiles->email; 
+       
+        Mail::send('email.sendtoClient',["message_value" => $message_value], function ($message) use($name,$email,$subject_value,$client_email) {
+
+            $message->from($email,$name);
+
+            $message->to($client_email)->subject($subject_value);
+
+        });         
+
+
+
+
+
+
+
 
         return back();
 

@@ -109,20 +109,21 @@ class AdminController extends Controller
 
         $adminProfile = DB::table('admin_users')->where('id',session('id'))->first();
       
-        $jobList = DB::table('job')->orderBy('id', 'desc')
-                    ->get();
+        $jobList = DB::table('job')->orderBy('id', 'desc')->get();
 
         $AdminDashboard_Ads = DB::table('ads')->where([
                      'area' => 'ADMIN',
                      'status' => 'ACTIVE'
                   ])->first();                 
-
+        $number = 0; 
 
 
              return view('admin.jobs')
                 ->with("jobList",$jobList)
                 ->with("adminProfile",$adminProfile)
                 ->with("AdminDashboard_Ads",$AdminDashboard_Ads)
+                ->with("number",$number)
+
 
              ;
 
@@ -403,9 +404,14 @@ public function deleteJobs($id){
 
         $job_id = $id;
         $inputDate = date('Y-m-d');
-
+        $status = "DELETE"; 
         $jobs = DB::table('job')->where('id',$job_id)->first(); 
 
+         DB::table('job')
+                  ->where('id', $job_id)
+                  ->update(array(
+                            'status' => $status, 
+                      ));
 
 
         // DB::table('job')
@@ -1211,6 +1217,24 @@ public function deleteJobs($id){
 
 
   }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

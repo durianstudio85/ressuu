@@ -2525,3 +2525,8 @@ color: #000;
 .cover_wrap{
   
 }
+.job-logo{
+  width:100%;
+  height: 100%;
+  border-radius:50px;
+}

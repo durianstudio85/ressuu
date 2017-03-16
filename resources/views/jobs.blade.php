@@ -248,15 +248,17 @@
 
                     <div class="col-xs-12 col-md-12">
                           <?php  $your_application = DB::table('applicant')->where('user_id',Auth::id())->count(); ?>
+
                         <div class="col-xs-4 col-md-4 content-header-tabs">                        
                            <div class="jobs">
                             <?php $available_job =  $count_job - $your_application ; ?>
-                            <?php if($available_job < 0){ ?>
-                                  <?php $available_job = 0; ?>
+                            <?php $total_job = $available_job - $count_delete_job; ?>
+                            <?php if($total_job < 0){ ?>
+                                  <?php $total_job = 0; ?>
                             <?php }else{ ?>
-                                   <?php $available_job = $available_job; ?>
+                                   <?php $total_job = $total_job; ?>
                             <?php } ?>
-                             <h4><?php echo $available_job; ?></h4>
+                             <h4><?php echo $total_job; ?></h4>
                              <p>Jobs Available</p>
                              <button class="view" data-toggle="modal" data-target="#viewAvailable">View</button>
                            </div>
@@ -268,13 +270,23 @@
                              <p>In your location</p>
                              <button class="views">View</button>
                            </div>                        
-                           
 
                         </div>
                         <div class="col-xs-4 col-md-4 content-header-tabs">   
                         <div class="jobs">
-                           
-                             <h4><?php echo $your_application; ?></h4>
+                          <?php $n=0;?>
+                             <?php foreach ($job_application as $value) { ?>
+
+                                <?php $jobInfo = DB::table('job')->where('id',$value->job_id)->first(); ?>
+
+                                <?php if($jobInfo->status != "DELETE"){ ?> 
+                                          <?php $n++;  ?>
+                                <?php  } ?>   
+
+
+                             <?php  } ?>
+
+                             <h4><?php //echo $your_application;?> <?php echo $n; ?></h4>
                              <p>Your Application</p>
                              <button class="views" data-toggle="modal" data-target="#viewApplication" >View</button>
                           </div>                     
@@ -291,6 +303,7 @@
 <?php foreach ($userJobs as $jobs) { ?>
 
 
+ <?php if($jobs->status != "DELETE"){ ?> 
 
           <div class="col-xs-12 col-md-12 content-panel-header">
               
@@ -405,7 +418,7 @@
 
                                       </section>
                   <!-- Modal for apply Job -->
-
+   <?php } ?>
 
 <?php } ?>
 
@@ -692,13 +705,21 @@
                                   <div class="col-md-3"><h4></h4></div>
                               </div>
                              <?php foreach ($job_application as $value) { ?>
+
                                 <?php $jobInfo = DB::table('job')->where('id',$value->job_id)->first(); ?>
+
+                                <?php if($jobInfo->status != "DELETE"){ ?> 
+                                     
                                   <div class="col-md-12" style="margin:0px 0px 10px 0px;">
                                     <div class="col-md-2"><img src="joblogo/{{ $jobInfo->company_picture }}" class="img-responsive"></div>
                                     <div class="col-md-4"><h5>{{ $jobInfo->company_name }}</h5></div>
                                     <div class="col-md-3"><h5>{{ $jobInfo->company_job }}</h5></div>
                                     <div class="col-md-3"><h5></h5></div>
                                   </div>
+
+                                <?php  } ?>   
+
+
                              <?php  } ?>
 
                            <input type="hidden" value="{{ csrf_token() }}" name="_token" >
@@ -737,6 +758,10 @@
                                   <div class="col-md-3"><h4></h4></div>
                               </div>
                              <?php foreach ($userJobs as $value) { ?>
+
+                              <?php if($value->status != "DELETE"){ ?> 
+
+
                                 <?php $available_job = DB::table('applicant')->where(['user_id' =>Auth::id() ,'job_id' => $value->id])->count(); ?>
 
                                   <?php if($available_job == 0){ ?> 
@@ -749,6 +774,7 @@
                                   <?php } ?>
                              <?php  } ?>
 
+                             <?php } ?>
                            <input type="hidden" value="{{ csrf_token() }}" name="_token" >
                         <div class="modal-footer">
                              <button class="btn btn-default" data-dismiss="modal">Close</button> 
