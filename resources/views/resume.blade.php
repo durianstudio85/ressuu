@@ -26,48 +26,106 @@
         </div>
         <div id="navbar" class="navbar-collapse collapse">
         <!-- <div id="navbar" class=""> -->
-        <nav class="col-md-3 col-sm-12 navicon">
+<nav class="col-md-3 col-sm-12 navicon">
               <ul>
+                <li class="dropdown">
+                 <!----> 
+                  <?php if($user_notification == 0){ ?>
+                     <span class="glyphicon glyphicon-user dropdown-toggle"></span>                         
+                  <?php }else { ?> 
+                      <span class="glyphicon glyphicon-user naviconactive dropdown-toggle" data-toggle="dropdown"><span class="badge">
+                  <?php  echo $user_notification;?></span></span>
+                      <ul class="dropdown-menu drop-message">
+                      <?php foreach ($user_list_notification as $user_value) { ?>
+                          <?php $checkProfile = DB::table('profiles')->where('user_id',$user_value->user_id)->count(); ?> 
+                          <?php $profileInfo = DB::table('profiles')->where('user_id',$user_value->user_id)->first(); ?>
+                          <?php $userInfo = DB::table('users')->where('id',$user_value->user_id)->first(); ?>
+                        
+                            <li>
+                              <a href="" data-toggle="modal" data-target="#checkusernotification_{{ $user_value->id }}">
+                                 <?php if($checkProfile == 0 or empty($profileInfo->profile_picture) or $profileInfo->profile_picture == " "){ ?>
+                                       <img class="img-responsive notification-img" src="profilepic/default_avatar.jpg">
+                                 <?php }else{ ?> 
+                                        <img class="img-responsive notification-img" src="profilepic/{{ $profileInfo->profile_picture }}">
+                                 <?php } ?>
+                                <?php if($checkProfile == 0){ ?>
+                                     <span class="title"><?php echo $userInfo->name; ?> followed you</span><br>
+                                <?php }else{ ?> 
+                                     <span class="title"><?php echo $profileInfo->name; ?> followed you</span><br>
+                                <?php } ?> 
+                                 
+                                  <span class="glyphicon glyphicon-calendar calendar-icon"></span>
+                                  <span class="date">
+                                  <?php
+                                        if(!empty($user_value->date)){
+                                         
+                                           $value_date = date("Y-m-d", strtotime( $user_value->date ) );
+                                           $from=date_create(date('Y-m-d'));
+                                           $to=date_create($value_date);
+                                           $diff=date_diff($to,$from);
+                                           $days_diff = $diff->format('%a');
+
+                                           if($days_diff == "0"){
+                                            echo "Just now";
+                                           }else{
+                                            echo $diff->format('%a Days Ago');
+                                           }
+                                        }
+
+                                 ?>
+                                 
+                               </span>
+
+                              </a>
+                            </li>
+
+                      <?php } ?>
+                     </ul>
+                  <?php } ?>
+                  <!---->
+                </li>
                   <li class="dropdown">
                    <!----> 
-                    <?php if($user_notification == 0){ ?>
-                       <span class="glyphicon glyphicon-user dropdown-toggle"></span>                         
-                    <?php }else { ?> 
-                        <span class="glyphicon glyphicon-user naviconactive dropdown-toggle" data-toggle="dropdown"><span class="badge">
-                    <?php  echo $user_notification;?></span></span>
-                        <ul class="dropdown-menu drop-message">
-                        <?php foreach ($user_list_notification as $user_value) { ?>
-                            <?php $checkProfile = DB::table('profiles')->where('user_id',$user_value->user_id)->count(); ?> 
-                            <?php $profileInfo = DB::table('profiles')->where('user_id',$user_value->user_id)->first(); ?>
-                            <?php $userInfo = DB::table('users')->where('id',$user_value->user_id)->first(); ?>
-                            <?php if($checkProfile == 0){ ?> 
-                              <li><a href="" data-toggle="modal" data-target="#checkusernotification_{{ $user_value->id }}"><span><?php echo $userInfo->name; ?> followed you</span></a></li>
-                            <?php }else{ ?> 
-                              <li><a href="" data-toggle="modal" data-target="#checkusernotification_{{ $user_value->id }}"><span><?php echo $profileInfo->name; ?> followed you</span></a></li>
-                            <?php } ?>
-                            
-                        <?php } ?>
-                       </ul>
-                    <?php } ?>
-                    <!---->
-                  </li>
-                  <li class="dropdown">
-                   <!----> 
-                   <?php if($no_message == 0){ ?>
+                    <?php if($no_message == 0){ ?>
                        <span class="glyphicon glyphicon-comment dropdown-toggle"></span>                         
                     <?php }else { ?> 
                         <span class="glyphicon glyphicon-comment naviconactive dropdown-toggle" data-toggle="dropdown"><span class="badge">
                       <?php  echo $no_message;?></span></span>
                         <ul class="dropdown-menu drop-message">
                         <?php foreach ($list_message as $message_value) { ?>
-                            <li><a href="" data-toggle="modal" data-target="#checkmessage_{{ $message_value->id }}"><span>Message from {{ $message_value->name }}</span></a></li>
+                            <li>
+                                <a href="" data-toggle="modal" data-target="#checkmessage_{{ $message_value->id }}">
+                                   <img class="img-responsive notification-img" src="images/messenger_icon.png">
+                                   <span class="title">Message from {{ $message_value->name }}</span><br>
+                                   <span class="glyphicon glyphicon-calendar calendar-icon"></span>
+                                   <span class="date">
+                                      <?php
+                                            if(!empty($message_value->date)){
+                                             
+                                               $value_date = date("Y-m-d", strtotime( $message_value->date ) );
+                                               $from=date_create(date('Y-m-d'));
+                                               $to=date_create($value_date);
+                                               $diff=date_diff($to,$from);
+                                               $days_diff = $diff->format('%a');
+
+                                               if($days_diff == "0"){
+                                                echo "Just now";
+                                               }else{
+                                                echo $diff->format('%a Days Ago');
+                                               }
+                                            }
+
+                                     ?>
+                                    </span>
+                                </a>
+                            </li>
                         <?php } ?>
                        </ul>
                     <?php } ?>
+                    <!---->
                   </li>
-                   <!---->
                    <li class="dropdown">
-                    <!----> 
+                   <!----> 
                     <?php if($job_notification == 0){ ?>
                        <span class="glyphicon glyphicon-briefcase dropdown-toggle"></span>                         
                     <?php }else { ?> 
@@ -76,12 +134,37 @@
                         <ul class="dropdown-menu drop-message">
                         <?php foreach ($job_list_notification as $job_value) { ?>
                           <?php  $jobInfo = DB::table('job')->where('id',$job_value->category_id)->first();    ?>
-                            <li><a href="" data-toggle="modal" data-target="#checkjobnotification_{{ $job_value->category_id }}"><span>New job post from <?php echo $jobInfo->company_name; ?></span></a></li>
+                             <li>
+                                <a href="" data-toggle="modal" data-target="#checkjobnotification_{{ $job_value->category_id }}">
+                                   <img class="img-responsive notification-img" src="images/jobicon.png">
+                                   <span class="title">New job post from <?php echo $jobInfo->company_name; ?></span><br>
+                                   <span class="glyphicon glyphicon-calendar calendar-icon"></span>
+                                   <span class="date">
+                                      <?php
+                                            if(!empty($message_value->date)){
+                                             
+                                               $value_date = date("Y-m-d", strtotime( $message_value->date ) );
+                                               $from=date_create(date('Y-m-d'));
+                                               $to=date_create($value_date);
+                                               $diff=date_diff($to,$from);
+                                               $days_diff = $diff->format('%a');
+
+                                               if($days_diff == "0"){
+                                                echo "Just now";
+                                               }else{
+                                                echo $diff->format('%a Days Ago');
+                                               }
+                                            }
+                                     ?>
+                                    </span>
+                                </a>
+                            </li>
+                            
                         <?php } ?>
                        </ul>
                     <?php } ?>
                     <!---->
-                  </li> 
+                  </li>  
               </ul>
         </nav>
         <div class="col-md-4 col-sm-12">
@@ -1410,18 +1493,11 @@
                                       <h5><i>Email:&nbsp;&nbsp;{{ $profileInfo->email }}</i></h5>
                                 <?php }?>
 
-                                <!-- Bio -->
-                                <?php if($checkprofile == 0){ ?>
-                                       <p><i>Not Set</i></p>
-                                <?php }else{ ?> 
-                                      <p><i>{{ $profileInfo->bio }}</i></p>
-                                <?php }?> 
-
                                 <!-- Cv Link -->
                                 <?php if($checksettings == 0){ ?>
-                                      <h5><i>CV Link:&nbsp;&nbsp; Not Set</i></h5>
+                                      <h5><i>Not Set</i></h5>
                                 <?php }else{ ?> 
-                                      <h5><i>CV Link:&nbsp;&nbsp;<a href="#">https://ressuu.me/cv/{{ $settingInfo->permalink }}</a></i></h5>
+                                      <h5><i><a href="#">https://ressuu.me/cv/{{ $settingInfo->permalink }}</a></i></h5>
                                 <?php }?>
                                </div> 
 

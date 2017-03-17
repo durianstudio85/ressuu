@@ -135,29 +135,33 @@ Route::post('/ads/updateAds/settings', 'AdminController@adsUpdateUserSettings');
 Route::post('/ads/addAds/adminAds', 'AdminController@adsNewAdmin');
 Route::post('/ads/updateAds/adminAds', 'AdminController@adsUpdateAdmin');
 
-
-
 /* message */
+
 Route::post('/message/send', 'MessageController@messageSend');
 
 Route::post('/message/sendtoClient', 'MessageController@messageSendtoClient');
 
 Route::post('/message/delete', 'MessageController@messageDelete');
 
-
 /* users */
 
 Route::get('/follow/users/{id}', 'HomeController@follow_users');
 Route::post('/follow/deleteUserNotification', 'HomeController@deleteUserNotification');
-
 
 Route::get('/follow/accept/{id}', 'HomeController@acceptFollower');
 Route::get('/follow/remove/{id}', 'HomeController@removeFollower');
 Route::get('/follow/decline/{id}', 'HomeController@declineFollower');
 Route::get('/unfollow/users/{id}', 'HomeController@unFollowUsers');
 
-
 Route::get('/like/users/{id}', 'HomeController@likeUsersCV');
+Route::get('/view/users/{id}', 'HomeController@viewUsersCV');
+
+Route::post('/portfolio/updateCoverPhoto/', 'HomeController@updateCoverPhoto');
+
+Route::get('/cancel/application/{id}', 'HomeController@cancelApplication');
+
+
+
 
 
 

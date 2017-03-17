@@ -57,7 +57,7 @@ class MessageController extends Controller
     $list_message = DB::table('message')->where([
                      'user_id' => $userId,
                      'status' => 'PENDING'
-                  ])->get(); 
+                  ])->orderBy('id', 'desc')->get();  
 
     $list_job = DB::table('job')->get();
 
@@ -71,9 +71,9 @@ class MessageController extends Controller
                      'user_id' => $userId,
                      'category' => 'Job',
                      'status' => 'PENDING'
-                  ])->get();
+                  ])->orderBy('id', 'desc')->get(); 
 
-    $user_notification = DB::table('user_notification')->where([
+     $user_notification = DB::table('user_notification')->where([
                      'category_id' => $userId,
                      'category' => 'Followed',
                      'status' => 'PENDING'
@@ -83,11 +83,11 @@ class MessageController extends Controller
                          'category_id' => $userId,
                          'category' => 'Followed',
                          'status' => 'PENDING'
-                      ])->get();
+                      ])->orderBy('id', 'desc')->get(); 
 
     $user_list =  DB::table('users')->get();
 
-     $count_connection = DB::table('connection_requests')->where([
+    $count_connection = DB::table('connection_requests')->where([
                      'to_user_id' => $userId,
                      'status' => 'ACCEPT'
                   ])->count();
@@ -101,7 +101,6 @@ class MessageController extends Controller
                          'to_user_id' => $userId,
                          'status' => 'VIEW'
                       ])->count();
-
 
         return view('message')
                 ->with("userProfile",$userProfile)
@@ -125,13 +124,14 @@ class MessageController extends Controller
                 ->with("count_connection",$count_connection)
                 ->with("count_like",$count_like)
                 ->with("count_view",$count_view)
+
+
        ;
    
 
     }
 
 
-    
     public function messageSend(){
 
         $userId = Input::get('id');
@@ -168,12 +168,13 @@ class MessageController extends Controller
         $user_id = Auth::id();
         $subject_value = Input::get('sender_subject');
         $message_value = Input::get('sender_message');
-        $client_email = 'ocojcastro@gmail.com';
+        
 
         $userProfile = DB::table('profiles')->where('user_id',$user_id)->first();
         $message_data = DB::table('message')->where('id',$user)->first();
         $name = $userProfile->name;
         $email = $userProfile->email;
+        $client_email =  $message_data->email;    
        
         Mail::send('email.sendtoClient',["message_value" => $message_value], function ($message) use($name,$email,$subject_value,$client_email) {
 

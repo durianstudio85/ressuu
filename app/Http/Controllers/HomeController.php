@@ -70,7 +70,7 @@ class HomeController extends Controller
     $list_message = DB::table('message')->where([
                      'user_id' => $userId,
                      'status' => 'PENDING'
-                  ])->get(); 
+                  ])->orderBy('id', 'desc')->get(); 
 
     $count_job = DB::table('job')->count();          
 
@@ -86,7 +86,7 @@ class HomeController extends Controller
                      'user_id' => $userId,
                      'category' => 'Job',
                      'status' => 'PENDING'
-                  ])->get();
+                  ])->orderBy('id', 'desc')->get();
 
     $user_notification = DB::table('user_notification')->where([
                      'category_id' => $userId,
@@ -98,7 +98,7 @@ class HomeController extends Controller
                      'category_id' => $userId,
                      'category' => 'Followed',
                      'status' => 'PENDING'
-                  ])->get();
+                  ])->orderBy('id', 'desc')->get();
 
     $user_list =  DB::table('users')->get();
       
@@ -117,7 +117,7 @@ class HomeController extends Controller
                      'status' => 'VIEW'
                   ])->count();
 
-    $follow_list =  DB::table('users')->take(3)->get();
+    $follow_list =  DB::table('users')->orderByRaw("RAND()")->take(3)->get();
 
     $follow_list2 = DB::table('users')->take(3)->get();
 
@@ -126,7 +126,10 @@ class HomeController extends Controller
 
     $check_followed_user = DB::table('connection_requests')->where([
                  'from_user_id'=>$userId,'status'=>"ACCEPT"
-                 ])->count(); 
+                 ])->count();
+
+
+
 
         return view('home')
                 ->with("userProfile",$userProfile)
@@ -187,7 +190,7 @@ class HomeController extends Controller
     $list_message = DB::table('message')->where([
                      'user_id' => $userId,
                      'status' => 'PENDING'
-                  ])->get();
+                  ])->orderBy('id', 'desc')->get(); 
     
     $list_job = DB::table('job')->get();
 
@@ -201,7 +204,7 @@ class HomeController extends Controller
                      'user_id' => $userId,
                      'category' => 'Job',
                      'status' => 'PENDING'
-                  ])->get();  
+                  ])->orderBy('id', 'desc')->get();   
 
     $user_notification = DB::table('user_notification')->where([
                      'category_id' => $userId,
@@ -213,7 +216,7 @@ class HomeController extends Controller
                      'category_id' => $userId,
                      'category' => 'Followed',
                      'status' => 'PENDING'
-                  ])->get();
+                  ])->orderBy('id', 'desc')->get(); 
 
     $user_list =  DB::table('users')->get(); 
 
@@ -300,7 +303,7 @@ class HomeController extends Controller
     $list_message = DB::table('message')->where([
                      'user_id' => $userId,
                      'status' => 'PENDING'
-                  ])->get();
+                  ])->orderBy('id', 'desc')->get(); 
 
     $list_job = DB::table('job')->get();
 
@@ -315,7 +318,7 @@ class HomeController extends Controller
                      'user_id' => $userId,
                      'category' => 'Job',
                      'status' => 'PENDING'
-                  ])->get();  
+                  ])->orderBy('id', 'desc')->get();   
 
     $user_notification = DB::table('user_notification')->where([
                      'category_id' => $userId,
@@ -327,7 +330,7 @@ class HomeController extends Controller
                      'category_id' => $userId,
                      'category' => 'Followed',
                      'status' => 'PENDING'
-                  ])->get();
+                  ])->orderBy('id', 'desc')->get(); 
 
     $user_list =  DB::table('users')->get();
 
@@ -405,7 +408,7 @@ class HomeController extends Controller
     $list_message = DB::table('message')->where([
                      'user_id' => $userId,
                      'status' => 'PENDING'
-                  ])->get(); 
+                  ])->orderBy('id', 'desc')->get();  
     $list_job = DB::table('job')->get();
 
     $job_notification =  DB::table('user_notification')->where([
@@ -418,7 +421,7 @@ class HomeController extends Controller
                      'user_id' => $userId,
                      'category' => 'Job',
                      'status' => 'PENDING'
-                  ])->get();
+                  ])->orderBy('id', 'desc')->get(); 
 
     $user_notification = DB::table('user_notification')->where([
                      'category_id' => $userId,
@@ -430,7 +433,7 @@ class HomeController extends Controller
                      'category_id' => $userId,
                      'category' => 'Followed',
                      'status' => 'PENDING'
-                  ])->get();
+                  ])->orderBy('id', 'desc')->get(); 
 
     $user_list =  DB::table('users')->get();
 
@@ -512,7 +515,7 @@ class HomeController extends Controller
         $list_message = DB::table('message')->where([
                      'user_id' => $userId,
                      'status' => 'PENDING'
-                  ])->get(); 
+                  ])->orderBy('id', 'desc')->get(); 
 
         $list_job = DB::table('job')->get();
 
@@ -526,7 +529,7 @@ class HomeController extends Controller
                      'user_id' => $userId,
                      'category' => 'Job',
                      'status' => 'PENDING'
-                  ])->get();
+                  ])->orderBy('id', 'desc')->get(); 
 
         $job_application = DB::table('applicant')->where('user_id',$userId)->get(); 
 
@@ -540,7 +543,7 @@ class HomeController extends Controller
                          'category_id' => $userId,
                          'category' => 'Followed',
                          'status' => 'PENDING'
-                      ])->get();
+                      ])->orderBy('id', 'desc')->get(); 
 
         $user_list =  DB::table('users')->get();
 
@@ -630,7 +633,7 @@ class HomeController extends Controller
         $list_message = DB::table('message')->where([
                      'user_id' => $userId,
                      'status' => 'PENDING'
-                  ])->get(); 
+                  ])->orderBy('id', 'desc')->get();  
         
         $list_job = DB::table('job')->get();
 
@@ -644,7 +647,7 @@ class HomeController extends Controller
                      'user_id' => $userId,
                      'category' => 'Job',
                      'status' => 'PENDING'
-                  ])->get();
+                  ])->orderBy('id', 'desc')->get(); 
 
         $user_notification = DB::table('user_notification')->where([
                      'category_id' => $userId,
@@ -656,7 +659,7 @@ class HomeController extends Controller
                          'category_id' => $userId,
                          'category' => 'Followed',
                          'status' => 'PENDING'
-                      ])->get();
+                      ])->orderBy('id', 'desc')->get(); 
 
         $user_list =  DB::table('users')->get();
 
@@ -1572,6 +1575,55 @@ class HomeController extends Controller
 
     }
 
+    public function cancelApplication($id){
+
+        $getUserId = Auth::id();
+        $getApplicationID = $id;
+        $status = "CANCEL";
+        $inputDate = date('Y-m-d');
+
+        $application_info = DB::table('applicant')->where('id',$getApplicationID)->first();
+        $jobInfo = DB::table('job')->where('id',$application_info->job_id)->first();
+
+
+        DB::table('dashboard_timeline')->insert([
+                           'user_id' => $getUserId,
+                           'category' => "Cancel Application",
+                           'category_id' => $getApplicationID,
+                           'activity' =>  "Cancel the application in ".$jobInfo->company_name." as ".$jobInfo->company_job,
+                           'date'=> $inputDate
+        ]);
+
+
+        DB::table('applicant')
+                  ->where('id', $getApplicationID)
+                  ->update(array(
+                        'status' => $status
+                    ));
+                  
+        return back();          
+
+         
+
+
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
      public function deleteJobNotification($id){
 
@@ -1714,7 +1766,7 @@ class HomeController extends Controller
     $list_message = DB::table('message')->where([
                      'user_id' => $userId,
                      'status' => 'PENDING'
-                  ])->get(); 
+                  ])->orderBy('id', 'desc')->get();  
 
     $count_job = DB::table('job')->count();          
 
@@ -1730,7 +1782,7 @@ class HomeController extends Controller
                      'user_id' => $userId,
                      'category' => 'Job',
                      'status' => 'PENDING'
-                  ])->get();  
+                  ])->orderBy('id', 'desc')->get();   
 
     $user_notification = DB::table('user_notification')->where([
                      'category_id' => $userId,
@@ -1742,7 +1794,7 @@ class HomeController extends Controller
                      'category_id' => $userId,
                      'category' => 'Followed',
                      'status' => 'PENDING'
-                  ])->get();
+                  ])->orderBy('id', 'desc')->get(); 
 
     $user_list =  DB::table('users')->get(); 
 
@@ -2076,16 +2128,6 @@ class HomeController extends Controller
 
     }
 
-
-
-
-
-
-
-
-
-
-
     public function updateCoverPhoto(){
 
         // getting all of the post data
@@ -2170,8 +2212,7 @@ class HomeController extends Controller
 
 
 
-
-
+  
 
 
 

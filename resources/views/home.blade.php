@@ -26,29 +26,62 @@
         <!-- <div id="navbar" class=""> -->
         <nav class="col-md-3 col-sm-12 navicon">
               <ul>
-                  <li class="dropdown">
-                   <!----> 
-                    <?php if($user_notification == 0){ ?>
-                       <span class="glyphicon glyphicon-user dropdown-toggle"></span>                         
-                    <?php }else { ?> 
-                        <span class="glyphicon glyphicon-user naviconactive dropdown-toggle" data-toggle="dropdown"><span class="badge">
-                    <?php  echo $user_notification;?></span></span>
-                        <ul class="dropdown-menu drop-message">
-                        <?php foreach ($user_list_notification as $user_value) { ?>
-                            <?php $checkProfile = DB::table('profiles')->where('user_id',$user_value->user_id)->count(); ?> 
-                            <?php $profileInfo = DB::table('profiles')->where('user_id',$user_value->user_id)->first(); ?>
-                            <?php $userInfo = DB::table('users')->where('id',$user_value->user_id)->first(); ?>
-                            <?php if($checkProfile == 0){ ?> 
-                              <li><a href="" data-toggle="modal" data-target="#checkusernotification_{{ $user_value->id }}"><span><?php echo $userInfo->name; ?> followed you</span></a></li>
-                            <?php }else{ ?> 
-                              <li><a href="" data-toggle="modal" data-target="#checkusernotification_{{ $user_value->id }}"><span><?php echo $profileInfo->name; ?> followed you</span></a></li>
-                            <?php } ?>
-                            
-                        <?php } ?>
-                       </ul>
-                    <?php } ?>
-                    <!---->
-                  </li>
+                <li class="dropdown">
+                 <!----> 
+                  <?php if($user_notification == 0){ ?>
+                     <span class="glyphicon glyphicon-user dropdown-toggle"></span>                         
+                  <?php }else { ?> 
+                      <span class="glyphicon glyphicon-user naviconactive dropdown-toggle" data-toggle="dropdown"><span class="badge">
+                  <?php  echo $user_notification;?></span></span>
+                      <ul class="dropdown-menu drop-message">
+                      <?php foreach ($user_list_notification as $user_value) { ?>
+                          <?php $checkProfile = DB::table('profiles')->where('user_id',$user_value->user_id)->count(); ?> 
+                          <?php $profileInfo = DB::table('profiles')->where('user_id',$user_value->user_id)->first(); ?>
+                          <?php $userInfo = DB::table('users')->where('id',$user_value->user_id)->first(); ?>
+                        
+                            <li>
+                              <a href="" data-toggle="modal" data-target="#checkusernotification_{{ $user_value->id }}">
+                                 <?php if($checkProfile == 0 or empty($profileInfo->profile_picture) or $profileInfo->profile_picture == " "){ ?>
+                                       <img class="img-responsive notification-img" src="profilepic/default_avatar.jpg">
+                                 <?php }else{ ?> 
+                                        <img class="img-responsive notification-img" src="profilepic/{{ $profileInfo->profile_picture }}">
+                                 <?php } ?>
+                                <?php if($checkProfile == 0){ ?>
+                                     <span class="title"><?php echo $userInfo->name; ?> followed you</span><br>
+                                <?php }else{ ?> 
+                                     <span class="title"><?php echo $profileInfo->name; ?> followed you</span><br>
+                                <?php } ?> 
+                                 
+                                  <span class="glyphicon glyphicon-calendar calendar-icon"></span>
+                                  <span class="date">
+                                  <?php
+                                        if(!empty($user_value->date)){
+                                         
+                                           $value_date = date("Y-m-d", strtotime( $user_value->date ) );
+                                           $from=date_create(date('Y-m-d'));
+                                           $to=date_create($value_date);
+                                           $diff=date_diff($to,$from);
+                                           $days_diff = $diff->format('%a');
+
+                                           if($days_diff == "0"){
+                                            echo "Just now";
+                                           }else{
+                                            echo $diff->format('%a Days Ago');
+                                           }
+                                        }
+
+                                 ?>
+                                 
+                               </span>
+
+                              </a>
+                            </li>
+
+                      <?php } ?>
+                     </ul>
+                  <?php } ?>
+                  <!---->
+                </li>
                   <li class="dropdown">
                    <!----> 
                     <?php if($no_message == 0){ ?>
@@ -58,7 +91,32 @@
                       <?php  echo $no_message;?></span></span>
                         <ul class="dropdown-menu drop-message">
                         <?php foreach ($list_message as $message_value) { ?>
-                            <li><a href="" data-toggle="modal" data-target="#checkmessage_{{ $message_value->id }}"><span>Message from {{ $message_value->name }}</span></a></li>
+                            <li>
+                                <a href="" data-toggle="modal" data-target="#checkmessage_{{ $message_value->id }}">
+                                   <img class="img-responsive notification-img" src="images/messenger_icon.png">
+                                   <span class="title">Message from {{ $message_value->name }}</span><br>
+                                   <span class="glyphicon glyphicon-calendar calendar-icon"></span>
+                                   <span class="date">
+                                      <?php
+                                            if(!empty($message_value->date)){
+                                             
+                                               $value_date = date("Y-m-d", strtotime( $message_value->date ) );
+                                               $from=date_create(date('Y-m-d'));
+                                               $to=date_create($value_date);
+                                               $diff=date_diff($to,$from);
+                                               $days_diff = $diff->format('%a');
+
+                                               if($days_diff == "0"){
+                                                echo "Just now";
+                                               }else{
+                                                echo $diff->format('%a Days Ago');
+                                               }
+                                            }
+
+                                     ?>
+                                    </span>
+                                </a>
+                            </li>
                         <?php } ?>
                        </ul>
                     <?php } ?>
@@ -74,7 +132,32 @@
                         <ul class="dropdown-menu drop-message">
                         <?php foreach ($job_list_notification as $job_value) { ?>
                           <?php  $jobInfo = DB::table('job')->where('id',$job_value->category_id)->first();    ?>
-                            <li><a href="" data-toggle="modal" data-target="#checkjobnotification_{{ $job_value->category_id }}"><span>New job post from <?php echo $jobInfo->company_name; ?></span></a></li>
+                             <li>
+                                <a href="" data-toggle="modal" data-target="#checkjobnotification_{{ $job_value->category_id }}">
+                                   <img class="img-responsive notification-img" src="images/jobicon.png">
+                                   <span class="title">New job post from <?php echo $jobInfo->company_name; ?></span><br>
+                                   <span class="glyphicon glyphicon-calendar calendar-icon"></span>
+                                   <span class="date">
+                                      <?php
+                                            if(!empty($message_value->date)){
+                                             
+                                               $value_date = date("Y-m-d", strtotime( $message_value->date ) );
+                                               $from=date_create(date('Y-m-d'));
+                                               $to=date_create($value_date);
+                                               $diff=date_diff($to,$from);
+                                               $days_diff = $diff->format('%a');
+
+                                               if($days_diff == "0"){
+                                                echo "Just now";
+                                               }else{
+                                                echo $diff->format('%a Days Ago');
+                                               }
+                                            }
+                                     ?>
+                                    </span>
+                                </a>
+                            </li>
+                            
                         <?php } ?>
                        </ul>
                     <?php } ?>
@@ -255,176 +338,60 @@
 
 <?php //} ?> 
 
+
 <section class="col-md-12 content-header">
   
     <div class="col-md-12">
       <h3>People You May Know</h3>     
     </div>
-
+    <?php $userId = Auth::id(); ?>
     <div class="col-md-12">
+
+    <?php foreach ($follow_list as $value) { ?>
+
+    <?php if($value->id != $userId){ ?>  
+
+    <?php  $check_followed_user = DB::table('connection_requests')->where(['from_user_id'=>$userId,'to_user_id'=>$value->id,'status'=>"ACCEPT"])->count(); ?>
+    <?php  $check_followed_user_pending = DB::table('connection_requests')->where(['from_user_id'=>$userId,'to_user_id'=>$value->id,'status'=>"PENDING"])->count(); ?>
     
-    <?php if(!empty($check_followed_user)){ ?> 
     <?php 
-        $followed_user = DB::table('connection_requests')->where(['from_user_id'=>Auth::id(),'status'=>"ACCEPT"])->take(1)->first();
-        $followed_profile_exists = DB::table('profiles')->where('user_id',$followed_user->to_user_id)->count(); 
-        $check_followed_profile = DB::table('profiles')->where('user_id',$followed_user->to_user_id)->first();
-     ?>   
-          <?php //if($check_followed_profile == 0){ ?>
+          $followed_profile_exists = DB::table('profiles')->where('user_id',$value->id)->count(); 
+          $check_followed_profile = DB::table('profiles')->where('user_id',$value->id)->first();
+     ?>
+
+    <?php if($check_followed_user == 0 AND $check_followed_user_pending == 0){ ?>
 
                 <div class="col-md-4 content-profile-people"> 
                         <div class="col-md-5 people-img">
-                         <?php if($followed_profile_exists == 0 or empty($check_followed_profile->profile_picture) or $check_followed_profile->profile_picture == " " ){ ?>
+                          <?php if($followed_profile_exists == 0 or empty($check_followed_profile->profile_picture) or $check_followed_profile->profile_picture == " " ){ ?>
                                     <img class="profile-pic" src="profilepic/default_avatar.jpg"> 
                               <?php }else{ ?>
                                     <img class="profile-pic" src="profilepic/<?php echo $check_followed_profile->profile_picture; ?>"> 
                           <?php } ?>
                         </div>
                         <div class="col-md-7 people-status">
-                             <p class="people-name">{{ $check_followed_profile->name }}</p>
-                             <p class="people-subname">{{ $check_followed_profile->position }}</p>
-                            
-                              <button class="following">Followed</button>
+                            <?php if($followed_profile_exists == 0 ){ ?>
+                                   <p class="people-name">{{ $value->name }}</p>
+                              <?php }else{ ?>
+                                   <p class="people-name">{{ $check_followed_profile->name }}</p> 
+                            <?php } ?>
+                             
+                            <?php if($followed_profile_exists == 0 ){ ?>
+                                   <p class="people-subname">Not Set</p>
+                              <?php }else{ ?>
+                                   <p class="people-subname">{{ $check_followed_profile->position }}</p> 
+                            <?php } ?> 
+                              
+                              <a href="/follow/users/{{ $value->id }}" class="follow" style="text-transform:none;text-decoration:none;color:#fff;">Follow</a>
                       
                         </div>                          
                   </div>
-
-          <?php //} ?>   
-
-
-          <?php foreach ($follow_list2 as $value) { ?>
-
-          <?php if($value->id != Auth::id() ){ ?>
-
-
-         
-          <?php $check_follow_user = DB::table('users')->where('id',$value->id)->first(); ?>  
-          <?php $follow_profile_exists = DB::table('profiles')->where('user_id',$value->id)->count(); ?>
-          <?php $check_follow_profile = DB::table('profiles')->where('user_id',$value->id)->first(); ?>
-
-          <?php $checkifFollowed = DB::table('connection_requests')->where(['from_user_id' =>Auth::id(),'to_user_id'=>$value->id])->count(); ?>
-
-            <?php if($checkifFollowed == 0){ ?>
-
-                    <div class="col-md-4 content-profile-people"> 
-                          <div class="col-md-5 people-img">
-                              <?php if($follow_profile_exists == 0 or empty($check_follow_profile->profile_picture) or $check_follow_profile->profile_picture == " " ){ ?>
-                                    <img class="profile-pic" src="profilepic/default_avatar.jpg"> 
-                              <?php }else{ ?>
-                                    <img class="profile-pic" src="profilepic/<?php echo $check_follow_profile->profile_picture; ?>"> 
-                              <?php } ?>
-                              
-                          </div>
-                          <div class="col-md-7 people-status">
-                          <?php if($follow_profile_exists == 0){ ?>
-                              <p class="people-name">{{ $value->name }}</p>
-                          <?php }else{ ?>
-                              <p class="people-name">{{ $check_follow_profile->name }}</p> 
-                          <?php } ?>
-                               
-                          <?php if($follow_profile_exists == 0){ ?>
-                              <p class="people-subname">Web Master</p>
-                          <?php }else{ ?>
-                               <p class="people-subname">{{ $check_follow_profile->position }}</p> 
-                          <?php } ?>
-                               
-                              <form method="GET" action="" class="" enctype="multipart/form-data" files="true">
-                                {{ csrf_field() }}     
-                                    <input type="hidden" value="" name="id">
-                                    <input type="hidden" value="{{ csrf_token() }}" name="_token" >
-                                    <?php if($checkifFollowed == 0){ ?>
-                                        <button class="follow">Follow</button>
-                                    <?php }else{ ?>
-                                        <button class="following">Followed</button>
-                                    <?php } ?>
-                                   
-                              </form>     
-                          </div>                          
-                    </div>
-
-            <?php } ?>
-
-              
-
-
-           <?php } ?>   
-          
-          <?php } ?>
-
-            
-    <?php }else{ ?> 
-
-          <?php foreach ($follow_list as $value) { ?>
-
-          <?php if($value->id != Auth::id() ){ ?>
-
-
-         
-          <?php $check_follow_user = DB::table('users')->where('id',$value->id)->first(); ?>  
-          <?php $follow_profile_exists = DB::table('profiles')->where('user_id',$value->id)->count(); ?>
-          <?php $check_follow_profile = DB::table('profiles')->where('user_id',$value->id)->first(); ?>
-
-          <?php $checkifFollowed = DB::table('connection_requests')->where(['from_user_id' =>Auth::id(),'to_user_id'=>$value->id])->count(); ?>
-
-            <?php if($checkifFollowed == 0){ ?>
-
-                    <div class="col-md-4 content-profile-people"> 
-                          <div class="col-md-5 people-img">
-                              <?php if($follow_profile_exists == 0 or empty($check_follow_profile->profile_picture) or $check_follow_profile->profile_picture == " " ){ ?>
-                                    <img class="profile-pic" src="profilepic/default_avatar.jpg"> 
-                              <?php }else{ ?>
-                                    <img class="profile-pic" src="profilepic/<?php echo $check_follow_profile->profile_picture; ?>"> 
-                              <?php } ?>
-                              
-                          </div>
-                          <div class="col-md-7 people-status">
-                          <?php if($follow_profile_exists == 0){ ?>
-                              <p class="people-name">{{ $value->name }}</p>
-                          <?php }else{ ?>
-                              <p class="people-name">{{ $check_follow_profile->name }}</p> 
-                          <?php } ?>
-                               
-                          <?php if($follow_profile_exists == 0){ ?>
-                              <p class="people-subname">Web Master</p>
-                          <?php }else{ ?>
-                               <p class="people-subname">{{ $check_follow_profile->position }}</p> 
-                          <?php } ?>
-                               
-                              <form method="GET" action="" class="" enctype="multipart/form-data" files="true">
-                                {{ csrf_field() }}     
-                                    <input type="hidden" value="" name="id">
-                                    <input type="hidden" value="{{ csrf_token() }}" name="_token" >
-                                    <?php if($checkifFollowed == 0){ ?>
-                                        <button class="follow">Follow</button>
-                                    <?php }else{ ?>
-                                        <button class="following">Followed</button>
-                                    <?php } ?>
-                                   
-                              </form>     
-                          </div>                          
-                    </div>
-
-            <?php } ?>
-
-              
-
-
-           <?php } ?>   
-          
-          <?php } ?>
-
-
-
-    <?php } ?>        
-      
-
+     <?php } ?>
+     <?php } ?> 
+     <?php } ?>
     </div>
 
 </section>
-
-
-
-
-
 
 
 
@@ -435,7 +402,9 @@
 
 <?php  if($value->category == "Job"){ ?><!-- if -->
 
-<?php  $jobInfo = DB::table('job')->where('id',$value->category_id)->first(); ?>  
+<?php  $jobInfo = DB::table('job')->where('id',$value->category_id)->first(); ?> 
+
+<?php  $alreay_apply = DB::table('applicant')->where(['user_id'=>Auth::id(),'job_id'=>$value->category_id])->count(); ?>
 
 <?php  if($jobInfo->status != "DELETE"){ ?> 
   
@@ -455,7 +424,8 @@
             </div>
              <div class="col-xs-12 col-md-2 content-panel-lc"> 
 
-                              <p><?php
+                              <p>
+                              <?php
                               
                               if(!empty($value->date)){
                                
@@ -490,8 +460,14 @@
                                                   
                                                     <!-- Modal content-->
                                                     <div class="modal-content">
-
-                                                    <form method="" action="jobs/addJob" class="theme1">
+                                                    <?php if($alreay_apply == 0){ ?>
+                                                        <form method="POST" action="/jobs/applyJobs" class="theme1">
+                                                    <?php }else{ ?>
+                                                        <form method="" action="" class="theme1">
+                                                    <?php } ?>
+                                                  
+                                                      {{ csrf_field() }}
+                                                               <input type="hidden" name="job_id" value="<?php echo $jobInfo->id; ?>">
                                                                <div class="modal-header col-md-12 content-panel-header">
                                                                     <h3> {{ $jobInfo->company_job }}</h3>
                                                                </div>
@@ -545,9 +521,14 @@
                                                                     </div>
                                                                                   
                                                                </div>
-
+                                                               <input type="hidden" value="{{ csrf_token() }}" name="_token" >
                                                               <div class="modal-footer">
-                                                                   <button type="" class="btn btn-default" data-dismiss="modal">Close</button> 
+                                                              <?php if($alreay_apply == 0){ ?>
+                                                                  <button type="" class="btn btn-default">Apply</button> 
+                                                              <?php }else{ ?>
+                                                                  <button type="" class="btn btn-default" data-dismiss="modal">Already Apply</button> 
+                                                              <?php } ?>
+                                                                   
                                                               </div>
                                                     </form>
                                                     </div>
@@ -1247,18 +1228,11 @@
                                       <h5><i>Email:&nbsp;&nbsp;{{ $profileInfo->email }}</i></h5>
                                 <?php }?>
 
-                                <!-- Bio -->
-                                <?php if($checkprofile == 0){ ?>
-                                       <p><i>Not Set</i></p>
-                                <?php }else{ ?> 
-                                      <p><i>{{ $profileInfo->bio }}</i></p>
-                                <?php }?> 
-
                                 <!-- Cv Link -->
                                 <?php if($checksettings == 0){ ?>
-                                      <h5><i>CV Link:&nbsp;&nbsp; Not Set</i></h5>
+                                      <h5><i>Not Set</i></h5>
                                 <?php }else{ ?> 
-                                      <h5><i>CV Link:&nbsp;&nbsp;<a href="#">https://ressuu.me/cv/{{ $settingInfo->permalink }}</a></i></h5>
+                                      <h5><i><a href="#">https://ressuu.me/cv/{{ $settingInfo->permalink }}</a></i></h5>
                                 <?php }?>
                                </div> 
 
