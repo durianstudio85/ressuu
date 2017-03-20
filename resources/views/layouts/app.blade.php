@@ -31,12 +31,18 @@
 
 
     <!-- JavaScripts -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
     <script src="js/bootstrap-filetype.js"></script>
     <script src="js/star-rating.js"></script>
     <script src="js/main.js"></script>
+    <script src="js/paginate.js"></script>
+    <script>
+      $('.pagination__list').paginate({
+           items_per_page: 5
+      });
 
+    </script>
     {{-- <script src="{{ elixir('js/app.js') }}"></script> --}}
 </body>
 </html>

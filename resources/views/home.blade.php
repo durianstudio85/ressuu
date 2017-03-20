@@ -33,7 +33,13 @@
                   <?php }else { ?> 
                       <span class="glyphicon glyphicon-user naviconactive dropdown-toggle" data-toggle="dropdown"><span class="badge">
                   <?php  echo $user_notification;?></span></span>
-                      <ul class="dropdown-menu drop-message">
+
+                      <?php if($user_notification > 5){ ?>
+                              <ul class="dropdown-menu drop-message" style="overflow-y:scroll;height:333px;">
+                      <?php }else{ ?>
+                                <ul class="dropdown-menu drop-message">
+                      <?php } ?>
+
                       <?php foreach ($user_list_notification as $user_value) { ?>
                           <?php $checkProfile = DB::table('profiles')->where('user_id',$user_value->user_id)->count(); ?> 
                           <?php $profileInfo = DB::table('profiles')->where('user_id',$user_value->user_id)->first(); ?>
@@ -89,7 +95,13 @@
                     <?php }else { ?> 
                         <span class="glyphicon glyphicon-comment naviconactive dropdown-toggle" data-toggle="dropdown"><span class="badge">
                       <?php  echo $no_message;?></span></span>
-                        <ul class="dropdown-menu drop-message">
+
+                      <?php if($no_message > 5){ ?>
+                              <ul class="dropdown-menu drop-message" style="overflow-y:scroll;height:333px;">
+                      <?php }else{ ?>
+                                <ul class="dropdown-menu drop-message">
+                      <?php } ?>
+
                         <?php foreach ($list_message as $message_value) { ?>
                             <li>
                                 <a href="" data-toggle="modal" data-target="#checkmessage_{{ $message_value->id }}">
@@ -129,8 +141,15 @@
                     <?php }else { ?> 
                         <span class="glyphicon glyphicon-briefcase naviconactive dropdown-toggle" data-toggle="dropdown"><span class="badge">
                     <?php  echo $job_notification;?></span></span>
-                        <ul class="dropdown-menu drop-message">
+
+                    <?php if($job_notification > 5){ ?>
+                              <ul class="dropdown-menu drop-message" style="overflow-y:scroll;height:333px;">
+                    <?php }else{ ?>
+                              <ul class="dropdown-menu drop-message">
+                    <?php } ?>
+
                         <?php foreach ($job_list_notification as $job_value) { ?>
+
                           <?php  $jobInfo = DB::table('job')->where('id',$job_value->category_id)->first();    ?>
                              <li>
                                 <a href="" data-toggle="modal" data-target="#checkjobnotification_{{ $job_value->category_id }}">
@@ -139,9 +158,9 @@
                                    <span class="glyphicon glyphicon-calendar calendar-icon"></span>
                                    <span class="date">
                                       <?php
-                                            if(!empty($message_value->date)){
+                                            if(!empty($job_value->date)){
                                              
-                                               $value_date = date("Y-m-d", strtotime( $message_value->date ) );
+                                               $value_date = date("Y-m-d", strtotime( $job_value->date ) );
                                                $from=date_create(date('Y-m-d'));
                                                $to=date_create($value_date);
                                                $diff=date_diff($to,$from);
@@ -157,8 +176,9 @@
                                     </span>
                                 </a>
                             </li>
-                            
+                           
                         <?php } ?>
+                        
                        </ul>
                     <?php } ?>
                     <!---->

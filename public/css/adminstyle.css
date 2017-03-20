@@ -2558,3 +2558,15 @@ margin: 0px 8px 0px -41px;
   font-size:10px;
   color:#333;
 }
+.pagination{
+  margin: 0px 0px 0px 28px;
+  
+}
+.pagination__controls .pagination .active a{
+  background: #01ba8e !important;
+  border-color: #01ba8e;
+  color: #ffffff;
+}
+.pagination__controls .pagination a{
+  color: #01ba8e;
+}
