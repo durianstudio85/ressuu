@@ -162,6 +162,8 @@ Route::get('/cancel/application/{id}', 'HomeController@cancelApplication');
 
 
 
-
+Route::get('/all/usernotification/', 'UsersNotifications@allUserNotification');
+Route::get('/all/messagenotification/', 'UsersNotifications@allMessageNotification');
+Route::get('/all/jobNotification/', 'UsersNotifications@allJobNotification');
 
 

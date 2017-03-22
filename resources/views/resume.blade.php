@@ -86,6 +86,7 @@
                             </li>
 
                       <?php } ?>
+                       <a class="see_all" href="{{ url('/all/usernotification/') }}">See All</a>
                      </ul>
                   <?php } ?>
                   <!---->
@@ -133,6 +134,7 @@
                                 </a>
                             </li>
                         <?php } ?>
+                          <a class="see_all" href="{{ url('/message') }}">See All</a>
                        </ul>
                     <?php } ?>
                     <!---->
@@ -180,6 +182,7 @@
                             </li>
                             
                         <?php } ?>
+                        <a class="see_all" href="{{ url('/all/jobNotification/') }}">See All</a> 
                        </ul>
                     <?php } ?>
                     <!---->
