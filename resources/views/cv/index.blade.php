@@ -17,9 +17,8 @@ $actual_link = "https://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
     <link href="/../css/style.css" rel='stylesheet' type='text/css'>
     <link rel="stylesheet" type="text/css" href="/../css/adminstyle.css">
-    <link rel="shortcut icon" type="image/x-icon" href="/../../images/fav icon.png"> 
-    <title>Ressu.me</title> 
-
+    <link rel="shortcut icon" type="image/x-icon" href="/../../images/fav icon.png">  
+    <title>Ressu.me</title>
   </head>
   <body class="signup ressuuhome">
 
@@ -123,13 +122,11 @@ function myFunction() {
    <!-- Style Sheets -->
 
    <link rel="stylesheet" href="../cv/clean_modern/style.css">
-   <link rel="stylesheet" href="../cv/clean_modern/scripts/prettyPhoto/css/prettyPhoto.css">   
-   <!-- Favicon -->
-   <link rel="shortcut icon" type="image/x-icon" href="/../../images/fav icon.png">     
+   <link rel="stylesheet" href="../cv/clean_modern/scripts/prettyPhoto/css/prettyPhoto.css"> 
    <!-- Google Fonts -->
    <link href='https://fonts.googleapis.com/css?family=Lato:400,700' rel='stylesheet' type='text/css'>
    <link href='https://fonts.googleapis.com/css?family=Droid+Serif:400,400italic' rel='stylesheet' type='text/css'>
-    
+   <link rel="shortcut icon" type="image/x-icon" href="/../../images/fav icon.png">  
    <!--[if lt IE 9]>
         <script src="js/html5.js"></script>             
    <![endif]-->
@@ -342,8 +339,8 @@ function myFunction() {
     <section class="hidden-section contact-section">                                
        <section class="contact">                                    
           <h3 class="contact-head">Let's talk <span class="plane"><img src="clean_modern/images/plane.png" alt="" /></span></h3>
-          <form action="/message/send" method="post" id="contact-form" class="clearfix">
-           {{ csrf_field() }} 
+           <form action="message/send" method="POST" id="contact-form" class="clearfix">
+          {{ csrf_field() }}
            <input type="hidden" name="id" class="input" value="<?php echo $profiles->user_id; ?>">
               <div class="left">
                  <p><input type="text" name="name" id="name" class="required" value="Full Name" /></p>
@@ -357,31 +354,11 @@ function myFunction() {
                  <input type="submit" id="submit" value="Submit" />
               </div>
                <input type="hidden" value="{{ csrf_token() }}" name="_token" >
-           </form>                                        
+           </form>                                       
         </section>                                
      </section>                     
     
 </section>  
-<?php
-
-  $the_user_id = $profiles->user_id;
-  $from_user_id = rand();
-  $category = "VIEW CV";
-  $status = "VIEW";
-  $inputDate = date('Y-m-d');
-  
-  DB::table('like_view')->insert([
-    'to_user_id' => $the_user_id,
-    'from_user_id' => $from_user_id,
-    'category_id' => $the_user_id,
-    'category' =>  $category,
-    'status' =>  $status,
-    'date'=> $inputDate
-  ]);
-
-
-
-?>
 
 <!-- JS Scripts -->
 <script src="../cv/clean_modern/js/jquery-1.8.2.min.js"></script>
@@ -397,8 +374,8 @@ function myFunction() {
 
 
 
-<?php } else { ?>
-
+<?php } ?>
+<?php if($theme_selection == "clean-modern") { ?>
 
 
 
@@ -416,7 +393,8 @@ function myFunction() {
     <link rel="stylesheet" type="text/css" href="../cv/yellow_theme/css/style.css"/>
     <link rel="stylesheet" type="text/css" href="../cv/yellow_theme/css/fancybox.css"/>
     <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Open+Sans:400,600,300,800,700,400italic|PT+Serif:400,400italic"/>
-    <link rel="shortcut icon" type="image/x-icon" href="/../../images/fav icon.png"> 
+    <link rel="shortcut icon" type="image/x-icon" href="/../../images/fav icon.png">  
+
     
     <script type="text/javascript" src="../cv/yellow_theme/js/jquery.min.js"></script>
     <script type="text/javascript" src="../cv/yellow_theme/js/jquery.easytabs.min.js"></script>
@@ -425,8 +403,8 @@ function myFunction() {
     <script type="text/javascript" src="../cv/yellow_theme/js/jquery.fancybox-1.3.4.pack.js"></script>
     <script type="text/javascript" src="../cv/yellow_theme/js/jquery.isotope.min.js"></script>
     <!--<script type="text/javascript" src="https://maps.google.com/maps/api/js?sensor=false"></script>-->
-    <script type="text/javascript" src="../cv/yellow_theme/js/jquery.gmap.min.js"></script>
     <script type="text/javascript" src="../cv/yellow_theme/js/custom.js"></script>
+
 
 </head>
     <body>
@@ -631,7 +609,8 @@ function myFunction() {
                          </div>
                          <style>#gmap_canvas{height:400px;width:860px;}#mapouter{overflow:hidden;height:400px;width:860px;}</style>
                       </div>
-                      <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDj_FG4Hogq9S4wXhl2onS5vPpTQHJKO6g&callback=initMap"></script>   
+                   
+                      <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDj_FG4Hogq9S4wXhl2onS5vPpTQHJKO6g&callback=initMap"></script>      
                     <!-- Contact Info -->
                     <div class="contact-info">
                     <h3 class="main-heading"><span>Contact info</span></h3>
@@ -648,7 +627,7 @@ function myFunction() {
                     <div class="contact-form">
                         <h3 class="main-heading"><span>Let's keep in touch</span></h3>
                         <div id="contact-status"></div>
-                         <form action="/message/send" id="contactform" method="POST">
+                        <form action="message/send" id="contactform" method="POST">
                          {{ csrf_field() }}  
                                 <input type="hidden" name="id" class="input" value="<?php echo $profiles->user_id; ?>">
                             <p>
@@ -682,34 +661,393 @@ function myFunction() {
             
         </div>
         <!-- /Container -->
+       
+              
+
+            
 
 <!--END THEME 2  -->
-                
-<?php
-
-  $the_user_id = $profiles->user_id;
-  $from_user_id = rand();
-  $category = "VIEW CV";
-  $status = "VIEW";
-  $inputDate = date('Y-m-d');
-  
-  DB::table('like_view')->insert([
-    'to_user_id' => $the_user_id,
-    'from_user_id' => $from_user_id,
-    'category_id' => $the_user_id,
-    'category' =>  $category,
-    'status' =>  $status,
-    'date'=> $inputDate
-  ]);
-
-
-
-?>
-
+            
 
 </body>
 </html>
 <?php } ?>
+
+<?php if($theme_selection == "theme3"){ ?> 
+
+
+    <!DOCTYPE html>
+          <html lang="en">
+            <head>
+              <meta charset="utf-8">
+              <meta http-equiv="X-UA-Compatible" content="IE=edge">
+              <meta name="viewport" content="width=device-width, initial-scale=1">
+              <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+              <title>Ressu.me | <?php echo $profiles->name; ?> </title>
+
+              <!-- Bootstrap -->
+              <link href="../cv/theme3/assets/css/bootstrap.min.css" rel="stylesheet">
+              <link href="../cv/theme3/assets/css/style.css" rel="stylesheet">
+              <link href="../cv/theme3/assets/css/scrolling-nav.css" rel="stylesheet">
+              <link href="../cv/theme3/assets/css/hover.css" rel="stylesheet">
+              
+              <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+              <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+              <!--[if lt IE 9]>
+                <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+                <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+              <![endif]-->
+              <style>
+                body.modal-open {
+                    overflow: visible;
+                }
+              </style>
+            </head>
+            <body>
+            <?php 
+            $cover_exists = DB::table('cover_photo')->where(['user_id' => $profiles->user_id,'status' => 'ACTIVE'])->count();
+            if($cover_exists){
+                $cover_photo = DB::table('cover_photo')->where(['user_id' => $profiles->user_id,'status' => 'ACTIVE'])->first();
+                $cover = $cover_photo->cover_photo_name;
+            }else{
+                $cover = "default_cover_theme3.png";
+            }
+            ?>
+             <section id="page-top" class="header navbar navbar navbar-static-top" style="background-image: url('../cover_photo/{{ $cover }}');">
+                    <div class="container">
+                      <div class="navbar-header col-md-5">
+                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                         <i class="fa fa-list"></i>
+                        </button>
+                        <a class="navbar-brand" href="index.html" style="">
+                          <p class="user-name"><?php echo $profiles->name; ?></p>
+                        </a>
+                      </div>
+                      <div class="col-md-2">&nbsp;</div>
+                      <nav id="navbar" class="navbar-collapse collapse header-menu col-md-3">
+                        <ul class="nav navbar-nav navbar-right">
+                          <li><a class="page-scroll" href="#page-top">Home</a></li>
+                          <li><a class="page-scroll" href="#resume">Resume</a></li>
+                          <li><a class="page-scroll" href="#portfolio">Portfolio</a></li>
+                          <li><a class="page-scroll" href="#contact">Contact</a></li>
+                        </ul>
+                      </nav><!--/.nav-collapse -->
+                    </div>
+                    <div class="row"> 
+                         
+                          <div class="col-md-12 banner-details">
+                                <p class="introduction">Hi, I'm <?php echo $profiles->name; ?> a <?php echo $profiles->position; ?></p>
+                                <p class="sub_introduction"><?php echo substr($profiles->bio, 0, 100);  ?></p>
+                                <a href="#resume" class="btn btn-info page-scroll">GET STARTED</a>
+                          </div>
+                     
+                    </div>
+
+
+
+            </section>
+            <section id="resume" class="row about">
+                      <?php 
+                            list($width, $height) = getimagesize('profilepic/default_profilepic_theme3.png');   
+                      ?>
+                  <div class="container">
+                       <div class="col-md-6">
+                          <p class="introduction">I'M <span class="name"><?php echo $profiles->name; ?></span> AND I'M A <span class="position"><?php echo $profiles->position; ?></span></p>
+                          <p class="bio"><?php echo $profiles->bio; ?></p>
+                          <!--<button class="btn btn-info">LEARN MORE</button>-->
+                    
+                       </div> 
+                       <div class="col-md-6">
+                           <?php if(!empty($profiles->profile_picture)  AND $profiles->profile_picture != " "  ){ ?>
+                              <img class="img-reponsive" height="{{ $height }}" width="{{ $width }}"  src="../profilepic/<?php echo $profiles->profile_picture; ?>"></a> 
+                                <?php  }else{ ?>
+                              <img class="img-responsive" src="../profilepic/default_profilepic_theme3.png" >
+
+                          <?php } ?>
+
+                       </div>
+                  </div>
+            </section>
+            <section class="row skills">
+                  <div class="container">
+                       @foreach ($skills as $my_skills) 
+
+                       <div class="col-xs-4">
+                              <p class="skills_title">{{ $my_skills->skillname }}</p>
+                              <?php 
+                                if($my_skills->rate == 5){ 
+                                    $skills_rate = "100%";
+
+                               }if($my_skills->rate == 4){ 
+                                    $skills_rate = "80%";
+
+                               }if($my_skills->rate == 3){ 
+                                    $skills_rate = "50%";
+                                    
+                               }if($my_skills->rate == 2){ 
+                                    $skills_rate = "35%";
+                                    
+                               }if($my_skills->rate == 1){ 
+                                    $skills_rate = "25%";
+                                    
+                               }
+
+                              ?>
+                                <div class="progress">
+                                  <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width:{{ $skills_rate }};">
+                                    <span class="sr-only">60% Complete</span>
+                                  </div>
+                                </div>
+
+                      </div> 
+
+                       @endforeach
+                   
+                  </div> 
+            </section>
+
+            <section class="row experience" style=""> 
+                  <div class="container">
+                        <p class="title">MY WORK <span class="bold">EXPERIENCE</span></p>
+                  </div>
+                  <div class="container">
+                      @foreach ($work_experience as $work) 
+
+                        <div class="col-md-4">
+                           <div class="experience-tabs ">
+                              <p class="job_title">{{ $work->job_title }}</p>
+                              <p class="date">{{ $work->start_date }} - {{ $work->end_date }}</p>
+                              <p class="company_name">{{ $work->company_name }}</p>
+                              <p class="description"><i>{{ $work->description }}</i></p>
+                           </div> 
+                        </div>
+
+                           
+                      @endforeach 
+                                 
+                  </div>
+            </section>
+
+            <section class="row education" style=""> 
+                  <div class="container">
+                        <p class="title">MY <span class="bold">EDUCATION</span></p>
+                  </div>
+                  <div class="container">
+
+                       @foreach ($education as $edu)
+
+                        <div class="col-md-4">
+                           <div class="education-tabs ">
+                              <p class="job_title">{{ $edu->school }}</p>
+                              <p class="date">{{ $edu->date_start }} - {{ $edu->date_end }}</p>
+                              <p class="company_name">{{ $edu->course }}</p>
+                              <p class="description"><i>{{ $edu->awards_rec }}</i></p>
+                           </div> 
+                        </div>
+                      @endforeach   
+                         
+                  </div>
+            </section>
+
+            <section id="portfolio" class="row recent-work">
+                  <div class="container">
+                      <div class="col-md-12">
+                           <p class="title">MY RECENT <span class="bold">WORK</span></p> 
+                      </div>
+                      <div class="col-md-12">
+                           <ul class="list">
+                             <li><a href="#all" data-toggle="tab">All</a></li>
+                             @foreach ($userPorfoliosCategories as $userCategories)
+                                <li><a href="#tab{{ $userCategories->id }}" data-toggle="tab">{{ $userCategories->title }}</a></li>
+                            @endforeach      
+                           </ul>
+                      </div> 
+                      <div class="row project tab-content">
+
+                        <div id="all" class="tab-pane fade in active">
+
+                            @foreach ($userPorfolios as $userPorfolio)
+
+                               <?php $fileName = "upload/".$userPorfolio->post_thumbnail;
+                                 if(file_exists($fileName)){  ?>
+                                     <a data-toggle="modal" data-target="#portfolio{{ $userPorfolio->id }}" >
+                                         <div class="col-md-4  hvr-float-shadow" style="background-image:url('../upload/{{ $userPorfolio->post_thumbnail }}');background-size:100% 100%;">
+                                            <div style="height:256px;">
+                                                &nbsp;
+                                            </div>
+                                               
+                                        </div>
+                                   </a>                      
+                           <?php }else{ ?>
+                                         <div class="col-md-4" style="background-image:url('../images/portfolio_images.png');background-size:100% 100%;">
+                                               <div style="height:256px;">
+                                               &nbsp;
+                                                </div>
+                                         </div>
+                           <?php } ?>      
+                            @endforeach    
+
+                        </div>
+                            <?php foreach ($userPorfoliosCategories as $userCategories) { ?>
+                                <div id="tab{{ $userCategories->id }}" class="tab-pane fade in">
+
+                                 <?php 
+
+                                    $userId = $profiles->user_id;         
+                                    $portfolioCat = DB::select('select * from portfolio where category_id = :id  and user_id = :userid', 
+                                    ['id' => $userCategories->id,'userid' => $userId]);   
+                                  
+                                 ?>
+
+                                 <?php  foreach ($portfolioCat as $category) { ?>
+
+                                         <?php $fileName = "upload/".$category->post_thumbnail;
+                                            if(file_exists($fileName)){  ?>
+                                               <a data-toggle="modal" data-target="#portfolio{{ $category->id }}" >
+                                                  <div class="col-md-4" style="background-image:url('../upload/{{ $category->post_thumbnail }}');background-size:100% 100%;">
+                                                      <div style="height:256px;">
+                                                        &nbsp;
+                                                      </div>
+
+                                                  </div>
+                                                </a>
+                                          <?php }else{ ?>
+                                                <div class="col-md-4" style="background-image:url('../images/portfolio_images.png');background-size:100% 100%;">
+                                                    <div style="height:256px;">
+                                                      &nbsp;
+                                                    </div>
+                                                </div>
+                                          <?php } ?>
+
+                                <?php } ?>
+
+                                 </div>
+
+                              <?php } ?>
+
+                               @foreach ($userPorfolios as $userPorfolio)
+
+                                <!-- Modal -->
+                                <div class="theme3_portfolio_modal">
+                                      <div id="portfolio{{ $userPorfolio->id }}" class="modal fade" role="dialog">
+                                        <div class="modal-dialog">
+
+                                          <!-- Modal content-->
+                                          <div class="modal-content">
+                                            <div class="modal-header">
+                                              <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                              <h4 class="modal-title">{{ $userPorfolio->port_title }}</h4>
+                                            </div>
+                                            <div class="modal-body">
+
+                                               <?php $fileName = "upload/".$userPorfolio->post_thumbnail;
+                                                if(file_exists($fileName)){  ?>
+                                                  <center>
+                                                    <img class="img-responsive" src="../upload/{{ $userPorfolio->post_thumbnail }}">
+                                                  </center>
+                                               <?php }else{ ?>
+                                                <center>
+                                                      <img class="img-responsive" src="../images/portfolio_images.png">
+                                                </center>
+                                               <?php } ?>  
+                                               <p class="port_excerpt"><?php echo $userPorfolio->port_excerpt; ?></p>
+                                            </div>
+                                          
+                                          </div>
+
+                                        </div>
+                                      </div>
+                                </div>      
+                               <!-- Modal -->
+                               
+                              @endforeach   
+                             
+                      </div>
+
+                  </div>
+            </section>
+            <section class="row quote">
+                  <div class="container">
+                       <div class="col-md-12">
+                          <p class="introduction">Do you have any project?</span></p>
+                          <p class="sub_introduction">Let's Work <span class="bold">Together</span> Indeed!</p>
+                          <!--<button class="btn btn-info">LEARN MORE</button> --> 
+                       </div> 
+                  </div>
+            </section>
+
+            <section class="row contact">
+                  <div class="container">
+                       <div class="col-md-12">
+                          <p class="title">GET IN <span class="bold">TOUCH</span>!</p>
+                       </div>
+                       <div class="col-md-12">
+                          <form class="form-group" action="message/send" id="contactform" method="POST">
+                           {{ csrf_field() }}  
+                              <input type="hidden" name="id" class="input" value="<?php echo $profiles->user_id; ?>">
+                              <div class="col-md-6">
+                                  <label>Your Name</label>
+                                  <input class="form-control" name="name" type="text" placeholder="Enter your name">
+                              </div>
+                              <div class="col-md-6">
+                                  <label>Your Email Address</label>
+                                  <input class="form-control" name="email" type="text" placeholder="Enter your email">
+                              </div>
+                              <div class="col-md-12"><br>
+                               <label>Your Message</label> 
+                              <textarea class="form-control" name="message"  rows="10">Enter your message</textarea>    
+                              </div>
+                              <div class="col-md-4 btn-wrap"><br>
+                              <input type="hidden" value="{{ csrf_token() }}" name="_token" >
+                                  <button type="submit" name="submit" class="btn btn-info">SEND MESSAGE</button>
+                              </div>
+                          </form>  
+
+                       </div> 
+                  </div>
+            </section>
+            <footer id="contact" class="row">
+                <div class="container">
+                    <div class="col-md-6">
+                        <p class="copyright">Copyright © 2017 All Right Reserved. Redesigned by Durian Studio</p>
+                    </div>
+                    <div class="col-md-6">
+                        <ul class="footer-list">
+                          <li><a href="http://{{ $profiles->facebook }}" target="_blank">FACEBOOK</a></li>
+                          <li><a href="http://{{ $profiles->twitter }}" target="_blank">TWITTER</a></li>
+                          <li><a href="http://{{ $profiles->linkedin }}" target="_blank">INSTAGRAM</a></li>
+                          <li><a href="http://{{ $profiles->google }}" target="_blank">WEBSITE</a></li>
+                        </ul>
+                    </div>
+                </div>
+                
+            </footer>
+
+
+              <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+              <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+              <!-- Include all compiled plugins (below), or include individual files as needed -->
+              <script src="../cv/theme3/assets/js/bootstrap.min.js"></script>
+              <script src="../cv/theme3/assets/js/custom.js"></script>
+              <!-- Scrolling Nav JavaScript -->
+              <script src="../cv/theme3/assets/js/jquery.easing.min.js"></script>
+              <script src="../cv/theme3/assets/js/scrolling-nav.js"></script>
+             <script type="text/javascript" src="js/jquery.fancybox-1.3.4.pack.js"></script>
+
+            </body>
+          </html>
+
+
+<?php } ?>
+
+
+
+
+
+
+
+
+
 
 
 
@@ -759,10 +1097,9 @@ function myFunction() {
    <!-- Style Sheets -->
 
    <link rel="stylesheet" href="../cv/clean_modern/style.css">
-   <link rel="stylesheet" href="../cv/clean_modern/scripts/prettyPhoto/css/prettyPhoto.css">
-   <link rel="shortcut icon" type="image/x-icon" href="/../../images/fav icon.png">    
+   <link rel="stylesheet" href="../cv/clean_modern/scripts/prettyPhoto/css/prettyPhoto.css">   
    <!-- Favicon -->
-   <link rel="shortcut icon" href="favicon.ico">    
+   <link rel="shortcut icon" type="image/x-icon" href="/../../images/fav icon.png">      
    <!-- Google Fonts -->
    <link href='https://fonts.googleapis.com/css?family=Lato:400,700' rel='stylesheet' type='text/css'>
    <link href='https://fonts.googleapis.com/css?family=Droid+Serif:400,400italic' rel='stylesheet' type='text/css'>
@@ -983,7 +1320,7 @@ function myFunction() {
     <section class="hidden-section contact-section">                                
        <section class="contact">                                    
           <h3 class="contact-head">Let's talk <span class="plane"><img src="clean_modern/images/plane.png" alt="" /></span></h3>
-          <form action="/message/send" method="POST" id="contact-form" class="clearfix">
+           <form action="message/send" method="POST" id="contact-form" class="clearfix">
           {{ csrf_field() }}
            <input type="hidden" name="id" class="input" value="<?php echo $profiles->user_id; ?>">
               <div class="left">
@@ -1003,27 +1340,6 @@ function myFunction() {
      </section>                     
     
 </section>  
-<?php
-
-  $the_user_id = $profiles->user_id;
-  $from_user_id = rand();
-  $category = "VIEW CV";
-  $status = "VIEW";
-  $inputDate = date('Y-m-d');
-  
-  DB::table('like_view')->insert([
-    'to_user_id' => $the_user_id,
-    'from_user_id' => $from_user_id,
-    'category_id' => $the_user_id,
-    'category' =>  $category,
-    'status' =>  $status,
-    'date'=> $inputDate
-  ]);
-
-
-
-?>
-
 
 <!-- JS Scripts -->
 <script src="../cv/clean_modern/js/jquery-1.8.2.min.js"></script>
@@ -1039,11 +1355,9 @@ function myFunction() {
 
 
 
-<?php } else { ?>
+<?php } ?> 
 
-
-
-
+<?php if($theme_selection == "clean-modern") { ?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -1051,11 +1365,11 @@ function myFunction() {
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>Ressu.me | <?php echo $profiles->name; ?></title>
 
-     <link rel="stylesheet" type="text/css" href="../cv/yellow_theme/css/style.css"/>
+    <link rel="stylesheet" type="text/css" href="../cv/yellow_theme/css/style.css"/>
     <link rel="stylesheet" type="text/css" href="../cv/yellow_theme/css/fancybox.css"/>
     <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Open+Sans:400,600,300,800,700,400italic|PT+Serif:400,400italic"/>
     <link rel="shortcut icon" type="image/x-icon" href="/../../images/fav icon.png"> 
@@ -1142,6 +1456,7 @@ function myFunction() {
                         <li class="tmenu"><a href="#resume" class="tab-resume">Resume</a></li>
                         <li class="tmenu"><a href="#portfolio" class="tab-portfolio">Portfolio</a></li>
                         <li class="tmenu"><a href="#contact" class="tab-contact">Contact</a></li>
+                       
                     </ul>
                 </div>
                 <!-- /Menu --> 
@@ -1157,7 +1472,7 @@ function myFunction() {
                                                    
                                 <div class="timelineUnit">
                                     <h4>{{ $work->job_title }}</h4>
-                                    <h4 class="timelineDate">{{ $work->start_date }} - {{ $work->end_date }}</h4>
+                                    <h5 class="timelineDate">{{ $work->start_date }} - {{ $work->end_date }}</h5>
                                     <h5>{{ $work->company_name }}</h5>
                                     <p>{{ $work->description }}</p>
                                 </div>
@@ -1175,7 +1490,7 @@ function myFunction() {
                             <li>            
                                 <div class="timelineUnit">
                                     <h4>{{ $edu->school }}</h4>
-                                    <h4 class="timelineDate">{{ $edu->date_start }} - {{ $edu->date_end }}</h4>
+                                    <h5 class="timelineDate">{{ $edu->date_start }} - {{ $edu->date_end }}</h5>
                                     <h5>{{ $edu->course }}</h5>
                                     <p>{{ $edu->awards_rec }}</p>
                                 </div>
@@ -1214,10 +1529,6 @@ function myFunction() {
                            @foreach ($userPorfoliosCategories as $userCategories)
                              <li><a href="" data-filter=".tab{{ $userCategories->id }}">{{ $userCategories->title }}</a></li>
                            @endforeach                  
-                      <!--   <li><a href="" data-filter=".photoghraphy">Photoghraphy</a></li>
-                        <li><a href="" data-filter=".illustration">Illustration</a></li>
-                        <li><a href="" data-filter=".print">Print</a></li>
-                        <li><a href="" data-filter=".animation">Animation</a></li> -->
                     </ul>
                     <div class="extra-text">Some of the projects i'm proud with</div>
                     <ul id="portfolio-list">
@@ -1262,10 +1573,9 @@ function myFunction() {
                     </ul>
                 </div>
                 <!-- /Portfolio -->   
-                
                 <!-- Contact -->
                 <div id="contact">
-                    <div id="mapouter">
+                      <div id="mapouter">
                           <div id="gmap_canvas">
                         <?php $location = "https://maps.google.com/maps?q=".$profiles->address." , &t=&z=14&ie=UTF8&iwloc=&output=embed"; ?>
                             <iframe width="860" height="400" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="<?php echo $location; ?>" >
@@ -1273,7 +1583,7 @@ function myFunction() {
                          </div>
                          <style>#gmap_canvas{height:400px;width:860px;}#mapouter{overflow:hidden;height:400px;width:860px;}</style>
                       </div>
-                      <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDj_FG4Hogq9S4wXhl2onS5vPpTQHJKO6g&callback=initMap"></script>   
+                      <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDj_FG4Hogq9S4wXhl2onS5vPpTQHJKO6g&callback=initMap"></script>      
                     <!-- Contact Info -->
                     <div class="contact-info">
                     <h3 class="main-heading"><span>Contact info</span></h3>
@@ -1290,9 +1600,9 @@ function myFunction() {
                     <div class="contact-form">
                         <h3 class="main-heading"><span>Let's keep in touch</span></h3>
                         <div id="contact-status"></div>
-                        <form action="/message/send" id="contactform" method="POST">
-                         {{ csrf_field() }}
-                         <input type="hidden" name="id" class="input" value="<?php echo $profiles->user_id; ?>">
+                        <form action="message/send" id="contactform" method="POST">
+                         {{ csrf_field() }}  
+                                <input type="hidden" name="id" class="input" value="<?php echo $profiles->user_id; ?>">
                             <p>
                                 <label for="name">Your Name</label>
                                 <input type="text" name="name" class="input" style="height:30px;width:95%;" >
@@ -1308,7 +1618,6 @@ function myFunction() {
                             <input type="hidden" value="{{ csrf_token() }}" name="_token" >
                             <input type="submit" name="submit" value="Send your message" class="button">
                         </form>
-                        
                     </div>
                     <!-- /Contact Form -->
                 </div>
@@ -1327,7 +1636,13 @@ function myFunction() {
         <!-- /Container -->
 
 <!--END THEME 2  -->
-               
+                
+              
+
+
+
+</body>
+</html>
 <?php
 
   $the_user_id = $profiles->user_id;
@@ -1352,9 +1667,379 @@ function myFunction() {
 
 
 
-</body>
-</html>
+
 <?php } ?>
+
+<?php if($theme_selection == "theme3"){ ?> 
+
+
+    <!DOCTYPE html>
+          <html lang="en">
+            <head>
+              <meta charset="utf-8">
+              <meta http-equiv="X-UA-Compatible" content="IE=edge">
+              <meta name="viewport" content="width=device-width, initial-scale=1">
+              <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+              <title>Ressu.me | <?php echo $profiles->name; ?> </title>
+
+              <!-- Bootstrap -->
+              <link href="../cv/theme3/assets/css/bootstrap.min.css" rel="stylesheet">
+              <link href="../cv/theme3/assets/css/style.css" rel="stylesheet">
+              <link href="../cv/theme3/assets/css/scrolling-nav.css" rel="stylesheet">
+              <link href="../cv/theme3/assets/css/hover.css" rel="stylesheet">
+              
+              <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+              <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+              <!--[if lt IE 9]>
+                <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+                <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+              <![endif]-->
+              <style>
+                body.modal-open {
+                    overflow: visible;
+                }
+              </style>
+            </head>
+            <body>
+            <?php 
+            $cover_exists = DB::table('cover_photo')->where(['user_id' => $profiles->user_id,'status' => 'ACTIVE'])->count();
+            if($cover_exists){
+                $cover_photo = DB::table('cover_photo')->where(['user_id' => $profiles->user_id,'status' => 'ACTIVE'])->first();
+                $cover = $cover_photo->cover_photo_name;
+            }else{
+                $cover = "default_cover_theme3.png";
+            }
+            ?>
+             <section id="page-top" class="header navbar navbar navbar-static-top" style="background-image: url('../cover_photo/{{ $cover }}');">
+                    <div class="container">
+                      <div class="navbar-header col-md-5">
+                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                         <i class="fa fa-list"></i>
+                        </button>
+                        <a class="navbar-brand" href="index.html" style="">
+                          <p class="user-name"><?php echo $profiles->name; ?></p>
+                        </a>
+                      </div>
+                      <div class="col-md-2">&nbsp;</div>
+                      <nav id="navbar" class="navbar-collapse collapse header-menu col-md-3">
+                        <ul class="nav navbar-nav navbar-right">
+                          <li><a class="page-scroll" href="#page-top">Home</a></li>
+                          <li><a class="page-scroll" href="#resume">Resume</a></li>
+                          <li><a class="page-scroll" href="#portfolio">Portfolio</a></li>
+                          <li><a class="page-scroll" href="#contact">Contact</a></li>
+                        </ul>
+                      </nav><!--/.nav-collapse -->
+                    </div>
+                    <div class="row"> 
+                         
+                          <div class="col-md-12 banner-details">
+                                <p class="introduction">Hi, I'm <?php echo $profiles->name; ?> a <?php echo $profiles->position; ?></p>
+                                <p class="sub_introduction"><?php echo substr($profiles->bio, 0, 100);  ?></p>
+                                <a href="#resume" class="btn btn-info page-scroll">GET STARTED</a>
+                          </div>
+                     
+                    </div>
+
+
+
+            </section>
+            <section id="resume" class="row about">
+                      <?php 
+                            list($width, $height) = getimagesize('profilepic/default_profilepic_theme3.png');   
+                      ?>
+                  <div class="container">
+                       <div class="col-md-6">
+                          <p class="introduction">I'M <span class="name"><?php echo $profiles->name; ?></span> AND I'M A <span class="position"><?php echo $profiles->position; ?></span></p>
+                          <p class="bio"><?php echo $profiles->bio; ?></p>
+                          <!--<button class="btn btn-info">LEARN MORE</button>-->
+                    
+                       </div> 
+                       <div class="col-md-6">
+                           <?php if(!empty($profiles->profile_picture)  AND $profiles->profile_picture != " "  ){ ?>
+                              <img class="img-reponsive" height="{{ $height }}" width="{{ $width }}"  src="../profilepic/<?php echo $profiles->profile_picture; ?>"></a> 
+                                <?php  }else{ ?>
+                              <img class="img-responsive" src="../profilepic/default_profilepic_theme3.png" >
+
+                          <?php } ?>
+
+                       </div>
+                  </div>
+            </section>
+            <section class="row skills">
+                  <div class="container">
+                       @foreach ($skills as $my_skills) 
+
+                       <div class="col-xs-4">
+                              <p class="skills_title">{{ $my_skills->skillname }}</p>
+                              <?php 
+                                if($my_skills->rate == 5){ 
+                                    $skills_rate = "100%";
+
+                               }if($my_skills->rate == 4){ 
+                                    $skills_rate = "80%";
+
+                               }if($my_skills->rate == 3){ 
+                                    $skills_rate = "50%";
+                                    
+                               }if($my_skills->rate == 2){ 
+                                    $skills_rate = "35%";
+                                    
+                               }if($my_skills->rate == 1){ 
+                                    $skills_rate = "25%";
+                                    
+                               }
+
+                              ?>
+                                <div class="progress">
+                                  <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width:{{ $skills_rate }};">
+                                    <span class="sr-only">60% Complete</span>
+                                  </div>
+                                </div>
+
+                      </div> 
+
+                       @endforeach
+                   
+                  </div> 
+            </section>
+
+            <section class="row experience" style=""> 
+                  <div class="container">
+                        <p class="title">MY WORK <span class="bold">EXPERIENCE</span></p>
+                  </div>
+                  <div class="container">
+                      @foreach ($work_experience as $work) 
+
+                        <div class="col-md-4">
+                           <div class="experience-tabs ">
+                              <p class="job_title">{{ $work->job_title }}</p>
+                              <p class="date">{{ $work->start_date }} - {{ $work->end_date }}</p>
+                              <p class="company_name">{{ $work->company_name }}</p>
+                              <p class="description"><i>{{ $work->description }}</i></p>
+                           </div> 
+                        </div>
+
+                           
+                      @endforeach 
+                                 
+                  </div>
+            </section>
+
+            <section class="row education" style=""> 
+                  <div class="container">
+                        <p class="title">MY <span class="bold">EDUCATION</span></p>
+                  </div>
+                  <div class="container">
+
+                       @foreach ($education as $edu)
+
+                        <div class="col-md-4">
+                           <div class="education-tabs ">
+                              <p class="job_title">{{ $edu->school }}</p>
+                              <p class="date">{{ $edu->date_start }} - {{ $edu->date_end }}</p>
+                              <p class="company_name">{{ $edu->course }}</p>
+                              <p class="description"><i>{{ $edu->awards_rec }}</i></p>
+                           </div> 
+                        </div>
+                      @endforeach   
+                         
+                  </div>
+            </section>
+
+            <section id="portfolio" class="row recent-work">
+                  <div class="container">
+                      <div class="col-md-12">
+                           <p class="title">MY RECENT <span class="bold">WORK</span></p> 
+                      </div>
+                      <div class="col-md-12">
+                           <ul class="list">
+                             <li><a href="#all" data-toggle="tab">All</a></li>
+                             @foreach ($userPorfoliosCategories as $userCategories)
+                                <li><a href="#tab{{ $userCategories->id }}" data-toggle="tab">{{ $userCategories->title }}</a></li>
+                            @endforeach      
+                           </ul>
+                      </div> 
+                      <div class="row project tab-content">
+
+                        <div id="all" class="tab-pane fade in active">
+
+                            @foreach ($userPorfolios as $userPorfolio)
+
+                               <?php $fileName = "upload/".$userPorfolio->post_thumbnail;
+                                 if(file_exists($fileName)){  ?>
+                                     <a data-toggle="modal" data-target="#portfolio{{ $userPorfolio->id }}" >
+                                         <div class="col-md-4  hvr-float-shadow" style="background-image:url('../upload/{{ $userPorfolio->post_thumbnail }}');background-size:100% 100%;">
+                                            <div style="height:256px;">
+                                                &nbsp;
+                                            </div>
+                                               
+                                        </div>
+                                   </a>                      
+                           <?php }else{ ?>
+                                         <div class="col-md-4" style="background-image:url('../images/portfolio_images.png');background-size:100% 100%;">
+                                               <div style="height:256px;">
+                                               &nbsp;
+                                                </div>
+                                         </div>
+                           <?php } ?>      
+                            @endforeach    
+
+                        </div>
+                            <?php foreach ($userPorfoliosCategories as $userCategories) { ?>
+                                <div id="tab{{ $userCategories->id }}" class="tab-pane fade in">
+
+                                 <?php 
+
+                                    $userId = $profiles->user_id;         
+                                    $portfolioCat = DB::select('select * from portfolio where category_id = :id  and user_id = :userid', 
+                                    ['id' => $userCategories->id,'userid' => $userId]);   
+                                  
+                                 ?>
+
+                                 <?php  foreach ($portfolioCat as $category) { ?>
+
+                                         <?php $fileName = "upload/".$category->post_thumbnail;
+                                            if(file_exists($fileName)){  ?>
+                                               <a data-toggle="modal" data-target="#portfolio{{ $category->id }}" >
+                                                  <div class="col-md-4" style="background-image:url('../upload/{{ $category->post_thumbnail }}');background-size:100% 100%;">
+                                                      <div style="height:256px;">
+                                                        &nbsp;
+                                                      </div>
+
+                                                  </div>
+                                                </a>
+                                          <?php }else{ ?>
+                                                <div class="col-md-4" style="background-image:url('../images/portfolio_images.png');background-size:100% 100%;">
+                                                    <div style="height:256px;">
+                                                      &nbsp;
+                                                    </div>
+                                                </div>
+                                          <?php } ?>
+
+                                <?php } ?>
+
+                                 </div>
+
+                              <?php } ?>
+
+                               @foreach ($userPorfolios as $userPorfolio)
+
+                                <!-- Modal -->
+                                <div class="theme3_portfolio_modal">
+                                      <div id="portfolio{{ $userPorfolio->id }}" class="modal fade" role="dialog">
+                                        <div class="modal-dialog">
+
+                                          <!-- Modal content-->
+                                          <div class="modal-content">
+                                            <div class="modal-header">
+                                              <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                              <h4 class="modal-title">{{ $userPorfolio->port_title }}</h4>
+                                            </div>
+                                            <div class="modal-body">
+
+                                               <?php $fileName = "upload/".$userPorfolio->post_thumbnail;
+                                                if(file_exists($fileName)){  ?>
+                                                  <center>
+                                                    <img class="img-responsive" src="../upload/{{ $userPorfolio->post_thumbnail }}">
+                                                  </center>
+                                               <?php }else{ ?>
+                                                <center>
+                                                      <img class="img-responsive" src="../images/portfolio_images.png">
+                                                </center>
+                                               <?php } ?>  
+                                               <p class="port_excerpt"><?php echo $userPorfolio->port_excerpt; ?></p>
+                                            </div>
+                                          
+                                          </div>
+
+                                        </div>
+                                      </div>
+                                </div>      
+                               <!-- Modal -->
+                               
+                              @endforeach   
+                             
+                      </div>
+
+                  </div>
+            </section>
+            <section class="row quote">
+                  <div class="container">
+                       <div class="col-md-12">
+                          <p class="introduction">Do you have any project?</span></p>
+                          <p class="sub_introduction">Let's Work <span class="bold">Together</span> Indeed!</p>
+                          <!--<button class="btn btn-info">LEARN MORE</button> --> 
+                       </div> 
+                  </div>
+            </section>
+
+            <section class="row contact">
+                  <div class="container">
+                       <div class="col-md-12">
+                          <p class="title">GET IN <span class="bold">TOUCH</span>!</p>
+                       </div>
+                       <div class="col-md-12">
+                          <form class="form-group" action="message/send" id="contactform" method="POST">
+                           {{ csrf_field() }}  
+                              <input type="hidden" name="id" class="input" value="<?php echo $profiles->user_id; ?>">
+                              <div class="col-md-6">
+                                  <label>Your Name</label>
+                                  <input class="form-control" name="name" type="text" placeholder="Enter your name">
+                              </div>
+                              <div class="col-md-6">
+                                  <label>Your Email Address</label>
+                                  <input class="form-control" name="email" type="text" placeholder="Enter your email">
+                              </div>
+                              <div class="col-md-12"><br>
+                               <label>Your Message</label> 
+                              <textarea class="form-control" name="message"  rows="10">Enter your message</textarea>    
+                              </div>
+                              <div class="col-md-4 btn-wrap"><br>
+                              <input type="hidden" value="{{ csrf_token() }}" name="_token" >
+                                  <button type="submit" name="submit" class="btn btn-info">SEND MESSAGE</button>
+                              </div>
+                          </form>  
+
+                       </div> 
+                  </div>
+            </section>
+            <footer id="contact" class="row">
+                <div class="container">
+                    <div class="col-md-6">
+                        <p class="copyright">Copyright © 2017 All Right Reserved. Redesigned by Durian Studio</p>
+                    </div>
+                    <div class="col-md-6">
+                        <ul class="footer-list">
+                          <li><a href="http://{{ $profiles->facebook }}" target="_blank">FACEBOOK</a></li>
+                          <li><a href="http://{{ $profiles->twitter }}" target="_blank">TWITTER</a></li>
+                          <li><a href="http://{{ $profiles->linkedin }}" target="_blank">INSTAGRAM</a></li>
+                          <li><a href="http://{{ $profiles->google }}" target="_blank">WEBSITE</a></li>
+                        </ul>
+                    </div>
+                </div>
+                
+            </footer>
+
+
+              <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+              <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+              <!-- Include all compiled plugins (below), or include individual files as needed -->
+              <script src="../cv/theme3/assets/js/bootstrap.min.js"></script>
+              <script src="../cv/theme3/assets/js/custom.js"></script>
+              <!-- Scrolling Nav JavaScript -->
+              <script src="../cv/theme3/assets/js/jquery.easing.min.js"></script>
+              <script src="../cv/theme3/assets/js/scrolling-nav.js"></script>
+             <script type="text/javascript" src="js/jquery.fancybox-1.3.4.pack.js"></script>
+
+            </body>
+          </html>
+
+
+<?php } ?>
+
+
+
+
 
 
 

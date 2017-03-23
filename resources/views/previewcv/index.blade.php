@@ -551,6 +551,422 @@
 </body>
 </html>
 
+<?php } elseif($theme_selection == "theme3"){ ?>
+
+
+    <!DOCTYPE html>
+          <html lang="en">
+            <head>
+              <meta charset="utf-8">
+              <meta http-equiv="X-UA-Compatible" content="IE=edge">
+              <meta name="viewport" content="width=device-width, initial-scale=1">
+              <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+              <title>Ressu.me | <?php echo $profiles->name; ?> </title>
+
+              <!-- Bootstrap -->
+              <link href="../../cv/theme3/assets/css/bootstrap.min.css" rel="stylesheet">
+              <link href="../../cv/theme3/assets/css/style.css" rel="stylesheet">
+              <link href="../../cv/theme3/assets/css/scrolling-nav.css" rel="stylesheet">
+              <link href="../../cv/theme3/assets/css/hover.css" rel="stylesheet">
+             
+              <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+              <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+              <!--[if lt IE 9]>
+                <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+                <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+              <![endif]-->
+              <style>
+                body.modal-open {
+                    overflow: visible;
+                }
+              </style>
+            </head>
+            <body>
+            <?php 
+            $cover_exists = DB::table('cover_photo')->where(['user_id' => $profiles->user_id,'status' => 'ACTIVE'])->count();
+            if($cover_exists){
+                $cover_photo = DB::table('cover_photo')->where(['user_id' => $profiles->user_id,'status' => 'ACTIVE'])->first();
+                $cover = $cover_photo->cover_photo_name;
+            }else{
+                $cover = "default_cover_theme3.png";
+            }
+            ?>
+             <section id="page-top" class="header navbar navbar navbar-static-top" style="background-image: url('../../cover_photo/default_cover_theme3.png');">
+                    <div class="container">
+                      <div class="navbar-header col-md-5">
+                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                         <i class="fa fa-list"></i>
+                        </button>
+                        <a class="navbar-brand" href="index.html" style="">
+                          <p class="user-name">JAMES SMITH</p>
+                        </a>
+                      </div>
+                      <div class="col-md-2">&nbsp;</div>
+                      <nav id="navbar" class="navbar-collapse collapse header-menu col-md-3">
+                        <ul class="nav navbar-nav navbar-right">
+                          <li><a class="page-scroll" href="#page-top">Home</a></li>
+                          <li><a class="page-scroll" href="#resume">Resume</a></li>
+                          <li><a class="page-scroll" href="#portfolio">Portfolio</a></li>
+                          <li><a class="page-scroll" href="#contact">Contact</a></li>
+                        </ul>
+                      </nav><!--/.nav-collapse -->
+                    </div>
+                    <div class="row"> 
+                         
+                          <div class="col-md-12 banner-details">
+                                <p class="introduction">Hi, I’m James Smith a Web Developer</p>
+                                <p class="sub_introduction">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+                                <a href="#resume" class="btn btn-info page-scroll">GET STARTED</a>
+                          </div>
+                     
+                    </div>
+
+
+
+            </section>
+            <section id="resume" class="row about">
+                    
+                  <div class="container">
+                       <div class="col-md-6">
+                          <p class="introduction">I'M <span class="name">James Smith</span> AND I'M A <span class="position">Web Developer</span></p>
+                          <p class="bio">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries.
+
+                            Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an printer took a galley.</p>
+                          <!--<button class="btn btn-info">LEARN MORE</button>-->
+                    
+                       </div> 
+                       <div class="col-md-6">
+                              <img class="img-responsive" src="../../profilepic/default_profilepic_theme3.png" >
+                       </div>
+                  </div>
+            </section>
+            <section class="row skills">
+                  <div class="container">
+                      
+
+                       <div class="col-xs-4">
+                              <p class="skills_title">PHP</p>
+                              
+                                <div class="progress">
+                                  <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width:60%;">
+                                    <span class="sr-only">60% Complete</span>
+                                  </div>
+                                </div>
+
+                      </div> 
+
+                      <div class="col-xs-4">
+                              <p class="skills_title">HTML/CSS</p>
+                              
+                                <div class="progress">
+                                  <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width:50%;">
+                                    <span class="sr-only">60% Complete</span>
+                                  </div>
+                                </div>
+
+                      </div> 
+
+                      <div class="col-xs-4">
+                              <p class="skills_title">LARAVEL</p>
+                              
+                                <div class="progress">
+                                  <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width:90%;">
+                                    <span class="sr-only">60% Complete</span>
+                                  </div>
+                                </div>
+
+                      </div> 
+                      
+                      <div class="col-xs-4">
+                              <p class="skills_title">WORDPRESS</p>
+                              
+                                <div class="progress">
+                                  <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width:80%;">
+                                    <span class="sr-only">60% Complete</span>
+                                  </div>
+                                </div>
+
+                      </div> 
+                  </div> 
+            </section>
+
+            <section class="row experience" style=""> 
+                  <div class="container">
+                        <p class="title">MY WORK <span class="bold">EXPERIENCE</span></p>
+                  </div>
+                  <div class="container">
+
+                     
+
+                        <div class="col-md-4">
+                           <div class="experience-tabs ">
+                              <p class="job_title">WEB DEVELOPMENT</p>
+                              <p class="date">JANUARY 20 2016 - DECEMBER 20 2017</p>
+                              <p class="company_name">Donec vel sem</p>
+                              <p class="description"><i>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry</i></p>
+                           </div> 
+                        </div>
+
+                        <div class="col-md-4">
+                           <div class="experience-tabs ">
+                              <p class="job_title">WEB DESIGN</p>
+                              <p class="date">JANUARY 20 2016 - DECEMBER 20 2017</p>
+                              <p class="company_name"> Aenean mauris</p>
+                              <p class="description"><i>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry</i></p>
+                           </div> 
+                        </div>
+
+                        <div class="col-md-4">
+                           <div class="experience-tabs ">
+                              <p class="job_title">INTERNET MARKETING</p>
+                              <p class="date">JANUARY 20 2016 - DECEMBER 20 2017</p>
+                              <p class="company_name">Pellentesque vel</p>
+                              <p class="description"><i>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry</i></p>
+                           </div> 
+                        </div>
+      
+                                 
+                  </div>
+            </section>
+
+            <section class="row education" style=""> 
+                  <div class="container">
+                        <p class="title">MY <span class="bold">EDUCATION</span></p>
+                  </div>
+                  <div class="container">
+
+                       
+                        <div class="col-md-4">
+                           <div class="education-tabs ">
+                              <p class="job_title">Donec dictum University</p>
+                              <p class="date">JANUARY 20 2016 - DECEMBER 20 2017</p>
+                              <p class="company_name">BS in Information Technology</p>
+                              <p class="description"><i>Curabitur nec fringilla lorem, et egestas mi. Vivamus venenatis velit leo, sit amet porttitor felis sollicitudin id. Nullam dictum, massa eget rhoncus gravida</i></p>
+                           </div> 
+                        </div>
+                       
+                       <div class="col-md-4">
+                           <div class="education-tabs ">
+                              <p class="job_title">Donec dictum University</p>
+                              <p class="date">JANUARY 20 2016 - DECEMBER 20 2017</p>
+                              <p class="company_name">BS in Information Technology</p>
+                              <p class="description"><i>Curabitur nec fringilla lorem, et egestas mi. Vivamus venenatis velit leo, sit amet porttitor felis sollicitudin id. Nullam dictum, massa eget rhoncus gravida</i></p>
+                           </div> 
+                        </div>
+
+                        <div class="col-md-4">
+                           <div class="education-tabs ">
+                              <p class="job_title">Donec dictum University</p>
+                              <p class="date">JANUARY 20 2016 - DECEMBER 20 2017</p>
+                              <p class="company_name">BS in Information Technology</p>
+                              <p class="description"><i>Curabitur nec fringilla lorem, et egestas mi. Vivamus venenatis velit leo, sit amet porttitor felis sollicitudin id. Nullam dictum, massa eget rhoncus gravida</i></p>
+                           </div> 
+                        </div>
+                         
+                  </div>
+            </section>
+
+            <section id="portfolio" class="row recent-work">
+                  <div class="container">
+                      <div class="col-md-12">
+                           <p class="title">MY RECENT <span class="bold">WORK</span></p> 
+                      </div>
+                      <div class="col-md-12">
+                           <ul class="list">
+                             <li><a href="#all" data-toggle="tab">All</a></li>
+                             @foreach ($userPorfoliosCategories as $userCategories)
+                                <li><a href="#tab{{ $userCategories->id }}" data-toggle="tab">{{ $userCategories->title }}</a></li>
+                            @endforeach      
+                           </ul>
+                      </div> 
+                      <div class="row project tab-content">
+
+                        <div id="all" class="tab-pane fade in active">
+
+                            @foreach ($userPorfolios as $userPorfolio)
+
+                               <?php $fileName = "upload/".$userPorfolio->post_thumbnail;
+                                 if(file_exists($fileName)){  ?>
+                                     <a data-toggle="modal" data-target="#portfolio{{ $userPorfolio->id }}" >
+                                         <div class="col-md-4  hvr-float-shadow" style="background-image:url('../../upload/{{ $userPorfolio->post_thumbnail }}');background-size:100% 100%;">
+                                            <div style="height:256px;">
+                                                &nbsp;
+                                            </div>
+                                               
+                                        </div>
+                                   </a>                      
+                           <?php }else{ ?>
+                                         <div class="col-md-4" style="background-image:url('../../images/portfolio_images.png');background-size:100% 100%;">
+                                               <div style="height:256px;">
+                                               &nbsp;
+                                                </div>
+                                         </div>
+                           <?php } ?>      
+                            @endforeach    
+
+                        </div>
+                            <?php foreach ($userPorfoliosCategories as $userCategories) { ?>
+                                <div id="tab{{ $userCategories->id }}" class="tab-pane fade in">
+
+                                 <?php 
+
+                                    $userId = $profiles->user_id;         
+                                    $portfolioCat = DB::select('select * from portfolio where category_id = :id  and user_id = :userid', 
+                                    ['id' => $userCategories->id,'userid' => $userId]);   
+                                  
+                                 ?>
+
+                                 <?php  foreach ($portfolioCat as $category) { ?>
+
+                                         <?php $fileName = "upload/".$category->post_thumbnail;
+                                            if(file_exists($fileName)){  ?>
+                                               <a data-toggle="modal" data-target="#portfolio{{ $category->id }}" >
+                                                  <div class="col-md-4" style="background-image:url('../../upload/{{ $category->post_thumbnail }}');background-size:100% 100%;">
+                                                      <div style="height:256px;">
+                                                        &nbsp;
+                                                      </div>
+
+                                                  </div>
+                                                </a>
+                                          <?php }else{ ?>
+                                                <div class="col-md-4" style="background-image:url('../../images/portfolio_images.png');background-size:100% 100%;">
+                                                    <div style="height:256px;">
+                                                      &nbsp;
+                                                    </div>
+                                                </div>
+                                          <?php } ?>
+
+                                <?php } ?>
+
+                                 </div>
+
+                              <?php } ?>
+
+                               @foreach ($userPorfolios as $userPorfolio)
+
+                                <!-- Modal -->
+                                <div class="theme3_portfolio_modal">
+                                      <div id="portfolio{{ $userPorfolio->id }}" class="modal fade" role="dialog">
+                                        <div class="modal-dialog">
+
+                                          <!-- Modal content-->
+                                          <div class="modal-content">
+                                            <div class="modal-header">
+                                              <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                              <h4 class="modal-title">{{ $userPorfolio->port_title }}</h4>
+                                            </div>
+                                            <div class="modal-body">
+
+                                               <?php $fileName = "upload/".$userPorfolio->post_thumbnail;
+                                                if(file_exists($fileName)){  ?>
+                                                  <center>
+                                                    <img class="img-responsive" src="../../upload/{{ $userPorfolio->post_thumbnail }}">
+                                                  </center>
+                                               <?php }else{ ?>
+                                                <center>
+                                                      <img class="img-responsive" src="../../images/portfolio_images.png">
+                                                </center>
+                                               <?php } ?>  
+                                               <p class="port_excerpt"><?php echo $userPorfolio->port_excerpt; ?></p>
+                                            </div>
+                                          
+                                          </div>
+
+                                        </div>
+                                      </div>
+                                </div>      
+                               <!-- Modal -->
+                               
+                              @endforeach   
+                             
+                      </div>
+
+                  </div>
+            </section>
+            <section class="row quote">
+                  <div class="container">
+                       <div class="col-md-12">
+                          <p class="introduction">Do you have any project?</span></p>
+                          <p class="sub_introduction">Let's Work <span class="bold">Together</span> Indeed!</p>
+                          <!--<button class="btn btn-info">LEARN MORE</button> --> 
+                       </div> 
+                  </div>
+            </section>
+
+            <section class="row contact">
+                  <div class="container">
+                       <div class="col-md-12">
+                          <p class="title">GET IN <span class="bold">TOUCH</span>!</p>
+                       </div>
+                       <div class="col-md-12">
+                          <form class="form-group">
+                              <input type="hidden" name="id" class="input" value="<?php echo $profiles->user_id; ?>">
+                              <div class="col-md-6">
+                                  <label>Your Name</label>
+                                  <input class="form-control" name="name" type="text" placeholder="Enter your name">
+                              </div>
+                              <div class="col-md-6">
+                                  <label>Your Email Address</label>
+                                  <input class="form-control" name="email" type="text" placeholder="Enter your email">
+                              </div>
+                              <div class="col-md-12"><br>
+                               <label>Your Message</label> 
+                              <textarea class="form-control" name="message"  rows="10">Enter your message</textarea>    
+                              </div>
+                              <div class="col-md-4 btn-wrap"><br>
+                              
+                                  <button type="submit" name="submit" class="btn btn-info">SEND MESSAGE</button>
+                              </div>
+                          </form>  
+
+                       </div> 
+                  </div>
+            </section>
+            <footer id="contact" class="row">
+                <div class="container">
+                    <div class="col-md-6">
+                        <p class="copyright">Copyright © 2017 All Right Reserved. Redesigned by Durian Studio</p>
+                    </div>
+                    <div class="col-md-6">
+                        <ul class="footer-list">
+                          <li><a href="#" target="_blank">FACEBOOK</a></li>
+                          <li><a href="#" target="_blank">TWITTER</a></li>
+                          <li><a href="#" target="_blank">INSTAGRAM</a></li>
+                          <li><a href="#" target="_blank">WEBSITE</a></li>
+                        </ul>
+                    </div>
+                </div>
+                
+            </footer>
+
+
+              <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+              <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+              <!-- Include all compiled plugins (below), or include individual files as needed -->
+              <script src="../../cv/theme3/assets/js/bootstrap.min.js"></script>
+              <script src="../../cv/theme3/assets/js/custom.js"></script>
+              <!-- Scrolling Nav JavaScript -->
+              <script src="../../cv/theme3/assets/js/jquery.easing.min.js"></script>
+              <script src="../../cv/theme3/assets/js/scrolling-nav.js"></script>
+             <script type="text/javascript" src="js/jquery.fancybox-1.3.4.pack.js"></script>
+
+            </body>
+          </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

@@ -87,7 +87,6 @@
                             </li>
 
                       <?php } ?>
-                       <a class="see_all" href="{{ url('/all/usernotification/') }}">See All</a>
                      </ul>
                   <?php } ?>
                   <!---->
@@ -134,7 +133,6 @@
                                 </a>
                             </li>
                         <?php } ?>
-                        <a class="see_all" href="{{ url('/message') }}">See All</a>
                        </ul>
                     <?php } ?>
                     <!---->
@@ -182,7 +180,6 @@
                             </li>
                             
                         <?php } ?>
-                        <a class="see_all" href="{{ url('/all/jobNotification/') }}">See All</a> 
                        </ul>
                     <?php } ?>
                     <!---->
@@ -377,9 +374,14 @@
                               <?php  if ( $userSettings->theme == "clean-modern") { ?>
                                          <p>Active Theme | Theme 1</p>  
                                           <img src="images/theme2.jpg" class="img-themes"> 
-                              <?php }else{ ?>
+                              <?php }?> 
+                              <?php if ( $userSettings->theme == "default") { ?>
                                           <p>Active Theme | Theme 2</p> 
                                          <img src="images/theme1.jpg" class="img-themes"> 
+                              <?php } ?>
+                              <?php if ( $userSettings->theme == "theme3") { ?>
+                                          <p>Active Theme | Theme 2</p> 
+                                         <img src="images/theme3.png" class="img-themes"> 
                               <?php } ?>
                       <?php } ?> 
                                    
@@ -389,6 +391,7 @@
                         <ul>
                           <li><a href="/previewcv/theme1/<?php echo Auth::id(); ?>">Theme 1</a></li>
                           <li><a href="/previewcv/theme2/<?php echo Auth::id(); ?>">Theme 2</a></li>
+                          <li><a href="/previewcv/theme3/<?php echo Auth::id(); ?>">Theme 3</a></li>
                         </ul>
                      </div>
                      <div class="col-md-12 line"></div>                
@@ -527,14 +530,30 @@
                                                           <select class="form-control" name="themes">
                                                             <option value="clean-modern">Theme1</option>
                                                             <option value="default">Theme2</option>
+                                                            <option value="theme3">Theme3</option>  
                                                           </select>
-                                                     <?php }else{ ?>
+                                                     <?php } ?>
+                                                     <?php  if ( $userSettings->theme == "default") { ?>
                                                           <select class="form-control" name="themes">
                                                             <option value="default">Theme2</option>
-                                                            <option value="clean-modern">Theme1</option>  
+                                                            <option value="clean-modern">Theme1</option>
+                                                             <option value="theme3">Theme3</option>  
                                                           </select> 
                                                      <?php } ?>
-                                                 
+                                                     <?php  if ( $userSettings->theme == "theme3") { ?>
+                                                          <select class="form-control" name="themes">
+                                                            <option value="theme3">Theme3</option> 
+                                                            <option value="clean-modern">Theme1</option>
+                                                            <option value="default">Theme2</option>
+                                                          </select> 
+                                                     <?php } ?>
+                                                      <?php  if ( $userSettings->theme == " ") { ?>
+                                                          <select class="form-control" name="themes">
+                                                            <option value="theme3">Theme3</option> 
+                                                            <option value="clean-modern">Theme1</option>
+                                                            <option value="default">Theme2</option>
+                                                          </select> 
+                                                     <?php } ?>
                                             <?php } ?>
                                             </div>
                                             </div>

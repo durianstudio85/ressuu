@@ -1,0 +1,435 @@
+
+@font-face {
+    font-family: 'Dosis-Regular';
+    src: url('../fonts/Dosis-Regular.ttf');
+}
+
+@font-face {
+    font-family: 'Dosis-Light';
+    src: url('../fonts/Dosis-Light.ttf');
+}
+@font-face {
+    font-family: 'Dosis-Bold';
+    src: url('../fonts/Dosis-Bold.ttf');
+}
+@font-face {
+    font-family: 'Dosis-SemiBold';
+    src: url('../fonts/Dosis-Bold.ttf');
+}
+@font-face {
+    font-family: 'Dosis-ExtraBold';
+    src: url('../fonts/Dosis-ExtraBold.ttf');
+}
+@font-face {
+    font-family: 'OpenSans-Regular';
+    src: url('../fonts/OpenSans-Regular.ttf');
+}
+@font-face {
+    font-family: 'OpenSans-Light';
+    src: url('../fonts/OpenSans-Light.ttf');
+}
+@font-face {
+    font-family: 'Roboto-Regular';
+    src: url('../fonts/Roboto-Regular.ttf');
+}
+
+
+
+
+
+html{
+	overflow-x: hidden;
+}
+
+
+/******** HEADER AND BANNER SECTION *************/
+
+.header{
+	
+	background-repeat: no-repeat;
+	background-size:  100% 100%;
+	height: 100%;
+	width: 100%;
+	padding-top:40px;
+}
+.user-name{
+	font-family: 'Dosis-Bold';
+	font-size: 30px;
+	color:#fff;
+	text-transform: uppercase;
+}
+.header nav ul li a{
+	color:#fff;
+	font-family: 'Roboto-Regular';
+	font-size:16px;
+}
+.header nav li a:hover{
+	background: transparent;
+}
+.banner-details{
+	color:#fff;
+	margin: 300px 0px 0px 0px;
+	text-align: center;
+}
+.banner-details .introduction{
+	font-size:40px;
+	font-family: 'Dosis-SemiBold';
+}
+.banner-details .sub_introduction{
+	font-size:20px;
+	font-family: 'OpenSans-Regular';
+	font-weight: 100px;
+}
+.banner-details a{
+	font-size:20px;
+	font-family: 'Dosis-SemiBold';
+	border-radius: 50px;
+	padding: 9px 21px;
+
+}
+
+
+
+/******** HEADER AND BANNER SECTION *************/
+
+/******** ABOUT ME SECTION *************/
+.about{
+	/*height: 540px;*/
+	padding:77px 0px 77px 0px;
+}
+.about .introduction{
+	font-size:35px;
+	font-family: 'Dosis-Regular';
+	color: #292929;
+}
+.about .introduction .name{
+	font-family: 'Dosis-ExtraBold';
+	text-transform: uppercase;
+
+}
+.about .introduction .position{
+	font-family: 'Dosis-ExtraBold';
+	text-transform: uppercase;
+
+}
+.about .bio{
+	font-size:15px;
+	font-family: 'OpenSans-Regular';
+	color:#717171;
+}
+.about button{
+	font-size:20px;
+	font-family: 'Dosis-SemiBold';
+	border-radius: 50px;
+	padding: 9px 21px;
+	margin:25px 0px 0px 0px;
+}
+
+/******** ABOUT ME SECTION *************/
+
+
+/******** SKILLS SECTION *************/
+.skills{
+	background: #ffffff;
+	padding:10px 0px 70px 0px;
+}
+.skills .title{
+	font-size:35px;
+	font-family: 'Dosis-Regular';
+	color: #292929;
+	text-align: center;
+
+}
+.skills .skills_title{
+	font-size:15px;
+	font-family: 'Dosis-Regular';
+	color: #292929;
+	text-transform: uppercase;
+
+}
+.skills .title .bold{
+	font-family: 'Dosis-ExtraBold';
+}
+.skills .progress{
+	border-radius: 0px;
+	height: 8px !important;
+	width: 100%;
+}
+.skills .progress-bar{
+	background: #292929;
+}
+
+/******** SKILLS SECTION *************/
+
+/******** EXPERIENCE SECTION *************/
+.experience{
+	background: #f6f6f6;
+	padding:77px 0px 77px 0px;
+}
+.experience .title{
+	font-size:35px;
+	font-family: 'Dosis-Regular';
+	color: #292929;
+	text-align: center;
+
+}
+.experience .title .bold{
+	font-family: 'Dosis-ExtraBold';
+}
+.experience .experience-tabs{
+	background: #ffffff;
+	padding:10px;
+}
+.experience .experience-tabs .job_title{
+	color: #292929;
+	font-family: "Dosis-ExtraBold";
+	font-size: 20px;
+	text-transform: uppercase;
+	border-width: 0px 0px 2px 0px;
+	border-style: solid;
+	border-color: #131313;
+}
+.experience .experience-tabs .date{
+	color: #292929;
+	font-family: "Dosis-Light";
+	font-size: 13px;
+	text-transform: uppercase;
+	margin: -5px 0px 0px 0px;
+
+}
+.experience .experience-tabs .company_name{
+	color: #292929;
+	font-family: "Dosis-Bold";
+	font-size: 20px;
+	text-transform: uppercase;
+	text-align: right;
+}
+.experience .experience-tabs .description{
+	color: #292929;
+	font-family: "Dosis-Light";
+	font-size: 15px;
+	
+}
+/******** EXPERIENCE SECTION *************/
+
+
+/******** EXPERIENCE SECTION *************/
+.education{
+	background: #f6f6f6;
+	padding:77px 0px 77px 0px;
+}
+.education .title{
+	font-size:35px;
+	font-family: 'Dosis-Regular';
+	color: #292929;
+	text-align: center;
+
+}
+.education .title .bold{
+	font-family: 'Dosis-ExtraBold';
+}
+.education .education-tabs{
+	background: #ffffff;
+	padding:10px;
+}
+.education .education-tabs .job_title{
+	color: #292929;
+	font-family: "Dosis-ExtraBold";
+	font-size: 20px;
+	text-transform: uppercase;
+	border-width: 0px 0px 2px 0px;
+	border-style: solid;
+	border-color: #131313;
+}
+.education .education-tabs .date{
+	color: #292929;
+	font-family: "Dosis-Light";
+	font-size: 13px;
+	text-transform: uppercase;
+	margin: -5px 0px 0px 0px;
+
+}
+.education .education-tabs .company_name{
+	color: #292929;
+	font-family: "Dosis-Bold";
+	font-size: 20px;
+	text-transform: uppercase;
+	text-align: right;
+}
+.education .education-tabs .description{
+	color: #292929;
+	font-family: "Dosis-Light";
+	font-size: 15px;
+	
+}
+/******** EXPERIENCE SECTION *************/
+
+
+/******** RECENT WORK SECTION *************/
+.recent-work{
+	padding:77px 0px 0px 0px;
+}
+.recent-work .title{
+	font-size:35px;
+	font-family: 'Dosis-Regular';
+	color: #292929;
+	text-align: center;
+}
+.recent-work .title .bold{
+	font-family: 'Dosis-ExtraBold';
+}
+.recent-work .list{
+	font-family: 'OpenSans-Regular';
+	font-size:15px;
+	text-align: center;
+
+}
+.recent-work .list .active{
+	border-style: solid;
+	border-width: 0px 0px 2px 0px !important;
+	border-color: #131313;
+	padding:0px 0px 9px 0px;
+}
+.recent-work .list li{
+	list-style: none;
+	display: inline-block;
+	margin:0px 30px 0px 0px;
+	padding:0px 0px 9px 0px;
+
+
+
+}
+.recent-work .list li a{
+	text-decoration: none;
+	color: inherit;	
+	text-transform: uppercase;
+}
+.recent-work .project{
+	padding: 120px 0px 120px 0px;
+}
+
+.theme3_portfolio_modal .modal-content{
+	border-radius: 0px !important;
+}
+.theme3_portfolio_modal .modal-content .port_excerpt{
+	font-size:15px;
+	font-family: 'Dosis-Regular';
+	margin: 10px 0px 0px 0px;
+}
+.theme3_portfolio_modal .modal-content .modal-title{
+	font-size:20px;
+	font-family: 'Dosis-Regular';
+	color: #292929;
+	text-transform: uppercase;
+}
+.hvr-underline-from-center:before {
+  background: #131313 !important;
+}
+
+
+
+
+
+/******** RECENT WORK SECTION *************/
+
+/******** RECENT WORK SECTION *************/
+.quote{
+	padding:135px 0px 0px 0px;
+	height: 427px;
+	background-image: url('../../assets/images/bg1.png');
+	background-repeat: no-repeat;
+	background-size: 100% 100%;
+	text-align: center;
+	color: #fff;
+	
+}
+.quote .introduction{
+	font-family: 'OpenSans-Regular';
+	font-size:20px;
+	text-align: center;
+}
+.quote .sub_introduction{
+	font-size:40px;
+	font-family: 'Dosis-Regular';
+	text-transform: uppercase;
+}
+.quote .sub_introduction .bold{
+	font-family: 'Dosis-ExtraBold';
+}
+.quote button{
+	font-size:20px;
+	font-family: 'Dosis-SemiBold';
+	border-radius: 50px;
+	padding: 9px 21px;
+	margin:25px 0px 0px 0px;
+}
+/******** RECENT WORK SECTION *************/
+
+/******** RECENT WORK SECTION *************/
+.contact{
+	background: #f6f6f6;
+	padding: 85px 0px 85px 0px;
+}
+.contact .title{
+	font-size:35px;
+	font-family: 'Dosis-Regular';
+	text-transform: uppercase;
+	text-align: center;
+}
+.contact .title .bold{
+	font-size:35px;
+	font-family: 'Dosis-ExtraBold';
+}
+.contact form{
+	margin:48px 0px 0px 0px;
+	font-family: 'OpenSans-Light';
+}
+.contact form label{
+	font-size: 12px;
+	color: #717171;
+	font-family: 'OpenSans-Light';
+}
+.contact form input{
+	border-radius: 0px;
+	border-color: #fff;
+	height: 50px;
+}
+.contact form  textarea{
+	border-radius: 0px;
+	border-color: #fff;
+}
+
+.contact form button{
+	font-size:20px;
+	font-family: 'Dosis-SemiBold';
+	border-radius: 50px;
+	padding: 9px 21px;
+	margin:25px 0px 0px 0px;
+}
+
+/******** RECENT WORK SECTION *************/
+
+/******** FOOTER SECTION *************/
+footer{
+	height: 100px;
+	background: #0f0f0f;
+	color: #fff;
+	font-family: 'OpenSans-Regular';
+	padding:47px 0px 0px 0px;
+}
+footer .footer-list{
+	text-align: right;
+}
+footer .footer-list li{
+	list-style: none;
+	display: inline;
+	margin:0px 20px 0px 0px;
+}
+footer .footer-list li a{
+	text-decoration: none;
+	color:inherit;
+}
+
+
+
+/******** FOOTER SECTION *************/
