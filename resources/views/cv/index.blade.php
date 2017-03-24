@@ -676,7 +676,7 @@ function myFunction() {
 <?php if($theme_selection == "theme3"){ ?> 
 
 
-    <!DOCTYPE html>
+<!DOCTYPE html>
           <html lang="en">
             <head>
               <meta charset="utf-8">
@@ -690,7 +690,8 @@ function myFunction() {
               <link href="../cv/theme3/assets/css/style.css" rel="stylesheet">
               <link href="../cv/theme3/assets/css/scrolling-nav.css" rel="stylesheet">
               <link href="../cv/theme3/assets/css/hover.css" rel="stylesheet">
-              
+              <link href="../cv/theme3/assets/css/imagehover.css" rel="stylesheet">
+              <link href="../cv/theme3/assets/css/animate.css" rel="stylesheet">
               <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
               <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
               <!--[if lt IE 9]>
@@ -702,6 +703,7 @@ function myFunction() {
                     overflow: visible;
                 }
               </style>
+              
             </head>
             <body>
             <?php 
@@ -735,8 +737,8 @@ function myFunction() {
                     </div>
                     <div class="row"> 
                          
-                          <div class="col-md-12 banner-details">
-                                <p class="introduction">Hi, I'm <?php echo $profiles->name; ?> a <?php echo $profiles->position; ?></p>
+                          <div class="col-md-12 banner-details wow bounceInDown" >
+                                <p class="introduction ">Hi, I'm <?php echo $profiles->name; ?> a <?php echo $profiles->position; ?></p>
                                 <p class="sub_introduction"><?php echo substr($profiles->bio, 0, 100);  ?></p>
                                 <a href="#resume" class="btn btn-info page-scroll">GET STARTED</a>
                           </div>
@@ -751,13 +753,13 @@ function myFunction() {
                             list($width, $height) = getimagesize('profilepic/default_profilepic_theme3.png');   
                       ?>
                   <div class="container">
-                       <div class="col-md-6">
+                       <div class="col-md-6 wow fadeInLeft">
                           <p class="introduction">I'M <span class="name"><?php echo $profiles->name; ?></span> AND I'M A <span class="position"><?php echo $profiles->position; ?></span></p>
                           <p class="bio"><?php echo $profiles->bio; ?></p>
                           <!--<button class="btn btn-info">LEARN MORE</button>-->
                     
                        </div> 
-                       <div class="col-md-6">
+                       <div class="col-md-6 wow fadeInRight">
                            <?php if(!empty($profiles->profile_picture)  AND $profiles->profile_picture != " "  ){ ?>
                               <img class="img-reponsive" height="{{ $height }}" width="{{ $width }}"  src="../profilepic/<?php echo $profiles->profile_picture; ?>"></a> 
                                 <?php  }else{ ?>
@@ -772,7 +774,7 @@ function myFunction() {
                   <div class="container">
                        @foreach ($skills as $my_skills) 
 
-                       <div class="col-xs-4">
+                       <div class="col-xs-4 wow fadeInDown">
                               <p class="skills_title">{{ $my_skills->skillname }}</p>
                               <?php 
                                 if($my_skills->rate == 5){ 
@@ -808,12 +810,12 @@ function myFunction() {
 
             <section class="row experience" style=""> 
                   <div class="container">
-                        <p class="title">MY WORK <span class="bold">EXPERIENCE</span></p>
+                        <p class="title wow fadeInDown">MY WORK <span class="bold">EXPERIENCE</span></p>
                   </div>
                   <div class="container">
                       @foreach ($work_experience as $work) 
 
-                        <div class="col-md-4">
+                        <div class="col-md-4 wow fadeInLeft">
                            <div class="experience-tabs ">
                               <p class="job_title">{{ $work->job_title }}</p>
                               <p class="date">{{ $work->start_date }} - {{ $work->end_date }}</p>
@@ -830,13 +832,13 @@ function myFunction() {
 
             <section class="row education" style=""> 
                   <div class="container">
-                        <p class="title">MY <span class="bold">EDUCATION</span></p>
+                        <p class="title wow fadeInDown">MY <span class="bold">EDUCATION</span></p>
                   </div>
                   <div class="container">
 
                        @foreach ($education as $edu)
 
-                        <div class="col-md-4">
+                        <div class="col-md-4 wow fadeInLeft">
                            <div class="education-tabs ">
                               <p class="job_title">{{ $edu->school }}</p>
                               <p class="date">{{ $edu->date_start }} - {{ $edu->date_end }}</p>
@@ -852,10 +854,10 @@ function myFunction() {
             <section id="portfolio" class="row recent-work">
                   <div class="container">
                       <div class="col-md-12">
-                           <p class="title">MY RECENT <span class="bold">WORK</span></p> 
+                           <p class="title wow fadeInDown">MY RECENT <span class="bold">WORK</span></p> 
                       </div>
                       <div class="col-md-12">
-                           <ul class="list">
+                           <ul class="list wow fadeInUp">
                              <li><a href="#all" data-toggle="tab">All</a></li>
                              @foreach ($userPorfoliosCategories as $userCategories)
                                 <li><a href="#tab{{ $userCategories->id }}" data-toggle="tab">{{ $userCategories->title }}</a></li>
@@ -865,25 +867,41 @@ function myFunction() {
                       <div class="row project tab-content">
 
                         <div id="all" class="tab-pane fade in active">
-
+                
+                             
                             @foreach ($userPorfolios as $userPorfolio)
+
+
+                               <?php  $portfolioCat_info = DB::table('portfolio_cat')->where('id',$userPorfolio->category_id)->first(); ?>
 
                                <?php $fileName = "upload/".$userPorfolio->post_thumbnail;
                                  if(file_exists($fileName)){  ?>
+
                                      <a data-toggle="modal" data-target="#portfolio{{ $userPorfolio->id }}" >
-                                         <div class="col-md-4  hvr-float-shadow" style="background-image:url('../upload/{{ $userPorfolio->post_thumbnail }}');background-size:100% 100%;">
-                                            <div style="height:256px;">
-                                                &nbsp;
+                                         <div class="portfolio-container col-md-4  hvr-glow " style="background-image:url('../upload/{{ $userPorfolio->post_thumbnail }}');">
+                                            <div class="overlay" style="">
+                                                    <p class="title">{{ $userPorfolio->port_title }}</p>
+                                                    <p class="category">{{ $portfolioCat_info->title }}</p>
+                                                    <?php   $excerpt = substr($userPorfolio->port_excerpt, 0, 100); ?>
+                                                    <p class="excerpt"><i>{!! $excerpt  !!}</i></p>
                                             </div>
                                                
                                         </div>
-                                   </a>                      
+                                   </a>   
+
                            <?php }else{ ?>
-                                         <div class="col-md-4" style="background-image:url('../images/portfolio_images.png');background-size:100% 100%;">
-                                               <div style="height:256px;">
-                                               &nbsp;
-                                                </div>
+
+                                  <a data-toggle="modal" data-target="#portfolio{{ $userPorfolio->id }}" >
+                                         <div class="portfolio-container col-md-4  hvr-glow" style="background-image:url('../images/portfolio_images.png');">
+                                                <div class="overlay" style="">
+                                                    <p class="title">{{ $userPorfolio->port_title }}</p>
+                                                    <p class="category">{{ $portfolioCat_info->title }}</p>
+                                                    <?php   $excerpt = substr($userPorfolio->port_excerpt, 0, 100); ?>
+                                                    <p class="excerpt"><i>{!! $excerpt  !!}</i></p>
+                                                 </div>
                                          </div>
+                                  </a>
+
                            <?php } ?>      
                             @endforeach    
 
@@ -903,20 +921,31 @@ function myFunction() {
 
                                          <?php $fileName = "upload/".$category->post_thumbnail;
                                             if(file_exists($fileName)){  ?>
-                                               <a data-toggle="modal" data-target="#portfolio{{ $category->id }}" >
-                                                  <div class="col-md-4" style="background-image:url('../upload/{{ $category->post_thumbnail }}');background-size:100% 100%;">
-                                                      <div style="height:256px;">
-                                                        &nbsp;
-                                                      </div>
 
+                                               <a data-toggle="modal" data-target="#portfolio{{ $category->id }}" >
+                                                  <div class="portfolio-container col-md-4  hvr-glow" style="background-image:url('../upload/{{ $category->post_thumbnail }}');">
+                                                        <div class="overlay" style="">
+                                                            <p class="title">{{ $category->port_title }}</p>
+                                                            <p class="category">{{ $userCategories->title }}</p>
+                                                            <?php   $excerpt = substr($category->port_excerpt, 0, 100); ?>
+                                                            <p class="excerpt"><i>{!! $excerpt  !!}</i></p>
+                                                         </div>
                                                   </div>
                                                 </a>
+
                                           <?php }else{ ?>
-                                                <div class="col-md-4" style="background-image:url('../images/portfolio_images.png');background-size:100% 100%;">
-                                                    <div style="height:256px;">
-                                                      &nbsp;
-                                                    </div>
+
+                                                <a data-toggle="modal" data-target="#portfolio{{ $category->id }}" >
+                                                <div class="portfolio-container col-md-4  hvr-glow" style="background-image:url('../images/portfolio_images.png');">
+                                                    <div class="overlay" style="">
+                                                            <p class="title">{{ $category->port_title }}</p>
+                                                            <p class="category">{{ $userCategories->title }}</p>
+                                                            <?php   $excerpt = substr($category->port_excerpt, 0, 100); ?>
+                                                            <p class="excerpt"><i>{!! $excerpt  !!}</i></p>
+                                                         </div>
                                                 </div>
+                                                </a>
+
                                           <?php } ?>
 
                                 <?php } ?>
@@ -968,7 +997,7 @@ function myFunction() {
             </section>
             <section class="row quote">
                   <div class="container">
-                       <div class="col-md-12">
+                       <div class="col-md-12 wow fadeInDown">
                           <p class="introduction">Do you have any project?</span></p>
                           <p class="sub_introduction">Let's Work <span class="bold">Together</span> Indeed!</p>
                           <!--<button class="btn btn-info">LEARN MORE</button> --> 
@@ -979,7 +1008,7 @@ function myFunction() {
             <section class="row contact">
                   <div class="container">
                        <div class="col-md-12">
-                          <p class="title">GET IN <span class="bold">TOUCH</span>!</p>
+                          <p class="title wow fadeInDown">GET IN <span class="bold">TOUCH</span>!</p>
                        </div>
                        <div class="col-md-12">
                           <form class="form-group" action="message/send" id="contactform" method="POST">
@@ -1013,10 +1042,10 @@ function myFunction() {
                     </div>
                     <div class="col-md-6">
                         <ul class="footer-list">
-                          <li><a href="http://{{ $profiles->facebook }}" target="_blank">FACEBOOK</a></li>
-                          <li><a href="http://{{ $profiles->twitter }}" target="_blank">TWITTER</a></li>
-                          <li><a href="http://{{ $profiles->linkedin }}" target="_blank">INSTAGRAM</a></li>
-                          <li><a href="http://{{ $profiles->google }}" target="_blank">WEBSITE</a></li>
+                          <li><a href="#" target="_blank">FACEBOOK</a></li>
+                          <li><a href="#" target="_blank">TWITTER</a></li>
+                          <li><a href="#" target="_blank">INSTAGRAM</a></li>
+                          <li><a href="#" target="_blank">WEBSITE</a></li>
                         </ul>
                     </div>
                 </div>
@@ -1033,6 +1062,11 @@ function myFunction() {
               <script src="../cv/theme3/assets/js/jquery.easing.min.js"></script>
               <script src="../cv/theme3/assets/js/scrolling-nav.js"></script>
              <script type="text/javascript" src="js/jquery.fancybox-1.3.4.pack.js"></script>
+             <script src="../cv/theme3/assets/js/wow.js"></script>
+              <script>
+                 new WOW().init();
+              </script>
+             
 
             </body>
           </html>
@@ -1687,7 +1721,8 @@ function myFunction() {
               <link href="../cv/theme3/assets/css/style.css" rel="stylesheet">
               <link href="../cv/theme3/assets/css/scrolling-nav.css" rel="stylesheet">
               <link href="../cv/theme3/assets/css/hover.css" rel="stylesheet">
-              
+              <link href="../cv/theme3/assets/css/imagehover.css" rel="stylesheet">
+              <link href="../cv/theme3/assets/css/animate.css" rel="stylesheet">
               <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
               <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
               <!--[if lt IE 9]>
@@ -1699,6 +1734,7 @@ function myFunction() {
                     overflow: visible;
                 }
               </style>
+              
             </head>
             <body>
             <?php 
@@ -1732,8 +1768,8 @@ function myFunction() {
                     </div>
                     <div class="row"> 
                          
-                          <div class="col-md-12 banner-details">
-                                <p class="introduction">Hi, I'm <?php echo $profiles->name; ?> a <?php echo $profiles->position; ?></p>
+                          <div class="col-md-12 banner-details wow bounceInDown" >
+                                <p class="introduction ">Hi, I'm <?php echo $profiles->name; ?> a <?php echo $profiles->position; ?></p>
                                 <p class="sub_introduction"><?php echo substr($profiles->bio, 0, 100);  ?></p>
                                 <a href="#resume" class="btn btn-info page-scroll">GET STARTED</a>
                           </div>
@@ -1748,13 +1784,13 @@ function myFunction() {
                             list($width, $height) = getimagesize('profilepic/default_profilepic_theme3.png');   
                       ?>
                   <div class="container">
-                       <div class="col-md-6">
+                       <div class="col-md-6 wow fadeInLeft">
                           <p class="introduction">I'M <span class="name"><?php echo $profiles->name; ?></span> AND I'M A <span class="position"><?php echo $profiles->position; ?></span></p>
                           <p class="bio"><?php echo $profiles->bio; ?></p>
                           <!--<button class="btn btn-info">LEARN MORE</button>-->
                     
                        </div> 
-                       <div class="col-md-6">
+                       <div class="col-md-6 wow fadeInRight">
                            <?php if(!empty($profiles->profile_picture)  AND $profiles->profile_picture != " "  ){ ?>
                               <img class="img-reponsive" height="{{ $height }}" width="{{ $width }}"  src="../profilepic/<?php echo $profiles->profile_picture; ?>"></a> 
                                 <?php  }else{ ?>
@@ -1769,7 +1805,7 @@ function myFunction() {
                   <div class="container">
                        @foreach ($skills as $my_skills) 
 
-                       <div class="col-xs-4">
+                       <div class="col-xs-4 wow fadeInDown">
                               <p class="skills_title">{{ $my_skills->skillname }}</p>
                               <?php 
                                 if($my_skills->rate == 5){ 
@@ -1805,12 +1841,12 @@ function myFunction() {
 
             <section class="row experience" style=""> 
                   <div class="container">
-                        <p class="title">MY WORK <span class="bold">EXPERIENCE</span></p>
+                        <p class="title wow fadeInDown">MY WORK <span class="bold">EXPERIENCE</span></p>
                   </div>
                   <div class="container">
                       @foreach ($work_experience as $work) 
 
-                        <div class="col-md-4">
+                        <div class="col-md-4 wow fadeInLeft">
                            <div class="experience-tabs ">
                               <p class="job_title">{{ $work->job_title }}</p>
                               <p class="date">{{ $work->start_date }} - {{ $work->end_date }}</p>
@@ -1827,13 +1863,13 @@ function myFunction() {
 
             <section class="row education" style=""> 
                   <div class="container">
-                        <p class="title">MY <span class="bold">EDUCATION</span></p>
+                        <p class="title wow fadeInDown">MY <span class="bold">EDUCATION</span></p>
                   </div>
                   <div class="container">
 
                        @foreach ($education as $edu)
 
-                        <div class="col-md-4">
+                        <div class="col-md-4 wow fadeInLeft">
                            <div class="education-tabs ">
                               <p class="job_title">{{ $edu->school }}</p>
                               <p class="date">{{ $edu->date_start }} - {{ $edu->date_end }}</p>
@@ -1849,10 +1885,10 @@ function myFunction() {
             <section id="portfolio" class="row recent-work">
                   <div class="container">
                       <div class="col-md-12">
-                           <p class="title">MY RECENT <span class="bold">WORK</span></p> 
+                           <p class="title wow fadeInDown">MY RECENT <span class="bold">WORK</span></p> 
                       </div>
                       <div class="col-md-12">
-                           <ul class="list">
+                           <ul class="list wow fadeInUp">
                              <li><a href="#all" data-toggle="tab">All</a></li>
                              @foreach ($userPorfoliosCategories as $userCategories)
                                 <li><a href="#tab{{ $userCategories->id }}" data-toggle="tab">{{ $userCategories->title }}</a></li>
@@ -1862,25 +1898,41 @@ function myFunction() {
                       <div class="row project tab-content">
 
                         <div id="all" class="tab-pane fade in active">
-
+                
+                             
                             @foreach ($userPorfolios as $userPorfolio)
+
+
+                               <?php  $portfolioCat_info = DB::table('portfolio_cat')->where('id',$userPorfolio->category_id)->first(); ?>
 
                                <?php $fileName = "upload/".$userPorfolio->post_thumbnail;
                                  if(file_exists($fileName)){  ?>
+
                                      <a data-toggle="modal" data-target="#portfolio{{ $userPorfolio->id }}" >
-                                         <div class="col-md-4  hvr-float-shadow" style="background-image:url('../upload/{{ $userPorfolio->post_thumbnail }}');background-size:100% 100%;">
-                                            <div style="height:256px;">
-                                                &nbsp;
+                                         <div class="portfolio-container col-md-4  hvr-glow " style="background-image:url('../upload/{{ $userPorfolio->post_thumbnail }}');">
+                                            <div class="overlay" style="">
+                                                    <p class="title">{{ $userPorfolio->port_title }}</p>
+                                                    <p class="category">{{ $portfolioCat_info->title }}</p>
+                                                    <?php   $excerpt = substr($userPorfolio->port_excerpt, 0, 100); ?>
+                                                    <p class="excerpt"><i>{!! $excerpt  !!}</i></p>
                                             </div>
                                                
                                         </div>
-                                   </a>                      
+                                   </a>   
+
                            <?php }else{ ?>
-                                         <div class="col-md-4" style="background-image:url('../images/portfolio_images.png');background-size:100% 100%;">
-                                               <div style="height:256px;">
-                                               &nbsp;
-                                                </div>
+
+                                  <a data-toggle="modal" data-target="#portfolio{{ $userPorfolio->id }}" >
+                                         <div class="portfolio-container col-md-4  hvr-glow" style="background-image:url('../images/portfolio_images.png');">
+                                                <div class="overlay" style="">
+                                                    <p class="title">{{ $userPorfolio->port_title }}</p>
+                                                    <p class="category">{{ $portfolioCat_info->title }}</p>
+                                                    <?php   $excerpt = substr($userPorfolio->port_excerpt, 0, 100); ?>
+                                                    <p class="excerpt"><i>{!! $excerpt  !!}</i></p>
+                                                 </div>
                                          </div>
+                                  </a>
+
                            <?php } ?>      
                             @endforeach    
 
@@ -1900,20 +1952,31 @@ function myFunction() {
 
                                          <?php $fileName = "upload/".$category->post_thumbnail;
                                             if(file_exists($fileName)){  ?>
-                                               <a data-toggle="modal" data-target="#portfolio{{ $category->id }}" >
-                                                  <div class="col-md-4" style="background-image:url('../upload/{{ $category->post_thumbnail }}');background-size:100% 100%;">
-                                                      <div style="height:256px;">
-                                                        &nbsp;
-                                                      </div>
 
+                                               <a data-toggle="modal" data-target="#portfolio{{ $category->id }}" >
+                                                  <div class="portfolio-container col-md-4  hvr-glow" style="background-image:url('../upload/{{ $category->post_thumbnail }}');">
+                                                        <div class="overlay" style="">
+                                                            <p class="title">{{ $category->port_title }}</p>
+                                                            <p class="category">{{ $userCategories->title }}</p>
+                                                            <?php   $excerpt = substr($category->port_excerpt, 0, 100); ?>
+                                                            <p class="excerpt"><i>{!! $excerpt  !!}</i></p>
+                                                         </div>
                                                   </div>
                                                 </a>
+
                                           <?php }else{ ?>
-                                                <div class="col-md-4" style="background-image:url('../images/portfolio_images.png');background-size:100% 100%;">
-                                                    <div style="height:256px;">
-                                                      &nbsp;
-                                                    </div>
+
+                                                <a data-toggle="modal" data-target="#portfolio{{ $category->id }}" >
+                                                <div class="portfolio-container col-md-4  hvr-glow" style="background-image:url('../images/portfolio_images.png');">
+                                                    <div class="overlay" style="">
+                                                            <p class="title">{{ $category->port_title }}</p>
+                                                            <p class="category">{{ $userCategories->title }}</p>
+                                                            <?php   $excerpt = substr($category->port_excerpt, 0, 100); ?>
+                                                            <p class="excerpt"><i>{!! $excerpt  !!}</i></p>
+                                                         </div>
                                                 </div>
+                                                </a>
+
                                           <?php } ?>
 
                                 <?php } ?>
@@ -1965,7 +2028,7 @@ function myFunction() {
             </section>
             <section class="row quote">
                   <div class="container">
-                       <div class="col-md-12">
+                       <div class="col-md-12 wow fadeInDown">
                           <p class="introduction">Do you have any project?</span></p>
                           <p class="sub_introduction">Let's Work <span class="bold">Together</span> Indeed!</p>
                           <!--<button class="btn btn-info">LEARN MORE</button> --> 
@@ -1976,7 +2039,7 @@ function myFunction() {
             <section class="row contact">
                   <div class="container">
                        <div class="col-md-12">
-                          <p class="title">GET IN <span class="bold">TOUCH</span>!</p>
+                          <p class="title wow fadeInDown">GET IN <span class="bold">TOUCH</span>!</p>
                        </div>
                        <div class="col-md-12">
                           <form class="form-group" action="message/send" id="contactform" method="POST">
@@ -2010,10 +2073,10 @@ function myFunction() {
                     </div>
                     <div class="col-md-6">
                         <ul class="footer-list">
-                          <li><a href="http://{{ $profiles->facebook }}" target="_blank">FACEBOOK</a></li>
-                          <li><a href="http://{{ $profiles->twitter }}" target="_blank">TWITTER</a></li>
-                          <li><a href="http://{{ $profiles->linkedin }}" target="_blank">INSTAGRAM</a></li>
-                          <li><a href="http://{{ $profiles->google }}" target="_blank">WEBSITE</a></li>
+                          <li><a href="#" target="_blank">FACEBOOK</a></li>
+                          <li><a href="#" target="_blank">TWITTER</a></li>
+                          <li><a href="#" target="_blank">INSTAGRAM</a></li>
+                          <li><a href="#" target="_blank">WEBSITE</a></li>
                         </ul>
                     </div>
                 </div>
@@ -2030,6 +2093,11 @@ function myFunction() {
               <script src="../cv/theme3/assets/js/jquery.easing.min.js"></script>
               <script src="../cv/theme3/assets/js/scrolling-nav.js"></script>
              <script type="text/javascript" src="js/jquery.fancybox-1.3.4.pack.js"></script>
+             <script src="../cv/theme3/assets/js/wow.js"></script>
+              <script>
+                 new WOW().init();
+              </script>
+             
 
             </body>
           </html>
