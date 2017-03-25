@@ -1,4 +1,4 @@
-  @extends('layouts.app')
+@extends('layouts.app')
 
 @section('title')
    | Connection
@@ -33,12 +33,12 @@
                   <?php }else { ?> 
                       <span class="glyphicon glyphicon-user naviconactive dropdown-toggle" data-toggle="dropdown"><span class="badge">
                   <?php  echo $user_notification;?></span></span>
-                  
+
                       <?php if($user_notification > 5){ ?>
                               <ul class="dropdown-menu drop-message" style="overflow-y:scroll;height:333px;">
                       <?php }else{ ?>
-                                <ul class="dropdown-menu drop-message">
-                      <?php } ?>  
+                              <ul class="dropdown-menu drop-message">
+                      <?php } ?>
 
                       <?php foreach ($user_list_notification as $user_value) { ?>
                           <?php $checkProfile = DB::table('profiles')->where('user_id',$user_value->user_id)->count(); ?> 
@@ -53,12 +53,12 @@
                                         <img class="img-responsive notification-img" src="profilepic/{{ $profileInfo->profile_picture }}">
                                  <?php } ?>
                                 <?php if($checkProfile == 0){ ?>
-                                     <span class="title"><?php echo $userInfo->name; ?> followed you</span><br>
+                                     <span class="title"><b><?php echo $userInfo->name; ?></b> followed you</span><br>
                                 <?php }else{ ?> 
-                                     <span class="title"><?php echo $profileInfo->name; ?> followed you</span><br>
+                                     <span class="title"><b><?php echo $profileInfo->name; ?></b> followed you</span><br>
                                 <?php } ?> 
                                  
-                                  <span class="glyphicon glyphicon-calendar calendar-icon"></span>
+                                  <span class="glyphicon glyphicon-time calendar-icon"></span>
                                   <span class="date">
                                   <?php
                                         if(!empty($user_value->date)){
@@ -84,7 +84,9 @@
                             </li>
 
                       <?php } ?>
-                      <a class="see_all" href="{{ url('/all/usernotification/') }}">See All</a>
+                      <div class="see_all">
+                          <a href="{{ url('/all/usernotification/') }}">See All</a>
+                      </div>
                      </ul>
                   <?php } ?>
                   <!---->
@@ -108,7 +110,7 @@
                                 <a href="" data-toggle="modal" data-target="#checkmessage_{{ $message_value->id }}">
                                    <img class="img-responsive notification-img" src="images/messenger_icon.png">
                                    <span class="title">Message from {{ $message_value->name }}</span><br>
-                                   <span class="glyphicon glyphicon-calendar calendar-icon"></span>
+                                   <span class="glyphicon glyphicon-time calendar-icon"></span>
                                    <span class="date">
                                       <?php
                                             if(!empty($message_value->date)){
@@ -131,7 +133,9 @@
                                 </a>
                             </li>
                         <?php } ?>
-                        <a class="see_all" href="{{ url('/message') }}">See All</a>
+                        <div class="see_all">
+                            <a href="{{ url('/message') }}">See All</a> 
+                        </div>
                        </ul>
                     <?php } ?>
                     <!---->
@@ -144,25 +148,25 @@
                         <span class="glyphicon glyphicon-briefcase naviconactive dropdown-toggle" data-toggle="dropdown"><span class="badge">
                     <?php  echo $job_notification;?></span></span>
 
-                     <?php if($job_notification > 5){ ?>
+                    <?php if($job_notification > 5){ ?>
                               <ul class="dropdown-menu drop-message" style="overflow-y:scroll;height:333px;">
-                      <?php }else{ ?>
-                                <ul class="dropdown-menu drop-message">
-                      <?php } ?>
+                    <?php }else{ ?>
+                              <ul class="dropdown-menu drop-message">
+                    <?php } ?>
 
-                      
                         <?php foreach ($job_list_notification as $job_value) { ?>
+
                           <?php  $jobInfo = DB::table('job')->where('id',$job_value->category_id)->first();    ?>
                              <li>
                                 <a href="" data-toggle="modal" data-target="#checkjobnotification_{{ $job_value->category_id }}">
                                    <img class="img-responsive notification-img" src="images/jobicon.png">
-                                   <span class="title">New job post from <?php echo $jobInfo->company_name; ?></span><br>
-                                   <span class="glyphicon glyphicon-calendar calendar-icon"></span>
+                                   <span class="title">Hiring <b><?php echo $jobInfo->company_job; ?></b> from <?php echo $jobInfo->company_name; ?>.</span><br>
+                                   <span class="glyphicon glyphicon-time calendar-icon"></span>
                                    <span class="date">
                                       <?php
-                                            if(!empty($message_value->date)){
+                                            if(!empty($job_value->date)){
                                              
-                                               $value_date = date("Y-m-d", strtotime( $message_value->date ) );
+                                               $value_date = date("Y-m-d", strtotime( $job_value->date ) );
                                                $from=date_create(date('Y-m-d'));
                                                $to=date_create($value_date);
                                                $diff=date_diff($to,$from);
@@ -178,15 +182,50 @@
                                     </span>
                                 </a>
                             </li>
-                            
+                           
                         <?php } ?>
-                        <a class="see_all" href="{{ url('/all/jobNotification/') }}">See All</a> 
+                        <div class="see_all">
+                          <a href="{{ url('/all/jobNotification/') }}">See All</a> 
+                        </div>
+                        
                        </ul>
                     <?php } ?>
                     <!---->
-                  </li>  
+                  </li> 
+
               </ul>
         </nav>
+         <div class="col-md-4 col-sm-12">
+            <div class="inner-addon left-addon">
+                <span class="glyphicon glyphicon-search"></span>
+                <input class="form-control input-md searchbox" type="text" placeholder="Search">
+            </div>
+        </div>
+        <nav class="col-md-2 col-sm-12 navicon right-navigation" style="">
+            <ul>
+                <a href="{{ url('/setting') }}"><li><span class="glyphicon glyphicon-cog"></span></li></a> 
+                <a href="{{ url('/logout') }}"><li><span class="glyphicon glyphicon-off"></span></li></a>   
+            </ul>
+        </nav>
+        <div class="row hiddenmenu ">
+              <ul>
+                  <li><a href="{{ url('/home') }}">Dashboard</a></li>
+                  <li><a href="{{ url('/profile') }}">My CV</a></li>
+                  <li><a href="{{ url('/profile') }}">Profile</a></li>
+                  <li><a href="{{ url('/resume') }}">Resume</a></li>
+                  <li><a href="{{ url('/portfolio') }}">Portfolio</a></li>
+                  <li><a href="{{ url('/jobs') }}">Jobs</a></li>
+                  <li><a href="{{ url('/setting') }}">Settings</a></li>
+                  <li><a href="{{ url('/logout') }}">Logout</a></li>
+              </ul>
+         </div>  
+        
+
+
+
+        </div>
+      </div>
+    </nav>
     
 </header> 
 
@@ -194,7 +233,7 @@
 <div class="container wrap">
 <sidebar class="col-md-3 col-sm-12">
                <div class="row user-tabs">
-                <div class="user">
+                <div class="col-md-12 user">
                   <?php if ($if_exist == 1) { ?>
       
                     <?php if(!empty($userProfile->profile_picture) AND $userProfile->profile_picture != " " ){ ?>
@@ -248,37 +287,35 @@
                         </section>
                   <!-- Modal for profilepic -->
                 </div>
-                 <div class="name-panel">
-                   <div class="name-panel">
-                   <p class="name">
-                   <?php if ($if_exist == 1) { ?>
-                         <?php echo $userProfile->name; ?>   
-                    <?php }else{ ?>
-                        {{ $name }}
-                    <?php } ?> 
-                   </p>
-                   <p class="subname">
-                    <?php if ($if_exist == 1) { ?>
-                         <?php echo $userProfile->position; ?>   
-                    <?php }else{ ?>
-                       Not Set!
-                    <?php } ?>
-                    </p>
-                 </div>
+                 <div class="col-md-12  name-panel">
+                    <p class="name">
+                         <?php if ($if_exist == 1) { ?>
+                               <?php echo $userProfile->name; ?>   
+                          <?php }else{ ?>
+                              {{ $name }}
+                          <?php } ?> 
+                         </p>
+                         <p class="subname">
+                          <?php if ($if_exist == 1) { ?>
+                               <?php echo $userProfile->position; ?>   
+                          <?php }else{ ?>
+                             Not Set!
+                          <?php } ?>
+                          </p>
                  </div>
               </div>
 
              <div class="row panel-status">
                         <div class="col-md-4 col-sm-4 panel-status-1">
-                            <img src="images/heart.png"> 
+                            <span class="glyphicon glyphicon-heart"></span>
                             <p><?php echo $count_like; ?></p>  
                         </div>                                     
                         <div class="col-md-4 col-sm-4 panel-status-2">
-                            <img src="images/users.png">
+                           <span class="glyphicon glyphicon-user"></span>
                             <p><?php echo $count_connection; ?></p>  
                         </div>
                         <div class="col-md-4 col-sm-4 panel-status-3">
-                            <img src="images/eye.png">
+                            <span class="glyphicon glyphicon-eye-open"></span>
                             <p><?php echo $count_view; ?></p>  
                         </div>
               </div>
@@ -330,12 +367,12 @@
 
   </a>
 
-     <nav class="col-xs-12 content-nav-menu connection-nav" role="tablist">
-          <ul role="presentation">
-            <li class="active"><a href="#tab1" role="tab" data-toggle="tab">Public CV</a></li>
-            <li><a href="#tab2" role="tab" data-toggle="tab">Followed</a></li>
-            <li><a href="#tab3" role="tab" data-toggle="tab">Followers</a></li>
-            <li><a href="#tab4" role="tab" data-toggle="tab">Invitation</a></li>
+     <nav class="col-xs-12 content-nav-menu connection-nav " role="tablist">
+          <ul class="">
+            <li role="presentation" class="active"><a href="#tab1" role="tab" data-toggle="tab">Public CV</a></li>
+            <li role="presentation"><a href="#tab2" role="tab" data-toggle="tab">Followed</a></li>
+            <li role="presentation"><a href="#tab3" role="tab" data-toggle="tab">Followers</a></li>
+            <li role="presentation"><a href="#tab4" role="tab" data-toggle="tab">Invitation</a></li>
           </ul>
      </nav>
 
@@ -345,7 +382,7 @@
 
 
 
-<section class="cph-wrapper tab-content">
+<section class="cph-wrapper tab-content connection-tab-area">
 
   <section role="tabpanel" class="tab-pane fade in active" id="tab1">
   <!---public list -->
@@ -372,12 +409,12 @@
                    <div class="col-xs-12 col-md-12 content-panel-header">
                       <div class="col-xs-12 col-md-2 img">
                           <?php if($if_profile_exist == 0 or empty($profile_info->profile_picture) or $profile_info->profile_picture == " " ){ ?>
-                            <img src="profilepic/default_avatar.jpg" class="img-responsive"> 
+                            <img src="profilepic/default_avatar.jpg" class="img-responsive round-pic"> 
                           <?php }else{ ?>
-                            <img class="img-responsive" src="profilepic/<?php echo $profile_info->profile_picture; ?>" > 
+                            <img class="img-responsive round-pic" src="profilepic/<?php echo $profile_info->profile_picture; ?>" > 
                           <?php } ?>  
                       </div>
-                      <div class="col-xs-8 col-md-7 content-panel-jobs">
+                      <div class="col-xs-8 col-md-6 content-panel-jobs">
                            <?php if($if_profile_exist == 0){ ?>
                             <h4><?php  echo $user_info->name; ?></h4>
                           <?php }else{ ?>
@@ -390,23 +427,23 @@
                              <p><?php echo $profile_info->position; ?></p>
                           <?php } ?>  
                      </div>
-                     <div class="col-xs-4 col-md-3"> 
+                     <div class="col-xs-4 col-md-4"> 
                       <p>&nbsp;</p><br><br>
-                          <div class="btn-group btn-group-xs" role="group" aria-label="...">
+                          <div class="" role="group" aria-label="...">
                             <?php if($checkifFollowed == 0){ ?> 
-                                <a href="/follow/users/{{ $user_info->id }}" data-toggle="modal" type="button" class="btn btn-primary">Follow</a>
+                                <a href="/follow/users/{{ $user_info->id }}" data-toggle="modal" type="button" class="btn">Follow</a>
                             <?php }else{ ?> 
-                                <a data-toggle="modal" type="button" class="btn btn-info">Followed</a>
+                                <a data-toggle="modal" type="button" class="btn followed">Followed</a>
                             <?php } ?>
 
                             <?php if(empty($setting_info->permalink)){ ?> 
                              
                             <?php }else{ ?> 
-                              <a  target="_target" href="/view/users/<?php echo $user_info->id; ?>" type="button" class="btn btn-primary">CV Link</a>
+                              <a  target="_target" href="/view/users/<?php echo $user_info->id; ?>" type="button" class="btn">CV Link</a>
                                <?php if($check_if_like == 0){?>
-                                     <a href="/like/users/<?php echo $user_info->id; ?>" data-toggle="modal" type="button" class="btn btn-info">Like</a>
+                                     <a href="/like/users/<?php echo $user_info->id; ?>" data-toggle="modal" type="button" class="btn">Like</a>
                                 <?php }else{ ?> 
-                                     <a href="#" data-toggle="modal" type="button" class="btn btn-success">Liked</a>
+                                     <a href="#" data-toggle="modal" type="button" class="btn liked">Liked</a>
                                 <?php } ?>
 
                             <?php } ?>
@@ -444,9 +481,9 @@
                    <div class="col-xs-12 col-md-12 content-panel-header">
                       <div class="col-xs-12 col-md-2 img">
                           <?php if(empty($profile_info->profile_picture) or $profile_info->profile_picture == " " ){ ?>
-                            <img src="profilepic/default_avatar.jpg" class="img-responsive"> 
+                            <img src="profilepic/default_avatar.jpg" class="img-responsive round-pic"> 
                           <?php }else{ ?>
-                            <img class="img-responsive" src="profilepic/<?php echo $profile_info->profile_picture; ?>" > 
+                            <img class="img-responsive round-pic" src="profilepic/<?php echo $profile_info->profile_picture; ?>" > 
                           <?php } ?>  
                       </div>
                       <div class="col-xs-8 col-md-8 content-panel-jobs">
@@ -464,12 +501,12 @@
                      </div>
                      <div class="col-xs-4 col-md-2"> 
                       <p>&nbsp;</p><br><br>
-                          <div class="btn-group btn-group-xs" role="group" aria-label="...">
+                          <div class="" role="group" aria-label="...">
                              <?php if($checkStatus->status == "PENDING"){ ?>
-                              <a data-toggle="modal" type="button" class="btn btn-info">Pending</a>
+                              <a data-toggle="modal" type="button" class="btn">Pending</a>
                              <?php } ?>
                              <?php if($checkStatus->status == "ACCEPT"){ ?> 
-                              <a data-toggle="modal" type="button" class="btn btn-primary">Followed</a>
+                              <a data-toggle="modal" type="button" class="btn followed">Followed</a>
                              <?php } ?>
                           </div>       
                      </div>
@@ -500,9 +537,9 @@
                    <div class="col-xs-12 col-md-12 content-panel-header">
                       <div class="col-xs-12 col-md-2 img">
                           <?php if($if_profile_exist == 0 or empty($profile_info->profile_picture) or $profile_info->profile_picture == " " ){ ?>
-                            <img src="profilepic/default_avatar.jpg" class="img-responsive"> 
+                            <img src="profilepic/default_avatar.jpg" class="img-responsive round-pic"> 
                           <?php }else{ ?>
-                            <img class="img-responsive" src="profilepic/<?php echo $profile_info->profile_picture; ?>" > 
+                            <img class="img-responsive round-pic" src="profilepic/<?php echo $profile_info->profile_picture; ?>" > 
                           <?php } ?>  
                       </div>
                       <div class="col-xs-8 col-md-8 content-panel-jobs">
@@ -520,8 +557,8 @@
                      </div>
                      <div class="col-xs-4 col-md-2"> 
                       <p>&nbsp;</p><br><br>
-                          <div class="btn-group btn-group-xs" role="group" aria-label="...">
-                             <a href="/follow/remove/{{ $user_info->id }}" data-toggle="modal" type="button" class="btn btn-primary">Remove</a>
+                          <div class="" role="group" aria-label="...">
+                             <a href="/follow/remove/{{ $user_info->id }}" data-toggle="modal" type="button" class="btn">Remove</a>
                           </div>       
                      </div>
                   </div>
@@ -552,12 +589,12 @@
                    <div class="col-xs-12 col-md-12 content-panel-header">
                       <div class="col-xs-12 col-md-2 img">
                           <?php if($if_profile_exist == 0 or empty($profile_info->profile_picture) or $profile_info->profile_picture == " " ){ ?>
-                            <img src="profilepic/default_avatar.jpg" class="img-responsive"> 
+                            <img src="profilepic/default_avatar.jpg" class="img-responsive round-pic"> 
                           <?php }else{ ?>
-                            <img class="img-responsive" src="profilepic/<?php echo $profile_info->profile_picture; ?>" > 
+                            <img class="img-responsive round-pic" src="profilepic/<?php echo $profile_info->profile_picture; ?>" > 
                           <?php } ?>  
                       </div>
-                      <div class="col-xs-8 col-md-8 content-panel-jobs">
+                      <div class="col-xs-8 col-md-7 content-panel-jobs">
                            <?php if($if_profile_exist == 0){ ?>
                             <h4><?php  echo $user_information->name; ?></h4>
                           <?php }else{ ?>
@@ -570,11 +607,11 @@
                              <p><?php echo $profile_info->position; ?></p>
                           <?php } ?>  
                      </div>
-                     <div class="col-xs-4 col-md-2"> 
+                     <div class="col-xs-4 col-md-3"> 
                       <p>&nbsp;</p><br><br>
-                          <div class="btn-group btn-group-xs" role="group" aria-label="...">
-                             <a href="/follow/accept/{{ $user_info->id }}" data-toggle="modal" type="button" class="btn btn-primary">Accept</a>
-                             <a href="/follow/decline/{{ $user_info->id }}" data-toggle="modal" type="button" class="btn btn-primary">Decline</a>
+                          <div class="" role="group" aria-label="...">
+                             <a href="/follow/accept/{{ $user_info->id }}" data-toggle="modal" type="button" class="btn accept">Accept</a>
+                             <a href="/follow/decline/{{ $user_info->id }}" data-toggle="modal" type="button" class="btn ">Decline</a>
                           </div>       
                      </div>
                   </div>

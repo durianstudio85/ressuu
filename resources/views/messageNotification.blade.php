@@ -20,7 +20,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>  
-         <div class="col-md-3 col-sm-12 logo"><a href="{{ url('/home') }}"><img src="images/logo.png"></a></div>
+         <div class="col-md-3 col-sm-12 logo"><a href="{{ url('/home') }}"><img src="../images/logo.png"></a></div>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
         <!-- <div id="navbar" class=""> -->
@@ -37,7 +37,7 @@
                       <?php if($user_notification > 5){ ?>
                               <ul class="dropdown-menu drop-message" style="overflow-y:scroll;height:333px;">
                       <?php }else{ ?>
-                                <ul class="dropdown-menu drop-message">
+                              <ul class="dropdown-menu drop-message">
                       <?php } ?>
 
                       <?php foreach ($user_list_notification as $user_value) { ?>
@@ -53,12 +53,12 @@
                                         <img class="img-responsive notification-img" src="profilepic/{{ $profileInfo->profile_picture }}">
                                  <?php } ?>
                                 <?php if($checkProfile == 0){ ?>
-                                     <span class="title"><?php echo $userInfo->name; ?> followed you</span><br>
+                                     <span class="title"><b><?php echo $userInfo->name; ?></b> followed you</span><br>
                                 <?php }else{ ?> 
-                                     <span class="title"><?php echo $profileInfo->name; ?> followed you</span><br>
+                                     <span class="title"><b><?php echo $profileInfo->name; ?></b> followed you</span><br>
                                 <?php } ?> 
                                  
-                                  <span class="glyphicon glyphicon-calendar calendar-icon"></span>
+                                  <span class="glyphicon glyphicon-time calendar-icon"></span>
                                   <span class="date">
                                   <?php
                                         if(!empty($user_value->date)){
@@ -84,7 +84,9 @@
                             </li>
 
                       <?php } ?>
-                      <a class="see_all" href="{{ url('/all/usernotification/') }}">See All</a>
+                      <div class="see_all">
+                          <a href="{{ url('/all/usernotification/') }}">See All</a>
+                      </div>
                      </ul>
                   <?php } ?>
                   <!---->
@@ -108,7 +110,7 @@
                                 <a href="" data-toggle="modal" data-target="#checkmessage_{{ $message_value->id }}">
                                    <img class="img-responsive notification-img" src="images/messenger_icon.png">
                                    <span class="title">Message from {{ $message_value->name }}</span><br>
-                                   <span class="glyphicon glyphicon-calendar calendar-icon"></span>
+                                   <span class="glyphicon glyphicon-time calendar-icon"></span>
                                    <span class="date">
                                       <?php
                                             if(!empty($message_value->date)){
@@ -131,7 +133,9 @@
                                 </a>
                             </li>
                         <?php } ?>
-                          <a class="see_all" href="{{ url('/message') }}">See All</a>
+                        <div class="see_all">
+                            <a href="{{ url('/message') }}">See All</a> 
+                        </div>
                        </ul>
                     <?php } ?>
                     <!---->
@@ -156,8 +160,8 @@
                              <li>
                                 <a href="" data-toggle="modal" data-target="#checkjobnotification_{{ $job_value->category_id }}">
                                    <img class="img-responsive notification-img" src="images/jobicon.png">
-                                   <span class="title">New job post from <?php echo $jobInfo->company_name; ?></span><br>
-                                   <span class="glyphicon glyphicon-calendar calendar-icon"></span>
+                                   <span class="title">Hiring <b><?php echo $jobInfo->company_job; ?></b> from <?php echo $jobInfo->company_name; ?>.</span><br>
+                                   <span class="glyphicon glyphicon-time calendar-icon"></span>
                                    <span class="date">
                                       <?php
                                             if(!empty($job_value->date)){
@@ -180,12 +184,15 @@
                             </li>
                            
                         <?php } ?>
-                         <a class="see_all" href="{{ url('/all/jobNotification/') }}">See All</a> 
-                       
+                        <div class="see_all">
+                          <a href="{{ url('/all/jobNotification/') }}">See All</a> 
+                        </div>
+                        
                        </ul>
                     <?php } ?>
                     <!---->
-                  </li>  
+                  </li> 
+
               </ul>
         </nav>
          <div class="col-md-4 col-sm-12">
@@ -226,7 +233,7 @@
 <div class="container wrap">
 <sidebar class="col-md-3 col-sm-12">
                <div class="row user-tabs">
-                <div class="user">
+                <div class="col-md-12 user">
                   <?php if ($if_exist == 1) { ?>
       
                     <?php if(!empty($userProfile->profile_picture) AND $userProfile->profile_picture != " " ){ ?>
@@ -280,8 +287,8 @@
                         </section>
                   <!-- Modal for profilepic -->
                 </div>
-                 <div class="name-panel">
-                   <div class="name-panel">
+                 <div class="col-md-12 name-panel">
+                 
                    <p class="name">
                    <?php if ($if_exist == 1) { ?>
                          <?php echo $userProfile->name; ?>   
@@ -297,20 +304,20 @@
                     <?php } ?>
                     </p>
                  </div>
-                 </div>
+                
               </div>
 
               <div class="row panel-status">
-                        <div class="col-md-4 col-sm-4 panel-status-1">
-                            <img src="images/heart.png"> 
+                       <div class="col-md-4 col-sm-4 panel-status-1">
+                            <span class="glyphicon glyphicon-heart"></span>
                             <p><?php echo $count_like; ?></p>  
                         </div>                                     
                         <div class="col-md-4 col-sm-4 panel-status-2">
-                            <img src="images/users.png">
+                           <span class="glyphicon glyphicon-user"></span>
                             <p><?php echo $count_connection; ?></p>  
                         </div>
                         <div class="col-md-4 col-sm-4 panel-status-3">
-                            <img src="images/eye.png">
+                            <span class="glyphicon glyphicon-eye-open"></span>
                             <p><?php echo $count_view; ?></p>  
                         </div>
               </div>
