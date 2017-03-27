@@ -38,10 +38,13 @@
 
 
 html{
-	overflow-x: hidden;
+	/*overflow-x: hidden;*/
 }
 
-
+.row{
+	margin-right: 0px !important;
+    margin-left: 0px !important;
+}
 /******** HEADER AND BANNER SECTION *************/
 
 .header{
@@ -124,7 +127,9 @@ html{
 	padding: 9px 21px;
 	margin:25px 0px 0px 0px;
 }
-
+.img-hidden{
+	display:none;
+}
 /******** ABOUT ME SECTION *************/
 
 
@@ -295,8 +300,6 @@ html{
 	display: inline-block;
 	margin:0px 30px 0px 0px;
 	padding:0px 0px 9px 0px;
-
-
 
 }
 .recent-work .list li a{
@@ -492,3 +495,319 @@ footer .footer-list li a{
 
 
 /******** FOOTER SECTION *************/
+
+
+
+
+/******** FOOTER SECTION *************/
+
+@media (max-width: 425px ){
+
+.header{
+	background-size:100% 100%;
+	height: 100%;
+	width: 414px;
+	padding-top:40px;
+	background: #333;
+}
+.header .navbar-toggle{
+	background: #ffffff;
+	margin: 7px -27px 0px 0px;
+}
+.user-name{
+	font-family: 'Dosis-Bold';
+	font-size: 25px;
+	text-transform: uppercase;
+	margin: 0px 0px 0px -11px;
+}
+.banner-details{
+	color:#fff;
+	margin: 10px 0px 0px 0px;
+	text-align: center;
+}
+
+.banner-details .introduction{
+	font-size:30px;
+	padding:0px 15px;
+	margin: 130px 0px 0px 0px;
+
+}
+.banner-details .sub_introduction{
+	font-size:15px;
+	padding:10px 15px;
+}
+.banner-details a{
+	font-size:20px;
+	border-radius: 50px;
+	padding: 9px 21px;
+
+}
+.about .img-hidden{
+	display: block;
+}
+.about img{
+    width: 62%;
+    height: 240px;
+    border-radius: 140px;
+    margin: -50px 0px 10px 80px;
+
+
+}
+.about .img-wrap{
+	display:none;
+}
+.recent-work .list{
+	padding: 10px 0px 0px 20px;
+}
+.recent-work .list li{
+	list-style: none;
+	display: inline-block;
+	margin:0px 20px 0px 0px;
+	padding:0px 0px 5px 0px;
+	font-size:15px;
+
+}
+.theme3_portfolio_modal .modal-content{
+	width: 405px;
+}
+.contact form button{
+/*	margin:25px 0px 0px 43px*/
+}
+
+footer{
+	height:156px;
+	text-align: center;
+}
+footer .footer-list{
+	text-align: center;
+	margin:0px 0px 0px -34px;
+}
+footer .footer-list li{
+	list-style: none;
+	display: inline;
+	margin:0px 10px 0px 0px;
+}
+footer .footer-list li a{
+	text-decoration: none;
+	color:inherit;
+}
+
+
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+@media (max-width: 375px ){
+
+.header{
+	background-size:100% 100%;
+	height: 100%;
+	width: 375px;
+	padding-top:40px;
+	background: #333;
+}
+.header .navbar-toggle{
+	background: #ffffff;
+	margin: 7px -27px 0px 0px;
+}
+.user-name{
+	font-family: 'Dosis-Bold';
+	font-size: 25px;
+	text-transform: uppercase;
+	margin: 0px 0px 0px -13px;
+}
+.banner-details{
+	color:#fff;
+	margin: 10px 0px 0px 0px;
+	text-align: center;
+}
+
+.banner-details .introduction{
+	font-size:30px;
+	padding:0px 15px;
+	margin: 130px 0px 0px 0px;
+
+}
+.banner-details .sub_introduction{
+	font-size:15px;
+	padding:10px 15px;
+}
+.banner-details a{
+	font-size:20px;
+	border-radius: 50px;
+	padding: 9px 21px;
+
+}
+.about .img-hidden{
+	display: block;
+}
+.about img{
+    width: 70%;
+    height: 240px;
+    border-radius: 140px;
+    margin: -50px 0px 10px 56px;
+
+
+}
+.about .img-wrap{
+	display:none;
+}
+.recent-work .list{
+	padding: 10px 0px 0px 20px;
+}
+.recent-work .list li{
+	list-style: none;
+	display: inline-block;
+	margin:0px 20px 0px 0px;
+	padding:0px 0px 5px 0px;
+	font-size:15px;
+
+}
+.theme3_portfolio_modal .modal-content{
+	width: 358px;
+}
+.contact form button{
+/*	margin:25px 0px 0px 43px*/
+}
+
+footer{
+	height:156px;
+	text-align: center;
+}
+footer .footer-list{
+	text-align: center;
+	margin:0px 0px 0px -34px;
+}
+footer .footer-list li{
+	list-style: none;
+	display: inline;
+	margin:0px 10px 0px 0px;
+}
+footer .footer-list li a{
+	text-decoration: none;
+	color:inherit;
+}
+
+
+
+
+}
+
+
+@media (max-width: 320px ){
+
+html{
+	overflow-x: hidden;
+}
+body{
+	margin: 0px !important;
+}
+
+
+
+.header{
+	background-size:100% 100%;
+	height: 100%;
+	width: 100%;
+	padding-top:40px;
+	background: #333;
+	margin-right: 0px !important;
+}
+.header .navbar-toggle{
+	background: #ffffff;
+	margin: 7px -30px 0px 0px;
+}
+.user-name{
+	font-family: 'Dosis-Bold';
+	font-size: 25px;
+	text-transform: uppercase;
+	margin: 0px 0px 0px -16px;
+}
+.banner-details{
+	color:#fff;
+	margin: 10px 0px 0px 0px;
+	text-align: center;
+}
+
+.banner-details .introduction{
+	font-size:30px;
+	padding:0px 15px;
+	margin: 25px 0px 0px 0px;
+
+}
+.banner-details .sub_introduction{
+	font-size:15px;
+	padding:10px 15px;
+}
+.banner-details a{
+	font-size:20px;
+	border-radius: 50px;
+	padding: 9px 21px;
+
+}
+.about .img-hidden{
+	display: block;
+}
+.about img{
+	width: 245px;
+    height: 240px;
+    border-radius: 150px;
+    margin: -50px 0px 5px 22px;
+
+
+}
+.about .img-wrap{
+	display:none;
+}
+.recent-work .list{
+	padding: 10px 0px 0px 20px;
+}
+.recent-work .list li{
+	list-style: none;
+	display: inline-block;
+	margin:0px 20px 0px 0px;
+	padding:0px 0px 5px 0px;
+	font-size:15px;
+
+}
+.theme3_portfolio_modal .modal-content{
+	width: 300px;
+}
+.contact form button{
+	/*margin:25px 0px 0px 43px*/
+}
+
+footer{
+	height:156px;
+	text-align: center;
+}
+footer .footer-list{
+	text-align: center;
+	margin:0px 0px 0px -34px;
+}
+footer .footer-list li{
+	list-style: none;
+	display: inline;
+	margin:0px 10px 0px 0px;
+}
+footer .footer-list li a{
+	text-decoration: none;
+	color:inherit;
+}
+
+
+
+
+}

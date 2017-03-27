@@ -675,8 +675,7 @@ function myFunction() {
 
 <?php if($theme_selection == "theme3"){ ?> 
 
-
-<!DOCTYPE html>
+ <!DOCTYPE html>
           <html lang="en">
             <head>
               <meta charset="utf-8">
@@ -692,6 +691,7 @@ function myFunction() {
               <link href="../cv/theme3/assets/css/hover.css" rel="stylesheet">
               <link href="../cv/theme3/assets/css/imagehover.css" rel="stylesheet">
               <link href="../cv/theme3/assets/css/animate.css" rel="stylesheet">
+              <link href="../cv/theme3/assets/css/font-awesome.css" rel="stylesheet">
               <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
               <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
               <!--[if lt IE 9]>
@@ -715,18 +715,19 @@ function myFunction() {
                 $cover = "default_cover_theme3.png";
             }
             ?>
-             <section id="page-top" class="header navbar navbar navbar-static-top" style="background-image: url('../cover_photo/{{ $cover }}');">
+             <section id="page-top" class="header navbar-static-top" style="background-image: url('../cover_photo/{{ $cover }}');">
+            
                     <div class="container">
-                      <div class="navbar-header col-md-5">
+                      <div class="navbar-header col-md-5 col-xs-12">
                         <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-                         <i class="fa fa-list"></i>
+                         <span class="glyphicon glyphicon-align-justify"></span>
                         </button>
                         <a class="navbar-brand" href="index.html" style="">
                           <p class="user-name"><?php echo $profiles->name; ?></p>
                         </a>
                       </div>
-                      <div class="col-md-2">&nbsp;</div>
-                      <nav id="navbar" class="navbar-collapse collapse header-menu col-md-3">
+                      <div class="col-md-2 col-xs-12">&nbsp;</div>
+                      <nav id="navbar" class="navbar-collapse collapse header-menu col-md-3 col-xs-12">
                         <ul class="nav navbar-nav navbar-right">
                           <li><a class="page-scroll" href="#page-top">Home</a></li>
                           <li><a class="page-scroll" href="#resume">Resume</a></li>
@@ -736,8 +737,7 @@ function myFunction() {
                       </nav><!--/.nav-collapse -->
                     </div>
                     <div class="row"> 
-                         
-                          <div class="col-md-12 banner-details wow bounceInDown" >
+                          <div class="col-md-12 col-xs-12 banner-details wow bounceInDown" >
                                 <p class="introduction ">Hi, I'm <?php echo $profiles->name; ?> a <?php echo $profiles->position; ?></p>
                                 <p class="sub_introduction"><?php echo substr($profiles->bio, 0, 100);  ?></p>
                                 <a href="#resume" class="btn btn-info page-scroll">GET STARTED</a>
@@ -745,21 +745,31 @@ function myFunction() {
                      
                     </div>
 
-
-
             </section>
+
             <section id="resume" class="row about">
                       <?php 
                             list($width, $height) = getimagesize('profilepic/default_profilepic_theme3.png');   
                       ?>
                   <div class="container">
-                       <div class="col-md-6 wow fadeInLeft">
+
+                        <div class="col-md-6 col-xs-12 wow fadeInRight img-hidden">
+                           <?php if(!empty($profiles->profile_picture)  AND $profiles->profile_picture != " "  ){ ?>
+                              <img class="img-reponsive" height="{{ $height }}" width="{{ $width }}"  src="../profilepic/<?php echo $profiles->profile_picture; ?>"></a> 
+                                <?php  }else{ ?>
+                              <img class="img-responsive" src="../profilepic/default_profilepic_theme3.png" >
+
+                          <?php } ?>
+
+                       </div>
+
+                       <div class="col-md-6 col-xs-12 wow fadeInLeft">
                           <p class="introduction">I'M <span class="name"><?php echo $profiles->name; ?></span> AND I'M A <span class="position"><?php echo $profiles->position; ?></span></p>
                           <p class="bio"><?php echo $profiles->bio; ?></p>
                           <!--<button class="btn btn-info">LEARN MORE</button>-->
                     
                        </div> 
-                       <div class="col-md-6 wow fadeInRight">
+                       <div class="col-md-6 col-xs-12 wow fadeInRight img-wrap">
                            <?php if(!empty($profiles->profile_picture)  AND $profiles->profile_picture != " "  ){ ?>
                               <img class="img-reponsive" height="{{ $height }}" width="{{ $width }}"  src="../profilepic/<?php echo $profiles->profile_picture; ?>"></a> 
                                 <?php  }else{ ?>
@@ -774,7 +784,7 @@ function myFunction() {
                   <div class="container">
                        @foreach ($skills as $my_skills) 
 
-                       <div class="col-xs-4 wow fadeInDown">
+                       <div class="col-md-4 col-xs-12 wow fadeInDown">
                               <p class="skills_title">{{ $my_skills->skillname }}</p>
                               <?php 
                                 if($my_skills->rate == 5){ 
@@ -853,10 +863,10 @@ function myFunction() {
 
             <section id="portfolio" class="row recent-work">
                   <div class="container">
-                      <div class="col-md-12">
+                      <div class="col-md-12 col-xs-12">
                            <p class="title wow fadeInDown">MY RECENT <span class="bold">WORK</span></p> 
                       </div>
-                      <div class="col-md-12">
+                      <div class="row">
                            <ul class="list wow fadeInUp">
                              <li><a href="#all" data-toggle="tab">All</a></li>
                              @foreach ($userPorfoliosCategories as $userCategories)
@@ -877,8 +887,8 @@ function myFunction() {
                                <?php $fileName = "upload/".$userPorfolio->post_thumbnail;
                                  if(file_exists($fileName)){  ?>
 
-                                     <a data-toggle="modal" data-target="#portfolio{{ $userPorfolio->id }}" >
-                                         <div class="portfolio-container col-md-4  hvr-glow " style="background-image:url('../upload/{{ $userPorfolio->post_thumbnail }}');">
+                                    <a data-toggle="modal" data-target="#portfolio{{ $userPorfolio->id }}" >
+                                         <div class="portfolio-container col-md-4 col-xs-12  hvr-glow " style="background-image:url('../upload/{{ $userPorfolio->post_thumbnail }}');">
                                             <div class="overlay" style="">
                                                     <p class="title">{{ $userPorfolio->port_title }}</p>
                                                     <p class="category">{{ $portfolioCat_info->title }}</p>
@@ -892,7 +902,7 @@ function myFunction() {
                            <?php }else{ ?>
 
                                   <a data-toggle="modal" data-target="#portfolio{{ $userPorfolio->id }}" >
-                                         <div class="portfolio-container col-md-4  hvr-glow" style="background-image:url('../images/portfolio_images.png');">
+                                         <div class="portfolio-container col-md-4 col-xs-12 hvr-glow" style="background-image:url('../images/portfolio_images.png');">
                                                 <div class="overlay" style="">
                                                     <p class="title">{{ $userPorfolio->port_title }}</p>
                                                     <p class="category">{{ $portfolioCat_info->title }}</p>
@@ -923,7 +933,7 @@ function myFunction() {
                                             if(file_exists($fileName)){  ?>
 
                                                <a data-toggle="modal" data-target="#portfolio{{ $category->id }}" >
-                                                  <div class="portfolio-container col-md-4  hvr-glow" style="background-image:url('../upload/{{ $category->post_thumbnail }}');">
+                                                  <div class="portfolio-container col-md-4 col-xs-12 hvr-glow" style="background-image:url('../upload/{{ $category->post_thumbnail }}');">
                                                         <div class="overlay" style="">
                                                             <p class="title">{{ $category->port_title }}</p>
                                                             <p class="category">{{ $userCategories->title }}</p>
@@ -936,7 +946,7 @@ function myFunction() {
                                           <?php }else{ ?>
 
                                                 <a data-toggle="modal" data-target="#portfolio{{ $category->id }}" >
-                                                <div class="portfolio-container col-md-4  hvr-glow" style="background-image:url('../images/portfolio_images.png');">
+                                                <div class="portfolio-container col-md-4 col-xs-12 hvr-glow" style="background-image:url('../images/portfolio_images.png');">
                                                     <div class="overlay" style="">
                                                             <p class="title">{{ $category->port_title }}</p>
                                                             <p class="category">{{ $userCategories->title }}</p>
@@ -1037,10 +1047,10 @@ function myFunction() {
             </section>
             <footer id="contact" class="row">
                 <div class="container">
-                    <div class="col-md-6">
+                    <div class="col-md-6 col-xs-12">
                         <p class="copyright">Copyright © 2017 All Right Reserved. Redesigned by Durian Studio</p>
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-md-6 col-xs-12">
                         <ul class="footer-list">
                           <li><a href="#" target="_blank">FACEBOOK</a></li>
                           <li><a href="#" target="_blank">TWITTER</a></li>
@@ -1723,6 +1733,7 @@ function myFunction() {
               <link href="../cv/theme3/assets/css/hover.css" rel="stylesheet">
               <link href="../cv/theme3/assets/css/imagehover.css" rel="stylesheet">
               <link href="../cv/theme3/assets/css/animate.css" rel="stylesheet">
+              <link href="../cv/theme3/assets/css/font-awesome.css" rel="stylesheet">
               <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
               <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
               <!--[if lt IE 9]>
@@ -1746,18 +1757,19 @@ function myFunction() {
                 $cover = "default_cover_theme3.png";
             }
             ?>
-             <section id="page-top" class="header navbar navbar navbar-static-top" style="background-image: url('../cover_photo/{{ $cover }}');">
+             <section id="page-top" class="header navbar-static-top" style="background-image: url('../cover_photo/{{ $cover }}');">
+            
                     <div class="container">
-                      <div class="navbar-header col-md-5">
+                      <div class="navbar-header col-md-5 col-xs-12">
                         <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-                         <i class="fa fa-list"></i>
+                         <span class="glyphicon glyphicon-align-justify"></span>
                         </button>
                         <a class="navbar-brand" href="index.html" style="">
                           <p class="user-name"><?php echo $profiles->name; ?></p>
                         </a>
                       </div>
-                      <div class="col-md-2">&nbsp;</div>
-                      <nav id="navbar" class="navbar-collapse collapse header-menu col-md-3">
+                      <div class="col-md-2 col-xs-12">&nbsp;</div>
+                      <nav id="navbar" class="navbar-collapse collapse header-menu col-md-3 col-xs-12">
                         <ul class="nav navbar-nav navbar-right">
                           <li><a class="page-scroll" href="#page-top">Home</a></li>
                           <li><a class="page-scroll" href="#resume">Resume</a></li>
@@ -1767,8 +1779,7 @@ function myFunction() {
                       </nav><!--/.nav-collapse -->
                     </div>
                     <div class="row"> 
-                         
-                          <div class="col-md-12 banner-details wow bounceInDown" >
+                          <div class="col-md-12 col-xs-12 banner-details wow bounceInDown" >
                                 <p class="introduction ">Hi, I'm <?php echo $profiles->name; ?> a <?php echo $profiles->position; ?></p>
                                 <p class="sub_introduction"><?php echo substr($profiles->bio, 0, 100);  ?></p>
                                 <a href="#resume" class="btn btn-info page-scroll">GET STARTED</a>
@@ -1776,21 +1787,31 @@ function myFunction() {
                      
                     </div>
 
-
-
             </section>
+
             <section id="resume" class="row about">
                       <?php 
                             list($width, $height) = getimagesize('profilepic/default_profilepic_theme3.png');   
                       ?>
                   <div class="container">
-                       <div class="col-md-6 wow fadeInLeft">
+
+                        <div class="col-md-6 col-xs-12 wow fadeInRight img-hidden">
+                           <?php if(!empty($profiles->profile_picture)  AND $profiles->profile_picture != " "  ){ ?>
+                              <img class="img-reponsive" height="{{ $height }}" width="{{ $width }}"  src="../profilepic/<?php echo $profiles->profile_picture; ?>"></a> 
+                                <?php  }else{ ?>
+                              <img class="img-responsive" src="../profilepic/default_profilepic_theme3.png" >
+
+                          <?php } ?>
+
+                       </div>
+
+                       <div class="col-md-6 col-xs-12 wow fadeInLeft">
                           <p class="introduction">I'M <span class="name"><?php echo $profiles->name; ?></span> AND I'M A <span class="position"><?php echo $profiles->position; ?></span></p>
                           <p class="bio"><?php echo $profiles->bio; ?></p>
                           <!--<button class="btn btn-info">LEARN MORE</button>-->
                     
                        </div> 
-                       <div class="col-md-6 wow fadeInRight">
+                       <div class="col-md-6 col-xs-12 wow fadeInRight img-wrap">
                            <?php if(!empty($profiles->profile_picture)  AND $profiles->profile_picture != " "  ){ ?>
                               <img class="img-reponsive" height="{{ $height }}" width="{{ $width }}"  src="../profilepic/<?php echo $profiles->profile_picture; ?>"></a> 
                                 <?php  }else{ ?>
@@ -1805,7 +1826,7 @@ function myFunction() {
                   <div class="container">
                        @foreach ($skills as $my_skills) 
 
-                       <div class="col-xs-4 wow fadeInDown">
+                       <div class="col-md-4 col-xs-12 wow fadeInDown">
                               <p class="skills_title">{{ $my_skills->skillname }}</p>
                               <?php 
                                 if($my_skills->rate == 5){ 
@@ -1884,10 +1905,10 @@ function myFunction() {
 
             <section id="portfolio" class="row recent-work">
                   <div class="container">
-                      <div class="col-md-12">
+                      <div class="col-md-12 col-xs-12">
                            <p class="title wow fadeInDown">MY RECENT <span class="bold">WORK</span></p> 
                       </div>
-                      <div class="col-md-12">
+                      <div class="row">
                            <ul class="list wow fadeInUp">
                              <li><a href="#all" data-toggle="tab">All</a></li>
                              @foreach ($userPorfoliosCategories as $userCategories)
@@ -1908,8 +1929,8 @@ function myFunction() {
                                <?php $fileName = "upload/".$userPorfolio->post_thumbnail;
                                  if(file_exists($fileName)){  ?>
 
-                                     <a data-toggle="modal" data-target="#portfolio{{ $userPorfolio->id }}" >
-                                         <div class="portfolio-container col-md-4  hvr-glow " style="background-image:url('../upload/{{ $userPorfolio->post_thumbnail }}');">
+                                    <a data-toggle="modal" data-target="#portfolio{{ $userPorfolio->id }}" >
+                                         <div class="portfolio-container col-md-4 col-xs-12  hvr-glow " style="background-image:url('../upload/{{ $userPorfolio->post_thumbnail }}');">
                                             <div class="overlay" style="">
                                                     <p class="title">{{ $userPorfolio->port_title }}</p>
                                                     <p class="category">{{ $portfolioCat_info->title }}</p>
@@ -1923,7 +1944,7 @@ function myFunction() {
                            <?php }else{ ?>
 
                                   <a data-toggle="modal" data-target="#portfolio{{ $userPorfolio->id }}" >
-                                         <div class="portfolio-container col-md-4  hvr-glow" style="background-image:url('../images/portfolio_images.png');">
+                                         <div class="portfolio-container col-md-4 col-xs-12 hvr-glow" style="background-image:url('../images/portfolio_images.png');">
                                                 <div class="overlay" style="">
                                                     <p class="title">{{ $userPorfolio->port_title }}</p>
                                                     <p class="category">{{ $portfolioCat_info->title }}</p>
@@ -1954,7 +1975,7 @@ function myFunction() {
                                             if(file_exists($fileName)){  ?>
 
                                                <a data-toggle="modal" data-target="#portfolio{{ $category->id }}" >
-                                                  <div class="portfolio-container col-md-4  hvr-glow" style="background-image:url('../upload/{{ $category->post_thumbnail }}');">
+                                                  <div class="portfolio-container col-md-4 col-xs-12 hvr-glow" style="background-image:url('../upload/{{ $category->post_thumbnail }}');">
                                                         <div class="overlay" style="">
                                                             <p class="title">{{ $category->port_title }}</p>
                                                             <p class="category">{{ $userCategories->title }}</p>
@@ -1967,7 +1988,7 @@ function myFunction() {
                                           <?php }else{ ?>
 
                                                 <a data-toggle="modal" data-target="#portfolio{{ $category->id }}" >
-                                                <div class="portfolio-container col-md-4  hvr-glow" style="background-image:url('../images/portfolio_images.png');">
+                                                <div class="portfolio-container col-md-4 col-xs-12 hvr-glow" style="background-image:url('../images/portfolio_images.png');">
                                                     <div class="overlay" style="">
                                                             <p class="title">{{ $category->port_title }}</p>
                                                             <p class="category">{{ $userCategories->title }}</p>
@@ -2068,10 +2089,10 @@ function myFunction() {
             </section>
             <footer id="contact" class="row">
                 <div class="container">
-                    <div class="col-md-6">
+                    <div class="col-md-6 col-xs-12">
                         <p class="copyright">Copyright © 2017 All Right Reserved. Redesigned by Durian Studio</p>
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-md-6 col-xs-12">
                         <ul class="footer-list">
                           <li><a href="#" target="_blank">FACEBOOK</a></li>
                           <li><a href="#" target="_blank">TWITTER</a></li>
