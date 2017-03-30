@@ -1578,13 +1578,19 @@ margin-left:100px;
     .navbar-header button{ margin-top: 25px; }  
     .sidebar-menus{ display: none; }
 
-    .navicon ul{ margin:0px 0px 0px 10px;  }
-    .searchbox{ margin:10px 0px 10px 5px; }
+    .navicon ul{ margin:0px 0px 0px 28px;  }
+    .searchbox{ margin:10px 0px 10px -20px;width: 360px;  }
+
 
     .user-tabs .name-panel{ float: left; }
+    .user-tabs img{ margin: 15px 0px 0px 126px; }
+    .user-tabs .name{  margin: 0px 0px 3px 13px;width: 320px; }
+    .user-tabs .subname{ margin:-2px 0px 14px 17px;width: 320px; }
     .hiddenmenu{ width: 375px; }
     .hiddenmenu{  display:inline-block; }
     .hiddenmenu ul li a{ width: 375px; }
+    .right-navigation{ display: none; }
+
 
 
             /*dashboard*/
@@ -1598,7 +1604,7 @@ margin-left:100px;
                float: left;
             }
             .panel-status img{ margin-top:14px; margin-left:37px !important;  }
-            .panel-status p{ margin-left:33px !important;  }
+            .panel-status p{ margin-left:0px !important;  }
 
             .hpage .content-header{ 
                 margin: -20px 0px 0px -15px; 
@@ -1627,6 +1633,7 @@ margin-left:100px;
               height: 60px;
               padding-right: 0px;
               float: left;
+              margin: 9px 0px 0px -30px;
             }
                  
            .cph-wrapper{ margin-top: -50px; }  
@@ -1638,7 +1645,7 @@ margin-left:100px;
            .content-panel-status .div div{ margin:25px 0px 0px -25px; }  
 
            .content-panel-lc{
-            margin:-50px 0px 0px 46px;
+            margin:-50px 0px 0px -24px;
             padding-left: 140px;
             width: 320px;
            }
@@ -1653,7 +1660,9 @@ margin-left:100px;
             .ppage .content-header{ 
                 margin: -20px 0px 0px -30px; 
                 width: 375px;  
-                height: 286px; 
+                height: 150px; 
+                background-size: 100% 100% !important; 
+                background-repeat: no-repeat !important;
             }
             .ppage .content-header h3{  margin:15px 0px 10px -20px; float: left;}
 
@@ -1912,7 +1921,7 @@ margin-left:100px;
              .portfolio p{ margin: -8px 0px 0px -19px !important; }
              .portfolio .tabmenu { display: none;  }
 
-             .content-portfolio { width: 375px; margin: 0px 0px 0px -15px; }
+             .content-portfolio { width: 375px; margin: -20px 0px 0px -15px; }
              .content-portfolio nav { margin: 10px 0px 60px 0px;width: 355px; }
              .content-portfolio nav ul { margin: 0px 0px 0px -46px; }
              .content-portfolio nav ul li { margin: 0px -2px 0px 0px; padding: 2px 5px;}
@@ -1930,7 +1939,13 @@ margin-left:100px;
                 font-size: 12px;
                 margin: 50px 0px 30px 0px;
               }
-
+              .popage .content-header{ 
+                margin: -20px 0px 0px -15px; 
+                width: 375px;
+                height: 150px;
+                background-size: 100% 100% !important; 
+                background-repeat: no-repeat !important;
+            }
 
          /* portfolio */   
 
@@ -1961,8 +1976,10 @@ margin-left:100px;
 
               .spage .content-header{ 
                 margin: -20px 0px 0px -15px; 
-                width: 375px;  
-                height: 286px; 
+                width: 375px;
+                height: 150px;  
+                background-size: 100% 100% !important; 
+                background-repeat: no-repeat !important;
               }
               .spage .content-header h3{  margin:15px 0px 10px -20px; float: left;}
 
@@ -1991,7 +2008,52 @@ margin-left:100px;
               
          /* settings */
 
+        /* message */
+           .message-wrap { margin:0px 0px 0px -32px; }
+           .message-wrap .content-panel-status p{ margin: 0px 0px 0px 87px !important; }
+           .message-wrap .message-icon{ margin:0px 7px 0px 0px !important; }
 
+        /* message */
+
+        /* connection */
+        .connection-nav{
+          margin: 0px 0px 0px -32px !important;
+          width: 375px !important;
+          font-size:12px !important;
+          height: 63px !important;
+        }
+        .connection-nav ul{
+          margin:0px 0px 0px -32px !important;
+        }
+         .connection-nav ul li{
+          display:inline;
+          margin:0px -10px 0px 0px;
+        }
+        .connection-nav ul .active a{
+          border-color: #d1d1d1 ;
+          border-width: 1px 1px 0px 1px; 
+          border-style: solid;
+          border-bottom: solid #ffffff 1px;
+        }
+        .connection-nav ul li a{
+          padding: 10px 13px !important;
+             
+        }
+        .connection-tab-area .content-panel-header{
+          margin: 0px 0px 0px -32px !important;
+        }
+        .connection-tab-area .content-panel-header img{
+          margin:20px 0px 0px -20px !important;
+        }
+        .connection-tab-area .content-panel-header .content-panel-jobs{
+          margin:37px 0px 0px -32px !important;
+        }
+        .connection-tab-area .content-panel-header .button-group{
+          margin: -41px 0px 0px -16px !important;
+        }
+
+
+        /* connection */
 
 
 
@@ -2031,14 +2093,17 @@ margin-left:100px;
     .navbar-header button{ margin-top: 25px; }  
     .sidebar-menus{ display: none; }
 
-    .navicon ul{ margin:0px 0px 0px 10px;  }
-    .searchbox{ margin:10px 0px 10px 5px; }
+    .navicon ul{ margin:0px 0px 0px 0px;  }
+    .searchbox{ margin: 10px 0px 10px -19px;width: 300px; }
 
     .user-tabs .name-panel{ float: left; }
+    .user-tabs img{ margin:15px 0px 0px 100px; }
+    .user-tabs .name{ margin: -19px 0px 3px -20px;width: 320px; }
+    .user-tabs .subname{ margin:-2px 0px 13px -20px;width: 320px; }
     .hiddenmenu{ width: 375px; }
     .hiddenmenu{  display:inline-block; }
     .hiddenmenu ul li a{ width: 375px; }
-
+    .right-navigation{ display: none; }
 
             /*dashboard*/
 
@@ -2049,10 +2114,10 @@ margin-left:100px;
                color:#ffffff;
                width: 33.33%;
                float: left;
+               text-align: center;
             }
             .panel-status img{ margin-top:14px; margin-left:29px !important;  }
-            .panel-status p{ margin-left:25px !important;  }
-
+            .panel-status p { margin-left: 0px !important; }
             .hpage .content-header{ 
                 margin: -20px 0px 0px -15px; 
                 width: 320px;  
@@ -2066,7 +2131,8 @@ margin-left:100px;
                  margin: 0px 10px 0px 0px; 
                  width: 60px; 
                  height: 60px; 
-                 float: left;                 
+                 float: left;  
+
             }
             .hpage .people-status  .people-name { margin: 10px 0px 0px 0px; }
             .hpage .people-status  .people-subname { margin: 0px 0px 0px 0px; }
@@ -2074,12 +2140,13 @@ margin-left:100px;
 
             .cancel-button{ display: none; }
 
-            .content-profile-people{ float: left; }
+            .content-profile-people{ float: left;margin:5px 0px 10px 0px; }
             .content-profile-people .people-img img {
               width: 60px;
               height: 60px;
               padding-right: 0px;
               float: left;
+              margin: 0px 0px 0px -35px;
             }
                  
            .cph-wrapper{ margin-top: -50px; }  
@@ -2091,7 +2158,7 @@ margin-left:100px;
            .content-panel-status .div div{ margin:25px 0px 0px -25px; }  
 
            .content-panel-lc{
-            margin:-50px 0px 0px -15px;
+            margin:-50px 0px 0px -27px;
             padding-left: 140px;
             width: 320px;
            }
@@ -2106,8 +2173,12 @@ margin-left:100px;
             .ppage .content-header{ 
                 margin: -20px 0px 0px -30px; 
                 width: 320px;  
-                height: 286px; 
+                height: 125px; 
+                background-size: 100% 100% !important; 
+                background-repeat: no-repeat !important;
             }
+
+            .ppage .content-header .ads-bg{ }
             .ppage .content-header h3{  margin:15px 0px 10px -20px; float: left;}
 
             .ppage .content-header .content-people-wrap{ margin: 0px 0px 0px -25px; }
@@ -2365,8 +2436,9 @@ margin-left:100px;
              .portfolio p{ margin: -8px 0px 0px -19px !important; }
              .portfolio .tabmenu { display: none;  }
 
-             .content-portfolio { width: 320px; margin: 0px 0px 0px -15px; }
+             .content-portfolio { width: 320px; margin:-19px 0px 0px -15px; }
              .content-portfolio nav { margin: 10px 0px 60px -43px; }
+             .content-portfolio nav ul { margin: 0px 0px 0px 0px; }
              .content-portfolio nav ul li { margin: 0px -2px 0px 0px; padding: 2px 5px;}
              .content-portfolio .tab-content { 
                 padding: 10px 0px 0px 0px; 
@@ -2382,6 +2454,17 @@ margin-left:100px;
                 font-size: 12px;
                 margin: 50px 0px 30px 0px;
               }
+             .popage .content-header{ 
+                margin: -20px 0px 0px -15px; 
+                width: 320px;  
+                height: 125px; 
+                background-size: 100% 100% !important; 
+                background-repeat: no-repeat !important;
+            }
+
+
+
+
 
 
          /* portfolio */   
@@ -2398,14 +2481,14 @@ margin-left:100px;
 
               .jobs-wrap .content-panel-header{ width: 320px;margin: 0px 0px 0px -30px;}
                .jobs-wrap .content-panel-header .img img{ 
-                margin: 0px 0px 0px 89px;
+                margin: 10px 0px 0px 0px;
                 width: 100px;
                 height: 100px; 
               }
               .jobs-wrap .content-panel-header .content-panel-jobs{ margin: 10px 0px 0px 0px; }
               .jobs-wrap .content-panel-header .apply{ margin: 20px 0px 0px 0px; }
-              
-
+              .jobs-wrap .content-panel-header .apply p{ float:left;margin: 4px 0px 0px 0px; }
+              .jobs-wrap .content-panel-header .apply button{ float:left;;margin: 4px 0px 0px 44px; }
 
          /* jobs */
 
@@ -2414,7 +2497,9 @@ margin-left:100px;
               .spage .content-header{ 
                 margin: -20px 0px 0px -15px; 
                 width: 320px;  
-                height: 286px; 
+                height: 150px;  
+                background-size: 100% 100% !important; 
+                background-repeat: no-repeat !important;
               }
               .spage .content-header h3{  margin:15px 0px 10px -20px; float: left;}
 
@@ -2442,6 +2527,61 @@ margin-left:100px;
           
               
          /* settings */
+
+         /* message */
+           .message-wrap { margin:0px 0px 0px -32px; }
+           .message-wrap .content-panel-status p{ margin: 0px 0px 0px 87px !important; }
+           .message-wrap .message-icon{ margin:0px 7px 0px 0px !important; }
+
+         /* message */
+
+        /* connection */
+        .connection-nav{
+          margin: 0px 0px 0px -32px !important;
+          width: 320px !important;
+          font-size:12px !important;
+          height: 63px !important;
+        }
+        .connection-nav ul{
+          margin:0px 0px 0px -32px !important;
+        }
+         .connection-nav ul li{
+          display:inline;
+          margin:0px -10px 0px 0px;
+        }
+        .connection-nav ul .active a{
+          border-color: #d1d1d1 ;
+          border-width: 1px 1px 0px 1px; 
+          border-style: solid;
+          border-bottom: solid #ffffff 1px;
+        }
+        .connection-nav ul li a{
+          padding: 10px 13px !important;
+             
+        }
+        .connection-tab-area .content-panel-header{
+          margin: 0px 0px 0px -32px !important;
+        }
+        .connection-tab-area .content-panel-header img{
+          margin:20px 0px 0px -20px !important;
+        }
+        .connection-tab-area .content-panel-header .content-panel-jobs{
+          margin:37px 0px 0px -32px !important;
+        }
+        .connection-tab-area .content-panel-header .button-group{
+          margin: -41px 0px 0px -16px !important;
+        }
+
+
+        /* connection */
+
+
+
+
+
+
+
+
 
 
 
@@ -2508,8 +2648,8 @@ margin: 10px 0px 0px 27px !important;
 color: #000;
 }
 .connection-nav{
-  margin: 0px 0px 0px 0px !important;
-  width: 825px !important;
+  margin: 0px 0px 0px 0px ;
+  width: 825px;
   height: 80px;
   padding: 24px 0px 0px 0px;
   background: #ffffff;
@@ -2527,7 +2667,7 @@ color: #000;
    border-bottom: solid #ffffff 1px;
 }
 .connection-nav ul li a{
-   padding: 13px 20px 15px 20px !important;
+   padding: 13px 20px 15px 20px;
    margin:0px 10px 0px 0px;
    background:#f6f6f6;
    border-color: #d1d1d1 ;
@@ -2651,4 +2791,52 @@ margin: 0px 8px 0px -41px;
 }
 .message-button button{
   background: #01ba8e;
+}
+.post-panel {
+  margin: 0px 0px 10px 0px;
+}
+.job-panel {
+  margin:0px 0px 10px 0px;
+}
+
+.job-panel .header-title{
+border: 1px solid #ccc;
+border-width: 0px 0px 1px 0px !important;
+margin: 0px -15px 11px -15px;
+padding: 1px 0px 2px 22px;
+}
+.job-panel .footer-title{
+border: 1px solid #ccc;
+border-width: 1px 0px 0px 0px !important;
+margin: 0px 0px 0px -15px;
+padding: 3px 0px 1px 22px;
+text-align: center;
+width: 825px;
+}
+
+.job-panel .job-recommended{
+  margin: 0px 0px 10px 0px;
+     
+}
+.job-panel .job-recommended img{
+  width: 48px;
+  height: 48px;
+  margin: 0px 0px 0px -30px;
+
+}
+.job-panel .job-recommended .job-details{
+  border:1px solid #ccc;
+  border-width: 0px 0px 0px 0px !important;
+  margin: 0px 0px 10px -55px;
+
+}
+.job-panel .job-recommended .job-details p{
+  margin:0px 0px 0px -37px;
+}
+.job-panel .job-recommended .job-details .job-title{
+  font-size:20px;
+
+}
+.job-panel .job-recommended .job-details .job-address{
+  color: #rgba(0,0,0,.55);
 }
