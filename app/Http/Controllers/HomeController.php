@@ -128,7 +128,7 @@ class HomeController extends Controller
                  'from_user_id'=>$userId,'status'=>"ACCEPT"
                  ])->count();
 
-
+    $recommended_job =  DB::table('job')->orderByRaw("RAND()")->take(3)->get();
 
 
         return view('home')
@@ -159,6 +159,7 @@ class HomeController extends Controller
                 ->with("follow_list",$follow_list)
                 ->with("follow_list2",$follow_list2)
                 ->with("check_followed_user",$check_followed_user)
+                ->with("recommended_job",$recommended_job)
 
 
        ;
@@ -2212,7 +2213,41 @@ class HomeController extends Controller
 
 
 
-  
+      public function userPost(){
+
+        $userId = Auth::id();
+        $post_content = Input::get('post_content');
+        $inputDate = date('Y-m-d');
+        $category = "User Post";
+        $status = "ACTIVE";
+        $getFollowers = DB::table('connection_requests')->where(['to_user_id' => $userId, 'status'=>'ACCEPT'])->get();
+
+
+        DB::table('dashboard_timeline')->insertGetId([
+              'user_id' => $userId,
+              'category' => $category,
+              'category_id' =>$userId,
+              'activity' => $post_content,
+              'date'=> $inputDate
+        ]);   
+
+        foreach ($getFollowers as $value) {
+          
+         DB::table('dashboard_timeline')->insert([
+              'user_id' => $value->from_user_id,
+              'category' => $category,
+              'category_id' =>$userId,
+              'activity' => $post_content,
+              'date'=> $inputDate
+        
+         ]);   
+
+        }
+
+
+        return back();
+
+    }
 
 
 

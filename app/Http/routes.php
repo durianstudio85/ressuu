@@ -166,4 +166,5 @@ Route::get('/all/usernotification/', 'UsersNotifications@allUserNotification');
 Route::get('/all/messagenotification/', 'UsersNotifications@allMessageNotification');
 Route::get('/all/jobNotification/', 'UsersNotifications@allJobNotification');
 
+Route::post('/user/post', 'HomeController@userPost');
 
