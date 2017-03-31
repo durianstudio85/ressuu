@@ -149,7 +149,7 @@
                     <?php  echo $job_notification;?></span></span>
 
                     <?php if($job_notification > 5){ ?>
-                              <ul class="dropdown-menu drop-message" style="overflow-y:scroll;height:333px;">
+                              <ul class="dropdown-menu drop-message" style="width: 400px;overflow:hidden;text-overflow: ellipsis ellipsis; text-align: left;word-wrap: break-word !important; ">
                     <?php }else{ ?>
                               <ul class="dropdown-menu drop-message">
                     <?php } ?>
@@ -212,6 +212,8 @@
                   <li><a href="{{ url('/home') }}">Dashboard</a></li>
                   <li><a href="{{ url('/profile') }}">My CV</a></li>
                   <li><a href="{{ url('/profile') }}">Profile</a></li>
+                  <li><a href="{{ url('/message') }}">Messages</a></li>
+                  <li><a href="{{ url('/connection') }}">Connections</a></li>
                   <li><a href="{{ url('/resume') }}">Resume</a></li>
                   <li><a href="{{ url('/portfolio') }}">Portfolio</a></li>
                   <li><a href="{{ url('/jobs') }}">Jobs</a></li>
@@ -326,12 +328,12 @@
                  <?php } ?> 
                  <!----> 
                 <?php if($no_message == 0){ ?>
-                  <a href="{{ url('/message') }}"><li class="menuactive"><span class="glyphicon glyphicon-envelope">&nbsp;</span>Message</li></a>                           
+                  <a href="{{ url('/message') }}"><li class="menuactive"><span class="glyphicon glyphicon-envelope">&nbsp;</span>Messages</li></a>                           
                 <?php }else { ?> 
-                  <a href="{{ url('/message') }}"><li class="menuactive"><span class="glyphicon glyphicon-envelope">&nbsp;</span>Message</li><span class="jobbagde"><?php echo $no_message;?></a>   
+                  <a href="{{ url('/message') }}"><li class="menuactive"><span class="glyphicon glyphicon-envelope">&nbsp;</span>Messages</li><span class="jobbagde"><?php echo $no_message;?></a>   
                 <?php } ?>
                  <!---->
-                <a href="{{ url('/connection') }}"><li><span class="glyphicon glyphicon-globe">&nbsp;</span>Connnection</li></a>
+                <a href="{{ url('/connection') }}"><li><span class="glyphicon glyphicon-globe">&nbsp;</span>Connnections</li></a>
                 <a href="{{ url('/profile') }}"><li><span class="glyphicon glyphicon-star">&nbsp;</span>Profile</li></a>
                 <a href="{{ url('/resume') }}"><li><span class="glyphicon glyphicon-flag">&nbsp;</span>Resume</li></a>
                 <a href="{{ url('/portfolio') }}"><li><span class="glyphicon glyphicon-send">&nbsp;</span>Portfolio</li></a>
@@ -341,7 +343,7 @@
 
 </sidebar>
  
-<content class="col-sm-12 col-md-9 hpage"> 
+<content class="col-xs-12  col-md-9 ppage"> 
 
  <?php  if(empty($userAds)){ ?>
 
@@ -378,23 +380,21 @@
 
 <?php  $messageInfo = DB::table('message')->where('id',$value->category_id)->first(); ?>   
 
- <div class="col-xs-12 col-md-12 content-panel-header">
+ <div class="col-xs-12 col-md-12 message-wrap content-panel-header">
             
             <div class="col-md-9" >
-                      <div class="content-panel-status col-xs-12 col-md-12">   
+                      <div class="content-panel-status col-md-12 col-xs-12 ">   
                             <div class="col-sm-2 div">
-                                   <img class="img-responsive " src="images/messenger_icon.png">
+                                   <img class="img-responsive" src="images/messenger_icon.png">
                             </div>
                             <div class="col-sm-10 div">
-                                  <h4>
-                                    <?php echo $messageInfo->name; ?>  
-                                  </h4>
+                                  <h4><?php echo $messageInfo->name; ?></h4>
                                   <p>New message from <?php echo $messageInfo->email; ?></p>
                                   <div></div>
                             </div>       
                       </div>
             </div>
-             <div class="col-xs-12 col-md-3 content-panel-lc"> 
+            <div class="col-md-3 col-xs-12  content-panel-lc"> 
               <span class="glyphicon glyphicon-time message-icon"></span>    
                               <p><?php
                               

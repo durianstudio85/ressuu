@@ -151,7 +151,7 @@
 
                     <?php if($job_notification > 5){ ?>
 
-                          <ul class="dropdown-menu drop-message" style="overflow-y:scroll;height:333px;" >
+                          <ul class="dropdown-menu drop-message" style="width: 400px;overflow:hidden;text-overflow: ellipsis ellipsis; text-align: left;word-wrap: break-word !important; ">
                               
                     <?php }else{ ?>
 
@@ -165,7 +165,7 @@
                              <li>
                                 <a href="" data-toggle="modal" data-target="#checkjobnotification_{{ $job_value->category_id }}">
                                    <img class="img-responsive notification-img" src="images/jobicon.png">
-                                   <span class="title">Hiring <b><?php echo $jobInfo->company_job; ?></b> from <?php echo $jobInfo->company_name; ?>.</span><br>
+                                   <div class="title">Hiring overflow:hidden;text-overflow: ellipsis ellipsis; text-align: left;word-wrap: break-word <b><?php echo $jobInfo->company_job; ?></b> from <?php echo $jobInfo->company_name; ?></div><br>
                                    <span class="glyphicon glyphicon-time calendar-icon"></span>
                                    <span class="date">
                                       <?php
@@ -189,7 +189,6 @@
                             </li>
                            
                         <?php } ?>
-                              
                                <div class="see_all">
                                 <a href="{{ url('/all/jobNotification/') }}">See All</a> 
                               </div>
@@ -219,8 +218,8 @@
                   <li><a href="{{ url('/home') }}">Dashboard</a></li>
                   <li><a href="{{ url('/profile') }}">My CV</a></li>
                   <li><a href="{{ url('/profile') }}">Profile</a></li>
-                  <li><a href="{{ url('/message') }}">Message</a></li>
-                  <li><a href="{{ url('/connection') }}">Connection</a></li>
+                  <li><a href="{{ url('/message') }}">Messages</a></li>
+                  <li><a href="{{ url('/connection') }}">Connections</a></li>
                   <li><a href="{{ url('/resume') }}">Resume</a></li>
                   <li><a href="{{ url('/portfolio') }}">Portfolio</a></li>
                   <li><a href="{{ url('/jobs') }}">Jobs</a></li>
@@ -340,12 +339,12 @@
                      <?php } ?> 
                     <!----> 
                     <?php if($no_message == 0){ ?>
-                      <a href="{{ url('/message') }}"><li class=""><span class="glyphicon glyphicon-envelope">&nbsp;</span>Message</li></a>                           
+                      <a href="{{ url('/message') }}"><li class=""><span class="glyphicon glyphicon-envelope">&nbsp;</span>Messages</li></a>                           
                     <?php }else { ?> 
-                      <a href="{{ url('/message') }}"><li class=""><span class="glyphicon glyphicon-envelope">&nbsp;</span>Message</li><span class="jobbagde"><?php echo $no_message;?></a>   
+                      <a href="{{ url('/message') }}"><li class=""><span class="glyphicon glyphicon-envelope">&nbsp;</span>Messages</li><span class="jobbagde"><?php echo $no_message;?></a>   
                     <?php } ?>
                     <!---->
-                    <a href="{{ url('/connection') }}"><li><span class="glyphicon glyphicon-globe">&nbsp;</span>Connnection</li></a>
+                    <a href="{{ url('/connection') }}"><li><span class="glyphicon glyphicon-globe">&nbsp;</span>Connnections</li></a>
                     <a href="{{ url('/profile') }}"><li><span class="glyphicon glyphicon-star">&nbsp;</span>Profile</li></a>
                     <a href="{{ url('/resume') }}"><li><span class="glyphicon glyphicon-flag">&nbsp;</span>Resume</li></a>
                     <a href="{{ url('/portfolio') }}"><li><span class="glyphicon glyphicon-send">&nbsp;</span>Portfolio</li></a>
@@ -386,50 +385,56 @@
 
     <?php foreach ($follow_list as $value) { ?>
 
-    <?php if($value->id != $userId){ ?>  
+     
 
-    <?php  $check_followed_user = DB::table('connection_requests')->where(['from_user_id'=>$userId,'to_user_id'=>$value->id,'status'=>"ACCEPT"])->count(); ?>
-    <?php  $check_followed_user_pending = DB::table('connection_requests')->where(['from_user_id'=>$userId,'to_user_id'=>$value->id,'status'=>"PENDING"])->count(); ?>
-    
-    <?php 
-          $followed_profile_exists = DB::table('profiles')->where('user_id',$value->id)->count(); 
-          $check_followed_profile = DB::table('profiles')->where('user_id',$value->id)->first();
-     ?>
 
-    <?php if($check_followed_user == 0 AND $check_followed_user_pending == 0){ ?>
 
-                <div class="col-md-4 col-xs-12 content-profile-people"> 
-                        <div class="col-md-5 col-xs-2 people-img">
-                          <?php if($followed_profile_exists == 0 or empty($check_followed_profile->profile_picture) or $check_followed_profile->profile_picture == " " ){ ?>
-                                    <img class="profile-pic" src="profilepic/default_avatar.jpg"/> 
-                              <?php }else{ ?>
-                                    <img class="profile-pic" src="profilepic/<?php echo $check_followed_profile->profile_picture; ?>"/> 
-                          <?php } ?>
-                        </div>
-                        <div class="col-md-7 col-xs-10 people-status">
-                         
-                            <?php if($followed_profile_exists == 0 ){ ?>
-                                   <p class="people-name">{{ $value->name }}</p>
-                              <?php }else{ ?>
-                                   <p class="people-name">{{ $check_followed_profile->name }}</p> 
-                            <?php } ?>
-                             
-                            <?php if($followed_profile_exists == 0 ){ ?>
-                                   <p class="people-subname">Not Set</p>
-                              <?php }else{ ?>
-                                   <p class="people-subname">{{ $check_followed_profile->position }}</p> 
-                            <?php } ?>
-                          
-                         
-                              <a href="/follow/users/{{ $value->id }}" class="follow" style="text-transform:none;text-decoration:none;color:#fff;">Follow</a>
-                        
-                        </div>   
+        <?php if($value->id != $userId){ ?>  
+
+        <?php  $check_followed_user = DB::table('connection_requests')->where(['from_user_id'=>$userId,'to_user_id'=>$value->id,'status'=>"ACCEPT"])->count(); ?>
+        <?php  $check_followed_user_pending = DB::table('connection_requests')->where(['from_user_id'=>$userId,'to_user_id'=>$value->id,'status'=>"PENDING"])->count(); ?>
+        
+        <?php 
+              $followed_profile_exists = DB::table('profiles')->where('user_id',$value->id)->count(); 
+              $check_followed_profile = DB::table('profiles')->where('user_id',$value->id)->first();
+         ?>
+
+            <?php if($check_followed_user == 0 AND $check_followed_user_pending == 0){ ?>
+
+                        <div class="col-md-4 col-xs-12 content-profile-people"> 
+                                <div class="col-md-5 col-xs-2 people-img">
+                                  <?php if($followed_profile_exists == 0 or empty($check_followed_profile->profile_picture) or $check_followed_profile->profile_picture == " " ){ ?>
+                                            <img class="profile-pic" src="profilepic/default_avatar.jpg"/> 
+                                      <?php }else{ ?>
+                                            <img class="profile-pic" src="profilepic/<?php echo $check_followed_profile->profile_picture; ?>"/> 
+                                  <?php } ?>
+                                </div>
+                                <div class="col-md-7 col-xs-10 people-status">
+                                 
+                                    <?php if($followed_profile_exists == 0 ){ ?>
+                                           <p class="people-name">{{ $value->name }}</p>
+                                      <?php }else{ ?>
+                                           <p class="people-name">{{ $check_followed_profile->name }}</p> 
+                                    <?php } ?>
+                                     
+                                    <?php if($followed_profile_exists == 0 ){ ?>
+                                           <p class="people-subname">Not Set</p>
+                                      <?php }else{ ?>
+                                           <p class="people-subname">{{ $check_followed_profile->position }}</p> 
+                                    <?php } ?>
+                                  
+                                 
+                                      <a href="/follow/users/{{ $value->id }}" class="follow" style="text-transform:none;text-decoration:none;color:#fff;">Follow</a>
+                                
+                                </div>   
+                                      
                               
-                      
-                                                 
-                  </div>
-     <?php } ?>
-     <?php } ?> 
+                                                         
+                          </div>
+             <?php } ?>
+
+         <?php } ?> 
+
      <?php } ?>
                 </div>
 
@@ -462,30 +467,36 @@
 <div class="col-xs-12 col-md-12 job-panel content-panel-header">
     <div class="row header-title">
         <h4>Jobs recommended for you</h4>
-    </div> 
-    <?php foreach ($recommended_job as $job_recommend_info) { ?>
-
-    <?php if($job_recommend_info->status != "DELETE"){ ?> 
-
-    <?php  $if_apply = DB::table('applicant')->where(['user_id' => Auth::id(),'job_id'=>$job_recommend_info->id])->count(); ?> 
-    
-      <?php if($if_apply == 0){ ?>  
-
-    <div class="col-md-12 job-recommended" >
-
-               <div class="col-md-2">
-                  <img class="img-responsive job-logo" src="joblogo/{{ $job_recommend_info->company_picture }}">
-               </div> 
-                <div class="col-md-10 job-details">
-                    <p class="job-title"><b>{{ $job_recommend_info->company_job }}</b></p>
-                    <p class="job-address">{{ $job_recommend_info->company_name }}, {{ $job_recommend_info->company_address }}</p>
-               </div>
+    </div>
    
 
-    </div>
-    <?php } ?>
+    <?php foreach ($recommended_job as $job_recommend_info) { ?>
 
-    <?php } ?>
+     
+        <?php if($job_recommend_info->status != "DELETE"){ ?> 
+
+              <?php  $if_apply = DB::table('applicant')->where(['user_id' => Auth::id(),'job_id'=>$job_recommend_info->id])->count(); ?> 
+              
+                    <?php if($if_apply == 0){ ?>  
+
+                        <div class="col-md-12 job-recommended" >
+
+                                   <div class="col-md-2">
+                                      <img class="img-responsive job-logo" src="images/jobicon.png">
+                                   </div> 
+                                    <div class="col-md-10 job-details">
+                                        <p class="job-title"><b>{{ $job_recommend_info->company_job }}</b></p>
+                                        <p class="job-address">{{ $job_recommend_info->company_name }}, {{ $job_recommend_info->company_address }}</p>
+                                   </div>
+                       
+
+                        </div>
+              <?php } ?>
+
+        <?php } ?>
+      
+
+
 
     <?php } ?>
     

@@ -2720,8 +2720,11 @@ color: #000;
 }
 .dropdown-menu{
 border-radius: 0px;
-padding: 0px 0px 0px 0px;;
+padding: 0px 0px 0px 0px;
 
+}
+.dropdown-menu .drop-message{
+  word-break: break-all;
 }
 .dropdown-menu > li > a{
 display: block;
@@ -2800,18 +2803,21 @@ margin: 0px 8px 0px -41px;
 }
 
 .job-panel .header-title{
-border: 1px solid #ccc;
-border-width: 0px 0px 1px 0px !important;
-margin: 0px -15px 11px -15px;
-padding: 1px 0px 2px 22px;
+  border: 1px solid #ccc;
+  border-width: 0px 0px 1px 0px !important;
+  margin: 0px 0px 11px -15px;
+  padding: 1px 0px 2px 50px;
+  width: 826px;
+  color: #5e6d81;
+
 }
 .job-panel .footer-title{
-border: 1px solid #ccc;
-border-width: 1px 0px 0px 0px !important;
-margin: 0px 0px 0px -15px;
-padding: 3px 0px 1px 22px;
-text-align: center;
-width: 825px;
+  border: 1px solid #ccc;
+  border-width: 1px 0px 0px 0px !important;
+  margin: 0px 0px 0px -15px;
+  padding: 3px 0px 1px 22px;
+  text-align: center;
+  width: 825px;
 }
 
 .job-panel .job-recommended{
@@ -2821,13 +2827,13 @@ width: 825px;
 .job-panel .job-recommended img{
   width: 48px;
   height: 48px;
-  margin: 0px 0px 0px -30px;
+  margin: 0px 0px 0px 0px;
 
 }
 .job-panel .job-recommended .job-details{
   border:1px solid #ccc;
   border-width: 0px 0px 0px 0px !important;
-  margin: 0px 0px 10px -55px;
+  margin: 0px 0px 10px -29px;
 
 }
 .job-panel .job-recommended .job-details p{
@@ -2835,8 +2841,9 @@ width: 825px;
 }
 .job-panel .job-recommended .job-details .job-title{
   font-size:20px;
+ color: #01ba8e;
 
 }
 .job-panel .job-recommended .job-details .job-address{
-  color: #rgba(0,0,0,.55);
+  color: #9ea7b3;
 }

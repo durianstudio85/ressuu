@@ -86,7 +86,7 @@ class HomeController extends Controller
                      'user_id' => $userId,
                      'category' => 'Job',
                      'status' => 'PENDING'
-                  ])->orderBy('id', 'desc')->get();
+                  ])->orderBy('id', 'desc')->take(5)->get();
 
     $user_notification = DB::table('user_notification')->where([
                      'category_id' => $userId,
@@ -131,6 +131,7 @@ class HomeController extends Controller
     $recommended_job =  DB::table('job')->orderByRaw("RAND()")->take(3)->get();
 
 
+
         return view('home')
                 ->with("userProfile",$userProfile)
                 ->with("userFeeds",$userFeeds)
@@ -160,6 +161,7 @@ class HomeController extends Controller
                 ->with("follow_list2",$follow_list2)
                 ->with("check_followed_user",$check_followed_user)
                 ->with("recommended_job",$recommended_job)
+               
 
 
        ;
@@ -565,6 +567,8 @@ class HomeController extends Controller
 
         $count_delete_job = DB::table('job')->where('status',"DELETE")->count();
 
+        $userListJobs = DB::table('job')->orderBy('id', 'desc')->paginate(5); 
+
         return view('jobs')
                 ->with("userProfile",$userProfile)
                 ->with("name",$name)
@@ -587,6 +591,7 @@ class HomeController extends Controller
                 ->with("count_like",$count_like)
                 ->with("count_view",$count_view)
                 ->with("count_delete_job",$count_delete_job)
+                ->with("userListJobs",$userListJobs)
         ;
 
     }
@@ -2211,9 +2216,7 @@ class HomeController extends Controller
 
     }
 
-
-
-      public function userPost(){
+    public function userPost(){
 
         $userId = Auth::id();
         $post_content = Input::get('post_content');
@@ -2248,6 +2251,9 @@ class HomeController extends Controller
         return back();
 
     }
+    
+
+  
 
 
 

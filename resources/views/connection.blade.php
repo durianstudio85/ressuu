@@ -149,7 +149,7 @@
                     <?php  echo $job_notification;?></span></span>
 
                     <?php if($job_notification > 5){ ?>
-                              <ul class="dropdown-menu drop-message" style="overflow-y:scroll;height:333px;">
+                              <ul class="dropdown-menu drop-message" style="width: 400px;overflow:hidden;text-overflow: ellipsis ellipsis; text-align: left;word-wrap: break-word !important; ">
                     <?php }else{ ?>
                               <ul class="dropdown-menu drop-message">
                     <?php } ?>
@@ -209,9 +209,11 @@
         </nav>
         <div class="row hiddenmenu ">
               <ul>
-                  <li><a href="{{ url('/home') }}">Dashboard</a></li>
+                 <li><a href="{{ url('/home') }}">Dashboard</a></li>
                   <li><a href="{{ url('/profile') }}">My CV</a></li>
                   <li><a href="{{ url('/profile') }}">Profile</a></li>
+                  <li><a href="{{ url('/message') }}">Messages</a></li>
+                  <li><a href="{{ url('/connection') }}">Connections</a></li>
                   <li><a href="{{ url('/resume') }}">Resume</a></li>
                   <li><a href="{{ url('/portfolio') }}">Portfolio</a></li>
                   <li><a href="{{ url('/jobs') }}">Jobs</a></li>
@@ -333,12 +335,12 @@
                        <?php } ?> 
                       <!----> 
                       <?php if($no_message == 0){ ?>
-                        <a href="{{ url('/message') }}"><li class=""><span class="glyphicon glyphicon-envelope">&nbsp;</span>Message</li></a>                           
+                        <a href="{{ url('/message') }}"><li class=""><span class="glyphicon glyphicon-envelope">&nbsp;</span>Messages</li></a>                           
                       <?php }else { ?> 
-                        <a href="{{ url('/message') }}"><li class=""><span class="glyphicon glyphicon-envelope">&nbsp;</span>Message</li><span class="jobbagde"><?php echo $no_message;?></a>   
+                        <a href="{{ url('/message') }}"><li class=""><span class="glyphicon glyphicon-envelope">&nbsp;</span>Messages</li><span class="jobbagde"><?php echo $no_message;?></a>   
                       <?php } ?>
                       <!---->
-                      <a href="{{ url('/connection') }}"><li class="menuactive"><span class="glyphicon glyphicon-globe">&nbsp;</span>Connnection</li></a>
+                      <a href="{{ url('/connection') }}"><li class="menuactive"><span class="glyphicon glyphicon-globe">&nbsp;</span>Connnections</li></a>
                       <a href="{{ url('/profile') }}"><li><span class="glyphicon glyphicon-star">&nbsp;</span>Profile</li></a>
                       <a href="{{ url('/resume') }}"><li><span class="glyphicon glyphicon-flag">&nbsp;</span>Resume</li></a>
                       <a href="{{ url('/portfolio') }}"><li><span class="glyphicon glyphicon-send">&nbsp;</span>Portfolio</li></a>
@@ -348,7 +350,7 @@
 
 </sidebar>
  
-<content class="col-sm-12 col-md-9 hpage"> 
+<content class="col-md-9 col-xs-12 ppage"> 
 
  <?php  if(empty($userAds)){ ?>
 
@@ -406,15 +408,15 @@
 
                <?php //if($checkifFollowed == 0){ ?><!-- CHECK FOLLOWED -->
 
-                   <div class="col-xs-12 col-md-12 content-panel-header">
-                      <div class="col-xs-12 col-md-2 img">
+                   <div class="col-md-12 col-xs-12  content-panel-header">
+                      <div class="col-md-2 col-xs-5  img">
                           <?php if($if_profile_exist == 0 or empty($profile_info->profile_picture) or $profile_info->profile_picture == " " ){ ?>
                             <img src="profilepic/default_avatar.jpg" class="img-responsive round-pic"> 
                           <?php }else{ ?>
                             <img class="img-responsive round-pic" src="profilepic/<?php echo $profile_info->profile_picture; ?>" > 
                           <?php } ?>  
                       </div>
-                      <div class="col-xs-8 col-md-6 content-panel-jobs">
+                      <div class="col-md-6 col-xs-7 content-panel-jobs">
                            <?php if($if_profile_exist == 0){ ?>
                             <h4><?php  echo $user_info->name; ?></h4>
                           <?php }else{ ?>
@@ -427,7 +429,7 @@
                              <p><?php echo $profile_info->position; ?></p>
                           <?php } ?>  
                      </div>
-                     <div class="col-xs-4 col-md-4"> 
+                     <div class="col-md-4 col-xs-12 button-group"> 
                       <p>&nbsp;</p><br><br>
                           <div class="" role="group" aria-label="...">
                             <?php if($checkifFollowed == 0){ ?> 
@@ -478,15 +480,15 @@
 
                <?php if($checkifFollowed == 1){ ?> 
 
-                   <div class="col-xs-12 col-md-12 content-panel-header">
-                      <div class="col-xs-12 col-md-2 img">
+                   <div class="col-md-12 col-xs-12  content-panel-header">
+                      <div class="col-md-2 col-xs-5 img">
                           <?php if(empty($profile_info->profile_picture) or $profile_info->profile_picture == " " ){ ?>
                             <img src="profilepic/default_avatar.jpg" class="img-responsive round-pic"> 
                           <?php }else{ ?>
                             <img class="img-responsive round-pic" src="profilepic/<?php echo $profile_info->profile_picture; ?>" > 
                           <?php } ?>  
                       </div>
-                      <div class="col-xs-8 col-md-8 content-panel-jobs">
+                      <div class="col-md-8 col-xs-7 content-panel-jobs">
                           <?php if($if_profile_exist == 0){ ?>
                             <h4><?php  echo $user_info->name; ?></h4>
                           <?php }else{ ?>
@@ -499,7 +501,7 @@
                              <p><?php echo $profile_info->position; ?></p>
                           <?php } ?>  
                      </div>
-                     <div class="col-xs-4 col-md-2"> 
+                     <div class="col-md-2 col-xs-12 button-group"> 
                       <p>&nbsp;</p><br><br>
                           <div class="" role="group" aria-label="...">
                              <?php if($checkStatus->status == "PENDING"){ ?>
@@ -534,15 +536,15 @@
 
                <?php //if($checkifFollowed == 1){ ?> 
 
-                   <div class="col-xs-12 col-md-12 content-panel-header">
-                      <div class="col-xs-12 col-md-2 img">
+                   <div class="col-md-12 col-xs-12 content-panel-header">
+                      <div class="col-md-2 col-xs-5 img">
                           <?php if($if_profile_exist == 0 or empty($profile_info->profile_picture) or $profile_info->profile_picture == " " ){ ?>
                             <img src="profilepic/default_avatar.jpg" class="img-responsive round-pic"> 
                           <?php }else{ ?>
                             <img class="img-responsive round-pic" src="profilepic/<?php echo $profile_info->profile_picture; ?>" > 
                           <?php } ?>  
                       </div>
-                      <div class="col-xs-8 col-md-8 content-panel-jobs">
+                      <div class="col-md-8 col-xs-7  content-panel-jobs">
                            <?php if($if_profile_exist == 0){ ?>
                             <h4><?php  echo $user_information->name; ?></h4>
                           <?php }else{ ?>
@@ -555,7 +557,7 @@
                              <p><?php echo $profile_info->position; ?></p>
                           <?php } ?>  
                      </div>
-                     <div class="col-xs-4 col-md-2"> 
+                     <div class="col-md-2 col-xs-12 button-group"> 
                       <p>&nbsp;</p><br><br>
                           <div class="" role="group" aria-label="...">
                              <a href="/follow/remove/{{ $user_info->id }}" data-toggle="modal" type="button" class="btn">Remove</a>
@@ -586,15 +588,15 @@
 
                <?php //if($checkifFollowed == 1){ ?> 
 
-                   <div class="col-xs-12 col-md-12 content-panel-header">
-                      <div class="col-xs-12 col-md-2 img">
+                   <div class="col-md-12 col-xs-12  content-panel-header">
+                      <div class="col-md-2 col-xs-5 img">
                           <?php if($if_profile_exist == 0 or empty($profile_info->profile_picture) or $profile_info->profile_picture == " " ){ ?>
                             <img src="profilepic/default_avatar.jpg" class="img-responsive round-pic"> 
                           <?php }else{ ?>
                             <img class="img-responsive round-pic" src="profilepic/<?php echo $profile_info->profile_picture; ?>" > 
                           <?php } ?>  
                       </div>
-                      <div class="col-xs-8 col-md-7 content-panel-jobs">
+                      <div class="col-md-7 col-xs-7 content-panel-jobs">
                            <?php if($if_profile_exist == 0){ ?>
                             <h4><?php  echo $user_information->name; ?></h4>
                           <?php }else{ ?>
@@ -607,7 +609,7 @@
                              <p><?php echo $profile_info->position; ?></p>
                           <?php } ?>  
                      </div>
-                     <div class="col-xs-4 col-md-3"> 
+                     <div class="col-md-3 col-xs-12 button-group"> 
                       <p>&nbsp;</p><br><br>
                           <div class="" role="group" aria-label="...">
                              <a href="/follow/accept/{{ $user_info->id }}" data-toggle="modal" type="button" class="btn accept">Accept</a>
