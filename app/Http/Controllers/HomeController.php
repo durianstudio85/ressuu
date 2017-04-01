@@ -1792,7 +1792,7 @@ class HomeController extends Controller
                      'user_id' => $userId,
                      'category' => 'Job',
                      'status' => 'PENDING'
-                  ])->orderBy('id', 'desc')->get();   
+                  ])->orderBy('id', 'desc')->take(5)->get();   
 
     $user_notification = DB::table('user_notification')->where([
                      'category_id' => $userId,
