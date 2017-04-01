@@ -650,6 +650,12 @@ sidebar{
 
     /* content header profile/dashboard */
 
+    .profile .content-panel-header h3{
+      margin-left: 44px;
+    }
+    .social-media .content-panel-header h3{
+      margin-left: 44px;
+    } 
     .content-profile img{
       float:left;
     }
@@ -785,7 +791,7 @@ sidebar{
        border-radius:5px;
        border: none;
        background:#ebebeb;
-       margin: 250px 0px 30px 0px;
+      
        color: #000;
     }
     .content-panel button:hover{
@@ -2647,6 +2653,101 @@ background: #ebebeb;
 margin: 10px 0px 0px 27px !important;
 color: #000;
 }
+.profile-button{
+  font-size: 16px;
+  color: #646464;
+  padding: 5px 15px;
+  border:solid 1px #ebebeb;
+  background: #ebebeb;
+  border-radius: 5px;
+  margin: -47px 0px 0px 0px;
+  float: right;
+ 
+}
+
+.portfolio-title-header{
+  background: #ffffff;
+  height: 100%;
+}
+.portfolio-title-header h1{
+  font-size: 25px;
+  color: #01ba8e;
+  margin:20px 0px 20px 30px;
+}
+.portfolio-button{
+  font-size: 16px;
+  color: #646464;
+  padding: 5px 15px;
+  border:solid 1px #ebebeb;
+  background: #ebebeb;
+  border-radius: 5px;
+  margin: 19px -9px 0px 0px;
+  float: right;
+  
+}
+
+
+
+
+
+.resume-title-header{
+  background: #ffffff;
+  height: 100%;
+}
+.resume-title-header h1{
+  font-size: 25px;
+  color: #01ba8e;
+  margin: 20px 0px 0px 7px;
+}
+.resume-button{
+  font-size: 16px;
+  color: #646464;
+  padding: 5px 15px;
+  border:solid 1px #ebebeb;
+  background: #ebebeb;
+  border-radius: 5px;
+  margin: 286px 0px 0px -158px;
+  float: right;
+  position: fixed;
+}
+
+
+
+.resume-nav{
+  margin: 0px 0px 0px 0px ;
+  width: 825px;
+  height: 80px;
+  padding: 25px 0px 0px 0px;
+  background: #ffffff;
+  border-color: #d1d1d1;
+  border-width: 0px 0px 1px 0px;
+  border-style: solid;
+}
+.resume-nav ul{
+  margin-top:0px;
+}
+.resume-nav ul .active a{
+   border-color: #d1d1d1 ;
+   border-width: 1px 1px 0px 1px; 
+   border-style: solid;
+   border-bottom: solid #ffffff 1px;
+}
+.resume-nav ul li a{
+   padding: 13px 20px 15px 20px;
+   margin:0px 10px 0px 0px;
+   background:#f6f6f6;
+   border-color: #d1d1d1 ;
+   border-width: 1px 1px 1px 1px; 
+   border-style: solid;
+   border-bottom: solid #d1d1d1 1px;
+}
+.content-experience{
+   margin: 200px 0px 30px 0px;
+}
+
+
+
+
 .connection-nav{
   margin: 0px 0px 0px 0px ;
   width: 825px;
@@ -2675,6 +2776,8 @@ color: #000;
    border-style: solid;
    border-bottom: solid #d1d1d1 1px;
 }
+
+
 .connection-tab-area a{
   background: #e9e9e9;
   color: #777777;

@@ -349,27 +349,50 @@
 </sidebar>
 <content class="col-xs-12 col-md-9">
  
- <section class="col-xs-12 col-md-12 rpage content-header">
-     <div class="col-xs-10 col-md-10">
-          <h3>Resume</h3>     
-     </div>             
-     <div  class="tabmenu col-xs-2 col-md-2">
-        <a href="#"><img  src="images/menu.png" class="nav-menu"></a>
-     </div>
-     <nav class="col-xs-12 content-nav-menu" role="tablist">
-          <ul role="presentation">
-            <li class="active" ><a href="#tab1" role="tab" data-toggle="tab">Experience</a></li>
-            <li><a href="#tab2" role="tab" data-toggle="tab">Education</a></li>
-            <li><a href="#tab3" role="tab" data-toggle="tab">Skill</a></li>
-            <li><a href="#tab4" role="tab" data-toggle="tab">Certification</a></li>
-          </ul>
-     </nav>
- </section>
+ <?php  if(empty($userAds)){ ?>
+
+  <a href="#" target="_blank"> 
+    <section class="col-xs-12 col-md-12 content-header ads-bg" style="background:url('../ads/default-ads.png')">
+      <div class="col-xs-12 col-md-12 content-people-wrap "></div>
+    </section>
+  </a>
+
+<?php }else{ ?> 
+
+  <a href="<?php echo $userAds->link; ?>" target="_blank"> 
+    <section class="col-xs-12 col-md-12 rpage content-header ads-bg" style="background:url('../ads/<?php echo $userAds->photo; ?>')">
+      
+    </section>
+
+  </a>
+<?php } ?> 
+<section class="col-xs-12 resume-title-header  tab-content">
+
+   
+        <div class="col-md-6">
+          <h1>Resume</h1>
+        </div>
+     
+
+
+
+</section>
+
+<nav class="col-xs-12 content-nav-menu resume-nav " role="tablist">
+            <ul class="">
+              <li role="presentation" class="active"><a href="#tab1" role="tab" data-toggle="tab">Experience</a></li>
+              <li role="presentation"><a href="#tab2" role="tab" data-toggle="tab">Education</a></li>
+              <li role="presentation"><a href="#tab3" role="tab" data-toggle="tab">Skill</a></li>
+              <li role="presentation"><a href="#tab4" role="tab" data-toggle="tab">Certification</a></li>
+            </ul>
+</nav>
 
 
 <section  class="resume tab-content">
 
          <section role="tabpanel" class="tab-pane fade in active" id="tab1">
+
+             <button class="resume-button" data-toggle="modal" data-target="#myModal1">Add Experience</button>
 
              @foreach ($userResume_Experience as $userExperience)
               
@@ -524,6 +547,8 @@
 
 
          <section role="tabpanel" class="tab-pane  fade in" id="tab2">
+
+            <button class="resume-button" data-toggle="modal" data-target="#myModal2">Add Education</button>
 
           @foreach ($userResume_Education as $userEducation)
 
@@ -683,6 +708,8 @@
 
          <section role="tabpanel" class="tab-pane fade in" id="tab3">
 
+         <button class="resume-button" data-toggle="modal" data-target="#myModal3">Add Skill</button>
+
           @foreach ($userResume_Skills as $userSkill)
 
             <div class="col-xs-12 col-md-12 content-panel-header skills-xs">
@@ -800,6 +827,8 @@
 
 
          <section role="tabpanel" class="tab-pane fade in" id="tab4">
+
+          <button class="resume-button" data-toggle="modal" data-target="#myModal4">Add Certification</button>
 
           @foreach ($userResume_Certification as $userCertification)
 

@@ -351,7 +351,10 @@ class HomeController extends Controller
                      'to_user_id' => $userId,
                      'status' => 'VIEW'
                   ])->count();
-
+    $userAds = DB::table('ads')->where([
+                     'area' => 'USERDASHBOARD',
+                     'status' => 'ACTIVE'
+                  ])->first();      
 
         return view('resume')
                     ->with("userProfile",$userProfile)
@@ -376,6 +379,7 @@ class HomeController extends Controller
                     ->with("count_connection",$count_connection)
                     ->with("count_like",$count_like)
                     ->with("count_view",$count_view)
+                    ->with("userAds",$userAds)
         ;
 
 

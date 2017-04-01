@@ -408,6 +408,19 @@
 <!-- Modal for Cover Photo -->  
 
 <section  class="col-xs-12 col-md-12 content-portfolio"> 
+    <section class="col-xs-12 portfolio-title-header  tab-content">
+        <div class="col-md-6">
+          <h1>Portfolio</h1>
+        </div>
+        <div class="col-md-6">
+          <button  class="portfolio-button" data-toggle="modal" data-target="#myModal"> Add Portfolio</button>
+        </div>
+
+
+
+    </section>
+
+
     <nav class="col-xs-12 col-md-12">
         <ul>
              <li class="active">
@@ -752,7 +765,7 @@
 
 <section class="col-md-12 content-panel">
             <div class="content-experience">
-                        <center><button data-toggle="modal" data-target="#myModal">Add Portfolio</button></center>
+                        
             </div>  
 </section>
 

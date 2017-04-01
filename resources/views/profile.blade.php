@@ -372,7 +372,11 @@
                    
 <section class="profile">
           
-          <div class="col-xs-12 col-md-12 content-panel-header"><h3>Profile</h3></div>
+          <div class="col-xs-12 col-md-12 content-panel-header">
+              <h3>Profile</h3>
+              <button  class="profile-button" data-toggle="modal" data-target="#myModal"><span class="glyphicon glyphicon-pencil"></span> Edit Profile</button>
+
+          </div>
 
           <div class="col-xs-12 col-md-12  content-panel">
                      <div class="col-xs-3 col-md-3">
@@ -386,7 +390,7 @@
                             <?php } ?>                    
                                       
                      </div>
-                     <div class="col-xs-12 col-md-12 line"></div>                
+                     <div class="col-xs-12 col-md-12 "></div>                
          </div>
 
          <div class="col-xs-12 col-md-12  content-panel">
@@ -401,7 +405,7 @@
                             <?php } ?>                   
                           <p></p>            
                      </div>
-                     <div class="col-xs-12 col-md-12 line"></div>                
+                     <div class="col-xs-12 col-md-12 "></div>                
          </div>
 
          <div class="col-xs-12 col-md-12  content-panel">
@@ -416,7 +420,7 @@
                             <?php } ?>                     
                                     
                      </div>
-                     <div class="col-xs-12 col-md-12 line"></div>                
+                     <div class="col-xs-12 col-md-12 "></div>                
          </div>
 
          <div class="col-xs-12 col-md-12  content-panel">
@@ -431,7 +435,7 @@
                             <?php } ?>                   
                                  
                      </div>
-                     <div class="col-xs-12 col-md-12 line"></div>                
+                     <div class="col-xs-12 col-md-12"></div>                
          </div>
 
          <div class="col-xs-12 col-md-12  content-panel">
@@ -445,7 +449,7 @@
                                <p>{{ $email }}</p>
                             <?php } ?>                 
                      </div>
-                     <div class="col-xs-12 col-md-12 line"></div>                
+                     <div class="col-xs-12 col-md-12 "></div>                
          </div>        
 
           <div class="col-xs-12 col-md-12  content-panel">
@@ -460,7 +464,7 @@
                             <?php } ?>                   
                                   
                      </div>
-                     <div class="col-xs-12 col-md-12 line"></div>                
+                     <div class="col-xs-12 col-md-12 "></div>                
          </div> 
           
           <div class="col-xs-12 col-md-12  content-panel">
@@ -475,7 +479,7 @@
                             <?php } ?>                      
                                      
                      </div>
-                     <div class="col-xs-12 col-md-12 line"></div>                
+                     <div class="col-xs-12 col-md-12 "></div>                
          </div>    
           <div class="col-xs-12 col-md-12  content-panel">
                      <div class="col-xs-3 col-md-3">
@@ -489,7 +493,7 @@
                             <?php } ?>                      
                                      
                      </div>
-                     <div class="col-xs-12 col-md-12 line"></div>                
+                     <div class="col-xs-12 col-md-12 "></div>                
          </div>                          
 </section>
 
@@ -509,7 +513,7 @@
                             <?php } ?>                     
                                     
                      </div>
-                     <div class="col-xs-12 col-md-12 line"></div>                
+                     <div class="col-xs-12 col-md-12"></div>                
          </div>
 
          <div class="col-xs-12 col-md-12  content-panel">
@@ -524,7 +528,7 @@
                             <?php } ?>                    
                                      
                      </div>
-                     <div class="col-xs-12 col-md-12 line"></div>                
+                     <div class="col-xs-12 col-md-12"></div>                
          </div>
 
         <div class="col-xs-12 col-md-12  content-panel">
@@ -539,7 +543,7 @@
                             <?php } ?>                    
                                      
                      </div>
-                     <div class="col-xs-12 col-md-12 line"></div>                
+                     <div class="col-xs-12 col-md-12"></div>                
          </div>
 
             <div class="col-xs-12 col-md-12  content-panel">
@@ -554,7 +558,7 @@
                       <?php } ?>                      
                                       
                      </div>
-                     <div class="col-xs-12 col-md-12 line"></div>                
+                     <div class="col-xs-12 col-md-12"></div>                
          </div>
                        
 </section> 

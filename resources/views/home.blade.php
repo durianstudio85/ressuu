@@ -165,7 +165,7 @@
                              <li>
                                 <a href="" data-toggle="modal" data-target="#checkjobnotification_{{ $job_value->category_id }}">
                                    <img class="img-responsive notification-img" src="images/jobicon.png">
-                                   <div class="title">Hiring overflow:hidden;text-overflow: ellipsis ellipsis; text-align: left;word-wrap: break-word <b><?php echo $jobInfo->company_job; ?></b> from <?php echo $jobInfo->company_name; ?></div><br>
+                                   <div class="title">Hiring <b><?php echo $jobInfo->company_job; ?></b> from <?php echo $jobInfo->company_name; ?></div><br>
                                    <span class="glyphicon glyphicon-time calendar-icon"></span>
                                    <span class="date">
                                       <?php
@@ -456,7 +456,7 @@
                           </div>
                   
                      <input type="hidden" value="{{ csrf_token() }}" name="_token" >
-                  <div class="modal-footer">
+                  <div class="modal-footer" style="border-top: 0px solid #e5e5e5;">
                        <button type="submit" class="btn btn-default">Post</button>
                   </div>
               </form>
@@ -479,18 +479,53 @@
               
                     <?php if($if_apply == 0){ ?>  
 
-                        <div class="col-md-12 job-recommended" >
+                        <div class="col-md-12 col-xs-12 content-panel-header">
+                            
+                          <div class="col-md-2 col-xs-5 img">
+                                  <img src="joblogo/{{ $job_recommend_info->company_picture }}" class="img-responsive"> 
+                          </div>
+                          <div class="col-md-8 col-xs-7  content-panel-jobs">
+                                     <h4>{{ $job_recommend_info->company_job }}</h4>
+                                     <p>{{ $job_recommend_info->company_name }}, {{ $job_recommend_info->company_address }}</p>
+                                     <div><!--<a href="#">Link</a> | <a href="#">Comment</a>--></div>
+                          </div>
+                           <div class="col-md-2 col-xs-12  apply">      
+                                      <p>
+                                        <?php
+                                            
+                                            if(!empty($job_recommend_info->date)){
+                                             
+                                               $value_date = date("Y-m-d", strtotime( $job_recommend_info->date ) );
+                                               $from=date_create(date('Y-m-d'));
+                                               $to=date_create($value_date);
+                                               $diff=date_diff($to,$from);
+                                               $days_diff = $diff->format('%a');
 
-                                   <div class="col-md-2">
-                                      <img class="img-responsive job-logo" src="images/jobicon.png">
-                                   </div> 
-                                    <div class="col-md-10 job-details">
-                                        <p class="job-title"><b>{{ $job_recommend_info->company_job }}</b></p>
-                                        <p class="job-address">{{ $job_recommend_info->company_name }}, {{ $job_recommend_info->company_address }}</p>
-                                   </div>
-                       
+                                               if($days_diff == "0"){
+                                                echo "Just now";
+                                               }else{
+                                                echo $diff->format('%a Days Ago');
+                                               }
+
+
+                                            }
+
+                                             ?>
+                                      </p>
+                                      <?php  $if_apply = DB::table('applicant')->where(['user_id' => Auth::id(),'job_id'=>$job_recommend_info->id])->count(); ?>
+                                      <?php if($if_apply == 0){ ?>
+                                         <button data-toggle="modal" data-target="#jobs_{{ $job_recommend_info->id }}">Apply</button> 
+                                      <?php }else{ ?> 
+                                         <button data-toggle="">Applied</button>
+                                      <?php } ?>
+                                     
+                                                
+                          </div>
 
                         </div>
+
+
+                        
               <?php } ?>
 
         <?php } ?>
@@ -511,149 +546,8 @@
 
 <?php  foreach ($timeline as $value) { ?><!-- foreach -->
 
-<?php  if($value->category == "Job"){ ?><!-- if -->
 
-<?php  $jobInfo = DB::table('job')->where('id',$value->category_id)->first(); ?> 
-
-<?php  $alreay_apply = DB::table('applicant')->where(['user_id'=>Auth::id(),'job_id'=>$value->category_id])->count(); ?>
-
-<?php  if($jobInfo->status != "DELETE"){ ?> 
-  
-<div class="col-xs-12 col-md-12 content-panel-header">
-            
-            <div class="col-md-10" >
-                      <div class="content-panel-status col-xs-12 col-md-12">   
-                            <div class="col-sm-2 div">
-                                <img class="img-responsive job-logo" src="images/jobicon.png">
-                            </div>
-                            <div class="col-sm-10 div">
-                                  <h4><?php echo $jobInfo->company_name ?></h4>
-                                  <p><?php echo $value->activity; ?> <a href="" data-toggle="modal" data-target="#newsfeed_{{ $value->id }}"><span>check it here.</span></a></p>
-                                  <div><!--<a href="#">Link</a> | <a href="#">Comment</a>--></div>
-                            </div>       
-                      </div>
-            </div>
-             <div class="col-xs-12 col-md-2 content-panel-lc"> 
-               <span class="glyphicon glyphicon-time dashboard-icon"></span>
-                              <p>
-                              <?php
-                              
-                              if(!empty($value->date)){
-                               
-                                 $value_date = date("Y-m-d", strtotime( $value->date ) );
-                                 $from=date_create(date('Y-m-d'));
-                                 $to=date_create($value_date);
-                                 $diff=date_diff($to,$from);
-                                 $days_diff = $diff->format('%a');
-
-                                 if($days_diff == "0"){
-                                  echo "Just now";
-                                 }else{
-                                  echo $diff->format('%a Days Ago');
-                                 }
-
-
-                              }
-
-                               ?>
-                               </p>
-                                
-            </div>
-
-  </div>
-    
-  <!-- Modal for newsFeed -->
-          <!-- Modal for viewJobs -->
-                                      <section>
-
-                                                 <div class="modal fade" id="newsfeed_{{ $value->id }}" role="dialog">
-                                                  <div class="modal-dialog">
-                                                  
-                                                    <!-- Modal content-->
-                                                    <div class="modal-content">
-                                                    <?php if($alreay_apply == 0){ ?>
-                                                        <form method="POST" action="/jobs/applyJobs" class="theme1">
-                                                    <?php }else{ ?>
-                                                        <form method="" action="" class="theme1">
-                                                    <?php } ?>
-                                                  
-                                                      {{ csrf_field() }}
-                                                               <input type="hidden" name="job_id" value="<?php echo $jobInfo->id; ?>">
-                                                               <div class="modal-header col-md-12 content-panel-header">
-                                                                    <h3> {{ $jobInfo->company_job }}</h3>
-                                                               </div>
-                                                                        
-                                                               <div class="col-md-12  content-panel">
-                                                                    <div class="col-md-4">
-                                                                              <p>Company Name: </p>
-                                                                    </div>
-                                                                    <div class="col-md-7">
-                                                                              <p>{{ $jobInfo->company_name }}</p>
-                                                                    </div>
-                                                                          
-                                                               </div>      
-
-                                                               <div class="col-md-12  content-panel">
-                                                                    <div class="col-md-4">
-                                                                              <p>Company Address: </p>
-                                                                    </div>
-                                                                    <div class="col-md-7">
-                                                                              <p>{{ $jobInfo->company_address }}</p>
-                                                                    </div>
-                                                                     
-                                                               </div> 
-
-                                                               <div class="col-md-12  content-panel">
-                                                                    <div class="col-md-4">
-                                                                              <p>Salary Rate </p>
-                                                                    </div>  
-                                                                    <div class="col-md-7">
-                                                                              <p class="job_salary">{{ $jobInfo->company_rate }}</p>
-                                                                    </div>
-                                                                                  
-                                                               </div>
-
-                                                               <div class="col-md-12  content-panel">
-                                                                    <div class="col-md-12">
-                                                                              <p>About Company: </p>
-                                                                    </div>
-                                                                    <div class="col-md-12">
-                                                                              <p>{{ $jobInfo->company_details }}</p>
-                                                                    </div>
-                                                                                  
-                                                               </div>
-
-                                                               <div class="col-md-12  content-panel">
-                                                                    <div class="col-md-12">
-                                                                              <p>Job Description: </p>
-                                                                    </div>
-                                                                    <div class="col-md-12">
-                                                                              <p>{!! nl2br( $jobInfo->company_status) !!}</p>
-                                                                    </div>
-                                                                                  
-                                                               </div>
-                                                               <input type="hidden" value="{{ csrf_token() }}" name="_token" >
-                                                              <div class="modal-footer">
-                                                              <?php if($alreay_apply == 0){ ?>
-                                                                  <button type="" class="btn btn-default">Apply</button> 
-                                                              <?php }else{ ?>
-                                                                  <button type="" class="btn btn-default" data-dismiss="modal">Already Apply</button> 
-                                                              <?php } ?>
-                                                                   
-                                                              </div>
-                                                    </form>
-                                                    </div>
-                                            
-                                          </div>
-                                        </div>
-
-                                      </section>
-                  <!-- Modal for viewJobs -->
- <!-- Modal for newsFeed -->   
-<?php } ?>  
-
-
-<?php }if($value->category == "Send Message"){ ?> 
+<?php if($value->category == "Send Message"){ ?> 
 
 
 <?php  $messageInfo = DB::table('message')->where('id',$value->category_id)->count(); ?>   

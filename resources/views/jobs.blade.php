@@ -354,61 +354,56 @@
 <section class="col-xs-12 col-md-12 jpage content-header">
   
                     <div class="col-xs-12 col-md-10">
-                      <h3>Jobs</h3>     
+                      <h3 style="margin-left: 3px;">Jobs Available</h3>     
                     </div>
+                       <div class="col-md-4 col-xs-12 content-profile-people"> 
+                                <div class="col-md-5 col-xs-2 people-img" style="">
+                                            <img class="profile-pic" src="images/job_img1.png" style="background: #01ba8e;"> 
+                                </div>
+                                <div class="col-md-7 col-xs-10 people-status">
+                                 <?php  $your_application = DB::table('applicant')->where('user_id',Auth::id())->count(); ?>
+                                 <?php $available_job =  $count_job - $your_application ; ?>
+                                 <?php $total_job = $available_job - $count_delete_job; ?>
+                                 <?php if($total_job < 0){ ?>
+                                    <?php $total_job = 0; ?>
+                                  <?php }else{ ?>
+                                     <?php $total_job = $total_job; ?>
+                                 <?php } ?>
+                                      <p class="people-name"><?php echo $total_job; ?></p>
+                                      <p class="people-subname">Job Available</p>
+                                      <a class="follow" data-toggle="modal" data-target="#viewAvailable" style="text-transform:none;text-decoration:none;color:#fff;">View</a>
+                                </div>   
+                      </div>
+                      <div class="col-md-4 col-xs-12 content-profile-people"> 
+                                <div class="col-md-5 col-xs-2 people-img">
+                                            <img class="profile-pic" src="images/job_img2.png" style="background: #01ba8e;"> 
+                                </div>
+                                <div class="col-md-7 col-xs-10 people-status">
+                                      <p class="people-name"> 0 </p>
+                                      <p class="people-subname">In your location</p>
+                                      <a class="follow" style="text-transform:none;text-decoration:none;color:#fff;">View</a>
+                                </div>   
+                      </div>
+                      <div class="col-md-4 col-xs-12 content-profile-people"> 
+                                <div class="col-md-5 col-xs-2 people-img">
+                                            <img class="profile-pic" src="images/job_img3.png" style="background: #01ba8e;"> 
+                                </div>
+                                <div class="col-md-7 col-xs-10 people-status">
+                                  <?php $n=0;?>
+                                        <?php foreach ($job_application as $value) { ?>
 
-                    <div class="col-md-2">
-                      <img src="images/cancel.png"  class="cancel-button">
-                    </div>
+                                            <?php $jobInfo = DB::table('job')->where('id',$value->job_id)->first(); ?>
 
-                    <div class="col-xs-12 col-md-12">
-                          <?php  $your_application = DB::table('applicant')->where('user_id',Auth::id())->count(); ?>
-
-                        <div class="col-xs-4 col-md-4 content-header-tabs">                        
-                           <div class="jobs">
-                            <?php $available_job =  $count_job - $your_application ; ?>
-                            <?php $total_job = $available_job - $count_delete_job; ?>
-                            <?php if($total_job < 0){ ?>
-                                  <?php $total_job = 0; ?>
-                            <?php }else{ ?>
-                                   <?php $total_job = $total_job; ?>
-                            <?php } ?>
-                             <h4><?php echo $total_job; ?></h4>
-                             <p>Jobs Available</p>
-                             <button class="view" data-toggle="modal" data-target="#viewAvailable">View</button>
-                           </div>
-
-                        </div>
-                        <div class="col-xs-4 col-md-4 content-header-tabs">
-                        <div class="jobs">
-                             <h4>0</h4>
-                             <p>In your location</p>
-                             <button class="views">View</button>
-                           </div>                        
-
-                        </div>
-                        <div class="col-xs-4 col-md-4 content-header-tabs">   
-                        <div class="jobs">
-                          <?php $n=0;?>
-                             <?php foreach ($job_application as $value) { ?>
-
-                                <?php $jobInfo = DB::table('job')->where('id',$value->job_id)->first(); ?>
-
-                                <?php if($jobInfo->status != "DELETE"){ ?> 
-                                          <?php $n++;  ?>
-                                <?php  } ?>   
-
-
-                             <?php  } ?>
-
-                             <h4><?php //echo $your_application;?> <?php echo $n; ?></h4>
-                             <p>Your Application</p>
-                             <button class="views" data-toggle="modal" data-target="#viewApplication" >View</button>
-                          </div>                     
-                           
-
-                        </div>
-                    </div>
+                                               <?php if($jobInfo->status != "DELETE"){ ?> 
+                                                  <?php $n++;  ?>
+                                              <?php  } ?>   
+                                    <?php  } ?>
+                                      <p class="people-name"><?php echo $n; ?></p>
+                                      <p class="people-subname">Your Application</p>
+                                      <a class="follow"  data-toggle="modal" data-target="#viewApplication" style="text-transform:none;text-decoration:none;color:#fff;">View</a>
+                                </div>   
+                      </div>
+      
 
 </section>
 
@@ -430,7 +425,8 @@
                        <p>{{ $jobs->company_name }}, {{ $jobs->company_address }}</p>
                        <div><!--<a href="#">Link</a> | <a href="#">Comment</a>--></div>
             </div>
-             <div class="col-md-2 col-xs-12  apply">      
+             <div class="col-md-2 col-xs-12  apply"> 
+              <span class="glyphicon glyphicon-time dashboard-icon"></span>     
                         <p>
                           <?php
                               
