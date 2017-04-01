@@ -67,11 +67,11 @@ class UsersNotifications extends Controller
                      'status' => 'PENDING'
                   ])->count();
 
-    $job_list_notification = DB::table('user_notification')->where([
+   $job_list_notification = DB::table('user_notification')->where([
                      'user_id' => $userId,
                      'category' => 'Job',
                      'status' => 'PENDING'
-                  ])->orderBy('id', 'desc')->get();
+                  ])->orderBy('id', 'desc')->take(5)->get();
 
     $user_notification = DB::table('user_notification')->where([
                      'category_id' => $userId,
@@ -218,7 +218,7 @@ class UsersNotifications extends Controller
                      'user_id' => $userId,
                      'category' => 'Job',
                      'status' => 'PENDING'
-                  ])->orderBy('id', 'desc')->get();
+                  ])->orderBy('id', 'desc')->take(5)->get();
 
     $user_notification = DB::table('user_notification')->where([
                      'category_id' => $userId,

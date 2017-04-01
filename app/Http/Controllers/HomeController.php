@@ -207,7 +207,7 @@ class HomeController extends Controller
                      'user_id' => $userId,
                      'category' => 'Job',
                      'status' => 'PENDING'
-                  ])->orderBy('id', 'desc')->get();   
+                  ])->orderBy('id', 'desc')->take(5)->get();
 
     $user_notification = DB::table('user_notification')->where([
                      'category_id' => $userId,
@@ -321,7 +321,7 @@ class HomeController extends Controller
                      'user_id' => $userId,
                      'category' => 'Job',
                      'status' => 'PENDING'
-                  ])->orderBy('id', 'desc')->get();   
+                  ])->orderBy('id', 'desc')->take(5)->get();   
 
     $user_notification = DB::table('user_notification')->where([
                      'category_id' => $userId,
@@ -424,11 +424,11 @@ class HomeController extends Controller
                      'status' => 'PENDING'
                   ])->count();
 
-    $job_list_notification = DB::table('user_notification')->where([
+     $job_list_notification = DB::table('user_notification')->where([
                      'user_id' => $userId,
                      'category' => 'Job',
                      'status' => 'PENDING'
-                  ])->orderBy('id', 'desc')->get(); 
+                  ])->orderBy('id', 'desc')->take(5)->get();
 
     $user_notification = DB::table('user_notification')->where([
                      'category_id' => $userId,
@@ -536,7 +536,7 @@ class HomeController extends Controller
                      'user_id' => $userId,
                      'category' => 'Job',
                      'status' => 'PENDING'
-                  ])->orderBy('id', 'desc')->get(); 
+                  ])->orderBy('id', 'desc')->take(5)->get();
 
         $job_application = DB::table('applicant')->where('user_id',$userId)->get(); 
 
@@ -657,7 +657,7 @@ class HomeController extends Controller
                      'user_id' => $userId,
                      'category' => 'Job',
                      'status' => 'PENDING'
-                  ])->orderBy('id', 'desc')->get(); 
+                  ])->orderBy('id', 'desc')->take(5)->get();
 
         $user_notification = DB::table('user_notification')->where([
                      'category_id' => $userId,
