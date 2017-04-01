@@ -140,9 +140,10 @@
                        </ul>
                     <?php } ?>
                     <!---->
-                  </li>
+                  </li> 
                    <li class="dropdown">
-                   <!----> 
+                    <!----> 
+                  
                     <?php if($job_notification == 0){ ?>
                        <span class="glyphicon glyphicon-briefcase dropdown-toggle"></span>                         
                     <?php }else { ?> 
@@ -150,13 +151,9 @@
                     <?php  echo $job_notification;?></span></span>
 
                     <?php if($job_notification > 5){ ?>
-
-                          <ul class="dropdown-menu drop-message" style="width: 400px;overflow:hidden;text-overflow: ellipsis ellipsis; text-align: left;word-wrap: break-word !important; ">
-                              
+                              <ul class="dropdown-menu drop-message" style="width: 400px;overflow:hidden;text-overflow: ellipsis ellipsis; text-align: left;word-wrap: break-word !important; ">
                     <?php }else{ ?>
-
-                          <ul class="dropdown-menu drop-message">
-
+                              <ul class="dropdown-menu drop-message">
                     <?php } ?>
 
                         <?php foreach ($job_list_notification as $job_value) { ?>
@@ -165,7 +162,8 @@
                              <li>
                                 <a href="" data-toggle="modal" data-target="#checkjobnotification_{{ $job_value->category_id }}">
                                    <img class="img-responsive notification-img" src="images/jobicon.png">
-                                   <div class="title">Hiring <b><?php echo $jobInfo->company_job; ?></b> from <?php echo $jobInfo->company_name; ?></div><br>
+                                   <?php $string = "Hiring <b style='text-transform: uppercase;'>".$jobInfo->company_job."</b> from ".$jobInfo->company_name;  ?>
+                                   <span class="title"><?php echo substr($string,0,100); ?> ...</span><br>
                                    <span class="glyphicon glyphicon-time calendar-icon"></span>
                                    <span class="date">
                                       <?php
@@ -189,12 +187,11 @@
                             </li>
                            
                         <?php } ?>
-                               <div class="see_all">
-                                <a href="{{ url('/all/jobNotification/') }}">See All</a> 
-                              </div>
-
-                          </ul>
-
+                        <div class="see_all">
+                          <a href="{{ url('/all/jobNotification/') }}">See All</a> 
+                        </div>
+                        
+                       </ul>
                     <?php } ?>
                     <!---->
                   </li> 

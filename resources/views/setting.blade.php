@@ -162,7 +162,9 @@
                              <li>
                                 <a href="" data-toggle="modal" data-target="#checkjobnotification_{{ $job_value->category_id }}">
                                    <img class="img-responsive notification-img" src="images/jobicon.png">
-                                   <span class="title">Hiring <b><?php echo $jobInfo->company_job; ?></b> from <?php echo $jobInfo->company_name; ?>.</span><br>
+                                   <?php $string = "Hiring <b style='text-transform: uppercase;'>".$jobInfo->company_job."</b> from ".$jobInfo->company_name;  ?>
+                                   <span class="title"><?php echo substr($string,0,100); ?> ...</span><br>
+                                   
                                    <span class="glyphicon glyphicon-time calendar-icon"></span>
                                    <span class="date">
                                       <?php
