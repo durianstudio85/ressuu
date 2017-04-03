@@ -162,8 +162,13 @@
                              <li>
                                 <a href="" data-toggle="modal" data-target="#checkjobnotification_{{ $job_value->category_id }}">
                                    <img class="img-responsive notification-img" src="images/jobicon.png">
-                                   <?php $string = "Hiring <b style='text-transform: uppercase;'>".$jobInfo->company_job."</b> from ".$jobInfo->company_name;  ?>
-                                   <span class="title"><?php echo $string; ?></span><br>
+                                   <?php $string = "Hiring ".ucwords(strtolower($jobInfo->company_job))." from ".ucwords(strtolower($jobInfo->company_name));  ?>
+                                   <?php $strlen = strlen($string);?>
+                                   <?php if($strlen > 40 ){ ?>
+                                          <span class="title"><?php echo substr($string,0,100); ?>...</span><br>
+                                   <?php }else{ ?> 
+                                          <span class="title"><?php echo $string ?></span><br>
+                                   <?php } ?> 
                                    <span class="glyphicon glyphicon-time calendar-icon"></span>
                                    <span class="date">
                                       <?php
@@ -482,8 +487,8 @@
                                   <img src="joblogo/{{ $job_recommend_info->company_picture }}" class="img-responsive"> 
                           </div>
                           <div class="col-md-8 col-xs-7  content-panel-jobs">
-                                     <h4>{{ $job_recommend_info->company_job }}</h4>
-                                     <p>{{ $job_recommend_info->company_name }}, {{ $job_recommend_info->company_address }}</p>
+                                     <h4><?php echo ucwords(strtolower($job_recommend_info->company_job)); ?></h4>
+                                     <p><?php echo ucwords(strtolower($job_recommend_info->company_name)); ?>,<?php echo ucwords(strtolower($job_recommend_info->company_address)); ?></p>
                                      <div><!--<a href="#">Link</a> | <a href="#">Comment</a>--></div>
                           </div>
                            <div class="col-md-2 col-xs-12  apply">      

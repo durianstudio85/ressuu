@@ -160,8 +160,13 @@
                              <li>
                                 <a href="" data-toggle="modal" data-target="#checkjobnotification_{{ $job_value->category_id }}">
                                    <img class="img-responsive notification-img" src="images/jobicon.png">
-                                   <?php $string = "Hiring <b style='text-transform: uppercase;'>".$jobInfo->company_job."</b> from ".$jobInfo->company_name;  ?>
-                                   <span class="title"><?php echo $string; ?></span><br>
+                                   <?php $string = "Hiring ".ucwords(strtolower($jobInfo->company_job))." from ".ucwords(strtolower($jobInfo->company_name));  ?>
+                                   <?php $strlen = strlen($string);?>
+                                   <?php if($strlen > 40 ){ ?>
+                                          <span class="title"><?php echo substr($string,0,100); ?>...</span><br>
+                                   <?php }else{ ?> 
+                                          <span class="title"><?php echo $string ?></span><br>
+                                   <?php } ?>
                                    
                                    <span class="glyphicon glyphicon-time calendar-icon"></span>
                                    <span class="date">
