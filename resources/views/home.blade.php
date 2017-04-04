@@ -165,7 +165,7 @@
                                    <?php $string = "Hiring ".ucwords(strtolower($jobInfo->company_job))." from ".ucwords(strtolower($jobInfo->company_name));  ?>
                                    <?php $strlen = strlen($string);?>
                                   
-                                          <span class="title"><?php echo substr($string,0,100); ?>...</span><br>
+                                          <span class="title"><?php echo substr($string,0,90); ?>...</span><br>
                                   
                                    <span class="glyphicon glyphicon-time calendar-icon"></span>
                                    <span class="date">
