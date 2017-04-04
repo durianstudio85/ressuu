@@ -163,11 +163,9 @@
                                    <img class="img-responsive notification-img" src="images/jobicon.png">
                                    <?php $string = "Hiring ".ucwords(strtolower($jobInfo->company_job))." from ".ucwords(strtolower($jobInfo->company_name));  ?>
                                    <?php $strlen = strlen($string);?>
-                                   <?php if($strlen > 40 ){ ?>
-                                          <span class="title"><?php echo substr($string,0,100); ?>...</span><br>
-                                   <?php }else{ ?> 
-                                          <span class="title"><?php echo $string ?></span><br>
-                                   <?php } ?> 
+                                  
+                                          <span class="title"><?php echo substr($string,0,50); ?>...</span><br>
+                                  
                                    
                                    <span class="glyphicon glyphicon-time calendar-icon"></span>
                                    <span class="date">

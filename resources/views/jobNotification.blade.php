@@ -48,9 +48,9 @@
                             <li>
                               <a href="" data-toggle="modal" data-target="#checkusernotification_{{ $user_value->id }}">
                                  <?php if($checkProfile == 0 or empty($profileInfo->profile_picture) or $profileInfo->profile_picture == " "){ ?>
-                                       <img class="img-responsive notification-img" src="profilepic/default_avatar.jpg">
+                                       <img class="img-responsive notification-img" src="../profilepic/default_avatar.jpg">
                                  <?php }else{ ?> 
-                                        <img class="img-responsive notification-img" src="profilepic/{{ $profileInfo->profile_picture }}">
+                                        <img class="img-responsive notification-img" src="../profilepic/{{ $profileInfo->profile_picture }}">
                                  <?php } ?>
                                 <?php if($checkProfile == 0){ ?>
                                      <span class="title"><b><?php echo $userInfo->name; ?></b> followed you</span><br>
@@ -108,7 +108,7 @@
                         <?php foreach ($list_message as $message_value) { ?>
                             <li>
                                 <a href="" data-toggle="modal" data-target="#checkmessage_{{ $message_value->id }}">
-                                   <img class="img-responsive notification-img" src="images/messenger_icon.png">
+                                   <img class="img-responsive notification-img" src="../images/messenger_icon.png">
                                    <span class="title">Message from {{ $message_value->name }}</span><br>
                                    <span class="glyphicon glyphicon-time calendar-icon"></span>
                                    <span class="date">
@@ -159,14 +159,12 @@
                           <?php  $jobInfo = DB::table('job')->where('id',$job_value->category_id)->first();    ?>
                              <li>
                                 <a href="" data-toggle="modal" data-target="#checkjobnotification_{{ $job_value->category_id }}">
-                                   <img class="img-responsive notification-img" src="images/jobicon.png">
+                                   <img class="img-responsive notification-img" src="../images/jobicon.png">
                                    <?php $string = "Hiring ".ucwords(strtolower($jobInfo->company_job))." from ".ucwords(strtolower($jobInfo->company_name));  ?>
                                    <?php $strlen = strlen($string);?>
-                                   <?php if($strlen > 40 ){ ?>
-                                          <span class="title"><?php echo substr($string,0,100); ?>...</span><br>
-                                   <?php }else{ ?> 
-                                          <span class="title"><?php echo $string ?></span><br>
-                                   <?php } ?> 
+                                  
+                                          <span class="title"><?php echo substr($string,0,50); ?>...</span><br>
+                                 
                                    
                                    <span class="glyphicon glyphicon-time calendar-icon"></span>
                                    <span class="date">
@@ -248,11 +246,11 @@
                     <?php if(!empty($userProfile->profile_picture) AND $userProfile->profile_picture != " " ){ ?>
                        <a href="#" data-toggle="modal" data-target="#profilepic" ><img class="img-reponsive profile-pic" src="../profilepic/<?php echo $userProfile->profile_picture; ?>"></a> 
                     <?php  }else{ ?>
-                       <a href="#" data-toggle="modal" data-target="#profilepic" ><img class="img-responsive profile-pic" src="profilepic/default_avatar.jpg"></a> 
+                       <a href="#" data-toggle="modal" data-target="#profilepic" ><img class="img-responsive profile-pic" src="../profilepic/default_avatar.jpg"></a> 
                     <?php } ?>
 
                     <?php }else{ ?>
-                       <a href="#" data-toggle="modal" data-target="#profilepic" ><img class="img-responsive profile-pic" src="profilepic/default_avatar.jpg" ></a>
+                       <a href="#" data-toggle="modal" data-target="#profilepic" ><img class="img-responsive profile-pic" src="../profilepic/default_avatar.jpg" ></a>
                   <?php } ?>     
                 <!-- Modal for profilepic -->
                       <section class="profilepic">
