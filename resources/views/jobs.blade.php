@@ -381,12 +381,81 @@
                       </div>
                       <div class="col-md-4 col-xs-12 content-profile-people"> 
                                 <div class="col-md-5 col-xs-2 people-img">
-                                            <img class="profile-pic" src="images/job_img2.png" style="background: #01ba8e;"> 
+                                      <img class="profile-pic" src="images/job_img2.png" style="background: #01ba8e;"> 
                                 </div>
+                                <?php
+                                  $my_address = $userProfile->address;
+                                  $my_prepAddr = str_replace(' ','+',$my_address);
+                                  $my_geocode=file_get_contents('https://maps.google.com/maps/api/geocode/json?address='.$my_prepAddr.'&sensor=false');
+                                  $output= json_decode($my_geocode);
+                                  $my_latitude = $output->results[0]->geometry->location->lat;
+                                  $my_longitude = $output->results[0]->geometry->location->lng;
+                                ?>
+                                <?php $track_job = 0; ?>
+                               
+                                 <!-- Modal for viewLocation -->
+                                  <section>
+
+                                      <div class="modal fade" id="viewLocation" role="dialog">
+                                          <div class="modal-dialog">
+                                                
+                                                  <!-- Modal content-->
+                                                  <div class="modal-content">
+
+                                                  <form method="" action="" class="theme1">
+                                                           {{ csrf_field() }}  
+                                                             <input type="hidden" name="job_id" value="<?php //echo $jobs->id; ?>">
+
+                                                             <div class="modal-header col-md-12 content-panel-header">
+                                                                  <h3>In your Location</h3>
+                                                             </div>  
+                                                                  <div class="col-md-12 ">
+                                                                      <div class="col-md-2"></div>
+                                                                      <div class="col-md-4"><h4>Company Name</h4></div>
+                                                                      <div class="col-md-3"><h4>Company Job</h4></div>
+                                                                      <div class="col-md-3"><h4></h4></div>
+                                                                  </div>
+                                                                  <div class="">
+                                                                   <?php foreach ($userJobs as $getLocation) { ?>
+                                                                    <?php if(!empty($getLocation->company_latitude) AND !empty($getLocation->company_longitude)){ ?> 
+                                                                       <?php if($getLocation->status != "DELETE"){ ?> 
+                                                                          <?php 
+                                                                              $Job_latitude = $getLocation->company_latitude;
+                                                                              $Job_longitude = $getLocation->company_longitude;
+                                                                              $radius = 3959;
+                                                                              $track = $radius * acos(sin($my_latitude) * sin($Job_latitude) + cos($my_latitude) * cos($Job_latitude) * cos($Job_longitude - $my_longitude));
+                                                                              $distance = round(deg2rad($track));
+                                                                          ?>
+                                                                          <?php if($distance < 10){ ?> 
+                                                                               <div class="col-md-12" style="margin:0px 0px 10px 0px;">
+                                                                                <div class="col-md-2"><img src="joblogo/{{ $getLocation->company_picture }}" class="img-responsive"></div>
+                                                                                <div class="col-md-4"><h5>{{ $getLocation->company_name }}</h5></div>
+                                                                                <div class="col-md-3"><h5>{{ $getLocation->company_job }}</h5></div>
+                                                                                <div class="col-md-3"><h5></h5></div>
+                                                                              </div> 
+                                                                              <?php $track_job++; ?> 
+                                                                          <?php }  ?>
+                                                                       <?php } ?>
+                                                                     <?php }  ?>
+                                                                   <?php } ?>
+                                                                 </div>
+                                                               <input type="hidden" value="{{ csrf_token() }}" name="_token" >
+                                                            <div class="modal-footer">
+                                                                 <button class="btn btn-default" data-dismiss="modal">Close</button> 
+                                                            </div>
+                                                  </form>
+                                                
+                                                  </div>
+                                          
+                                        </div>
+                                      </div>
+
+                                  </section>
+                                  <!-- Modal for viewLocation -->
                                 <div class="col-md-7 col-xs-10 people-status">
-                                      <p class="people-name"> 0 </p>
+                                      <p class="people-name"><?php echo $track_job; ?></p>
                                       <p class="people-subname">In your location</p>
-                                      <a class="follow" style="text-transform:none;text-decoration:none;color:#fff;">View</a>
+                                      <a class="follow" data-toggle="modal" data-target="#viewLocation" style="text-transform:none;text-decoration:none;color:#fff;">View</a>
                                 </div>   
                       </div>
                       <div class="col-md-4 col-xs-12 content-profile-people"> 
@@ -405,7 +474,7 @@
                                     <?php  } ?>
                                       <p class="people-name"><?php echo $n; ?></p>
                                       <p class="people-subname">Your Application</p>
-                                      <a class="follow"  data-toggle="modal" data-target="#viewApplication" style="text-transform:none;text-decoration:none;color:#fff;">View</a>
+                                      <a class="follow" data-toggle="modal" data-target="#viewApplication" style="text-transform:none;text-decoration:none;color:#fff;">View</a>
                                 </div>   
                       </div>
       
@@ -466,74 +535,267 @@
 
           </div>
 
-            <!-- Modal for apply Job -->
-                                      <section>
+<!-- Modal for apply Job -->
+<section>
 
-                                                 <div class="modal fade" id="jobs_{{ $jobs->id }}" role="dialog">
-                                                  <div class="modal-dialog">
-                                                  
-                                                    <!-- Modal content-->
-                                                    <div class="modal-content">
+ <div class="modal fade bs-example-modal-lg" id="jobs_{{ $jobs->id }}" role="dialog">
 
-                                                    <form method="POST" action="/jobs/applyJobs" class="theme1">
-                                                             {{ csrf_field() }}  
-                                                               <input type="hidden" name="job_id" value="<?php echo $jobs->id; ?>">
+            <div class="modal-dialog modal-lg" style="width:1200px;">
+            
+              <!-- Modal content-->
+              <div class="modal-content">
 
-                                                               <div class="modal-header col-md-12 content-panel-header">
-                                                                    <h3>Applying for <?php echo ucwords(strtolower($jobs->company_job)); ?></h3>
-                                                               </div>
-                                                                        
-                                                               <div class="col-md-12  content-panel">
-                                                                    <div class="col-md-4">
-                                                                              <p>Company Name: </p>
-                                                                    </div>
-                                                                    <div class="col-md-7">
-                                                                              <p><?php echo ucwords(strtolower($jobs->company_name)); ?></p>
-                                                                    </div>
-                                                                          
-                                                               </div>      
+              <form method="POST" action="/jobs/applyJobs" class="theme1">
+                       {{ csrf_field() }}  
+                         <input type="hidden" name="job_id" value="<?php echo $jobs->id; ?>">
 
-                                                               <div class="col-md-12  content-panel">
-                                                                    <div class="col-md-4">
-                                                                              <p>Company Address: </p>
-                                                                    </div>
-                                                                    <div class="col-md-7">
-                                                                              <p><?php echo ucwords(strtolower($jobs->company_address)); ?></p>
-                                                                    </div>
-                                                                     
-                                                               </div> 
+                  <div class="modal-header col-md-12 content-panel-header">
+                     <button type="button" class="close" data-dismiss="modal">&times;</button>
+                     <h3>Applying {{ $jobs->company_job }} </h3>
+                  </div>
 
-                                                               <div class="col-md-12  content-panel">
-                                                                    <div class="col-md-4">
-                                                                              <p>Company Details: </p>
-                                                                    </div>
-                                                                    <div class="col-md-7">
-                                                                              <p><?php echo ucwords(strtolower($jobs->company_details)); ?></p>
-                                                                    </div>
-                                                                                  
-                                                               </div>
+                  <div class="modal-body" style="height: 100%;background: #fff;float: left;width: 100%;">
+                  
+                          <div class="col-sm-12">
+                              <input type="hidden" value="{{ $jobs->id }}" name="id">
 
-                                                               <div class="col-md-12  content-panel">
-                                                                    <div class="col-md-4">
-                                                                              <p>Salary Rate </p>
-                                                                    </div>  
-                                                                    <div class="col-md-7">
-                                                                              <p class="job_salary"><?php echo ucwords(strtolower($jobs->company_rate)); ?></p>
-                                                                    </div>
-                                                                                  
-                                                               </div>
-                                                                 <input type="hidden" value="{{ csrf_token() }}" name="_token" >
-                                                              <div class="modal-footer">
-                                                                   <button type="submit" class="btn btn-default">Confirm</button> 
-                                                              </div>
-                                                    </form>
-                                                    </div>
-                                            
-                                          </div>
-                                        </div>
+                              <div class="form-group form-group">
+                                <div class="col-sm-12">
+                                  <center><h4>Job Information</h4></center>
+                                  <hr></hr>
+                                </div>
+                              </div>
 
-                                      </section>
-                  <!-- Modal for apply Job -->
+
+                              <div class="form-group form-group">
+                                <div class="col-sm-4">
+                                  <p>Job Title</p>
+                                  <?php if(empty($jobs->company_job OR $jobs->company_job == " ")){ ?> 
+                                    <p class="form-control job_input">Empty</p>
+                                  <?php }else{ ?> 
+                                    <p class="form-control job_input">{{ $jobs->company_job }}</p>
+                                  <?php } ?>
+                                </div>
+                              </div>
+
+                              <div class="form-group form-group" style="margin-top:-15px;">
+                                <div class="col-sm-4">
+                                  <p>Salary Rate</p>
+                                  <?php if(empty($jobs->company_rate OR $jobs->company_rate == " ")){ ?>
+                                    <p class="form-control job_input">Empty</p>
+                                  <?php }else{ ?> 
+                                    <p class="form-control job_input">{{ $jobs->company_rate }}</p>
+                                  <?php } ?>
+                                  
+                                </div>
+                              </div>
+
+                              <div class="form-group form-group" style="margin-top:-15px;">
+                                <div class="col-sm-4">
+                                  <p>Working Hours</p>
+                                  <?php if(empty($jobs->company_workinghours OR $jobs->company_workinghours == " ")){ ?> 
+                                    <p class="form-control job_input">Empty</p>
+                                  <?php }else{ ?>
+                                    <p class="form-control job_input">{{ $jobs->company_workinghours }}</p> 
+                                  <?php } ?>
+                                  
+                                </div>
+                              </div>
+
+                              <div class="form-group form-group">
+                                <div class="col-sm-12">
+                                   <p>Job Description</p>
+                                   <p class="form-control job_input" style="height:100%;">{!! nl2br($jobs->company_status) !!}</p>   
+                                </div>
+                              </div>
+
+                              <div class="form-group form-group">
+                                <div class="col-sm-12">
+                                  <center><h4>Company Information</h4></center>
+                                  <hr></hr>
+                                </div>
+                              </div>
+
+                              <div class="form-group form-group">
+                                <div class="col-sm-4">
+                                  <p>Name</p>
+                                  <?php if(empty($jobs->company_name OR $jobs->company_name == " ")){ ?>
+                                    <p class="form-control job_input">Empty</p> 
+                                  <?php }else{ ?>
+                                    <p class="form-control job_input">{{ $jobs->company_name }}</p> 
+                                  <?php } ?>
+                                  
+                                </div>
+                              </div>
+
+                              <div class="form-group form-group">
+                                <div class="col-sm-8">
+                                  <p>Address</p>
+                                  <?php if(empty($jobs->company_address OR $jobs->company_address == " ")){ ?>
+                                    <p class="form-control job_input">Empty</p>  
+                                  <?php }else{ ?>
+                                    <p class="form-control job_input">{{ $jobs->company_address }}</p>
+                                  <?php } ?>
+
+                                  
+                                </div>
+                              </div>
+
+                              <div class="form-group form-group">
+                                <div class="col-sm-12">
+                                  <p>About the Company</p>
+                                  <p class="form-control job_input" style="height:100%;">{!! nl2br($jobs->company_details) !!}</p>
+                                </div>
+                               
+                              </div>
+
+                              <div class="form-group form-group">
+                                <div class="col-sm-3">
+                                  <p>Email</p>
+                                  <?php if(empty($jobs->email OR $jobs->email == " ")){ ?>
+                                    <p class="form-control job_input">Empty</p> 
+                                  <?php }else{ ?>
+                                    <p class="form-control job_input">{{ $jobs->email }}</p> 
+                                  <?php } ?>
+                                </div>
+                              </div>
+
+                              <div class="form-group form-group">
+                                <div class="col-sm-3">
+                                  <p>Website</p>
+                                  <?php if(empty($jobs->company_website OR $jobs->company_website == " ")){ ?>
+                                    <p class="form-control job_input">Empty</p> 
+                                  <?php }else{ ?>
+                                    <p class="form-control job_input"><a href="{{ $jobs->company_website }}">Website Link</a></p> 
+                                  <?php } ?>
+                                  
+                                </div>
+                              </div>
+
+                              <div class="form-group form-group">
+                                <div class="col-sm-3">
+                                  <p>Telephone Number</p>                     
+                                  <?php if(empty($jobs->company_telephone OR $jobs->company_telephone == " ")){ ?>
+                                    <p class="form-control job_input">Empty</p> 
+                                  <?php }else{ ?>
+                                    <p class="form-control job_input">{{ $jobs->company_telephone }}</p> 
+                                  <?php } ?>
+
+                                </div>
+                              </div>
+
+                              <div class="form-group form-group">
+                                <div class="col-sm-3">
+                                  <p>Company Size</p>
+                                  <?php if(empty($jobs->company_companysize OR $jobs->company_companysize == " ")){ ?>
+                                    <p class="form-control job_input">Empty</p>  
+                                  <?php }else{ ?>
+                                    <p class="form-control job_input">{{ $jobs->company_companysize }}</p>
+                                  <?php } ?>
+
+                               </div>
+
+                              </div>
+
+                               <div class="form-group form-group">
+                                <div class="col-sm-12">
+                                  <center><h4>Other Information</h4></center>
+                                  <hr></hr>
+                                </div>
+                              </div>
+
+                               <div class="form-group form-group">
+                                <div class="col-sm-6">
+                                  <p>Language Spoken</p>
+                                  <?php if(empty($jobs->company_spokenlanguage OR $jobs->company_spokenlanguage == " ")){ ?>
+                                    <p class="form-control job_input">Empty</p>  
+                                    
+                                  <?php }else{ ?>
+                                    <p class="form-control job_input">{{ $jobs->company_spokenlanguage }}</p>
+                                    
+                                  <?php } ?>
+
+                               </div>
+
+                              </div>
+
+
+                              <div class="form-group form-group">
+                                <div class="col-sm-6">
+                                  <p>Industry</p>
+                                  <?php if(empty($jobs->company_industry OR $jobs->company_industry == " ")){ ?>
+                                    <p class="form-control job_input">Empty</p> 
+                                    
+                                  <?php }else{ ?>
+                                    <p class="form-control job_input">{{ $jobs->company_industry }}</p>
+                                    
+                                  <?php } ?>
+                               </div>
+
+                              </div>
+
+
+                               <div class="form-group form-group">
+                                <div class="col-sm-6">
+                                  <p>Process Time</p>
+                                  <?php if(empty($jobs->company_processtime OR $jobs->company_processtime == " ")){ ?>
+                                    <p class="form-control job_input">Empty</p> 
+                                  <?php }else{ ?>
+                                    <p class="form-control job_input">{{ $jobs->company_processtime }}</p>
+                                  <?php } ?>
+                               </div>
+
+                              </div>
+
+
+
+                              <div class="form-group form-group">
+                                <div class="col-sm-6">
+                                  <p>Facebook Page</p>
+                                  <?php if(empty($jobs->company_facebook OR $jobs->company_facebook == " ")){ ?>
+                                    <p class="form-control job_input">Empty</p> 
+                                  <?php }else{ ?>
+                                    <p class="form-control job_input"><a href="{{ $jobs->company_facebook }}">Facebook Page</a></p>
+                                  <?php } ?>
+                               </div>
+
+                              </div>
+
+
+                              <div class="form-group form-group">
+                                <div class="col-sm-12">
+                                  <p>Benefits</p>
+                                  <?php if(empty($jobs->company_benefits OR $jobs->company_benefits == " ")){ ?>
+                                    <p class="form-control job_input">Empty</p> 
+                                     
+                                  <?php }else{ ?>
+                                   
+                                    <p class="form-control job_input" style="height:100%;">{!! nl2br($jobs->company_benefits) !!}</p>                  
+                                  <?php } ?>
+                                </div>
+                               
+                              </div>
+
+
+                          </div>   
+           
+                  </div>
+
+                  <div class="modal-footer content-panel-header" style="width:100%;">
+                        <button type="submit" class="btn btn-default" data-dismiss="modal">Apply</button> 
+                  </div>
+
+              </form>
+
+              </div>
+              <!-- Modal content-->
+
+            </div>
+
+  </div>
+
+</section>
+<!-- Modal for apply Job -->
    <?php } ?>
 
 <?php } ?>
@@ -681,77 +943,262 @@
 
 <!-- Modal for JobNotification -->
   <section>
-             <div class="modal fade" id="checkjobnotification_{{ $jobInfo->id }}" role="dialog">
-              <div class="modal-dialog">
-              
-                <!-- Modal content--> 
-                <div class="modal-content">
 
-                <form method="" action="" class="theme1">
-                           <div class="modal-header col-md-12 content-panel-header">
-                                <h3> {{ $jobInfo->company_job }}</h3>
-                           </div>
+  <div class="modal fade bs-example-modal-lg" id="checkjobnotification_{{ $jobInfo->id }}" role="dialog">
+      <div class="modal-dialog modal-lg" style="width:1200px;">
+      
+         <!-- Modal content-->
+              <div class="modal-content">
+
+              <form method="POST" action="" class="theme1">
+                       {{ csrf_field() }}  
+                         <input type="hidden" name="job_id" value="<?php echo $jobInfo->id; ?>">
+
+                  <div class="modal-header col-md-12 content-panel-header">
+                     <button type="button" class="close" data-dismiss="modal">&times;</button>
+                     <h3>Applying {{ $jobInfo->company_job }} </h3>
+                  </div>
+
+                  <div class="modal-body" style="height: 100%;background: #fff;float: left;width: 100%;">
+                  
+                          <div class="col-sm-12">
+                              <input type="hidden" value="{{ $jobInfo->id }}" name="id">
+
+                              <div class="form-group form-group">
+                                <div class="col-sm-12">
+                                  <center><h4>Job Information</h4></center>
+                                  <hr></hr>
+                                </div>
+                              </div>
+
+
+                              <div class="form-group form-group">
+                                <div class="col-sm-4">
+                                  <p>Job Title</p>
+                                  <?php if(empty($jobInfo->company_job OR $jobInfo->company_job == " ")){ ?> 
+                                    <p class="form-control job_input">Empty</p>
+                                  <?php }else{ ?> 
+                                    <p class="form-control job_input">{{ $jobInfo->company_job }}</p>
+                                  <?php } ?>
+                                </div>
+                              </div>
+
+                              <div class="form-group form-group" style="margin-top:-15px;">
+                                <div class="col-sm-4">
+                                  <p>Salary Rate</p>
+                                  <?php if(empty($jobInfo->company_rate OR $jobInfo->company_rate == " ")){ ?>
+                                    <p class="form-control job_input">Empty</p>
+                                  <?php }else{ ?> 
+                                    <p class="form-control job_input">{{ $jobInfo->company_rate }}</p>
+                                  <?php } ?>
+                                  
+                                </div>
+                              </div>
+
+                              <div class="form-group form-group" style="margin-top:-15px;">
+                                <div class="col-sm-4">
+                                  <p>Working Hours</p>
+                                  <?php if(empty($jobInfo->company_workinghours OR $jobInfo->company_workinghours == " ")){ ?> 
+                                    <p class="form-control job_input">Empty</p>
+                                  <?php }else{ ?>
+                                    <p class="form-control job_input">{{ $jobInfo->company_workinghours }}</p> 
+                                  <?php } ?>
+                                  
+                                </div>
+                              </div>
+
+                              <div class="form-group form-group">
+                                <div class="col-sm-12">
+                                   <p>Job Description</p>
+                                   <p class="form-control job_input" style="height:100%;">{!! nl2br($jobInfo->company_status) !!}</p>   
+                                </div>
+                              </div>
+
+                              <div class="form-group form-group">
+                                <div class="col-sm-12">
+                                  <center><h4>Company Information</h4></center>
+                                  <hr></hr>
+                                </div>
+                              </div>
+
+                              <div class="form-group form-group">
+                                <div class="col-sm-4">
+                                  <p>Name</p>
+                                  <?php if(empty($jobInfo->company_name OR $jobInfo->company_name == " ")){ ?>
+                                    <p class="form-control job_input">Empty</p> 
+                                  <?php }else{ ?>
+                                    <p class="form-control job_input">{{ $jobInfo->company_name }}</p> 
+                                  <?php } ?>
+                                  
+                                </div>
+                              </div>
+
+                              <div class="form-group form-group">
+                                <div class="col-sm-8">
+                                  <p>Address</p>
+                                  <?php if(empty($jobInfo->company_address OR $jobInfo->company_address == " ")){ ?>
+                                    <p class="form-control job_input">Empty</p>  
+                                  <?php }else{ ?>
+                                    <p class="form-control job_input">{{ $jobInfo->company_address }}</p>
+                                  <?php } ?>
+
+                                  
+                                </div>
+                              </div>
+
+                              <div class="form-group form-group">
+                                <div class="col-sm-12">
+                                  <p>About the Company</p>
+                                  <p class="form-control job_input" style="height:100%;">{!! nl2br($jobInfo->company_details) !!}</p>
+                                </div>
+                               
+                              </div>
+
+                              <div class="form-group form-group">
+                                <div class="col-sm-3">
+                                  <p>Email</p>
+                                  <?php if(empty($jobInfo->email OR $jobInfo->email == " ")){ ?>
+                                    <p class="form-control job_input">Empty</p> 
+                                  <?php }else{ ?>
+                                    <p class="form-control job_input">{{ $jobInfo->email }}</p> 
+                                  <?php } ?>
+                                </div>
+                              </div>
+
+                              <div class="form-group form-group">
+                                <div class="col-sm-3">
+                                  <p>Website</p>
+                                  <?php if(empty($jobInfo->company_website OR $jobInfo->company_website == " ")){ ?>
+                                    <p class="form-control job_input">Empty</p> 
+                                  <?php }else{ ?>
+                                    <p class="form-control job_input"><a href="{{ $jobInfo->company_website }}">Website Link</a></p> 
+                                  <?php } ?>
+                                  
+                                </div>
+                              </div>
+
+                              <div class="form-group form-group">
+                                <div class="col-sm-3">
+                                  <p>Telephone Number</p>                     
+                                  <?php if(empty($jobInfo->company_telephone OR $jobInfo->company_telephone == " ")){ ?>
+                                    <p class="form-control job_input">Empty</p> 
+                                  <?php }else{ ?>
+                                    <p class="form-control job_input">{{ $jobInfo->company_telephone }}</p> 
+                                  <?php } ?>
+
+                                </div>
+                              </div>
+
+                              <div class="form-group form-group">
+                                <div class="col-sm-3">
+                                  <p>Company Size</p>
+                                  <?php if(empty($jobInfo->company_companysize OR $jobInfo->company_companysize == " ")){ ?>
+                                    <p class="form-control job_input">Empty</p>  
+                                  <?php }else{ ?>
+                                    <p class="form-control job_input">{{ $jobInfo->company_companysize }}</p>
+                                  <?php } ?>
+
+                               </div>
+
+                              </div>
+
+                               <div class="form-group form-group">
+                                <div class="col-sm-12">
+                                  <center><h4>Other Information</h4></center>
+                                  <hr></hr>
+                                </div>
+                              </div>
+
+                               <div class="form-group form-group">
+                                <div class="col-sm-6">
+                                  <p>Language Spoken</p>
+                                  <?php if(empty($jobInfo->company_spokenlanguage OR $jobInfo->company_spokenlanguage == " ")){ ?>
+                                    <p class="form-control job_input">Empty</p>  
                                     
-                           <div class="col-md-12  content-panel">
-                                <div class="col-md-4">
-                                          <p>Company Name: </p>
-                                </div>
-                                <div class="col-md-7">
-                                          <p>{{ $jobInfo->company_name }}</p>
-                                </div>
-                                      
-                           </div>      
+                                  <?php }else{ ?>
+                                    <p class="form-control job_input">{{ $jobInfo->company_spokenlanguage }}</p>
+                                    
+                                  <?php } ?>
 
-                           <div class="col-md-12  content-panel">
-                                <div class="col-md-4">
-                                          <p>Company Address: </p>
-                                </div>
-                                <div class="col-md-7">
-                                          <p>{{ $jobInfo->company_address }}</p>
-                                </div>
-                                 
-                           </div> 
+                               </div>
 
-                           <div class="col-md-12  content-panel">
-                                <div class="col-md-4">
-                                          <p>Salary Rate </p>
-                                </div>  
-                                <div class="col-md-7">
-                                          <p class="job_salary">{{ $jobInfo->company_rate }}</p>
-                                </div>
-                                              
-                           </div>
+                              </div>
 
-                           <div class="col-md-12  content-panel">
-                                <div class="col-md-12">
-                                          <p>About Company: </p>
-                                </div>
-                                <div class="col-md-12">
-                                          <p>{{ $jobInfo->company_details }}</p>
-                                </div>
-                                              
-                           </div>
 
-                           <div class="col-md-12  content-panel">
-                                <div class="col-md-12">
-                                          <p>Job Description: </p>
+                              <div class="form-group form-group">
+                                <div class="col-sm-6">
+                                  <p>Industry</p>
+                                  <?php if(empty($jobInfo->company_industry OR $jobInfo->company_industry == " ")){ ?>
+                                    <p class="form-control job_input">Empty</p> 
+                                    
+                                  <?php }else{ ?>
+                                    <p class="form-control job_input">{{ $jobInfo->company_industry }}</p>
+                                    
+                                  <?php } ?>
+                               </div>
+
+                              </div>
+
+
+                               <div class="form-group form-group">
+                                <div class="col-sm-6">
+                                  <p>Process Time</p>
+                                  <?php if(empty($jobInfo->company_processtime OR $jobInfo->company_processtime == " ")){ ?>
+                                    <p class="form-control job_input">Empty</p> 
+                                  <?php }else{ ?>
+                                    <p class="form-control job_input">{{ $jobInfo->company_processtime }}</p>
+                                  <?php } ?>
+                               </div>
+
+                              </div>
+
+
+
+                              <div class="form-group form-group">
+                                <div class="col-sm-6">
+                                  <p>Facebook Page</p>
+                                  <?php if(empty($jobInfo->company_facebook OR $jobInfo->company_facebook == " ")){ ?>
+                                    <p class="form-control job_input">Empty</p> 
+                                  <?php }else{ ?>
+                                    <p class="form-control job_input"><a href="{{ $jobInfo->company_facebook }}">Facebook Page</a></p>
+                                  <?php } ?>
+                               </div>
+
+                              </div>
+
+
+                              <div class="form-group form-group">
+                                <div class="col-sm-12">
+                                  <p>Benefits</p>
+                                  <?php if(empty($jobInfo->company_benefits OR $jobInfo->company_benefits == " ")){ ?>
+                                    <p class="form-control job_input">Empty</p> 
+                                     
+                                  <?php }else{ ?>
+                                   
+                                    <p class="form-control job_input" style="height:100%;">{!! nl2br($jobInfo->company_benefits) !!}</p>                  
+                                  <?php } ?>
                                 </div>
-                                <div class="col-md-12">
-                                          <p>{!! nl2br( $jobInfo->company_status) !!}</p>
-                                </div>
-                                              
-                           </div>
+                               
+                              </div>
 
-                          <div class="modal-footer">
-                              <button  class="btn btn-default" data-dismiss="modal" data-toggle="modal" data-target="#jobsnoti_{{ $jobInfo->id }}">Apply</button> 
-                              <a class="btn btn-default readJobNoti" href="/jobs/deleteJobNotification/<?php echo $job_value->id; ?>">Read</a>
-                          </div>
 
-                </form>
+                          </div>   
+           
+                  </div>
 
-                </div>
-      </div>
-    </div>
+                  <div class="modal-footer content-panel-header" style="width:100%;">
+                      <button  class="btn btn-default" data-dismiss="modal" data-toggle="modal" data-target="#jobs_{{ $jobInfo->id }}">Apply</button> 
+                      <a class="btn btn-default readJobNoti" href="/jobs/deleteJobNotification/<?php echo $job_value->id; ?>">Read</a>
+                  </div>
+
+              </form>
+
+              </div>
+              <!-- Modal content--> 
+        
+  </div>
+  </div>
+
   </section>
 <!-- Modal for JobNotification -->
   
@@ -798,7 +1245,9 @@
                            
 <?php } ?>   
 
-<!-- Modal for viewApplication-->
+
+
+<!-- Modal for viewAvailable-->
 <section>
 
            <div class="modal fade" id="viewAvailable" role="dialog">
@@ -852,7 +1301,7 @@
   </div>
 
 </section>
-<!-- Modal for viewApplication -->
+<!-- Modal for viewAvailable -->
 
 <!-- Modal for viewApplication-->
 <section>

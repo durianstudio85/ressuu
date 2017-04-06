@@ -20,22 +20,22 @@
 <sidebar class="col-md-3 ">
 
                <div class="row">
-                <div class="user">
+                <div class="col-md-12 user">
                     <?php if(!empty($adminProfile->profile_pic) AND $adminProfile->profile_pic != " " ){ ?>
                            <a href="#" data-toggle="modal" data-target="#profilepic" ><img class="img-reponsive profile-pic" src="../profilepic/<?php echo $adminProfile->profile_pic; ?>"></a> 
                     <?php }else{ ?>
                            <a href="#" data-toggle="modal" data-target="#profilepic" ><img class="img-responsive profile-pic" src="../profilepic/default_avatar.jpg"></a> 
                     <?php } ?>    
                 </div>
-                 <div class="name-panel">
-                   <div class="name-panel">
+                 <div class="col-md-12 name-panel">
+                  
                    <p class="name">
-                   <?php echo $adminProfile->name; ?>
+                 	 <?php echo $adminProfile->name; ?>
                    </p>
                    <p class="subname">
                    <?php echo $adminProfile->position; ?>
                     </p>
-                 </div>
+                 
                  </div>
               </div>
       

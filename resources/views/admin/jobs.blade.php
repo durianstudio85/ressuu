@@ -18,22 +18,22 @@
 <sidebar class="col-md-3 ">
 
                <div class="row">
-                <div class="user">
+                <div class="col-md-12 user">
                     <?php if(!empty($adminProfile->profile_pic) AND $adminProfile->profile_pic != " " ){ ?>
                            <a href="#" data-toggle="modal" data-target="#profilepic" ><img class="img-reponsive profile-pic" src="../profilepic/<?php echo $adminProfile->profile_pic; ?>"></a> 
                     <?php }else{ ?>
                            <a href="#" data-toggle="modal" data-target="#profilepic" ><img class="img-responsive profile-pic" src="../profilepic/default_avatar.jpg"></a> 
                     <?php } ?>
                 </div>
-                 <div class="name-panel">
-                   <div class="name-panel">
+                 <div class="col-md-12 name-panel">
+                  
                    <p class="name">
                    <?php echo $adminProfile->name; ?>
                    </p>
                    <p class="subname">
                    <?php echo $adminProfile->position; ?>
                     </p>
-                 </div>
+             
                  </div>
               </div>
       
@@ -109,78 +109,260 @@
   <!-- Modal for viewJobs -->
   <section>
 
-             <div class="modal fade" id="viewJobs{{ $jobs->id }}" role="dialog">
-              <div class="modal-dialog">
+  <div class="modal fade bs-example-modal-lg" id="viewJobs{{ $jobs->id }}" role="dialog">
               
-                <!-- Modal content-->
-                <div class="modal-content">
+      <div class="modal-dialog modal-lg" style="width:1200px;">
+              
+             <!-- Modal content-->
+          <div class="modal-content">
 
-                <form method="" action="jobs/addJob" class="theme1">
-                           <div class="modal-header col-md-12 content-panel-header">
-                                <h3>Applying for {{ $jobs->company_job }}</h3>
-                           </div>
+              <form method="" action="" class="theme1"  enctype="multipart/form-data">
+                            
+                  <div class="modal-header col-md-12 content-panel-header">
+                     <button type="button" class="close" data-dismiss="modal">&times;</button>
+                     <h3>{{ $jobs->company_job }} </h3>
+                  </div>
+
+                  <div class="modal-body" style="height: 100%;background: #fff;float: left;width: 100%;">
+                  
+                          <div class="col-sm-12">
+                              <input type="hidden" value="{{ $jobs->id }}" name="id">
+
+                              <div class="form-group form-group">
+                                <div class="col-sm-12">
+                                  <center><h4>Job Information</h4></center>
+                                  <hr></hr>
+                                </div>
+                              </div>
+
+
+                              <div class="form-group form-group">
+                                <div class="col-sm-4">
+                                  <p>Job Title</p>
+                                  <?php if(empty($jobs->company_job OR $jobs->company_job == " ")){ ?> 
+                                    <p>Empty</p>
+                                  <?php }else{ ?> 
+                                    <p class="form-control job_input">{{ $jobs->company_job }}</p>
+                                  <?php } ?>
+                                </div>
+                              </div>
+
+                              <div class="form-group form-group" style="margin-top:-15px;">
+                                <div class="col-sm-4">
+                                  <p>Salary Rate</p>
+                                  <?php if(empty($jobs->company_rate OR $jobs->company_rate == " ")){ ?>
+                                    <p>Empty</p>
+                                  <?php }else{ ?> 
+                                    <p class="form-control job_input">{{ $jobs->company_rate }}</p>
+                                  <?php } ?>
+                                  
+                                </div>
+                              </div>
+
+                              <div class="form-group form-group" style="margin-top:-15px;">
+                                <div class="col-sm-4">
+                                  <p>Working Hours</p>
+                                  <?php if(empty($jobs->company_workinghours OR $jobs->company_workinghours == " ")){ ?> 
+                                    <p>Empty</p>
+                                  <?php }else{ ?>
+                                    <p class="form-control job_input">{{ $jobs->company_workinghours }}</p> 
+                                  <?php } ?>
+                                  
+                                </div>
+                              </div>
+
+                              <div class="form-group form-group">
+                                <div class="col-sm-12">
+                                   <p>Job Description</p>
+                                   <p class="form-control job_input" style="height:100%;">{!! nl2br($jobs->company_status) !!}</p>   
+                                </div>
+                              </div>
+
+                              <div class="form-group form-group">
+                                <div class="col-sm-12">
+                                  <center><h4>Company Information</h4></center>
+                                  <hr></hr>
+                                </div>
+                              </div>
+
+                              <div class="form-group form-group">
+                                <div class="col-sm-4">
+                                  <p>Name</p>
+                                  <?php if(empty($jobs->company_name OR $jobs->company_name == " ")){ ?>
+                                    <p>Empty</p> 
+                                  <?php }else{ ?>
+                                    <p class="form-control job_input">{{ $jobs->company_name }}</p> 
+                                  <?php } ?>
+                                  
+                                </div>
+                              </div>
+
+                              <div class="form-group form-group">
+                                <div class="col-sm-8">
+                                  <p>Address</p>
+                                  <?php if(empty($jobs->company_address OR $jobs->company_address == " ")){ ?>
+                                    <p>Empty</p>  
+                                  <?php }else{ ?>
+                                    <p class="form-control job_input">{{ $jobs->company_address }}</p>
+                                  <?php } ?>
+
+                                  
+                                </div>
+                              </div>
+
+                              <div class="form-group form-group">
+                                <div class="col-sm-12">
+                                  <p>About the Company</p>
+                                  <p class="form-control job_input" style="height:100%;">{!! nl2br($jobs->company_details) !!}</p>
+                                </div>
+                               
+                              </div>
+
+                              <div class="form-group form-group">
+                                <div class="col-sm-3">
+                                  <p>Email</p>
+                                  <?php if(empty($jobs->email OR $jobs->email == " ")){ ?>
+                                    <p>Empty</p> 
+                                  <?php }else{ ?>
+                                    <p class="form-control job_input">{{ $jobs->email }}</p> 
+                                  <?php } ?>
+                                </div>
+                              </div>
+
+                              <div class="form-group form-group">
+                                <div class="col-sm-3">
+                                  <p>Website</p>
+                                  <?php if(empty($jobs->company_website OR $jobs->company_website == " ")){ ?>
+                                    <p>Empty</p> 
+                                  <?php }else{ ?>
+                                    <p class="form-control job_input"><a href="{{ $jobs->company_website }}" target="_blank">Website Link</a></p> 
+                                  <?php } ?>
+                                  
+                                </div>
+                              </div>
+
+                              <div class="form-group form-group">
+                                <div class="col-sm-3">
+                                  <p>Telephone Number</p>                     
+                                  <?php if(empty($jobs->company_telephone OR $jobs->company_telephone == " ")){ ?>
+                                    <p>Empty</p> 
+                                  <?php }else{ ?>
+                                    <p class="form-control job_input">{{ $jobs->company_telephone }}</p> 
+                                  <?php } ?>
+
+                                </div>
+                              </div>
+
+                              <div class="form-group form-group">
+                                <div class="col-sm-3">
+                                  <p>Company Size</p>
+                                  <?php if(empty($jobs->company_companysize OR $jobs->company_companysize == " ")){ ?>
+                                    <p>Empty</p>  
+                                  <?php }else{ ?>
+                                    <p class="form-control job_input">{{ $jobs->company_companysize }}</p>
+                                  <?php } ?>
+
+                               </div>
+
+                              </div>
+
+                               <div class="form-group form-group">
+                                <div class="col-sm-12">
+                                  <center><h4>Other Information</h4></center>
+                                  <hr></hr>
+                                </div>
+                              </div>
+
+                               <div class="form-group form-group">
+                                <div class="col-sm-6">
+                                  <p>Language Spoken</p>
+                                  <?php if(empty($jobs->company_spokenlanguage OR $jobs->company_spokenlanguage == " ")){ ?>
+                                    <p>Empty</p>  
                                     
-                           <div class="col-md-12  content-panel">
-                                <div class="col-md-4">
-                                          <p>Company Name: </p>
-                                </div>
-                                <div class="col-md-7">
-                                          <p>{{ $jobs->company_name }}</p>
-                                </div>
-                                      
-                           </div>      
+                                  <?php }else{ ?>
+                                    <p class="form-control job_input">{{ $jobs->company_spokenlanguage }}</p>
+                                    
+                                  <?php } ?>
 
-                           <div class="col-md-12  content-panel">
-                                <div class="col-md-4">
-                                          <p>Company Address: </p>
-                                </div>
-                                <div class="col-md-7">
-                                          <p>{{ $jobs->company_address }}</p>
-                                </div>
-                                 
-                           </div> 
+                               </div>
+
+                              </div>
 
 
-                           <div class="col-md-12  content-panel">
-                                <div class="col-md-4">
-                                          <p>Salary Rate </p>
-                                </div>  
-                                <div class="col-md-7">
-                                          <p class="job_salary">{{ $jobs->company_rate }}</p>
-                                </div>
-                                              
-                           </div>
+                              <div class="form-group form-group">
+                                <div class="col-sm-6">
+                                  <p>Industry</p>
+                                  <?php if(empty($jobs->company_industry OR $jobs->company_industry == " ")){ ?>
+                                    <p>Empty</p> 
+                                    
+                                  <?php }else{ ?>
+                                    <p class="form-control job_input">{{ $jobs->company_industry }}</p>
+                                    
+                                  <?php } ?>
+                               </div>
+
+                              </div>
 
 
-                           <div class="col-md-12  content-panel">
-                                <div class="col-md-12">
-                                          <p>About Company:  </p>
-                                </div>
-                                <div class="col-md-12">
-                                          <p>{{ $jobs->company_details }}</p>
-                                </div>
-                                              
-                           </div>
+                               <div class="form-group form-group">
+                                <div class="col-sm-6">
+                                  <p>Process Time</p>
+                                  <?php if(empty($jobs->company_processtime OR $jobs->company_processtime == " ")){ ?>
+                                    <p>Empty</p> 
+                                  <?php }else{ ?>
+                                    <p class="form-control job_input">{{ $jobs->company_processtime }}</p>
+                                  <?php } ?>
+                               </div>
 
-                           <div class="col-md-12  content-panel">
-                                <div class="col-md-12">
-                                          <p>Job Description</p>
-                                </div>
-                                <div class="col-md-12">
-                                          <p>{!! nl2br( $jobs->company_status) !!}</p>
-                                </div>
-                                              
-                           </div>
+                              </div>
 
 
-                          <div class="modal-footer">
-                               <button type="" class="btn btn-default" data-dismiss="modal">Close</button> 
-                          </div>
-                </form>
-                </div>
-        
+
+                              <div class="form-group form-group">
+                                <div class="col-sm-6">
+                                  <p>Facebook Page</p>
+                                  <?php if(empty($jobs->company_facebook OR $jobs->company_facebook == " ")){ ?>
+                                    <p>Empty</p> 
+                                  <?php }else{ ?>
+                                    <p class="form-control job_input"><a href="{{ $jobs->company_facebook }}" target="_blank">Facebook Page</a></p>
+                                  <?php } ?>
+                               </div>
+
+                              </div>
+
+
+                              <div class="form-group form-group">
+                                <div class="col-sm-12">
+                                  <p>Benefits</p>
+                                  <?php if(empty($jobs->company_benefits OR $jobs->company_benefits == " ")){ ?>
+                                    <p>Empty</p> 
+                                     
+                                  <?php }else{ ?>
+                                   
+                                    <p class="form-control job_input" style="height:100%;">{!! nl2br($jobs->company_benefits) !!}</p>                  
+                                  <?php } ?>
+                                </div>
+                               
+                              </div>
+
+
+                          </div>   
+           
+                  </div>
+
+                  <div class="modal-footer content-panel-header" style="width:100%;">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button> 
+                  </div>
+
+          
+                             
+              </form>
+
+          </div>
+           <!-- Modal content-->
+              
       </div>
-    </div>
+  </div>
 
   </section>
 <!-- Modal for viewJobs -->
@@ -188,99 +370,269 @@
 <!-- Modal for editJobs -->
  <section class="upeducation_modal">
 
-                               <div class="modal fade" id="editJobs{{ $jobs->id }}" role="dialog">
+   <div class="modal fade bs-example-modal-lg" id="editJobs{{ $jobs->id }}" role="dialog">
 
-                                    <div class="modal-dialog">
-                                    
-                                      <!-- Modal content-->
-                                      <div class="modal-content">
+        <div class="modal-dialog modal-lg" style="width:1200px;">
+        
+          <!-- Modal content-->
+          <div class="modal-content">
 
-                                      <form method="POST" action="/jobs/editJobs" class="theme1"  enctype="multipart/form-data">
-                                          {{ csrf_field() }}  
-                                                          
-                                                          <div class="col-md-12 content-panel-header">
-                                                             <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                                             <h3>Update {{ $jobs->company_job }} </h3>
+              <form method="POST" action="/jobs/editJobs" class="theme1"  enctype="multipart/form-data">
+                  {{ csrf_field() }}  
+                                  
+                  <div class="modal-header col-md-12 content-panel-header">
+                     <button type="button" class="close" data-dismiss="modal">&times;</button>
+                     <h3>Update {{ $jobs->company_job }} </h3>
 
-                                                          </div>
-                                                          <section>
-                                                                      <input type="hidden" value="{{ $jobs->id }}" name="id">
+                  </div>
 
-                                                               <div class="form-group form-group">
+                  <div class="modal-body" style="height: 100%;background: #fff;float: left;width: 100%;">
+                  
+                          <div class="col-sm-12">
+                              <input type="hidden" value="{{ $jobs->id }}" name="id">
 
-                                                                <div class="col-md-offset-1 col-sm-10">
-                                                                  <input class="form-control job_input" name="company_name" type="text" value="{{ $jobs->company_name }}">
-
-                                                                </div>
-                                                              </div>
-
-                                                              <div class="form-group form-group">
-                                                                <div class="col-md-offset-1 col-sm-10">
-                                                                  <input class="form-control job_input" name="company_address" type="text" value="{{ $jobs->company_address }}">
-                                                                </div>
-                                                              </div>
-
-                                                              <div class="form-group form-group">
-                                                                <div class="col-md-offset-1 col-sm-10">
-                                                                  <input class="form-control job_input" name="company_jobtitle" type="text" value="{{ $jobs->company_job }}">
-                                                                </div>
-                                                              </div>
+                              <div class="form-group form-group">
+                                <div class="col-sm-12">
+                                  <center><h4>Job Information</h4></center>
+                                  <hr></hr>
+                                </div>
+                              </div>
 
 
-                                                                   <div class="form-group form-group">
-                                                                <div class="col-md-offset-1 col-sm-10">
-                                                                  <input class="form-control job_input" name="company_rate" type="text" value="{{ $jobs->company_rate }}">
-                                                                </div>
-                                                              </div>
+                              <div class="form-group form-group">
+                                <div class="col-sm-4">
+                                  <p>Job Title</p>
+                                  <?php if(empty($jobs->company_job OR $jobs->company_job == " ")){ ?> 
+                                    <input class="form-control job_input" name="company_jobtitle" type="text" value="Empty">
+                                  <?php }else{ ?> 
+                                    <input class="form-control job_input" name="company_jobtitle" type="text" value="{{ $jobs->company_job }}">
+                                  <?php } ?>
+                                </div>
+                              </div>
 
+                              <div class="form-group form-group" style="margin-top:-15px;">
+                                <div class="col-sm-4">
+                                  <p>Salary Rate</p>
+                                  <?php if(empty($jobs->company_rate OR $jobs->company_rate == " ")){ ?> 
+                                    <input class="form-control job_input" name="company_rate" type="text" value="Empty">
+                                  <?php }else{ ?> 
+                                    <input class="form-control job_input" name="company_rate" type="text" value="{{ $jobs->company_rate }}">
+                                  <?php } ?>
+                                  
+                                </div>
+                              </div>
 
-                                                              <div class="form-group form-group">
-                                                                <div class="col-md-offset-1 col-md-10">
-                                                                  <textarea class="form-control job_input" name="company_details" rows="5" cols="10">{{ $jobs->company_details }}</textarea>
-                                                                </div>
-                                                               
-                                                              </div>
+                              <div class="form-group form-group" style="margin-top:-15px;">
+                                <div class="col-sm-4">
+                                  <p>Working Hours</p>
+                                  <?php if(empty($jobs->company_workinghours OR $jobs->company_workinghours == " ")){ ?> 
+                                    <input class="form-control job_input" name="company_workinghours" type="text" value="Empty">
+                                  <?php }else{ ?> 
+                                    <input class="form-control job_input" name="company_workinghours" type="text" value="{{ $jobs->company_workinghours }}">
+                                  <?php } ?>
+                                  
+                                </div>
+                              </div>
 
-                                                              <div class="form-group form-group">
-                                                                <div class="col-md-offset-1 col-md-10">
-                                                                  <textarea  class="form-control job_input"  rows="5" cols="45" name="job_description">{{ $jobs->company_status }}</textarea>  
-                                                                </div>
-                                                               
-                                                              </div>
+                              <div class="form-group form-group">
+                                <div class="col-sm-12">
+                                   <p>Job Description</p>
+                                  <textarea  class="form-control job_input"  rows="5" cols="45" name="job_description">{{ $jobs->company_status }}</textarea>   
+                                </div>
+                              </div>
 
+                              <div class="form-group form-group">
+                                <div class="col-sm-12">
+                                  <center><h4>Company Information</h4></center>
+                                  <hr></hr>
+                                </div>
+                              </div>
 
+                              <div class="form-group form-group">
+                                <div class="col-sm-4">
+                                  <p>Name</p>
+                                  <?php if(empty($jobs->company_name OR $jobs->company_name == " ")){ ?> 
+                                    <input class="form-control job_input" name="company_name" type="text" value="Empty">
+                                  <?php }else{ ?> 
+                                    <input class="form-control job_input" name="company_name" type="text" value="{{ $jobs->company_name }}">
+                                  <?php } ?>
+                                  
+                                </div>
+                              </div>
 
-                                                                
+                              <div class="form-group form-group">
+                                <div class="col-sm-8">
+                                  <p>Address</p>
+                                  <?php if(empty($jobs->company_address OR $jobs->company_address == " ")){ ?> 
+                                    <input class="form-control job_input" name="company_address" type="text" value="Empty">
+                                  <?php }else{ ?>
+                                    <input class="form-control job_input" name="company_address" type="text" value="{{ $jobs->company_address }}">
+                                  <?php } ?>
 
-                                                                 <div class="form-group form-group">
-                                                                  <div class="col-xs-12 col-md-offset-1 col-sm-10">
-                                                                     <p>Logo</p>
-                                                                  </div>
-                                                                   <div class="col-xs-12 col-md-offset-1 col-sm-10">
-                                                                      <input class="form-control jobfile" name="logo" type="file" placeholder="Logo">
-                                                                      <input class="form-control jobfile" name="oldlogo" type="hidden" value="<?php echo $jobs->company_picture; ?>">
-                                                                    </div>
-                                                                    
-                                                                  </div>
+                                  
+                                </div>
+                              </div>
 
+                              <div class="form-group form-group">
+                                <div class="col-sm-12">
+                                  <p>About the Company</p>
+                                  <textarea class="form-control job_input" name="company_details" rows="5" cols="10">{{ $jobs->company_details }}</textarea>
+                                </div>
+                               
+                              </div>
 
+                              <div class="form-group form-group">
+                                <div class="col-sm-3">
+                                  <p>Email</p>
+                                  <?php if(empty($jobs->email OR $jobs->email == " ")){ ?> 
+                                    <input class="form-control job_input" name="company_email" type="text" value="Empty">
+                                  <?php }else{ ?>
+                                    <input class="form-control job_input" name="company_email" type="text" value="{{ $jobs->email }}">
+                                  <?php } ?>
+                                  
+                                </div>
+                              </div>
 
+                              <div class="form-group form-group">
+                                <div class="col-sm-3">
+                                  <p>Website</p>
+                                  <?php if(empty($jobs->company_website OR $jobs->company_website == " ")){ ?> 
+                                    <input class="form-control job_input" name="company_website" type="text" value="Empty">
+                                  <?php }else{ ?>
+                                    <input class="form-control job_input" name="company_website" type="text" value="{{ $jobs->company_website }}">
+                                  <?php } ?>
+                                  
+                                </div>
+                              </div>
 
-                                                         </section>
+                              <div class="form-group form-group">
+                                <div class="col-sm-3">
+                                  <p>Telephone Number</p>                     
+                                  <?php if(empty($jobs->company_telephone OR $jobs->company_telephone == " ")){ ?> 
+                                    <input class="form-control job_input" name="company_telephone" type="text" value="Empty">
+                                  <?php }else{ ?>
+                                    <input class="form-control job_input" name="company_telephone" type="text" value="{{ $jobs->company_telephone }}">
+                                  <?php } ?>
 
-                                                        <div class="modal-footer">
-                                                             <button type="submit" class="btn btn-default">Update</button>  
-                                                              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button> 
-                                                        </div>
-                                              <input type="hidden" value="{{ csrf_token() }}" name="_token" >
-                                                     
-                                      </form>
+                                </div>
+                              </div>
 
-                                      </div>
-                              
-                                    </div>
+                              <div class="form-group form-group">
+                                <div class="col-sm-3">
+                                  <p>Company Size</p>
+                                  <?php if(empty($jobs->company_companysize OR $jobs->company_companysize == " ")){ ?> 
+                                    <input class="form-control job_input" name="company_companysize" type="text" value="Empty">
+                                  <?php }else{ ?>
+                                    <input class="form-control job_input" name="company_companysize" type="text" value="{{ $jobs->company_companysize }}">
+                                  <?php } ?>
+
+                               </div>
 
                               </div>
+
+                               <div class="form-group form-group">
+                                <div class="col-sm-12">
+                                  <center><h4>Other Information</h4></center>
+                                  <hr></hr>
+                                </div>
+                              </div>
+
+                               <div class="form-group form-group">
+                                <div class="col-sm-3">
+                                  <p>Language Spoken</p>
+                                  <?php if(empty($jobs->company_spokenlanguage OR $jobs->company_spokenlanguage == " ")){ ?> 
+                                    <input class="form-control job_input" name="company_spokenlanguage" type="text" value="Empty">
+                                  <?php }else{ ?>
+                                    <input class="form-control job_input" name="company_spokenlanguage" type="text" value="{{ $jobs->company_spokenlanguage }}">
+                                  <?php } ?>
+
+                               </div>
+
+                              </div>
+
+
+                              <div class="form-group form-group">
+                                <div class="col-sm-3">
+                                  <p>Industry</p>
+                                  <?php if(empty($jobs->company_industry OR $jobs->company_industry == " ")){ ?> 
+                                    <input class="form-control job_input" name="company_industry" type="text" value="Empty">
+                                  <?php }else{ ?>
+                                    <input class="form-control job_input" name="company_industry" type="text" value="{{ $jobs->company_industry }}">
+                                  <?php } ?>
+                               </div>
+
+                              </div>
+
+
+                               <div class="form-group form-group">
+                                <div class="col-sm-3">
+                                  <p>Process Time</p>
+                                  <?php if(empty($jobs->company_processtime OR $jobs->company_processtime == " ")){ ?> 
+                                    <input class="form-control job_input" name="company_processtime" type="text" value="Empty">
+                                  <?php }else{ ?>
+                                    <input class="form-control job_input" name="company_processtime" type="text" value="{{ $jobs->company_processtime }}">
+                                  <?php } ?>
+                               </div>
+
+                              </div>
+
+
+
+                              <div class="form-group form-group">
+                                <div class="col-sm-3">
+                                  <p>Facebook Page</p>
+                                  <?php if(empty($jobs->company_facebook OR $jobs->company_facebook == " ")){ ?> 
+                                    <input class="form-control job_input" name="company_facebook" type="text" value="Empty">
+                                  <?php }else{ ?>
+                                    <input class="form-control job_input" name="company_facebook" type="text" value="{{ $jobs->company_facebook }}">
+                                  <?php } ?>
+                               </div>
+
+                              </div>
+
+
+                              <div class="form-group form-group">
+                                <div class="col-sm-12">
+                                  <p>Benefits</p>
+                                  <?php if(empty($jobs->company_benefits OR $jobs->company_benefits == " ")){ ?> 
+                                    <textarea  class="form-control job_input"  rows="5" cols="45" name="company_benefits"></textarea> 
+                                  <?php }else{ ?>
+                                    <textarea  class="form-control job_input"  rows="5" cols="45" name="company_benefits">{{ $jobs->company_benefits }}</textarea>                   
+                                  <?php } ?>
+                                </div>
+                               
+                              </div>
+
+
+                              <div class="form-group form-group">
+                                <div class="col-sm-12">
+                                      <p>Logo</p>
+                                      <input class="form-control jobfile" name="logo" type="file" placeholder="Logo">
+                                      <input class="form-control jobfile" name="oldlogo" type="hidden" value="<?php echo $jobs->company_picture; ?>">
+                                </div>
+                                    
+                              </div>
+
+
+                          </div>   
+           
+                  </div>
+
+                  <div class="modal-footer content-panel-header" style="width:100%;">
+                       <button type="submit" class="btn btn-default">Update</button>  
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button> 
+                  </div>
+
+                  <input type="hidden" value="{{ csrf_token() }}" name="_token" >
+                             
+              </form>
+
+          </div>
+           <!-- Modal content-->
+
+        </div>
+
+  </div>
 
  </section>
 <!-- Modal for editJobs -->
