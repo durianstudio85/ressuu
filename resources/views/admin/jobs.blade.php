@@ -97,11 +97,11 @@
                     <td><?php echo $jobs->company_job; ?></td> 
                     <td><?php echo $jobs->company_rate; ?></td> 
                     <td>
-                        <div class="btn-group btn-group-xs" role="group" aria-label="...">
-                             <button data-toggle="modal" data-target="#viewJobs{{ $jobs->id }}" type="button" class="btn btn-info">View</button>
-                             <button data-toggle="modal" data-target="#editJobs{{ $jobs->id }}" type="button" class="btn btn-primary">Edit</button>
-                             <button data-toggle="modal" data-target="#deleteJobs{{ $jobs->id }}" type="button" class="btn btn-success">Delete</button>
-                             <button data-toggle="modal" data-target="#viewApplicant{{ $jobs->id }}" type="button" class="btn btn-info">Applicant</button>
+                        <div class="" role="group" aria-label="...">
+                             <button data-toggle="modal" data-target="#viewJobs{{ $jobs->id }}" type="button" class="btn job_admin_button">View</button><br>
+                             <button data-toggle="modal" data-target="#editJobs{{ $jobs->id }}" type="button" class="btn job_admin_button">Edit</button><br>
+                             <button data-toggle="modal" data-target="#deleteJobs{{ $jobs->id }}" type="button" class="btn job_admin_button">Delete</button><br>   
+                             <button data-toggle="modal" data-target="#viewApplicant{{ $jobs->id }}" type="button" class="btn job_admin_button">Applicant</button>
                         </div>
                       
                     </td> 

@@ -2950,3 +2950,17 @@ margin: 0px 8px 0px -41px;
 .job-panel .job-recommended .job-details .job-address{
   color: #9ea7b3;
 }
+.job_admin_button{
+background: #eaedf1;
+border: none;
+border-radius: 5px;
+color: #5e6d81;
+margin: 1px;
+font-weight: 300;
+width: 100px;
+
+}
+.job_admin_button:hover{
+      background: #01ba8e;
+      color:#ffffff;
+}
