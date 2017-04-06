@@ -74,7 +74,7 @@
               <thead>
                <tr>
                 <th>#</th> 
-                <th></th> 
+                <th style="width: 70px;"></th> 
                 <th>Company Name</th> 
                 <th>Company Job</th> 
                 <th>Rate</th>
