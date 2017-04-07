@@ -218,19 +218,50 @@ class AdminController extends Controller
                      // sending back with message
                      $inputJob_id = rand(11111,99999);
                      $inputUser_id = "0";
+
+                //     $inputCompany_Name =  Input::get('company_name');
+                     // $inputCompany_Address  =  Input::get('company_address');
+                     // $inputCompany_Jobtitle  =  Input::get('company_jobtitle');
+                     
+                     // $inputCompany_Details  =  Input::get('company_details');
+                     // $inputCompany_Rate  =  Input::get('company_rate');
+                     // $inputJob_Description = Input::get('job_description');
+                     // $inputDate = date('Y-m-d');
+
+                     $inputCompany_Jobtitle  =  Input::get('company_jobtitle');
+                     $inputCompany_Rate  =  Input::get('company_rate');
+                     $inputCompany_Workinghours  =  Input::get('company_workinghours');
+                     $inputJob_Description = Input::get('job_description');
+
                      $inputCompany_Name =  Input::get('company_name');
                      $inputCompany_Address  =  Input::get('company_address');
-                     $inputCompany_Jobtitle  =  Input::get('company_jobtitle');
-                     $inputCompany_Picture  =  $fileName;
                      $inputCompany_Details  =  Input::get('company_details');
-                     $inputCompany_Rate  =  Input::get('company_rate');
-                     $inputJob_Description = Input::get('job_description');
+                     $inputCompany_Email  =  Input::get('company_email');
+                     $inputCompany_Website  =  Input::get('company_website');
+                     $inputCompany_Telephone  =  Input::get('company_telephone');
+                     $inputCompany_Companysize  =  Input::get('company_companysize');
+
+                     $inputCompany_Spokenlanguage  =  Input::get('company_spokenlanguage');
+                     $inputCompany_Industry  =  Input::get('company_industry');
+                     $inputCompany_Processtime  =  Input::get('company_processtime');
+                     $inputCompany_Facebook  =  Input::get('company_facebook');
+                     $inputCompany_Benefits  =  Input::get('company_benefits');
+
                      $inputDate = date('Y-m-d');
-            
+                     $inputCompany_Picture  =  $fileName;
+               
+                     $my_address = $inputCompany_Address;
+                     $my_prepAddr = str_replace(' ','+',$my_address);
+                     $my_geocode=file_get_contents('https://maps.google.com/maps/api/geocode/json?address='.$my_prepAddr.'&sensor=false');
+                     $output= json_decode($my_geocode);
+                     $inputCompany_Latitude = $output->results[0]->geometry->location->lat;
+                     $inputCompany_Longitude = $output->results[0]->geometry->location->lng;
+
 
                  $getLastId = DB::table('job')->insertGetId([
                             'job_id' => $inputJob_id,
                             'user_id' => "0",
+                            'date'=> $inputDate,
                             'company_name' => $inputCompany_Name,
                             'company_address' => $inputCompany_Address,
                             'company_job' => $inputCompany_Jobtitle,
@@ -238,7 +269,18 @@ class AdminController extends Controller
                             'company_details' => $inputCompany_Details,
                             'company_rate' => $inputCompany_Rate,
                             'company_status' => $inputJob_Description,
-                            'date'=> $inputDate
+                            'email' => $inputCompany_Email,
+                            'company_processtime' => $inputCompany_Processtime,
+                            'company_industry' => $inputCompany_Industry,
+                            'company_telephone' => $inputCompany_Telephone,
+                            'company_companysize' => $inputCompany_Companysize,
+                            'company_spokenlanguage' => $inputCompany_Spokenlanguage,
+                            'company_website' => $inputCompany_Website,
+                            'company_facebook' => $inputCompany_Facebook,
+                            'company_workinghours' => $inputCompany_Workinghours,
+                            'company_benefits' => $inputCompany_Benefits,
+                            'company_latitude' => $inputCompany_Latitude,
+                            'company_longitude' => $inputCompany_Longitude,
                     ]);
 
 

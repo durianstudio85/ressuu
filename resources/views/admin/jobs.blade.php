@@ -807,82 +807,221 @@
 <!-- Modal for Jobs -->
 <section class="certification_modal">
 
-           <div class="modal fade" id="addJobs" role="dialog">
-            <div class="modal-dialog">
+           <div class="modal fade bs-example-modal-lg" id="addJobs" role="dialog">
+
+            <div class="modal-dialog modal-lg" style="width:1200px;">
             
               <!-- Modal content-->
               <div class="modal-content">
 
                   <form method="POST" action="/jobs/addJobs" class="theme1"  enctype="multipart/form-data">
+                    {{ csrf_field() }}  
+                                  
+                  <div class="modal-header col-md-12 content-panel-header">
+                     <button type="button" class="close" data-dismiss="modal">&times;</button>
+                     <h3>Add Job </h3>
 
-                              {{ csrf_field() }}        
-                                      <div class="col-md-12 content-panel-header">
-                                         <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                         <h3>Add Jobs</h3>
+                  </div>
 
-                                      </div>
+                  <div class="modal-body" style="height: 100%;background: #fff;float: left;width: 100%;">
+                  
+                          <div class="col-sm-12">
+                              <input type="hidden" value="{{ $jobs->id }}" name="id">
 
-                                      <section>
-
-                                           <div class="form-group form-group">
-                                            <div class="col-xs-12 col-md-offset-1 col-sm-10">
-                                              <input class="form-control" name="company_name" type="text" placeholder="Company Name">
-                                            </div>
-                                          </div>
-
-                                          <div class="form-group form-group">
-                                            <div class="col-xs-12 col-md-offset-1 col-sm-10">
-                                              <input class="form-control" name="company_address" type="text" placeholder="Company Address">
-                                            </div>
-                                          </div>
-
-                                          <div class="form-group form-group">
-                                           <div class="col-xs-12 col-md-offset-1 col-sm-10">
-                                              <input class="form-control" name="company_jobtitle" type="text" placeholder="Job Title">
-                                            </div>
-                                            
-                                          </div>
-
-                                          <div class="form-group form-group">
-                                           <div class="col-xs-12 col-md-offset-1 col-sm-10">
-                                              <input class="form-control" name="company_rate" type="text" placeholder="Rate">
-                                            </div>
-                                            
-                                          </div>
-
-                                          <div class="form-group form-group">
-
-                                            <div class="col-xs-12 col-md-offset-1 col-sm-10">
-                                              <textarea  class="form-control"  rows="5" cols="45" name="company_details">About Company</textarea>  
-                                            </div>
-                                            
-                                          </div>
+                              <div class="form-group form-group">
+                                <div class="col-sm-12">
+                                  <center><h4>Job Information</h4></center>
+                                  <hr></hr>
+                                </div>
+                              </div>
 
 
-                                          <div class="form-group form-group">
+                              <div class="form-group form-group">
+                                <div class="col-sm-4">
+                                  <p>Job Name</p>
+                                 
+                                    <input class="form-control job_input" name="company_jobtitle" type="text" placeholder="Enter Job Name" >
+                                 
+                                </div>
+                              </div>
 
-                                            <div class="col-xs-12 col-md-offset-1 col-sm-10">
-                                              <textarea  class="form-control"  rows="5" cols="45" name="job_description">Job Description</textarea>  
-                                            </div>
-                                            
-                                          </div>
+                              <div class="form-group form-group" style="margin-top:-15px;">
+                                <div class="col-sm-4">
+                                  <p>Salary Rate</p>
+                                  
+                                    <input class="form-control job_input" name="company_rate" type="text" placeholder="Enter Salary Rate ">
+                                 
+                                </div>
+                              </div>
 
-                                           <div class="form-group form-group">
-                                          
-                                           <div class="col-xs-12 col-md-offset-1 col-sm-10">
-                                              <input class="form-control jobfile" name="logo" type="file" placeholder="Logo">
-                                            </div>
-                                            
-                                          </div>
-                                          <input type="hidden" value="{{ csrf_token() }}" name="_token" >
-                                     </section>
+                              <div class="form-group form-group" style="margin-top:-15px;">
+                                <div class="col-sm-4">
+                                  <p>Working Hours</p>
+                                  
+                                    <input class="form-control job_input" name="company_workinghours" type="text" placeholder=" Enter Working Hours">
+                                 
+                                </div>
+                              </div>
 
-                            <div class="modal-footer">
+                              <div class="form-group form-group">
+                                <div class="col-sm-12">
+                                   <p>Job Description</p>
+                                  <textarea  class="form-control job_input"  rows="5" cols="45" name="job_description">Enter Job Description</textarea>   
+                                </div>
+                              </div>
 
-                                 <button type="submit" class="btn btn-default">Save</button>
-                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                              <div class="form-group form-group">
+                                <div class="col-sm-12">
+                                  <center><h4>Company Information</h4></center>
+                                  <hr></hr>
+                                </div>
+                              </div>
 
-                            </div>
+                              <div class="form-group form-group">
+                                <div class="col-sm-4">
+                                  <p>Name</p>
+                                 
+                                    <input class="form-control job_input" name="company_name" type="text" placeholder=" Enter Company Name">
+                                 
+                                </div>
+                              </div>
+
+                              <div class="form-group form-group">
+                                <div class="col-sm-8">
+                                  <p>Address</p>
+                                 
+                                    <input class="form-control job_input" name="company_address" type="text" placeholder=" Enter Company Address">
+                                  
+                                </div>
+                              </div>
+
+                              <div class="form-group form-group">
+                                <div class="col-sm-12">
+                                  <p>About the Company</p>
+                                  <textarea class="form-control job_input" name="company_details" rows="5" cols="10">Enter Company Details</textarea>
+                                </div>
+                               
+                              </div>
+
+                              <div class="form-group form-group">
+                                <div class="col-sm-3">
+                                  <p>Email</p>
+                                  
+                                    <input class="form-control job_input" name="company_email" type="email" placeholder=" Enter Email" style="margin-top: 15px;height: 45px;">
+                                 
+                                </div>
+                              </div>
+
+                              <div class="form-group form-group">
+                                <div class="col-sm-3">
+                                  <p>Website</p>
+                                 
+                                    <input class="form-control job_input" name="company_website" type="text" placeholder=" Enter Website Link">
+                                  
+                                </div>
+                              </div>
+
+                              <div class="form-group form-group">
+                                <div class="col-sm-3">
+                                  <p>Telephone Number</p>                     
+                                  
+                                    <input class="form-control job_input" name="company_telephone" type="text" placeholder=" Enter Telephone Number">
+                                
+                                </div>
+                              </div>
+
+                              <div class="form-group form-group">
+                                <div class="col-sm-3">
+                                  <p>Company Size</p>
+                                 
+                                    <input class="form-control job_input" name="company_companysize" type="text" placeholder=" Enter Company Size">
+                                
+                               </div>
+
+                              </div>
+
+                               <div class="form-group form-group">
+                                <div class="col-sm-12">
+                                  <center><h4>Other Information</h4></center>
+                                  <hr></hr>
+                                </div>
+                              </div>
+
+                               <div class="form-group form-group">
+                                <div class="col-sm-3">
+                                  <p>Language Spoken</p>
+                                 
+                                    <input class="form-control job_input" name="company_spokenlanguage" type="text" placeholder=" Enter Language Spoken">
+                                 
+                               </div>
+
+                              </div>
+
+
+                              <div class="form-group form-group">
+                               <div class="col-sm-3">
+                                  <p>Industry</p>
+                                  <input class="form-control job_input" name="company_industry" type="text" placeholder=" Enter Company Industry">
+                                    
+                               </div>
+
+                              </div>
+
+
+                               <div class="form-group form-group">
+                                <div class="col-sm-3">
+                                  <p>Process Time</p>
+                                 
+                                    <input class="form-control job_input" name="company_processtime" type="text" placeholder=" Enter Company Process Time">
+                                  
+                               </div>
+
+                              </div>
+
+
+
+                              <div class="form-group form-group">
+                                <div class="col-sm-3">
+                                  <p>Facebook Page</p>
+                                  
+                                    <input class="form-control job_input" name="company_facebook" type="text" placeholder=" Enter Facebook Page Link">
+                                 
+                               </div>
+
+                              </div>
+
+
+                              <div class="form-group form-group">
+                                <div class="col-sm-12">
+                                  <p>Benefits</p>
+                                
+                                    <textarea  class="form-control job_input"  rows="5" cols="45" name="company_benefits">Enter Benefits</textarea> 
+                                
+                                </div>
+                               
+                              </div>
+
+
+                              <div class="form-group form-group">
+                                <div class="col-sm-12">
+                                      <p>Logo</p>
+                                      <input class="form-control jobfile" name="logo" type="file" placeholder="Logo">
+                                </div>
+                                    
+                              </div>
+
+
+                          </div>   
+           
+                  </div>
+
+                  <div class="modal-footer content-panel-header" style="width:100%;">
+                       <button type="submit" class="btn btn-default">Save</button>  
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button> 
+                  </div>
+
+                  <input type="hidden" value="{{ csrf_token() }}" name="_token" >
+                     
 
                   </form>
                 </div>
