@@ -515,7 +515,23 @@
                                  if($days_diff == "0"){
                                   echo "Just now";
                                  }else{
-                                  echo $diff->format('%a Days Ago');
+                                  
+                                  /*** date/week/month  ***/
+
+                                    if($days_diff <= 6){
+                                        echo $diff->format('%a Days Ago');
+                                    }
+                                    if($days_diff >= 7 AND $days_diff <= 29 ){
+                                        $week_diff = $days_diff / 7;
+                                        echo floor($week_diff)." Week Ago";
+                                    }
+                                    if($days_diff >= 30){
+                                        $month_diff = $days_diff / 29;
+                                        echo floor($month_diff)." Month Ago";
+                                    }
+
+                                    /*** date/week/month  ***/
+                                  
                                  }
 
 
