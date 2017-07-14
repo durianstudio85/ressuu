@@ -54,7 +54,8 @@ signup ressuuhome
 
              <div class="form-group{{ $errors->has('facebook_id') ? ' has-error' : '' }}">
 
-                <input placeholder="facebook_id" name="facebook_id" type="hidden" value="NULL">
+                <input placeholder="facebook_id" name="facebook_id" type="hidden" value="<?php echo rand();  ?>">
+                <input placeholder="twitter_id" name="twitter_id" type="hidden" value="<?php echo rand(); ?>">
 
                  @if ($errors->has('facebook_id'))
                      <p class="label label-danger">{{ $errors->first('facebook_id') }}</p>
